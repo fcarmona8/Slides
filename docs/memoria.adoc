@@ -16,16 +16,16 @@ Los miembros del proyecto somos Carmona Hernandez Ferran, Galindo Palacio Joan y
 
 
 === Guia de estilos
-La paleta de colores que utilizaremos es un fondo azul grisáceo apagado (#96C5B0), ya que el color azul representa Inteligencia, seriedad y confianza. Mostrando este azul apagado queremos puntuar esta seriedad y consideramos que estos sentimientos que representa se adecuan correctamente a la temática de la aplicación.
-El color de texto será negro, puesto que contrasta muy bien con el color de fondo y además muestra elegancia y formalidad.
-El estilo de texto que utilizamos es el Liberation Sans ya que es un texto simple y cómodo de leer para los usuarios, no presenta ninguna dificultad a la hora de la visualización por usuario como pueden presentar otros tipos de texto más editados.
-Los iconos utilizados son del sitio web Font Awesome: https://fontawesome.com/icons
-Iconos utilizados en la aplicación:
-- Icono de añadir: https://fontawesome.com/icons/circle-plus?f=classic&s=solid
-- Icono de eliminar: https://fontawesome.com/icons/trash?f=classic&s=solid
-- Icono de editar: https://fontawesome.com/icons/pen-to-square?f=classic&s=solid
-- Icono de previsualizar: https://fontawesome.com/icons/magnifying-glass?f=classic&s=solid
-- Icono de clonar: https://fontawesome.com/icons/magnifying-glass?f=classic&s=solid
+La paleta de colores que utilizaremos es un fondo azul grisáceo apagado (#96C5B0), ya que el color azul representa Inteligencia, seriedad y confianza. Mostrando este azul apagado queremos puntuar esta seriedad y consideramos que estos sentimientos que representa se adecuan correctamente a la temática de la aplicación. +
+El color de texto será negro, puesto que contrasta muy bien con el color de fondo y además muestra elegancia y formalidad. +
+El estilo de texto que utilizamos es el Liberation Sans ya que es un texto simple y cómodo de leer para los usuarios, no presenta ninguna dificultad a la hora de la visualización por usuario como pueden presentar otros tipos de texto más editados. +
+Los iconos utilizados son del sitio web Font Awesome: https://fontawesome.com/icons +
+Iconos utilizados en la aplicación: +
+- Icono de añadir: https://fontawesome.com/icons/circle-plus?f=classic&s=solid +
+- Icono de eliminar: https://fontawesome.com/icons/trash?f=classic&s=solid +
+- Icono de editar: https://fontawesome.com/icons/pen-to-square?f=classic&s=solid +
+- Icono de previsualizar: https://fontawesome.com/icons/magnifying-glass?f=classic&s=solid +
+- Icono de clonar: https://fontawesome.com/icons/magnifying-glass?f=classic&s=solid +
 
 === Confección del manual de instalación/distribución de la aplicación
 
