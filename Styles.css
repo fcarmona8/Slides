@@ -5,6 +5,11 @@ body {
     font-family: 'Liberation Sans', sans-serif; /* Fuente Liberation Sans */
 }
 
+.container {
+    text-align: center;
+    margin-top: 100px;
+}
+
 /* Estilos para los iconos */
 .icono {
     /* Puedes definir estilos comunes para tus iconos aquí */
@@ -41,4 +46,18 @@ body {
     /* Estilos específicos para el icono de clonar */
     background-color: #5bc0de; /* Color de fondo para el icono de clonar (azul claro) */
     color: white; /* Color del icono de clonar (blanco) */
+}
+
+.button {
+    background-color: #4c86c4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.button:hover {
+    background-color: #1f66b1;
 }

@@ -1,9 +1,5 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
-  config.vm.network "private_network", type: "dhcp" # Configura la xarxa
-  config.vm.provider "virtualbox" do |vb|
-    vb.memory = "1024" # Configura la memòria
-  end
 
   config.vm.provision "shell", inline: <<-SHELL
     apt-get update
