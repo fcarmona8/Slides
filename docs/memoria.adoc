@@ -10,6 +10,7 @@ Los miembros del proyecto somos Carmona Hernandez Ferran, Galindo Palacio Joan y
 
 
 === Diseño de BD
+Link hacia el digrama relacional de la base de dades:  https://drive.google.com/file/d/1HUVLYU9hPKxmyfT6V3yxM_MYT2UfzMvv/view?usp=sharing
 
 
 === Sketching y Mockup de interfaces 
