@@ -1,6 +1,6 @@
 = Memoria del proyecto
-=== Introducción
 
+=== Introducción
 Los miembros del proyecto somos Carmona Hernandez Ferran, Galindo Palacio Joan y Camilo Jumelle. Este proyecto tratará de realizar una aplicación que permitirá a los usuarios crear presentaciones. Las presentaciones que se podrán crear contaran con diversos tipos de diapositivas, y el usuario al final podra ver su presentación. El target de esta aplicación serán personas que deseen trasmitir sus conocimientos a otro grupo de personas, y evaluar sus conocimientos. 
 
 
