@@ -14,9 +14,7 @@ Link hacia el digrama relacional de la base de dades:  https://drive.google.com/
 
 
 === Sketching y Mockup de interfaces 
-Sketching de la pantalla Home: +
-
-image::PantallaHome.jpg["Sketching Pantalla Home"] +
+Sketching de la pantalla Home se encuentra en docs, consta de una pantalla con el fondo del color de nuestra palete (azul grisáceo), y en el centro un boton con el icono de añadir más el texto de "Crear Presentación". +
 
 Link del figma de la pantalla home: https://www.figma.com/file/L0cwsLQkG8uzz2khb70gTF/Pagina-Home?type=design&node-id=0%3A1&mode=design&t=SLndVBhAVoyvUGdy-1[enlace figma]
 
