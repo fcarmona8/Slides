@@ -22,37 +22,6 @@ body {
     color: #333; /* Color de iconos por defecto */
 }
 
-/* Estilos específicos para cada tipo de icono */
-.icono-add {
-    /* Estilos específicos para el icono de añadir */
-    background-color: #4285f4; /* Color de fondo para el icono de añadir (azul) */
-    color: white; /* Color del icono de añadir (blanco) */
-}
-
-.icono-delete {
-    /* Estilos específicos para el icono de eliminar */
-    background-color: #d9534f; /* Color de fondo para el icono de eliminar (rojo) */
-    color: white; /* Color del icono de eliminar (blanco) */
-}
-
-.icono-edit {
-    /* Estilos específicos para el icono de editar */
-    background-color: #f0ad4e; /* Color de fondo para el icono de editar (amarillo) */
-    color: white; /* Color del icono de editar (blanco) */
-}
-
-.icono-preview {
-    /* Estilos específicos para el icono de previsualizar */
-    background-color: #5bc0de; /* Color de fondo para el icono de previsualizar (azul claro) */
-    color: white; /* Color del icono de previsualizar (blanco) */
-}
-
-.icono-clone {
-    /* Estilos específicos para el icono de clonar */
-    background-color: #5bc0de; /* Color de fondo para el icono de clonar (azul claro) */
-    color: white; /* Color del icono de clonar (blanco) */
-}
-
 .button {
     background-color: #4c86c4;
     color: white;

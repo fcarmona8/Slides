@@ -25,11 +25,11 @@ El color de texto será negro, puesto que contrasta muy bien con el color de fon
 El estilo de texto que utilizamos es el Liberation Sans ya que es un texto simple y cómodo de leer para los usuarios, no presenta ninguna dificultad a la hora de la visualización por usuario como pueden presentar otros tipos de texto más editados. +
 Los iconos utilizados son del sitio web Font Awesome: https://fontawesome.com/icons +
 Iconos utilizados en la aplicación: +
-- Icono de añadir: https://fontawesome.com/icons/circle-plus?f=classic&s=solid +
-- Icono de eliminar: https://fontawesome.com/icons/trash?f=classic&s=solid +
-- Icono de editar: https://fontawesome.com/icons/pen-to-square?f=classic&s=solid +
-- Icono de previsualizar: https://fontawesome.com/icons/magnifying-glass?f=classic&s=solid +
-- Icono de clonar: https://fontawesome.com/icons/magnifying-glass?f=classic&s=solid +
+- https://fontawesome.com/icons/circle-plus?f=classic&s=solid[Icono de añadir] +
+- https://fontawesome.com/icons/trash?f=classic&s=solid[Icono de eliminar] +
+- https://fontawesome.com/icons/pen-to-square?f=classic&s=solid[Icono de editar] +
+- https://fontawesome.com/icons/magnifying-glass?f=classic&s=solid[Icono de previsualizar] +
+- https://fontawesome.com/icons/clone?f=classic&s=solid[Icono de clonar] +
 
 === Confección del manual de instalación/distribución de la aplicación
 
