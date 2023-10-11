@@ -1,6 +1,6 @@
 const newDiapo = document.getElementById('tipus');
 const finalizar = document.getElementById('fin');
-let newInput = '', newConti = '', titol = '', contingut = '', titolContingut = '';
+let titol = '', contingut = '';
 let diapositives = []; //array [titol, cont][titol, null][titol,cont]
 let tituloPresentacion, descripcionPresentacion;
 const titPres = document.getElementById('titulo');
@@ -9,23 +9,28 @@ const descPres = document.getElementById('descripcion');
 
 newDiapo.addEventListener('change', function(e){
     const diapo = document.querySelector('div[class="right"]');
-        if(titol!='' || titolContingut!=''){
-            if (contingut!='') {
-                contingut.remove(); 
-                titolContingut.remove();
-                contingut = ''; titolContingut = '';
-            }else{
-                titol.remove();
-                titol = ''; 
-            }
+
+    //if que borra la diapositiva anterior cada vez que se cmabia
+    if(titol!=''){
+        if (contingut!='') {
+            titol.remove();
+            titol = ''; 
+            contingut.remove(); 
+            contingut = ''; titolContingut = '';
+        }else{
+            titol.remove();
+            titol = ''; 
+        }
     }
+    
+    //creacion de inputs para escribir el titulo (y contenido si es el caso) de una diapositiva
+    newTitol = document.createElement('input');
+    newTitol.setAttribute('id','titolDiapositiva');    
+    newTitol.setAttribute('type','text');
 
     if (this.value == 'titol') {
-        newInput = document.createElement('input');
-        newInput.setAttribute('id','titolDiapositiva');
-        newInput.setAttribute('type','text');
-        newInput.classList.add('titolDiapo');
-        newInput.setAttribute('placeholder','Titol');
+        newTitol.classList.add('titolDiapo');
+        newTitol.setAttribute('placeholder','Titol');
 
         diapo.insertAdjacentElement('afterbegin',newInput);
         titol = document.getElementById('titolDiapositiva');
@@ -33,16 +38,12 @@ newDiapo.addEventListener('change', function(e){
             diapositives.push([this.value, null]);
         });
     }else if (this.value == 'titolContingut') {
-
-        newInput = document.createElement('input');
-        newInput.setAttribute('id','titolDiapositiva');
-        newInput.setAttribute('type','text');
-        newInput.classList.add('titolContDiapo');
-        newInput.setAttribute('placeholder','Titol');
+        newTitol.classList.add('titolContDiapo');
+        newTitol.setAttribute('placeholder','Titol');
 
         diapo.insertAdjacentElement('afterbegin',newInput);
-        titolContingut = document.getElementById('titolDiapositiva');
-        titolContingut.addEventListener('change', function(e){
+        titol = document.getElementById('titolDiapositiva');
+        titol.addEventListener('change', function(e){
             titolDiapo = this.value;
         })
 
@@ -52,13 +53,15 @@ newDiapo.addEventListener('change', function(e){
         newConti.classList.add('contingutDiapo');
         newConti.setAttribute('placeholder','Contingut');
 
-        titolContingut.insertAdjacentElement('afterEnd', newConti);
+        titol.insertAdjacentElement('afterEnd', newConti);
         contingut = document.getElementById('contingutDiapositiva');
         let titolDiapo;
         contingut.addEventListener('change', function(e){
             diapositives.push([titolDiapo, this.value]);
         })
     }
+
+    //evento donde al dar click en el boton añade los datos a la base de datos sobre la presentacion hecha
 
     finalizar.addEventListener('click', function(e){
         if (titPres != '') {
