@@ -1,11 +1,13 @@
 const newDiapo = document.getElementById('tipus');
 const finalizar = document.getElementById('fin');
+const titPres = document.getElementById('titulo');
+const descPres = document.getElementById('descripcion');
+const visualizarDiapo = document.querySelector('.diapositivas');
+
 let titol = '', contingut = '';
 let diapositives = []; //array [titol, cont][titol, null][titol,cont]
 let tituloPresentacion, descripcionPresentacion;
-const titPres = document.getElementById('titulo');
-const descPres = document.getElementById('descripcion');
-
+let contadorArray = 0;
 
 newDiapo.addEventListener('change', function(e){
     const diapo = document.querySelector('div[class="right"]');
@@ -32,16 +34,22 @@ newDiapo.addEventListener('change', function(e){
         newTitol.classList.add('titolDiapo');
         newTitol.setAttribute('placeholder','Titol');
 
-        diapo.insertAdjacentElement('afterbegin',newInput);
+        diapo.insertAdjacentElement('afterbegin',newTitol);
         titol = document.getElementById('titolDiapositiva');
         titol.addEventListener('change', function(e){
             diapositives.push([this.value, null]);
+            newVisualDiapo = document.createElement('div');
+            text = document.createTextNode(diapositives[contadorArray][0]);
+            newVisualDiapo.appendChild(text);
+            newVisualDiapo.classList.add('diaposInfo');
+            visualizarDiapo.insertAdjacentElement('beforeend',newVisualDiapo);
+            contadorArray++;
         });
     }else if (this.value == 'titolContingut') {
         newTitol.classList.add('titolContDiapo');
         newTitol.setAttribute('placeholder','Titol');
 
-        diapo.insertAdjacentElement('afterbegin',newInput);
+        diapo.insertAdjacentElement('afterbegin',newTitol);
         titol = document.getElementById('titolDiapositiva');
         titol.addEventListener('change', function(e){
             titolDiapo = this.value;
@@ -58,6 +66,12 @@ newDiapo.addEventListener('change', function(e){
         let titolDiapo;
         contingut.addEventListener('change', function(e){
             diapositives.push([titolDiapo, this.value]);
+            newVisualDiapo = document.createElement('div');
+            text = document.createTextNode(diapositives[contadorArray][0]);
+            newVisualDiapo.appendChild(text);
+            newVisualDiapo.classList.add('diaposInfo');
+            visualizarDiapo.insertAdjacentElement('beforeend',newVisualDiapo);
+            contadorArray++;
         })
     }
 
@@ -83,5 +97,7 @@ newDiapo.addEventListener('change', function(e){
         //mas el titulo de la presentacion y la descripcion
         //y llevar al usuario a la pagina home
     })
+
+
 
 });

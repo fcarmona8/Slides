@@ -43,6 +43,7 @@ body {
 .up{
     display: flex;
     flex-direction: row;
+    height: 10%;
 }
 
 .volver{
@@ -56,9 +57,13 @@ body {
     flex-direction: column;
 }
 
+#descripcion{
+    height: 100%;
+}
+
 .down{
     display: flex;
-    height: 100%;
+    height: 91%;
 }
 
 .left{
@@ -78,10 +83,13 @@ body {
 .diapositivas{
     background-color: #dddd;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    flex-direction: column;
     height: 100%;
     overflow-y: auto;
+}
+
+.diaposInfo{
+    height: 17px;
 }
 
 .right{
