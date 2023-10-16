@@ -1,12 +1,4 @@
 <?php
-// Si se usa el archivo config descomentar y comentar las variables de abajo
-// $config = include('config.php');
-
-// $db_host = $config['db_host'];
-// $db_port = $config['db_port'];
-// $db_name = $config['db_name'];
-// $db_user = $config['db_user'];
-// $db_pass = $config['db_pass'];
 
 $db_host = '192.168.1.12';
 $db_name = 'slidescarmonagalindojumelle';
