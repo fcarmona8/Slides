@@ -80,13 +80,13 @@ h1{
     padding: 2px;
     display: flex;
     flex-direction: column;
-    width: min-content;
+    width: 140px;
 }
 
 .nuevaDiapositiva{
     display: flex;
     flex-direction: column;
-    width: 80px;
+    width: 140px;
 }
 
 .diapositivas{
