@@ -3,11 +3,16 @@ const finalizar = document.getElementById('fin');
 const titPres = document.getElementById('titulo');
 const descPres = document.getElementById('descripcion');
 const visualizarDiapo = document.querySelector('.diapositivas');
+const button = document.querySelector('.volver');
 
 let titol = '', contingut = '';
 let diapositives = []; //array [titol, cont][titol, null][titol,cont]
 let tituloPresentacion, descripcionPresentacion;
 let contadorArray = 0;
+
+button.addEventListener('click', function(e){
+    document.location.href = 'Home.html';
+});
 
 newDiapo.addEventListener('change', function(e){
     const diapo = document.querySelector('div[class="right"]');
