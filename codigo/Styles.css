@@ -111,19 +111,27 @@ h1{
 }
 
 .titolDiapo{
-    width: 100%;
-    height: 90%;
+    width: 80%;
+    height: 75%;
+    font-size: 32px;
+    text-align: center;
+    margin-top: 40px;
 }
 
 .titolContDiapo{
-    width: 100%;
-    height: 10%;
+    margin-top: 40px;
+    width: 80%;
+    height: 15%;
+    font-size: 32px;
+    text-align: center;
 }
 
 .contingutDiapo{
-    width: 100%;
-    height: 80%;
+    width: 80%;
+    height: 60%;
+    font-size: 18px;
 }
+
 
 /* Estilo para el fondo del texto de descripción de la pantalla home */
 .description {

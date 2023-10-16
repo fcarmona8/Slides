@@ -3,11 +3,17 @@ const finalizar = document.getElementById('fin');
 const titPres = document.getElementById('titulo');
 const descPres = document.getElementById('descripcion');
 const visualizarDiapo = document.querySelector('.diapositivas');
+const button = document.querySelector('.volver');
 
 let titol = '', contingut = '';
 let diapositives = []; //array [titol, cont][titol, null][titol,cont]
 let tituloPresentacion, descripcionPresentacion;
 let contadorArray = 0;
+
+button.addEventListener('click', function(e){
+    document.location.href = 'Home.html';
+});
+
 
 newDiapo.addEventListener('change', function(e){
     const diapo = document.querySelector('div[class="right"]');
@@ -44,6 +50,7 @@ newDiapo.addEventListener('change', function(e){
             newVisualDiapo.classList.add('diaposInfo');
             visualizarDiapo.insertAdjacentElement('beforeend',newVisualDiapo);
             contadorArray++;
+            this.value = null;
         });
     }else if (this.value == 'titolContingut') {
         newTitol.classList.add('titolContDiapo');
@@ -55,7 +62,7 @@ newDiapo.addEventListener('change', function(e){
             titolDiapo = this.value;
         })
 
-        newConti = document.createElement('input');
+        newConti = document.createElement('textarea');
         newConti.setAttribute('id','contingutDiapositiva');
         newConti.setAttribute('type','text');
         newConti.classList.add('contingutDiapo');
@@ -72,6 +79,8 @@ newDiapo.addEventListener('change', function(e){
             newVisualDiapo.classList.add('diaposInfo');
             visualizarDiapo.insertAdjacentElement('beforeend',newVisualDiapo);
             contadorArray++;
+            titol.value = null;
+            this.value = null;
         })
     }
 
