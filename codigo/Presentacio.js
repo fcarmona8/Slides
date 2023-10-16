@@ -4,14 +4,38 @@ const titPres = document.getElementById('titulo');
 const descPres = document.getElementById('descripcion');
 const visualizarDiapo = document.querySelector('.diapositivas');
 const button = document.querySelector('.volver');
+const añadir = document.querySelector('.añadir');
+const downElements = document.querySelectorAll('.down .left, .down .right'); // Todos los elementos dentro de "down"
+const presentacionGuardada = document.querySelector('.presentacion-guardada');
+const tituloGuardado = document.getElementById('titulo-guardado');
+const descripcionGuardada = document.getElementById('descripcion-guardada');
 
 let titol = '', contingut = '';
 let diapositives = []; //array [titol, cont][titol, null][titol,cont]
-let tituloPresentacion, descripcionPresentacion;
+let tituloPresentacion = '';
+let descripcionPresentacion = '';
 let contadorArray = 0;
 
 button.addEventListener('click', function(e){
     document.location.href = 'Home.html';
+});
+
+añadir.addEventListener('click', function(e){
+    if (titPres.value.trim() !== '' && descPres.value.trim() !== '') {
+        tituloPresentacion = titPres.value;
+        descripcionPresentacion = descPres.value;
+        añadir.remove();
+        titPres.remove();
+        descPres.remove();
+        presentacionGuardada.style.display = 'block';
+        tituloGuardado.textContent = tituloPresentacion;
+        descripcionGuardada.textContent = descripcionPresentacion;
+
+        // Mostrar elementos en "down"
+        downElements.forEach(element => {
+            element.style.display = 'flex';
+        });
+    }
 });
 
 

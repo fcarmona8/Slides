@@ -17,6 +17,10 @@ h1{
     margin-top: 100px;
 }
 
+.down .left, .down .right {
+    display: none;
+}
+
 /* Estilos para los iconos */
 .icono {
     font-size: 24px; /* Tamaño de fuente para los iconos */
@@ -50,6 +54,10 @@ h1{
 .volver{
     display: flex;
 
+}
+
+.añadir{
+    display: flex;
 }
 
 .presentacion{
@@ -132,6 +140,14 @@ h1{
     font-size: 18px;
 }
 
+.presentacion-guardada{
+    display: flex;
+    text-align: center; /* Alinea el contenido al centro horizontalmente */
+    flex-direction: column;
+    margin-top: -10px;
+    justify-content: center; /* Centra verticalmente */
+    align-items: center;
+}
 
 /* Estilo para el fondo del texto de descripción de la pantalla home */
 .description {
