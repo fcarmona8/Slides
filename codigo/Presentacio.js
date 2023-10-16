@@ -14,6 +14,7 @@ button.addEventListener('click', function(e){
     document.location.href = 'Home.html';
 });
 
+
 newDiapo.addEventListener('change', function(e){
     const diapo = document.querySelector('div[class="right"]');
 
