@@ -44,6 +44,7 @@ newDiapo.addEventListener('change', function(e){
             newVisualDiapo.classList.add('diaposInfo');
             visualizarDiapo.insertAdjacentElement('beforeend',newVisualDiapo);
             contadorArray++;
+            this.value = null;
         });
     }else if (this.value == 'titolContingut') {
         newTitol.classList.add('titolContDiapo');
@@ -72,6 +73,8 @@ newDiapo.addEventListener('change', function(e){
             newVisualDiapo.classList.add('diaposInfo');
             visualizarDiapo.insertAdjacentElement('beforeend',newVisualDiapo);
             contadorArray++;
+            titol.value = null;
+            this.value = null;
         })
     }
 
