@@ -56,7 +56,7 @@ newDiapo.addEventListener('change', function(e){
             titolDiapo = this.value;
         })
 
-        newConti = document.createElement('input');
+        newConti = document.createElement('textarea');
         newConti.setAttribute('id','contingutDiapositiva');
         newConti.setAttribute('type','text');
         newConti.classList.add('contingutDiapo');
