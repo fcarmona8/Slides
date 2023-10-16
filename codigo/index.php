@@ -1,22 +1,38 @@
 <?php
-class Connection {
-    private static $pdo;
+//index de prova
+$config = require_once 'config.php';
+require_once 'Connection.php';
+require_once 'DAO.php';
 
-    private final function __construct(){
+$dao = new DAO(Connection::getConnection($config['db']));
 
-    }
+$presen = $dao->getDiapositives('1');
 
-    public static function getConnection($dbconfig){
-        if(!isset(self::$pdo)){
-            $pdo = new PDO(
-                $dbconfig['connection'] . ';dbname=' . $dbconfig['dbname'],
-                $dbconfig['usr'],
-                $dbconfig['pwd'],
-                $dbconfig['options']
-            );
 
-            self::$pdo = $pdo;
-        }
-        return self::$pdo;
-    }
-}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <th>titol</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($row = $presen->fetch()) : ?>
+                <tr>
+                    <td><?= $row['titol']; ?></td>
+                </tr>
+            <?php endwhile ?>   
+        </tbody>
+    </table>
+</body>
+</html>
