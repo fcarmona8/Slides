@@ -73,7 +73,7 @@ newDiapo.addEventListener('change', function(e){
             newVisualDiapo.classList.add('diaposInfo');
             visualizarDiapo.insertAdjacentElement('beforeend',newVisualDiapo);
             contadorArray++;
-            titol.value = null;
+            titol.value = null; 
             this.value = null;
         })
     }
