@@ -9,7 +9,9 @@ body {
     right: 0;
     left: 0;
 }
-
+h1{
+    margin-left: 50px;
+}
 .container {
     text-align: center;
     margin-top: 100px;
@@ -17,7 +19,6 @@ body {
 
 /* Estilos para los iconos */
 .icono {
-    /* Puedes definir estilos comunes para tus iconos aquí */
     font-size: 24px; /* Tamaño de fuente para los iconos */
     color: #333; /* Color de iconos por defecto */
 }
@@ -138,4 +139,6 @@ body {
 
 .line{
     border: 1px solid black;
+    margin-left: 50px;
+    margin-right: 50px;
 }
