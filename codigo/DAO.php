@@ -15,13 +15,16 @@ class DAO{
     }
 
     public function setPresentacions($titol, $descripcio){
-        $sql = "INSERT INTO Presentacions(titol, descripcio) VALUES (:titol, :descripcio)";
+        $sql = "INSERT INTO Presentacions (titol, descripcio) VALUES (:titol, :descripcio)";
         $statement = ($this->pdo)->prepare($sql);
 
-        $statement->bindValue(':titol', $titol);
-        $statement->bindValue(':descripcio', $descripcio);
+        // $statement->bindValue(':titol', $titol);
+        // $statement->bindValue(':descripcio', $descripcio);
 
-        $statement->execute();
+        $statement->execute([
+            "titol" => $titol,
+            "descripcio" => $descripcio
+        ]);
     }
 
     public function getDiapositives($id_presentacio){

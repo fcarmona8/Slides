@@ -17,7 +17,7 @@ let descripcionPresentacion = '';
 let contadorArray = 0;
 
 button.addEventListener('click', function(e){
-    document.location.href = 'Home.html';
+    document.location.href = 'Home.php';
 });
 
 añadir.addEventListener('click', function(e){

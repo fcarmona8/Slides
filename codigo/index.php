@@ -6,7 +6,10 @@ require_once 'DAO.php';
 
 $dao = new DAO(Connection::getConnection($config['db']));
 
-$presen = $dao->getDiapositives('1');
+$titulo = 'sdfs';
+$descripcion = 'descripcion';
+$dao->setPresentacions($titulo, $descripcion);
+$presen = $dao->getPresentacions();
 
 
 ?>

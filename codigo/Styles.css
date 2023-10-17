@@ -44,7 +44,6 @@ body {
 
 /* Estilos afectados en CrearPresentacion */
 
-
 .up {
     margin-top: 30px;
     display: flex;
@@ -106,6 +105,11 @@ body {
     border: 1.5px solid black;
 }
 
+.añadir{
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
+}
 
 .presentacion {
     display: flex;
