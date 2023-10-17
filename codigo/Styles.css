@@ -65,7 +65,6 @@ body {
     background-color: #96C5B0;
     border: none;
     font-size: 18px;
-
 }
 
 .volver a {
@@ -103,6 +102,18 @@ body {
     margin: 0 auto;
     border-radius: 4px;
     border: 1.5px solid black;
+}
+
+.presentacion-guardada{
+    display: flex;
+    justify-content: center;
+}
+
+.tituloGuardado{
+    background-color: #DDDDDD;
+    padding: 0.2% 1%;
+    border-radius: 15%;
+    border: 1px solid;
 }
 
 .añadir{

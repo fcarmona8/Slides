@@ -23,13 +23,11 @@ button.addEventListener('click', function(e){
 añadir.addEventListener('click', function(e){
     if (titPres.value.trim() !== '' && descPres.value.trim() !== '') {
         tituloPresentacion = titPres.value;
-        descripcionPresentacion = descPres.value;
         añadir.remove();
         titPres.remove();
         descPres.remove();
-        presentacionGuardada.style.display = 'block';
+        presentacionGuardada.style.display = 'flex';
         tituloGuardado.textContent = tituloPresentacion;
-        descripcionGuardada.textContent = descripcionPresentacion;
 
         // Mostrar elementos en "down"
         downElements.forEach(element => {
