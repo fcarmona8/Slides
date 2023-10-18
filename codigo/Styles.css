@@ -196,6 +196,12 @@ body {
     padding: 2px;
 }
 
+.tituloGuardado{
+    border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    font-size: 28px;
+}
+
 .titolDiapo {
     width: 70%;
     height: 75%;

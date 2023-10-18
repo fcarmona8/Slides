@@ -108,7 +108,7 @@ newDiapo.addEventListener('change', function(e){
 
     //evento donde al dar click en el boton añade los datos a la base de datos sobre la presentacion hecha
 
-    finalizar.addEventListener('click', function(e){
+    finalizar.addEventListener('click', e => {
         if (titPres != '') {
             tituloPresentacion = titPres.value;
             if (descPres != '') {
@@ -126,7 +126,9 @@ newDiapo.addEventListener('change', function(e){
         
         //añadir array diapositivas a la base de datos
         //mas el titulo de la presentacion y la descripcion
+
         //y llevar al usuario a la pagina home
+        document.location.href = 'Home.php';
     })
 
 
