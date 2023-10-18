@@ -61,7 +61,7 @@ image::preview.png[Imagen del icono previsualizar][width=100]
 
 - https://fontawesome.com/icons/clone?f=classic&s=solid[Icono de clonar]
 
-image::clonar.png[Imagen del icono clonar][width=100]
+image::clonar.png[width=30]
 
 Link del resumen esquemático de la guía de estilos: https://www.figma.com/file/NLUpqEUNShhgeqQzZvntOe/Guia-d'estils?type=design&node-id=0%3A1&mode=design&t=Qni8KE80LLjWfZ9U-1[Guía de estilos (figma)]
 
