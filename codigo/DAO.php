@@ -21,10 +21,14 @@ class DAO{
         // $statement->bindValue(':titol', $titol);
         // $statement->bindValue(':descripcio', $descripcio);
 
-        $statement->execute([
-            "titol" => $titol,
-            "descripcio" => $descripcio
-        ]);
+        try {
+            $statement->execute([
+                "titol" => $titol,
+                "descripcio" => $descripcio
+            ]);
+        } catch (PDOException $e) {
+            echo "Error al guardar datos: " . $e->getMessage();
+        }
     }
 
     public function getDiapositives($id_presentacio){

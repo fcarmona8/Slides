@@ -19,10 +19,10 @@ include_once("baseDatos.php");
             </button>
         </div>
         <div class="presentacion">
-            <form method="get">
-                <input type="text" name="titulo" id="titulo" placeholder="Titulo de la presentacion">
-                <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion">
-                <input type="submit" name="botonCrear" value="Crear" class="añadir">   
+            <form method="POST">
+                <input type="text" name="titol" id="titol" placeholder="Titulo de la presentacion">
+                <input type="text" name="descripcio" id="descripcio" placeholder="Descripcio">
+                <input type="submit" name="anadirPresentacio" value="Crear">   
             </form>
             <div class="presentacion-guardada" style="display: none;">
                 <p id="titulo-guardado" class="tituloGuardado"></p>
