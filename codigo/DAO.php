@@ -14,6 +14,24 @@ class DAO{
         return $statement;
     }
 
+    public function getTitolPorID($id_presentacio) {
+        $sql = "SELECT titol FROM Presentacions WHERE ID_Presentacio = :id_presentacio";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([':id_presentacio' => $id_presentacio]);
+    
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result['titol'];
+        } else {
+            return "Título no encontrado";
+        }
+    }
+    
+    public function getLastInsertId() {
+        return $this->pdo->lastInsertId();
+    }
+
     public function setPresentacions($titol, $descripcio){
         $sql = "INSERT INTO Presentacions (titol, descripcio) VALUES (:titol, :descripcio)";
         $statement = ($this->pdo)->prepare($sql);
@@ -26,6 +44,7 @@ class DAO{
                 "titol" => $titol,
                 "descripcio" => $descripcio
             ]);
+            
         } catch (PDOException $e) {
             echo "Error al guardar datos: " . $e->getMessage();
         }

@@ -24,34 +24,7 @@ include_once("baseDatos.php");
                 <input type="text" name="descripcio" id="descripcio" placeholder="Descripcio">
                 <input type="submit" name="anadirPresentacio" value="Crear">   
             </form>
-            <div class="presentacion-guardada" style="display: none;">
-                <p id="titulo-guardado" class="tituloGuardado"></p>
-            </div>
         </div>
-    </div>
-    
-    
-    <div class="down">
-        <div class="left">
-            <div class="nuevaDiapositiva">
-                <select name="tipus" id="tipus">
-                    <option value="" selected disabled>Nueva Diapositiva</option>
-                    <option value="titol">Titol</option>
-                    <option value="titolContingut">Titol + contingut</option>
-                </select>
-            </div>
-            <div class="diapositivas">
-            </div>
-        </div>
-    
-        <div class="right">
-
-            <div class="botones">
-                <button name="añadirDiapositiva">Añadir diapositiva</button>
-                <button name="finalizar">Finalizar presentacion</button>
-            </div>
-        </div>
-        
     </div>
     <script src="Presentacio.js"></script>
 </body>

@@ -20,22 +20,6 @@ button.addEventListener('click', function(e){
     document.location.href = 'Home.php';
 });
 
-anadirPresentacio.addEventListener('click', function(e){
-    if (titPres.value.trim() !== '' && descPres.value.trim() !== '') {
-        tituloPresentacion = titPres.value;
-        anadirPresentacio.remove();
-        titPres.remove();
-        descPres.remove();
-        presentacionGuardada.style.display = 'flex';
-        tituloGuardado.textContent = tituloPresentacion;
-
-        // Mostrar elementos en "down"
-        downElements.forEach(element => {
-            element.style.display = 'flex';
-        });
-    }
-});
-
 
 newDiapo.addEventListener('change', function(e){
     const diapo = document.querySelector('div[class="right"]');

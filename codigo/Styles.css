@@ -134,9 +134,6 @@ body {
     display: flex;
     height: 91%;
 }
-.down .left, .down .right {
-    display: none;
-}
 
 .left {
     height: 77%;
