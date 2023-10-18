@@ -43,23 +43,23 @@ image::liberationSans.png[Imagen del tipo de fuente utilizado]
 Los iconos utilizados son del sitio web Font Awesome: https://fontawesome.com/icons +
 Iconos utilizados en la aplicación: +
 
-- https://fontawesome.com/icons/circle-plus?f=classic&s=solid[Icono de añadir] 
+- https://fontawesome.com/icons/circle-plus?f=classic&s=solid[Icono de añadir][width=100]
 
 image::add.png[Imagen del icono añadir]
 
-- https://fontawesome.com/icons/trash?f=classic&s=solid[Icono de eliminar]
+- https://fontawesome.com/icons/trash?f=classic&s=solid[Icono de eliminar][width=200]
 
 image::delete.png[Imagen del icono eliminar]
 
-- https://fontawesome.com/icons/pen-to-square?f=classic&s=solid[Icono de editar]
+- https://fontawesome.com/icons/pen-to-square?f=classic&s=solid[Icono de editar][width=200]
 
 image::edit.png[Imagen del icono editar]
 
-- https://fontawesome.com/icons/magnifying-glass?f=classic&s=solid[Icono de previsualizar]
+- https://fontawesome.com/icons/magnifying-glass?f=classic&s=solid[Icono de previsualizar][width=200]
 
 image::preview.png[Imagen del icono previsualizar]
 
-- https://fontawesome.com/icons/clone?f=classic&s=solid[Icono de clonar]
+- https://fontawesome.com/icons/clone?f=classic&s=solid[Icono de clonar][width=200]
 
 image::clonar.png[Imagen del icono clonar]
 
