@@ -1,3 +1,18 @@
+<?php
+//index de prova
+$config = require_once 'config.php';
+require_once 'Connection.php';
+require_once 'DAO.php';
+
+$dao = new DAO(Connection::getConnection($config['db']));
+
+$titol = 'prova';
+$descripcio = 'prova2';
+$dao->setPresentacions($titol, $descripcio);
+$presen = $dao->getPresentacions();
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -10,7 +25,20 @@
     <h1>Slides</h1>
     <hr class="line">
     <div class="container">
-        
+    <table>
+        <thead>
+            <tr>
+                <th>titol</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while ($row = $presen->fetch()) : ?>
+                <tr>
+                    <td><?= $row['titol']; ?></td>
+                </tr>
+            <?php endwhile ?>   
+        </tbody>
+    </table>
         <a href="CrearPresentacio.php" class="button"><svg xmlns="http://www.w3.org/2000/svg" height="1em"
                 viewBox="0 0 512 512">
                 <path
