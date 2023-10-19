@@ -216,10 +216,34 @@ tr{
     width: 150px;
     border-radius: 5px;
     border: 1px solid black;
+    overflow-y: auto;
+
 }
 
 .diaposInfo {
-    height: 17px;
+    height: 20px;
+    height: min-content;
+    overflow-wrap: break-word;
+    margin: 4px 8px;
+    padding: 10px 5px;
+    border-radius: 4px;
+    position: relative; 
+    text-align: center;
+}
+.diaposInfo::after {
+    content: '';
+    position: absolute;
+    left: 50%; 
+    transform: translateX(-50%); 
+    bottom: -4px; 
+    width: 80%; 
+    height: 1px; 
+    background-color: rgb(145, 145, 145); 
+  }
+
+.diaposInfo:hover {
+    background-color: #c8c8c8;
+    cursor: pointer;
 }
 
 .right {
