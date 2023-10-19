@@ -9,7 +9,6 @@
 
     apt-get install -y mysql-server    
     mysql -u root -p$DBPASS -e "GRANT ALL PRIVILEGES ON * . * TO 'root' IDENTIFIED BY '1234';"
-    mysql -u root -p$DBPASS -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';"
     mysql -u root -p$DBPASS -e "CREATE DATABASE $DBNAME;"
     mysql -u root -p$DBPASS -e "USE $DBNAME; FLUSH PRIVILEGES;"
     mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE Presentacions (ID_Presentacio INT AUTO_INCREMENT PRIMARY KEY, titol VARCHAR(255) NOT NULL, descripcio TEXT);"
