@@ -7,6 +7,9 @@ let diapositives = []; //array [titol, cont][titol, null][titol,cont]
 let titol = '', contingut = '', titolContingut = '', titolDiapo = '';
 let contadorArray = 0;
 
+button.addEventListener('click', function (e) {
+    document.location.href = 'Home.php';
+});
 
 const mostrarDiapositivaColumna = () => {
     const newVisualDiapo = document.createElement('div');
