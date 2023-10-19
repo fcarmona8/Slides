@@ -1,25 +1,29 @@
-const newDiapo = document.getElementById('tipus');
-const finalizar = document.getElementById('fin');
-const titPres = document.getElementById('titol');
-const descPres = document.getElementById('descripcio');
-const visualizarDiapo = document.querySelector('.diapositivas');
+const titPres = document.getElementById('titulo');
+const descPres = document.getElementById('descripcion');
 const button = document.querySelector('.volver');
-const anadirPresentacio = document.querySelector('.anadirPresentacio');
 const downElements = document.querySelectorAll('.down .left, .down .right'); // Todos los elementos dentro de "down"
 const presentacionGuardada = document.querySelector('.presentacion-guardada');
 const tituloGuardado = document.getElementById('titulo-guardado');
+const añadir = document.querySelector('.añadir');
 const descripcionGuardada = document.getElementById('descripcion-guardada');
 
-let titol = '', contingut = '';
-let diapositives = []; //array [titol, cont][titol, null][titol,cont]
 let tituloPresentacion = '';
 let descripcionPresentacion = '';
-let contadorArray = 0;
 
-button.addEventListener('click', function(e){
+
+
+button.addEventListener('click', function (e) {
     document.location.href = 'Home.php';
 });
 
+añadir.addEventListener('click', function (e) {
+    if (titPres.value.trim() !== '' && descPres.value.trim() !== '') {
+        tituloPresentacion = titPres.value;
+        añadir.remove();
+        titPres.remove();
+        descPres.remove();
+        presentacionGuardada.style.display = 'flex';
+        tituloGuardado.textContent = tituloPresentacion;
 
 newDiapo.addEventListener('change', function(e){
     const diapo = document.querySelector('div[class="right"]');
@@ -128,5 +132,3 @@ newDiapo.addEventListener('change', function(e){
     */
 
 
-
-});

@@ -41,6 +41,37 @@ body {
     background-color: #1f66b1;
 }
 
+.presentacionsBD{
+    margin: 30px;
+    height: 50%;
+    flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    overflow-y: auto;
+    justify-content: center;
+}
+.pres{
+    width: 50%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+}
+
+.buttons{
+    background-color: #96C5B0;
+    border: 0px;
+}
+
+.buttons:hover{
+    background-color: #78a691;
+}
+
+tr{
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
 
 /* Estilos afectados en CrearPresentacion */
 
