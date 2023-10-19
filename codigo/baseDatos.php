@@ -21,6 +21,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirPresentacio"])) 
     exit();
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) {
+        // Obtener los datos del formulario
+        $titol = $_POST["titol"];
+        $contingut = $_POST["contingut"];
+        $id_presentacio = $_POST["id_presentacio"];
+
+        // Insertar los datos en la base de datos
+        $dao->setDiapositives($titol, $contingut, $id_presentacio);
+
+        // Redirigir de nuevo a CrearDiapositives.php
+        header("Location: CrearDiapositives.php?id=" . $id_presentacio);
+        exit();
+}
+
+
 
 
 /*

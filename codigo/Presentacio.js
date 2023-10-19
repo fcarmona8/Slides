@@ -37,6 +37,13 @@ newDiapo.addEventListener('change', function(e){
         }
     }
     
+    document.getElementById("tipus").addEventListener("change", function() {
+        if (this.value === "titolContingut") {
+            window.location.href = "CrearDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
+        }
+    });
+
+    /*
     //creacion de inputs para escribir el titulo (y contenido si es el caso) de una diapositiva
     newTitol = document.createElement('input');
     newTitol.setAttribute('id','titolDiapositiva');    
@@ -45,6 +52,7 @@ newDiapo.addEventListener('change', function(e){
     if (this.value == 'titol') {
         newTitol.classList.add('titolDiapo');
         newTitol.setAttribute('placeholder','Titol');
+        newTitol.setAttribute('name', 'titol');
 
         diapo.insertAdjacentElement('afterbegin',newTitol);
         titol = document.getElementById('titolDiapositiva');
@@ -56,11 +64,13 @@ newDiapo.addEventListener('change', function(e){
             newVisualDiapo.classList.add('diaposInfo');
             visualizarDiapo.insertAdjacentElement('beforeend',newVisualDiapo);
             contadorArray++;
+            document.getElementById('formularioPresentacion').submit();
             this.value = null;
         });
     }else if (this.value == 'titolContingut') {
         newTitol.classList.add('titolContDiapo');
         newTitol.setAttribute('placeholder','Titol');
+        newTitol.setAttribute('name', 'titol');
 
         diapo.insertAdjacentElement('afterbegin',newTitol);
         titol = document.getElementById('titolDiapositiva');
@@ -70,6 +80,7 @@ newDiapo.addEventListener('change', function(e){
 
         newConti = document.createElement('textarea');
         newConti.setAttribute('id','contingutDiapositiva');
+        newConti.setAttribute('name', 'contingut');
         newConti.setAttribute('type','text');
         newConti.classList.add('contingutDiapo');
         newConti.setAttribute('placeholder','Contingut');
@@ -114,6 +125,7 @@ newDiapo.addEventListener('change', function(e){
         //y llevar al usuario a la pagina home
         document.location.href = 'Home.php';
     })
+    */
 
 
 

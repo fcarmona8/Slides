@@ -185,6 +185,14 @@ body {
     align-content: center;
 }
 
+#formDiapoCont {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center; /* Centra horizontalmente los elementos del formulario */
+}
+
 .finalizar {
     display: flex;
     flex-direction: row;
@@ -231,8 +239,10 @@ body {
 
 }
 
+
 textarea {
     font-family: 'Liberation Sans', sans-serif;
+    width: 100%; /* Asegura que el textarea ocupe el ancho completo */
 }
 
 

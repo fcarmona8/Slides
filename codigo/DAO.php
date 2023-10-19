@@ -5,7 +5,7 @@ class DAO{
     public function __construct($pdo){
         $this->pdo = $pdo;
     }
-
+    // funcio per mostrar totes les presentacions guardades a la base de dades
     public function getPresentacions(){
         $sql = "SELECT titol FROM Presentacions";
         $statement = ($this->pdo)->query($sql);
@@ -43,6 +43,22 @@ class DAO{
             $statement->execute([
                 "titol" => $titol,
                 "descripcio" => $descripcio
+            ]);
+            
+        } catch (PDOException $e) {
+            echo "Error al guardar datos: " . $e->getMessage();
+        }
+    }
+
+    public function setDiapositives($titol, $contingut, $id_presentacio){
+        $sql = "INSERT INTO Diapositives (titol, contingut, ID_Presentacio) VALUES (:titol, :contingut, :id_presentacio)";
+        $statement = ($this->pdo)->prepare($sql);
+
+        try {
+            $statement->execute([
+                "titol" => $titol,
+                "contingut" => $contingut,
+                ':id_presentacio' => $id_presentacio
             ]);
             
         } catch (PDOException $e) {

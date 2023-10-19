@@ -9,14 +9,15 @@ if (isset($_GET["id"])) {
     $titol = "Título no disponible";
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pantalla Crear Presentació</title>
+    <title>Pantalla Crear Diapositivas Contingut</title>
     <link rel="stylesheet" href="Styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 </head>
-<body id="crearPresentacio">
+<body id="crearDiapositivasContingut">
     <div class="up">
         <div class="volver">
             <button> 
@@ -30,10 +31,10 @@ if (isset($_GET["id"])) {
             <div class="presentacion-guardada">
                 <p id="titulo-guardado" class="tituloGuardado"><?php echo $titol; ?></p>
             </div>
+            
         </div>
     </div>
-    
-    
+
     <div class="down">
         <div class="left">
             <div class="nuevaDiapositiva">
@@ -46,19 +47,15 @@ if (isset($_GET["id"])) {
             <div class="diapositivas">
             </div>
         </div>
-    
-        
-        
+        <div class="right">
+            <form method="POST" id="formDiapoCont">
+                <!-- Campo oculto para enviar el ID -->
+                <input type="hidden" name="id_presentacio" value="<?php echo $id_presentacio; ?>">
+                <input type="text" name="titol" class="titolDiapo" placeholder="Titol">
+                <input type="submit" name="anadirDiapositiva" value="Añadir diapositiva">
+            </form>
+        </div>
     </div>
-    <script>
-    document.getElementById("tipus").addEventListener("change", function() {
-        if (this.value === "titolContingut") {
-            window.location.href = "CrearDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
-        }
-        if (this.value === "titol") {
-            window.location.href = "CrearDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
-        }
-    });
-</script>
+    
 </body>
 </html>
