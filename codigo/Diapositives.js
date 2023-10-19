@@ -15,7 +15,9 @@ button.addEventListener('click', function (e) {
 const mostrarDiapositivaColumna = () => {
     const newVisualDiapo = document.createElement('div');
     if (diapositives && diapositives.length > contadorArray) {
-        const text = document.createTextNode(diapositives[contadorArray][0]);
+        const displayTitle = diapositives[contadorArray][0] || 'Sin título';
+
+        const text = document.createTextNode(displayTitle);
         newVisualDiapo.appendChild(text);
         newVisualDiapo.classList.add('diaposInfo');
         visualizarDiapo.insertAdjacentElement('beforeend', newVisualDiapo);
@@ -84,8 +86,8 @@ newDiapo.addEventListener('change', function (e) {
             }
         } else if (newDiapo.value === 'titolContingut') {
             if (titolDiapo.trim() !== '' || contingut.value.trim() !== '') {
-            diapositives.push([titolDiapo || 'Sin título', contingut.value]);
-            mostrarDiapositivaColumna();
+                diapositives.push([titolDiapo, contingut.value]);
+                mostrarDiapositivaColumna();
             }
         }
     });
