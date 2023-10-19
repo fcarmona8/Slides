@@ -50,12 +50,12 @@ if (isset($_GET["id"])) {
         <div class="right">
 
             <div class="botones">
-                <button name="añadirDiapositiva">Añadir diapositiva</button>
+                <button id="añadirDiapositiva" name="añadirDiapositiva">Añadir diapositiva</button>
                 <button name="finalizar">Finalizar presentacion</button>
             </div>
         </div>
         
     </div>
-    <script src="Presentacio.js"></script>
+    <script src="Diapositives.js"></script>
 </body>
 </html>
