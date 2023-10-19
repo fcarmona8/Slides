@@ -5,6 +5,7 @@ include_once("DAO.php");
 if (isset($_GET["id"])) {
     $id_presentacio = $_GET["id"];
     $titol = $dao->getTitolPorID($id_presentacio);
+    $diapo = $dao->getDiapositives($id_presentacio);
 } else {
     $titol = "Título no disponible";
 }
@@ -45,6 +46,15 @@ if (isset($_GET["id"])) {
                 </select>
             </div>
             <div class="diapositivas">
+                <?php while ($row = $diapo->fetch()) : ?>
+                    <table class='diapo'>   
+                        <tbody>
+                            <tr>
+                                <td><?= $row['titol']; ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <?php endwhile ?>  
             </div>
         </div>
         <div class="right">
@@ -56,6 +66,18 @@ if (isset($_GET["id"])) {
             </form>
         </div>
     </div>
+
+    <script>
+        const button = document.querySelector('.volver');
+        document.getElementById("tipus").addEventListener("change", function() {
+            if (this.value === "titolContingut") {
+                window.location.href = "CrearDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
+            }
+        });
+        button.addEventListener('click', function (e) {
+            window.location.href = "CrearDiapositives.php?id=<?php echo $id_presentacio; ?>";
+        });
+    </script>
     
 </body>
 </html>

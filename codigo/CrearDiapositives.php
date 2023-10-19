@@ -5,9 +5,11 @@ include_once("DAO.php");
 if (isset($_GET["id"])) {
     $id_presentacio = $_GET["id"];
     $titol = $dao->getTitolPorID($id_presentacio);
+    $diapo = $dao->getDiapositives($id_presentacio);
 } else {
     $titol = "Título no disponible";
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,6 +46,15 @@ if (isset($_GET["id"])) {
                 </select>
             </div>
             <div class="diapositivas">
+                <?php while ($row = $diapo->fetch()) : ?>
+                    <table class='diapo'>   
+                        <tbody>
+                            <tr>
+                                <td><?= $row['titol']; ?></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                <?php endwhile ?>  
             </div>
         </div>
     
@@ -51,14 +62,15 @@ if (isset($_GET["id"])) {
         
     </div>
     <script>
-    document.getElementById("tipus").addEventListener("change", function() {
-        if (this.value === "titolContingut") {
-            window.location.href = "CrearDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
-        }
-        if (this.value === "titol") {
-            window.location.href = "CrearDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
-        }
-    });
-</script>
+        document.getElementById("tipus").addEventListener("change", function() {
+            if (this.value === "titolContingut") {
+                window.location.href = "CrearDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
+            }
+            if (this.value === "titol") {
+                window.location.href = "CrearDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
+            }
+        });
+    </script>
+    <script src="Diapositives.js"></script>
 </body>
 </html>

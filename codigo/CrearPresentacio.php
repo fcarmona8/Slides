@@ -19,9 +19,9 @@ include_once("baseDatos.php");
             </button>
         </div>
         <div class="presentacion">
-            <form method="POST">
-                <input type="text" name="titol" id="titol" placeholder="Titulo de la presentacion">
-                <input type="text" name="descripcio" id="descripcio" placeholder="Descripcio">
+            <form method="POST" id="formPresentacio">
+                <input type="text" name="titol" class="titol" placeholder="Titulo de la presentacion">
+                <input type="text" name="descripcio" class="descripcio" placeholder="Descripcio">
                 <input type="submit" name="anadirPresentacio" value="Crear">   
             </form>
         </div>

@@ -11,6 +11,7 @@ button.addEventListener('click', function (e) {
     document.location.href = 'Home.php';
 });
 
+
 const mostrarDiapositivaColumna = () => {
     const newVisualDiapo = document.createElement('div');
     if (diapositives && diapositives.length > contadorArray) {
