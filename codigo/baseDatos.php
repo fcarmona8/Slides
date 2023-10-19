@@ -41,6 +41,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
 }
 
 
+if (isset($_POST['eliminar_presentacion'])) {
+    $id_presentacion = $_POST['id_presentacion'];
+    $result = $dao->eliminarPresentacion($id_presentacion);
+
+    if ($result) {
+        echo "Presentación eliminada correctamente.";
+    } else {
+        echo "No se pudo eliminar la presentación.";
+    }
+}
+
 
 
 /*

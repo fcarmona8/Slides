@@ -54,7 +54,22 @@ body {
     width: 50%;
     height: fit-content;
     display: flex;
+    flex-direction: row;
     justify-content: center;
+}
+
+#eliminar{
+    display: flex;
+    flex-direction: row;
+}
+
+.button-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.form-inline{
+    display: inline; /* Muestra los elementos del formulario en línea */
 }
 
 .buttons{

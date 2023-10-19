@@ -7,7 +7,7 @@ class DAO{
     }
     // funcio per mostrar totes les presentacions guardades a la base de dades
     public function getPresentacions(){
-        $sql = "SELECT titol FROM Presentacions";
+        $sql = "SELECT titol, ID_Presentacio FROM Presentacions";
         $statement = ($this->pdo)->query($sql);
 
         $statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -73,5 +73,27 @@ class DAO{
         
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         return $statement;
+    }
+
+    public function eliminarPresentacion($id_presentacion) {
+        try {
+            $this->pdo->beginTransaction();
+    
+            // Eliminar las diapositivas relacionadas
+            $sql_eliminar_diapositivas = "DELETE FROM Diapositives WHERE ID_Presentacio = :id_presentacion";
+            $statement_eliminar_diapositivas = $this->pdo->prepare($sql_eliminar_diapositivas);
+            $statement_eliminar_diapositivas->execute([':id_presentacion' => $id_presentacion]);
+    
+            // Luego, eliminar la propia presentación
+            $sql_eliminar_presentacion = "DELETE FROM Presentacions WHERE ID_Presentacio = :id_presentacion";
+            $statement_eliminar_presentacion = $this->pdo->prepare($sql_eliminar_presentacion);
+            $statement_eliminar_presentacion->execute([':id_presentacion' => $id_presentacion]);
+    
+            $this->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->pdo->rollback();
+            return false;
+        }
     }
 }
