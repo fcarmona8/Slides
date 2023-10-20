@@ -36,6 +36,8 @@ $presen = $dao->getPresentacions();
                 </tr>
             <?php endwhile ?>   
         </tbody>
+
+        
     </table>
 </body>
 </html>
