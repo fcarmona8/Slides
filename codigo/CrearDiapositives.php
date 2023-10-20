@@ -19,6 +19,11 @@ if (isset($_GET["id"])) {
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 </head>
 <body id="crearPresentacio">
+<?php
+    if (isset($_GET['mensaje'])) {
+        echo '<div class="mensaje-exito">' . $_GET['mensaje'] . '</div>';
+    }
+    ?>
     <div class="up">
         <div class="volver">
             <button> 

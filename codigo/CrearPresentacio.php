@@ -18,10 +18,14 @@ include_once("baseDatos.php");
             </button>
         </div>
         <div class="presentacion">
-            <form method="POST" id="formPresentacio">
-                <input type="text" name="titol" class="titol" placeholder="Titulo de la presentacion">
-                <input type="text" name="descripcio" class="descripcio" placeholder="Descripcio">
-                <input type="submit" name="anadirPresentacio" value="Crear">   
+            <form method="POST" id="formPresentacio" onsubmit="return validateForm();">
+                <input type="text" name="titol" class="titol" placeholder="Titulo de la presentación" maxlength="30" required>
+                <span id="titolError" class="error"></span>
+
+                <textarea type="text" name="descripcio" class="descripcio" placeholder="Descripción" required></textarea>
+                <span id="descripcioError" class="error"></span>
+                
+                <input type="submit" name="anadirPresentacio" class="boton-crear" value="Crear Presentación">   
             </form>
         </div>
     </div>
