@@ -73,7 +73,7 @@ if (isset($_GET["id"])) {
             }
         });
         button.addEventListener('click', function (e) {
-            window.location.href = "CrearDiapositives.php?id=<?php echo $id_presentacio; ?>";
+            window.location.href = "Home.php";
         });
     </script>
     

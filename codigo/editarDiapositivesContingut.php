@@ -71,7 +71,7 @@ if (isset($_GET["id"])) {
         const button = document.querySelector('.volver');
         document.getElementById("tipus").addEventListener("change", function() {
             if (this.value === "titol") {
-                window.location.href = "CrearDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
+                window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
             }
         });
         button.addEventListener('click', function (e) {

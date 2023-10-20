@@ -55,7 +55,12 @@ if (isset($_POST['eliminar_presentacion'])) {
     }
 }
 
-
+if (isset($_POST['editar_presentacion'])) {
+    $id_presentacion = $_POST['id_presentacion'];
+    
+    header("Location: editarDiapositivesTitol.php?id=".$id_presentacion);
+    exit();
+}
 
 /*
 if(isset($_GET['anadirPresentacio'])){
