@@ -127,6 +127,5 @@ function drop(e) {
   }
 
   draggedElement.classList.remove('dragging');
-  console.log(diapositives);
 }
 
