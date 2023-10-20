@@ -16,36 +16,22 @@ button.addEventListener('click', function (e) {
     document.location.href = 'Home.php';
 });
 
-añadir.addEventListener('click', function (e) {
-    if (titPres.value.trim() !== '' && descPres.value.trim() !== '') {
-        tituloPresentacion = titPres.value;
-        añadir.remove();
-        titPres.remove();
-        descPres.remove();
-        presentacionGuardada.style.display = 'flex';
-        tituloGuardado.textContent = tituloPresentacion;
-    }
-});
-
-newDiapo.addEventListener('change', function(e){
-    const diapo = document.querySelector('div[class="right"]');
-
-    //if que borra la diapositiva anterior cada vez que se cmabia
-    if(titol!=''){
-        if (contingut!='') {
-            titol.remove();
-            titol = ''; 
-            contingut.remove(); 
-            contingut = ''; titolContingut = '';
-        }else{
-            titol.remove();
-            titol = ''; 
-        }
+function validateForm() {
+    const titol = document.forms["formPresentacio"]["titol"].value;
+    const descripcio = document.forms["formPresentacio"]["descripcio"].value;
+    let isValid = true;
+    
+    if (titol === "") {
+        isValid = false;
+    } else {
+        document.getElementById("titolError").innerText = "";
     }
     
-    document.getElementById("tipus").addEventListener("change", function() {
-        if (this.value === "titolContingut") {
-            window.location.href = "CrearDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
-        }
-    });
-});
+    if (descripcio === "") {
+        isValid = false;
+    } else {
+        document.getElementById("descripcioError").innerText = "";
+    }
+    
+    return isValid;
+}

@@ -11,19 +11,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirPresentacio"])) 
     $titol = $_POST["titol"];
     $descripcio = $_POST["descripcio"];
     if ($titol != '' && $descripcio != '') {
-            // Insertar los datos en la base de datos y obtener el ID generado
+        // Insertar los datos en la base de datos y obtener el ID generado
         $dao->setPresentacions($titol, $descripcio);
 
         // Obtener el ID generado automáticamente
         $lastInsertId = $dao->getLastInsertId();
+
         // Redirigir a CrearDiapositives.php con el ID de la presentación como parámetro en la URL
-        header("Location: CrearDiapositives.php?id=" . $lastInsertId);
+        header("Location: CrearDiapositives.php?id=" . $lastInsertId . "&mensaje=Presentación creada correctamente");
         $_POST['titol'] = null;
         $_POST['descripcio'] = null;
+        exit();
     }else{
+        // Redirigir de nuevo a CrearPresentacio.php
         header("Location: CrearPresentacio.php");
+        exit();
     }
-    exit();
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) {
