@@ -460,3 +460,13 @@ textarea {
     border: 1px solid #000000;
     margin: 10px 0;
 }
+
+.preview{
+    height: 90%;
+    margin: 0;
+    overflow: hidden; /* Evita barras de desplazamiento */
+}
+.diapositiva {
+    width: 90%;
+    height: 90%;
+}

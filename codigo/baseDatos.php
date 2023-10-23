@@ -80,6 +80,13 @@ if (isset($_POST['editar_presentacion'])) {
     exit();
 }
 
+if (isset($_POST['previsualizar_presentacion'])) {
+    $id_presentacion = $_POST['id_presentacion'];
+    
+    header("Location: vistaPrevia.php?id=".$id_presentacion);
+    exit();
+}
+
 if (isset($_POST['editarPres'])) {
     $id_presentacion = $_GET['id'];
     

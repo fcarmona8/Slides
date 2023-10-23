@@ -99,7 +99,7 @@ class DAO{
     }
 
     public function getDiapositives($id_presentacio){
-        $sql = "SELECT titol FROM Diapositives WHERE ID_Presentacio = :id_presentacio";
+        $sql = "SELECT titol, contingut FROM Diapositives WHERE ID_Presentacio = :id_presentacio";
         $statement = $this->pdo->prepare($sql);
         $statement->execute([':id_presentacio' => $id_presentacio]);
         
@@ -128,4 +128,15 @@ class DAO{
             return false;
         }
     }
+    
+    public function getDiapositivesVista($id_presentacio) {
+        $sql = "SELECT titol, contingut FROM Diapositives WHERE ID_Presentacio = :id_presentacio";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([':id_presentacio' => $id_presentacio]);
+        
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $result;
+    }
 }
+
