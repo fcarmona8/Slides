@@ -238,7 +238,7 @@ tr{
 
 
 .diapositivas {
-    background-color: #dddd;
+    background-color: #DDDDDD;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -459,4 +459,13 @@ textarea {
     border-radius: 5px; /* Bordes redondeados */
     border: 1px solid #000000;
     margin: 10px 0;
+}
+
+.button-diapo{
+    border: none;
+    background-color: #DDDDDD;
+}
+
+.button-diapo:hover{
+    background-color: white;
 }

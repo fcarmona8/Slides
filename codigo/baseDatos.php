@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["cambiarPresentacion"])
         $_POST['titol'] = null;
         $_POST['descripcio'] = null;
     }else{
-        header("Location: CrearPresentacio.php");
+        header("Location: editarDiapositivesTitol.php?id=".$id);
     }
     exit();
 }

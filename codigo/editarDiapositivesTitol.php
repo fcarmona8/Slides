@@ -82,7 +82,7 @@ if (isset($_GET["id_diapo"])) {
                                 <form method='post'>
                                     <input type="hidden" name="id" value="<?= $id_presentacio?>">
                                     <input type="hidden" name="id_diapo" value="<?= $row['ID_Diapositiva'];?>">
-                                   <button type='submit' name="editar_diapo"><?= $row['titol']; ?></button>
+                                   <button type='submit' name="editar_diapo" class="button-diapo"><?= $row['titol']; ?></button>
                                 </form>
                         </tbody>
                     </table>
@@ -95,10 +95,10 @@ if (isset($_GET["id_diapo"])) {
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
-                <input type="text" name="titol" class="titolDiapo" placeholder="Titol" <?php if ($editDiapo === TRUE) {
+                <input type="text" name="titol" class="titolDiapo" placeholder="Titol" maxlength="25" required <?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo ?>" <?php ;
                    } ?> >
-                <input type="submit" name="anadirEditarDiapositiva" value="Añadir diapositiva">
+                <input type="submit" name="anadirEditarDiapositiva" class="boton-crear"  value="Añadir diapositiva">
             </form>
             <div class='buttons-diapositiva'>
                 <button>
