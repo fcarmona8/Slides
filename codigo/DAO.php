@@ -45,6 +45,25 @@ class DAO{
         return $this->pdo->lastInsertId();
     }
 
+    public function getTitolDiapoPorID($id_diapositiva){
+        $sql = "SELECT titol FROM Diapositives WHERE ID_Diapositiva = :id_diapositiva LIMIT 1";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([':id_diapositiva' => $id_diapositiva]);
+        
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $statement->fetch();
+        return $row['titol'];
+    }
+
+    public function getContingutPorID($id_diapositiva){
+        $sql = "SELECT contingut FROM Diapositives WHERE ID_Diapositiva = :id_diapositiva LIMIT 1";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([':id_diapositiva' => $id_diapositiva]);
+        
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $statement->fetch();
+        return $row['contingut'];
+    }
     public function setPresentacions($titol, $descripcio){
         $sql = "INSERT INTO Presentacions (titol, descripcio) VALUES (:titol, :descripcio)";
         $statement = ($this->pdo)->prepare($sql);
@@ -98,8 +117,24 @@ class DAO{
         }
     }
 
+    public function alterDiapositives($titol, $contingut, $id_diapositiva){
+        $sql = "UPDATE  Diapositives SET titol = :titol, contingut = :contingut WHERE ID_Diapositiva = :id_diapo";
+        $statement = ($this->pdo)->prepare($sql);
+
+        try {
+            $statement->execute([
+                "titol" => $titol,
+                "contingut" => $contingut,
+                ':id_diapo' => $id_diapositiva
+            ]);
+            
+        } catch (PDOException $e) {
+            echo "Error al guardar datos: " . $e->getMessage();
+        }
+    }
+
     public function getDiapositives($id_presentacio){
-        $sql = "SELECT titol FROM Diapositives WHERE ID_Presentacio = :id_presentacio";
+        $sql = "SELECT titol, ID_Diapositiva FROM Diapositives WHERE ID_Presentacio = :id_presentacio";
         $statement = $this->pdo->prepare($sql);
         $statement->execute([':id_presentacio' => $id_presentacio]);
         
