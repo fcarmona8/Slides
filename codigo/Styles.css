@@ -204,7 +204,7 @@ tr{
     width: 100%;
     flex-direction: column;
     padding: 10px;
-    margin-top: 165px;
+    margin-top: 150px;
 }
 
 
@@ -433,4 +433,20 @@ textarea {
 
 .line {
     border: 1px solid black;
+}
+
+.boton-crear {
+    margin-top: 10px;
+    background-color: #0074d9; /* Color de fondo del botón */
+    color: #fff; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 10px 20px; /* Espaciado dentro del botón */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilos para el botón de "Crear Presentación" al pasar el cursor */
+.boton-crear:hover {
+    background-color: #0056b3; /* Cambia el color de fondo al pasar el cursor */
 }
