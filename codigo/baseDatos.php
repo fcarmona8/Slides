@@ -49,9 +49,9 @@ if (isset($_POST['eliminar_presentacion'])) {
     $result = $dao->eliminarPresentacion($id_presentacion);
 
     if ($result) {
-        echo "Presentación eliminada correctamente.";
+        echo '<div id="message-container" class="mensaje-exito">Presentación eliminada correctamente.</div>';
     } else {
-        echo "No se pudo eliminar la presentación.";
+        echo '<div id="message-container" class="mensaje-error">No se pudo eliminar la presentación.</div>';
     }
 }
 

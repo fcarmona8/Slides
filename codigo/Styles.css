@@ -342,6 +342,7 @@ tr{
     text-align: center;
     margin-top: 40px;
     border: 2px solid black;
+    box-sizing: border-box;
 }
 
 .titolContDiapo {
@@ -362,9 +363,8 @@ tr{
     height: 60%;
     font-size: 18px;
     border: 2px solid black;
-    border-top: none;
     padding: 40px;
-
+    box-sizing: border-box;
 }
 
 
@@ -407,4 +407,14 @@ textarea {
 /* Estilos para el botón de "Crear Presentación" al pasar el cursor */
 .boton-crear:hover {
     background-color: #0056b3; /* Cambia el color de fondo al pasar el cursor */
+}
+
+.mensaje-exito {
+    background-color: #4CAF50; /* Color de fondo verde */
+    font-weight: bold;
+    color: white; /* Texto en color blanco */
+    padding: 10px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    border: 1px solid #000000;
+    margin: 10px 0;
 }
