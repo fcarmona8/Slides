@@ -9,6 +9,20 @@ if (isset($_GET["id"])) {
 } else {
     $titol = "Título no disponible";
 }
+
+$editDiapo = FALSE;
+$id_diapo = '';
+if (isset($_GET["id_diapo"])) {
+    $id_diapo = $_GET["id_diapo"];
+    if ($id_diapo != '') {
+        $titolDiapo = $dao->getTitolDiapoPorID($id_diapo);
+        $contingut = $dao->getContingutPorID($id_diapo);
+        $editDiapo = TRUE;
+    }
+    
+}else{
+    $editDiapo = FALSE;
+}
 ?>
 
 <!DOCTYPE html>
@@ -58,8 +72,11 @@ if (isset($_GET["id"])) {
                     <table class='diapo'>   
                         <tbody>
                             <tr>
-                                <td><?= $row['titol']; ?></td>
-                            </tr>
+                                <form method='post'>
+                                    <input type="hidden" name="id" value="<?= $id_presentacio?>">
+                                    <input type="hidden" name="id_diapo" value="<?= $row['ID_Diapositiva'];?>">
+                                   <button type='submit' name="editar_diapo"><?= $row['titol']; ?></button>
+                                </form>
                         </tbody>
                     </table>
                 <?php endwhile ?>  
@@ -68,9 +85,13 @@ if (isset($_GET["id"])) {
         <div class="right">
             <form method="POST" id="formDiapoCont">
                 <!-- Campo oculto para enviar el ID -->
-                <input type="hidden" name="id_presentacio" value="<?php echo $id_presentacio; ?>">
-                <input type="text" name="titol" class="titolDiapo" placeholder="Titol">
-                <input type="submit" name="anadirDiapositiva" value="Añadir diapositiva">
+                <?php if ($editDiapo) {
+                    echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
+                <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <input type="text" name="titol" class="titolDiapo" placeholder="Titol" <?php if ($editDiapo === TRUE) {
+                   ?> value="<?= $titolDiapo ?>" <?php ;
+                   } ?> >
+                <input type="submit" name="anadirEditarDiapositiva" value="Añadir diapositiva">
             </form>
             <div class='buttons-diapositiva'>
                 <button>
@@ -94,6 +115,7 @@ if (isset($_GET["id"])) {
             window.location.href = "Home.php";
         });
     </script>
+    <script src="Diapositives.js"></script>
     
 </body>
 </html>
