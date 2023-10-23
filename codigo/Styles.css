@@ -177,6 +177,7 @@ tr{
 .presentacion-guardada{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .presentacionV2{
@@ -279,19 +280,21 @@ tr{
 
 .right {
     padding: 10px;
+    padding-left: 15%;
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    align-content: center;
+
 }
 
 #formDiapoCont {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 70%;
     height: 100%;
     align-items: center; /* Centra horizontalmente los elementos del formulario */
+    align-content: center;
 }
 
 #formPresentacio {
@@ -336,7 +339,7 @@ tr{
 }
 
 .titolDiapo {
-    width: 70%;
+    width: 100%;
     height: 75%;
     font-size: 42px;
     text-align: center;
@@ -347,8 +350,8 @@ tr{
 .titolContDiapo {
     box-sizing: border-box;
     margin-top: 40px;
-    width: 70%;
-    height: 15%;
+    width: 101%;
+    height: 15.8%;
     font-size: 32px;
     text-align: center;
     border: 2px solid black;
@@ -358,7 +361,7 @@ tr{
 
 .contingutDiapo {
     box-sizing: border-box;
-    width: 70%;
+    width: 101%;
     height: 60%;
     font-size: 18px;
     border: 2px solid black;
@@ -367,6 +370,45 @@ tr{
 
 }
 
+.tituloGuardado:hover{
+    background-color: #78a691;
+}
+
+.buttons-editar{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.buttons-editar button{
+    background-color: #96C5B0;
+    border: none;
+    margin: 5px;
+    padding: 5px;
+}
+
+.buttons-editar button:hover{
+    background-color: #78a691;
+    border-radius: 5px;
+}
+
+.buttons-diapositiva{
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.buttons-diapositiva button{
+    background-color: #96C5B0;
+    border: none;
+    margin: 5px;
+    padding: 5px;
+}
+
+.buttons-diapositiva button:hover{
+    background-color: #78a691;
+    border-radius: 5px;
+}
 
 textarea {
     font-family: 'Liberation Sans', sans-serif;
