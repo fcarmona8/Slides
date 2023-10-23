@@ -95,6 +95,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["editar_diapo"])){
     }
 }
 
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["eliminarDiapo"])){
+    $id = $_POST['id'];
+    $id_diapo = $_POST['id_diapo'];
+    $dao->eliminarDiapo($id_diapo);
+    if ($dao == TRUE) {
+        header("Location: editarDiapositivesTitol.php?id=".$id . "&feedEliminado=Diapositiva eliminada correctamente.");
+    }else{
+        echo 'No se pudo eliminar la diapositiva';
+    }
+}
 
 if (isset($_POST['eliminar_presentacion'])) {
     $id_presentacion = $_POST['id_presentacion'];

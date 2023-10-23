@@ -142,6 +142,24 @@ class DAO{
         return $statement;
     }
 
+    public function eliminarDiapo($id_diapo){
+        try {
+            $this->pdo->beginTransaction();
+
+            $sql = "DELETE from Diapositives WHERE ID_Diapositiva = :id_diapo";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindParam(':id_diapo', $id_diapo);
+            $statement->execute(); 
+
+            $this->pdo->commit();
+            return true;
+        } catch (PDOException $e) {
+            $this->pdo->rollback();
+            return false;
+        }
+       
+    }
+
     public function eliminarPresentacion($id_presentacion) {
         try {
             $this->pdo->beginTransaction();
