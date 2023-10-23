@@ -21,7 +21,7 @@ if (isset($_GET["id"])) {
 <body id="crearPresentacio">
 <?php
     if (isset($_GET['mensaje'])) {
-        echo '<div class="mensaje-exito">' . $_GET['mensaje'] . '</div>';
+        echo '<div id="mensaje-exito" class="mensaje-exito">' . $_GET['mensaje'] . '</div>';
     }
     ?>
     <div class="up">
@@ -45,8 +45,8 @@ if (isset($_GET["id"])) {
             <div class="nuevaDiapositiva">
                 <select name="tipus" id="tipus">
                     <option value="" selected disabled>Nueva Diapositiva</option>
-                    <option value="titol">Titol</option>
-                    <option value="titolContingut">Titol + contingut</option>
+                    <option value="titol">Titulo</option>
+                    <option value="titolContingut">Titulo + contenido</option>
                 </select>
             </div>
             <div class="diapositivas">

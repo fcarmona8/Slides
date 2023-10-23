@@ -39,8 +39,8 @@ if (isset($_GET["id"])) {
             <div class="nuevaDiapositiva">
                 <select name="tipus" id="tipus">
                     <option value="" selected disabled>Nueva Diapositiva</option>
-                    <option value="titol">Titol</option>
-                    <option value="titolContingut">Titol + contingut</option>
+                    <option value="titol">Titulo</option>
+                    <option value="titolContingut">Titulo + contenido</option>
                 </select>
             </div>
             <div class="diapositivas">
@@ -56,11 +56,13 @@ if (isset($_GET["id"])) {
             </div>
         </div>
         <div class="right">
-            <form method="POST" id="formDiapoCont">
+            <form method="POST" id="formDiapoCont" onsubmit="return validateForm();">
                 <!-- Campo oculto para enviar el ID -->
                 <input type="hidden" name="id_presentacio" value="<?php echo $id_presentacio; ?>">
-                <input type="text" name="titol" class="titolDiapo" placeholder="Titol">
-                <input type="submit" name="anadirDiapositiva" value="Añadir diapositiva">
+                <input type="text" name="titol" class="titolDiapo" placeholder="Titulo" required>
+                <span id="titolError" class="error"></span>
+
+                <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">
             </form>
         </div>
     </div>
@@ -75,6 +77,20 @@ if (isset($_GET["id"])) {
         button.addEventListener('click', function (e) {
             window.location.href = "Home.php";
         });
+
+        function validateForm() {
+            const titol = document.forms["formDiapoCont"]["titol"].value;
+            let isValid = true;
+            
+            if (titol.trim() === "") {
+                isValid = false;
+                document.getElementById("titolError").innerText = "El campo 'Titol' no puede estar vacío";
+            } else {
+                document.getElementById("titolError").innerText = "";
+            }
+            
+            return isValid;
+        }
     </script>
     
 </body>

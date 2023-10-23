@@ -40,8 +40,8 @@ if (isset($_GET["id"])) {
             <div class="nuevaDiapositiva">
                 <select name="tipus" id="tipus">
                     <option value="" selected disabled>Nueva Diapositiva</option>
-                    <option value="titol">Titol</option>
-                    <option value="titolContingut">Titol + contingut</option>
+                    <option value="titol">Titulo</option>
+                    <option value="titolContingut">Titulo + contenido</option>
                 </select>
             </div>
             <div class="diapositivas">
@@ -60,9 +60,9 @@ if (isset($_GET["id"])) {
             <form method="POST" id="formDiapoCont">
                 <!-- Campo oculto para enviar el ID -->
                 <input type="hidden" name="id_presentacio" value="<?php echo $id_presentacio; ?>">
-                <input type="text" name="titol" class="titolContDiapo" placeholder="Titol">
-                <textarea name="contingut" class="contingutDiapo" placeholder="Contingut"></textarea>
-                <input type="submit" name="anadirDiapositiva" value="Añadir diapositiva">
+                <input type="text" name="titol" class="titolContDiapo" placeholder="Titulo" required>
+                <textarea name="contingut" class="contingutDiapo" placeholder="Contenido" required></textarea>
+                <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">
             </form>
         </div>
     </div>
