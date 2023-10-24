@@ -10,6 +10,7 @@ if (isset($_GET["id"])) {
     $titol = "Título no disponible";
 }
 
+$contadorMaxDiapos = [];
 $editDiapo = FALSE;
 $id_diapo = '';
 if (isset($_GET["id_diapo"])) {
@@ -74,7 +75,8 @@ if (isset($_GET["id_diapo"])) {
                                 <form method='post'>
                                     <input type="hidden" name="id" value="<?= $id_presentacio;?>">
                                     <input type="hidden" name="id_diapo" value="<?= $row['ID_Diapositiva'];?>">
-                                   <button type='submit' name="editar_diapo" class="button-diapo"><?= $row['titol']; ?></button>
+                                    <button type='submit' name="editar_diapo" class="button-diapo"><?= $row['titol']; ?></button>
+                                    <?php array_push($contadorMaxDiapos,$row['ID_Diapositiva'] ) ?>
                                 </form>
                             </tr>
                         </tbody>
@@ -112,6 +114,15 @@ if (isset($_GET["id_diapo"])) {
                     <button type='submit' name='eliminarDiapo'>
                         <!-- Boton eliminar diapositiva -->
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
+                    </button>
+                </form>
+                <form method="post" >
+                    <?php if ($editDiapo) {
+                            echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
+                    <input type="hidden" name="id" value="<?= $id_presentacio; ?>">
+                    <input type="number" name="ordenNew" id="ordenNew" min=1 max=<?=count($contadorMaxDiapos) ?>>
+                    <button type="submit" name="ordenDiapo">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8H32c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
                     </button>
                 </form>
             </div>

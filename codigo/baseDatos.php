@@ -51,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
     $titol = $_POST["titol"];
     $contingut = $_POST["contingut"];
     $id_presentacio = $_POST["id_presentacio"];
-    $editDiapo = $_POST['id_diapo'];
     // Insertar los datos en la base de datos
     $dao->setDiapositives($titol, $contingut, $id_presentacio); 
             
@@ -93,6 +92,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["editar_diapo"])){
     }else {
         header("Location: editarDiapositivesTitol.php?id=".$id."&id_diapo=".$id_diapo);
     }
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ordenDiapo"])) {
+     $id_diapo = $_POST['id_diapo'];
+     $orden = $_POST['ordenNew'];
+     try {
+        $dao->changeOrden($orden, $id_diapo);
+    } catch (PDOException $th) {
+        echo 'No se logro reordenar las diapositivas';
+     }
+     
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["eliminarDiapo"])){

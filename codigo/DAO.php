@@ -64,6 +64,27 @@ class DAO{
         $row = $statement->fetch();
         return $row['contingut'];
     }
+
+    public function getOrdenPorID($id_diapo){
+        $sql = "SELECT orden FROM Diapositives WHERE ID_Diapositiva = :id_diapo";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([':id_diapo' => $id_diapo]);
+
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $statement->fetch();
+        return $row['orden'];
+    }
+
+    public function getIDPorOrden($orden){
+        $sql = "SELECT ID_Diapositiva FROM Diapositives WHERE orden = :orden";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([':orden' => $orden]);
+
+        $statement->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $statement->fetch();
+        return $row['ID_Diapositiva'];
+    }
+
     public function setPresentacions($titol, $descripcio){
         $sql = "INSERT INTO Presentacions (titol, descripcio) VALUES (:titol, :descripcio)";
         $statement = ($this->pdo)->prepare($sql);
@@ -102,13 +123,18 @@ class DAO{
     }
 
     public function setDiapositives($titol, $contingut, $id_presentacio){
-        $sql = "INSERT INTO Diapositives (titol, contingut, ID_Presentacio) VALUES (:titol, :contingut, :id_presentacio)";
+        $sql = "INSERT INTO Diapositives (titol, contingut, orden, ID_Presentacio) VALUES (:titol, :contingut, :orden, :id_presentacio)";
         $statement = ($this->pdo)->prepare($sql);
 
+        $orden = $this->getOrdenPorID($id_presentacio)+1;
+        if ($orden<1 || $orden == 'NULL') {
+            $orden = 1;
+        }
         try {
             $statement->execute([
                 "titol" => $titol,
                 "contingut" => $contingut,
+                "orden" => $orden,
                 ':id_presentacio' => $id_presentacio
             ]);
             
@@ -133,8 +159,34 @@ class DAO{
         }
     }
 
+    public function changeOrden($ordenNew, $id_diapo){
+        try {            
+            $ordenAnterior = $this->getOrdenPorID($id_diapo);
+
+            $sql1 = "UPDATE Diapositives SET orden= -1 WHERE orden = :orden1";
+            $statement1 = $this->pdo->prepare($sql1);
+
+            $sql2 = "UPDATE Diapositives SET orden= :orden1 WHERE orden= :orden2";
+            $statement2 = $this->pdo->prepare($sql2);
+
+            $sql3 = "UPDATE Diapositives SET orden= :orden2 WHERE orden= -1";
+            $statement3 = $this->pdo->prepare($sql3);
+            try {
+                $statement1->execute(['orden1' => $ordenNew]);
+                $statement2->execute(['orden1' => $ordenNew, 'orden2' => $ordenAnterior]);
+                $statement3->execute(['orden2' => $ordenAnterior]);
+            } catch (PDOException $th) {
+                echo 'error al intercambiar   ' . $ordenNew ;
+                echo $ordenAnterior;
+            }
+            
+        } catch (PDOException $th) {
+           echo 'Error al intercambiar el orden';
+        }
+    }
+
     public function getDiapositives($id_presentacio){
-        $sql = "SELECT titol, ID_Diapositiva FROM Diapositives WHERE ID_Presentacio = :id_presentacio";
+        $sql = "SELECT titol, ID_Diapositiva FROM Diapositives WHERE ID_Presentacio = :id_presentacio ORDER BY orden ASC";
         $statement = $this->pdo->prepare($sql);
         $statement->execute([':id_presentacio' => $id_presentacio]);
         
