@@ -70,8 +70,8 @@ if (isset($_GET["id_diapo"])) {
             <div class="nuevaDiapositiva">
                 <select name="tipus" id="tipus">
                     <option value="" selected disabled>Nueva Diapositiva</option>
-                    <option value="titol">Titol</option>
-                    <option value="titolContingut">Titol + contingut</option>
+                    <option value="titol">Titulo</option>
+                    <option value="titolContingut">Titulo + contenido</option>
                 </select>
             </div>
             <div class="diapositivas">
@@ -95,10 +95,15 @@ if (isset($_GET["id_diapo"])) {
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
-                <input type="text" name="titol" class="titolDiapo" placeholder="Titol" maxlength="25" required <?php if ($editDiapo === TRUE) {
+                <input type="text" name="titol" class="titolDiapo" placeholder="Titulo" maxlength="25" required <?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo ?>" <?php ;
                    } ?> >
-                <input type="submit" name="anadirEditarDiapositiva" class="boton-crear"  value="Añadir diapositiva">
+                <input type="submit" name="anadirEditarDiapositiva" class="boton-crear" <?php if ($editDiapo === TRUE) {
+                    echo 'value="Guardar diapositiva"';
+                }else{
+                    echo 'value="Añadir diapositiva"';
+                }
+                ?> >
             </form>
             <div class='buttons-diapositiva'>
                 <button>
