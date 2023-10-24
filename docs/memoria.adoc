@@ -7,7 +7,7 @@ Los miembros del proyecto somos Carmona Hernandez Ferran, Galindo Palacio Joan y
 
 === Seguimiento semanal
 // Actualizar cada viernes con descripción y valoración
-Semana 1 (9, 10, 11 y del 16 al 21):+
+Semana 1 (9, 10, 11 y del 16 al 21): +
 Primeramente hemos definido la guia de estilos de la aplicación, decidimos los colores de la pagina, la tipografia, y hemos elegido varios iconos para la aplicación.
 Seguido de ello decidimos la base de datos, haciendo el diagrama y preparamos el vagrant para la bd, luego de poder conectar la bd con exito, nos pusimos a hacer
 los sketch y Mockups de las pantallas a realizar. Al completar los Mockups empezamos a crear los html y css de la pantalla home y crear presentacion, además del js 
@@ -16,7 +16,7 @@ cambiamos según vimos conveniente, aparte de ver tambien fallas en el html y cr
 guardar las presentaciones correctamente y que el diseño nos parezca aceptable terminamos de realizar la pantalla home con visualización de las presentaciones ya creadas. +
 
 Al empezar el sprint 2 actualizamos el trello, hicimos los sketchs de la pagina editar para luego comenzar a hacer el html y crear la opcion de eliminar. Comenzamos con la pagina editar
-y realizamos la opcion de poder cambiar el nombre y la descripción de la presentación, y realizar la funcion de cambiar la posicion del orden(aunque aun esa funcion no se guarda en la bd).+
+y realizamos la opcion de poder cambiar el nombre y la descripción de la presentación, y realizar la funcion de cambiar la posicion del orden(aunque aun esa funcion no se guarda en la bd). +
 
 
 === Diseño de BD
