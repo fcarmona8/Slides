@@ -29,8 +29,10 @@ if (isset($_GET["id"])) {
         <div class="presentacion">
             <form method="POST" id="formPresentacio">
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
-                <input type="text" name="titol" class="titol" value="<?php echo $titol; ?>">
-                <input type="text" name="descripcio" class="descripcio" value="<?php echo $desc; ?>">
+                <input type="text" name="titol" class="titol" value="<?php echo $titol; ?>" placeholder="Titulo de la presentación" maxlength="30" required>
+                <span id="titolError" class="error"></span>
+                <input type="text" name="descripcio" class="descripcio" value="<?php echo $desc; ?>" placeholder="Descripción" required></textarea>
+                <span id="descripcioError" class="error"></span>
                 <input type="submit" name="cambiarPresentacion" value="cambiar">   
             </form>
         </div>
