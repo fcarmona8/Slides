@@ -4,6 +4,7 @@ include_once("DAO.php");
 
 if (isset($_GET["id"])) {
     $id_presentacio = $_GET["id"];
+    $from = isset($_GET["from"]) ? $_GET["from"] : "Página desconocida"; // Obtén el valor de "from"
     $titol = $dao->getTitolPorID($id_presentacio);
     $desc = $dao->getDescPorID($id_presentacio);
     $diapositivas = $dao->getDiapositivesVista($id_presentacio);
@@ -22,7 +23,7 @@ if (isset($_GET["id"])) {
 <body class="preview">
     <?php if (empty($diapositivas)): ?>
         <div class="aviso">Esta presentación no tiene diapositivas.</div>
-        <a href="Home.php">Cancelar</a>
+        <a href="<?php echo $from === 'Home' ? 'Home.php' : ($from === 'Editar' ? 'editarDiapositivesTitol.php?id=' . $id_presentacio : 'crearDiapositivesTitol.php?id=' . $id_presentacio); ?>">Cancelar</a>
     <?php else: ?>
     <div class="diapositiva-preview">
         <h1></h1>
@@ -31,7 +32,7 @@ if (isset($_GET["id"])) {
     <div class="controles">
         <button id="anterior">Anterior</button>
         <button id="siguiente">Siguiente</button>
-        <a href="Home.php">Cancelar</a>
+        <a href="<?php echo $from === 'Home' ? 'Home.php' : ($from === 'Editar' ? 'editarDiapositivesTitol.php?id=' . $id_presentacio : 'crearDiapositivesTitol.php?id=' . $id_presentacio); ?>">Cancelar</a>
     </div>
     <?php endif; ?>
     <script>

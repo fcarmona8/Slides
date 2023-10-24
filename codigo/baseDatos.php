@@ -82,8 +82,13 @@ if (isset($_POST['editar_presentacion'])) {
 
 if (isset($_POST['previsualizar_presentacion'])) {
     $id_presentacion = $_POST['id_presentacion'];
-    
-    header("Location: vistaPrevia.php?id=".$id_presentacion);
+    $from = $_POST['from'];
+
+    // Construir la URL de redirección con ambos valores
+    $redireccion_url = "vistaPrevia.php?id=" . $id_presentacion . "&from=" . $from;
+
+    // Redirigir a vistaPrevia.php
+    header("Location: " . $redireccion_url);
     exit();
 }
 
