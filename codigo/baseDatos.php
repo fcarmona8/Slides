@@ -46,21 +46,65 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["cambiarPresentacion"])
     }
     exit();
 }
-
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) {
+    // Obtener los datos del formulario
+    $titol = $_POST["titol"];
+    $contingut = $_POST["contingut"];
+    $id_presentacio = $_POST["id_presentacio"];
+    $editDiapo = $_POST['id_diapo'];
+    // Insertar los datos en la base de datos
+    $dao->setDiapositives($titol, $contingut, $id_presentacio); 
+            
+    // Redirigir de nuevo a CrearDiapositives.php
+    header("Location: CrearDiapositivesTitol.php?id=" . $id_presentacio);         
+    exit();          
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiva"])) {
         // Obtener los datos del formulario
         $titol = $_POST["titol"];
         $contingut = $_POST["contingut"];
         $id_presentacio = $_POST["id_presentacio"];
+        $editDiapo = $_POST['id_diapo'];
+        if ($editDiapo != '') {
+            $dao->alterDiapositives($titol, $contingut, $editDiapo);
+            if ($contingut != '') {
+                header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo);
+            }else {
+                header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo);
+            }
+        }else {
+                // Insertar los datos en la base de datos
+            $dao->setDiapositives($titol, $contingut, $id_presentacio); 
+                
+            // Redirigir de nuevo a CrearDiapositives.php
+            header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio);         
+        }
 
-        // Insertar los datos en la base de datos
-        $dao->setDiapositives($titol, $contingut, $id_presentacio);
-
-        // Redirigir de nuevo a CrearDiapositives.php
-        header("Location: CrearDiapositivesTitol.php?id=" . $id_presentacio);
-        exit();
+        exit();          
 }
 
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["editar_diapo"])){
+    $id = $_POST['id'];
+    $id_diapo = $_POST['id_diapo'];
+    $cont = $dao->getContingutPorID($id_diapo);
+    if($cont != NULL ){
+        header("Location: editarDiapositivesContingut.php?id=".$id."&id_diapo=".$id_diapo);
+    }else {
+        header("Location: editarDiapositivesTitol.php?id=".$id."&id_diapo=".$id_diapo);
+    }
+}
+
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["eliminarDiapo"])){
+    $id = $_POST['id'];
+    $id_diapo = $_POST['id_diapo'];
+    $dao->eliminarDiapo($id_diapo);
+    if ($dao == TRUE) {
+        header("Location: editarDiapositivesTitol.php?id=".$id . "&feedEliminado=Diapositiva eliminada correctamente.");
+    }else{
+        echo 'No se pudo eliminar la diapositiva';
+    }
+}
 
 if (isset($_POST['eliminar_presentacion'])) {
     $id_presentacion = $_POST['id_presentacion'];

@@ -86,5 +86,6 @@ if (isset($_GET["id"])) {
             window.location.href = "Home.php";
         });
     </script>
+    <script src="Diapositives.js"></script>
 </body>
 </html>

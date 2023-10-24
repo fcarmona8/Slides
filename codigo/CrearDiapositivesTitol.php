@@ -99,6 +99,7 @@ if (isset($_GET["id"])) {
             return isValid;
         }
     </script>
+    <script src="Diapositives.js"></script>
     
 </body>
 </html>
