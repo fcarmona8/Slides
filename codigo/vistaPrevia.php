@@ -20,9 +20,9 @@ if (isset($_GET["id"])) {
     <link rel="stylesheet" href="Styles.css">
 </head>
 <body class="preview">
-    <div class="diapositiva">
-        <h1><?php echo $titol; ?></h1>
-        <p><?php echo $desc; ?></p>
+    <div class="diapositiva-preview">
+        <h1></h1>
+        <p></p>
     </div>
     <div class="controles">
         <button id="anterior">Anterior</button>
@@ -32,13 +32,20 @@ if (isset($_GET["id"])) {
     <script>
         var diapositivas = <?php echo json_encode($diapositivas); ?>;
         var currentSlide = 0;
+        var totalSlides = diapositivas.length;
 
+        var anteriorButton = document.getElementById("anterior");
+        var siguienteButton = document.getElementById("siguiente");
         
         function mostrarDiapositiva(slideIndex) {
                 var diapositiva = diapositivas[slideIndex];
-                document.querySelector('.diapositiva h1').textContent = diapositiva.titol;
-                document.querySelector('.diapositiva p').textContent = diapositiva.contingut;
+                document.querySelector('.diapositiva-preview h1').textContent = diapositiva.titol;
+                document.querySelector('.diapositiva-preview p').textContent = diapositiva.contingut;
                 currentSlide = slideIndex;
+
+                // Habilitar o deshabilitar botones según la posición de la diapositiva
+                anteriorButton.disabled = currentSlide === 0;
+                siguienteButton.disabled = currentSlide === totalSlides - 1;
         }
 
         document.getElementById("anterior").addEventListener("click", function() {
