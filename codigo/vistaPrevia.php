@@ -20,6 +20,10 @@ if (isset($_GET["id"])) {
     <link rel="stylesheet" href="Styles.css">
 </head>
 <body class="preview">
+    <?php if (empty($diapositivas)): ?>
+        <div class="aviso">Esta presentación no tiene diapositivas.</div>
+        <a href="Home.php">Cancelar</a>
+    <?php else: ?>
     <div class="diapositiva-preview">
         <h1></h1>
         <p></p>
@@ -29,7 +33,9 @@ if (isset($_GET["id"])) {
         <button id="siguiente">Siguiente</button>
         <a href="Home.php">Cancelar</a>
     </div>
+    <?php endif; ?>
     <script>
+        <?php if (!empty($diapositivas)): ?>
         var diapositivas = <?php echo json_encode($diapositivas); ?>;
         var currentSlide = 0;
         var totalSlides = diapositivas.length;
@@ -58,6 +64,7 @@ if (isset($_GET["id"])) {
 
         // Mostrar la primera diapositiva al cargar la página
         mostrarDiapositiva(0);
+        <?php endif; ?>
     </script>
 </body>
 </html>
