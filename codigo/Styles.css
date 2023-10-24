@@ -227,7 +227,7 @@ tr{
 .nuevaDiapositiva {
     display: flex;
     flex-direction: column;
-    width: 152px;
+    width: 200px;
     margin-left: 40px;
 }
 
@@ -245,7 +245,7 @@ tr{
     margin-bottom: 11px;
     overflow-y: auto;
     margin-left: 40px;
-    width: 150px;
+    width: 200px;
     border-radius: 5px;
     border: 1px solid black;
     overflow-y: auto;
@@ -334,7 +334,7 @@ tr{
 
 .tituloGuardado{
     border-radius: 5px;
-    padding: 5px 10px 5px 10px;
+    padding: 5px 50px 5px 50px;
     font-size: 28px;
 }
 
@@ -370,7 +370,7 @@ tr{
     box-sizing: border-box;
 }
 
-.tituloGuardado:hover{
+button[name="editarPres"]:hover{
     background-color: #78a691;
 }
 
