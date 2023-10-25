@@ -22,7 +22,7 @@ if (isset($_GET["id_diapo"])) {
     }
     
 }else{
-    $editDiapo =false;
+    $editDiapo =FALSE;
 }
 ?>
 
