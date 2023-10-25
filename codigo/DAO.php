@@ -191,5 +191,17 @@ class DAO{
     
         return $result;
     }
+
+    public function obtenerUltimoIDDiapositiva() {
+        $sql = "SELECT MAX(ID_Diapositiva) AS ultimoID FROM Diapositives";
+        $statement = $this->pdo->query($sql);
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($row && isset($row['ultimoID'])) {
+            return $row['ultimoID'];
+        } else {
+            return 0;
+        }
+    }
 }
 

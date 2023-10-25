@@ -12,16 +12,32 @@ if (isset($_GET["id"])) {
 
 $editDiapo = FALSE;
 $id_diapo = '';
+$titolDiapo = "";
+$contingut = "";
+
 if (isset($_GET["id_diapo"])) {
     $id_diapo = $_GET["id_diapo"];
     if ($id_diapo != '') {
         $titolDiapo = $dao->getTitolDiapoPorID($id_diapo);
         $contingut = $dao->getContingutPorID($id_diapo);
+
         $editDiapo = TRUE;
     }
     
 }else{
     $editDiapo =false;
+}
+
+if ($editDiapo === false) {
+    // Obtiene el último ID de diapositiva de la base de datos
+    $ultimoIDDiapo = $dao->obtenerUltimoIDDiapositiva();
+
+    // Incrementa el ID para asignar el nuevo ID
+    $nuevoIDDiapo = $ultimoIDDiapo + 1;
+
+    // Establece los valores de título y contenido desde el formulario si no existe la diapositiva
+    $titolDiapo = $_POST["titol"] ?? "";
+    $contingut = $_POST["contingut"] ?? "";
 }
 ?>
 
@@ -90,18 +106,23 @@ if (isset($_GET["id_diapo"])) {
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
-                <input type="text" name="titol" class="titolContDiapo" placeholder="Titol" <?php if ($editDiapo === TRUE) {
+                <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titol" <?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo; ?>" <?php ;
                    } ?> >
-                <textarea name="contingut" class="contingutDiapo" placeholder="Contingut" ><?php if ($editDiapo === TRUE) {
+                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contingut" ><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
                 <input type="submit" name="anadirEditarDiapositiva" value="Añadir diapositiva">
             </form>
             <div class='buttons-diapositiva'>
-                <button>
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
-                </button>
+                <!-- Boton previsualizar diapositiva -->
+                <form method="post" action="previsualitzarDiapositiva.php">
+                    <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                    <input type="hidden" name="id_diapo" value="<?= $id_diapo; ?>">
+                    <input type="hidden" name="titol" class="titolContDiapo" placeholder="Título" value="<?= $titolDiapo; ?>">
+                    <input type="hidden" name="contingut" class="contingutDiapo" placeholder="Contenido" value="<?= $contingut; ?>">
+                    <button type='submit' onclick="obtenerValores()" name='previsualizar_diapo'><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg></button>
+                </form>
                 <form method = 'post'>  
                     <?php if ($editDiapo) {
                             echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
@@ -125,6 +146,15 @@ if (isset($_GET["id_diapo"])) {
         button.addEventListener('click', function (e) {
             window.location.href = "Home.php";
         });
+
+        function obtenerValores() {
+            var titolDiapo = document.getElementById('titol').value;
+        var contingut = document.getElementById('contingut').value;
+
+        // Almacena los valores en localStorage para que estén disponibles en la nueva página
+        localStorage.setItem('titolDiapo', titolDiapo);
+        localStorage.setItem('contingut', contingut);
+        }
     </script>
     <script src="Diapositives.js"></script>
 </body>
