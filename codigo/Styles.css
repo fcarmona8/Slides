@@ -227,7 +227,7 @@ tr{
 .nuevaDiapositiva {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    width: 240px;
     margin-left: 40px;
 }
 
@@ -245,7 +245,7 @@ tr{
     margin-bottom: 11px;
     overflow-y: auto;
     margin-left: 40px;
-    width: 200px;
+    width: 240px;
     border-radius: 5px;
     border: 1px solid black;
     overflow-y: auto;
@@ -463,9 +463,42 @@ textarea {
 
 .button-diapo{
     border: none;
-    background-color: #DDDDDD;
+    background-color: inherit;
 }
 
 .button-diapo:hover{
     background-color: white;
+}
+
+.buttons-orden{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 18px;
+    width: 10px;
+}
+
+.button-upDown{
+    height: 100%;
+    width: 100%;
+}
+
+.button-upDown button{
+    border: none;
+    background-color: inherit;
+    border-radius: 15%;
+}
+
+.button-upDown button:hover{
+    background-color: #4c86c4;
+}
+
+.diapo{
+    height: 11%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.diapo:nth-child(even){
+    background-color: #a0a0a0;
 }
