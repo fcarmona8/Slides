@@ -95,12 +95,25 @@ if (isset($_GET["id"])) {
 
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
-        var contingut = document.getElementById('contingut').value;
+            var contingut = document.getElementById('contingut').value;
 
-        // Almacena los valores en localStorage para que estén disponibles en la nueva página
-        localStorage.setItem('titolDiapo', titolDiapo);
-        localStorage.setItem('contingut', contingut);
+            // Almacena los valores en localStorage para que estén disponibles en la nueva página
+            localStorage.setItem('titolDiapo', titolDiapo);
+            localStorage.setItem('contingut', contingut);
         }
+
+        // Obtiene los valores almacenados en localStorage
+        var titolDiapo = localStorage.getItem('titolDiapo');
+        var contingut = localStorage.getItem('contingut');
+
+            // Función para borrar los valores de localStorage
+        function clearLocalStorage() {
+            localStorage.removeItem('titolDiapo');
+            localStorage.removeItem('contingut');
+        }
+
+        // Agrega un evento para borrar los valores cuando se cargue la página
+        window.addEventListener('load', clearLocalStorage);
     </script>
     <script src="Diapositives.js"></script>
 </body>
