@@ -2,6 +2,7 @@
 $config = [
     'db' => [
         'connection' => 'mysql:host=192.168.1.12',
+        /*'connection' => 'mysql:host=localhost:3306',*/
         'dbname' => 'slidescarmonagalindojumelle',
         'usr' => 'root',
         'pwd' => 1234,
