@@ -517,12 +517,13 @@ textarea {
     margin: 0 20px;
 }
 
-#siguiente {
+#siguiente, #anterior {
     background-color: #007BFF;
     color: #fff;
     padding: 10px 20px;
     border: none;
     cursor: pointer;
+    border-radius: 100%;
 }
 
 #anterior,
@@ -547,4 +548,19 @@ a {
 .aviso {
     font-size: 24px;
     color: red;
+}
+
+.rotate{
+    transform: rotate(180deg);
+}
+
+.vista{
+    overflow: hidden;
+}
+
+.titulo{
+    margin-top: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: end;
 }
