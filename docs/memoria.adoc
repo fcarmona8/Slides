@@ -79,13 +79,28 @@ image::clonar.png[width=80]
 
 - https://fontawesome.com/icons/paintbrush?f=classic&s=solid[Icono de estilo]
 
+- https://fontawesome.com/icons/sort-up?f=classic&s=solid[Icono de ordenar arriba]
+
+- https://fontawesome.com/icons/sort-down?f=classic&s=solid[Icono de ordenar abajo]
 
 
 Link del resumen esquemático de la guía de estilos: https://www.figma.com/file/NLUpqEUNShhgeqQzZvntOe/Guia-d'estils?type=design&node-id=0%3A1&mode=design&t=Qni8KE80LLjWfZ9U-1[Guía de estilos (figma)]
 
 
 === Confección del manual de instalación/distribución de la aplicación
-
+instalación del servidor: +
+- php
+- mysql 
+-GIT
+Luego de instalar correctamente los dos podra configurar la ip, el nombre de la bd, el usuario y password en codigo/config.php. +
+Para obtener la última version disponible de Slides abra el CMD o terminal y ubiquese en la carpeta del repositorio GIT 
+ slidescarmonagalindojumelle, desde ahí ingrese:
+ [source, ssh]
+ ----
+git pull 
+ ---- 
+Al darle enter vera como se descarga o actualizan los archivos requeridos para la aplicación. O si tiene ya la última version disponible 
+le saldra un mensaje diciendo 'Already up to date'. +
 
 === Confección del manual de usuario integrado en la aplicación
 
