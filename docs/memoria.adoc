@@ -97,7 +97,7 @@ Para obtener la última version disponible de Slides abra el CMD o terminal y ub
  slidescarmonagalindojumelle, desde ahí ingrese: +
  [source,console]  
  ----  
-git pull  
+$ git pull  
  ---- 
 Al darle enter vera como se descarga o actualizan los archivos requeridos para la aplicación. O si tiene ya la última version disponible 
 le saldra un mensaje diciendo 'Already up to date'. +
