@@ -82,7 +82,7 @@ if (isset($_GET["id"])) {
             <form method="POST" id="formDiapoCont" onsubmit="return validateForm();">
                 <!-- Campo oculto para enviar el ID -->
                 <input type="hidden" name="id_presentacio" value="<?php echo $id_presentacio; ?>">
-                <input type="text" name="titol" class="titolDiapo" placeholder="Titulo" maxlength="25" required>
+                <input type="text" id="titol" name="titol" class="titolDiapo" placeholder="Titulo" maxlength="25" required>
                 <span id="titolError" class="error"></span>
 
                 <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">

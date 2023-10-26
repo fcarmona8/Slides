@@ -119,10 +119,10 @@ if ($editDiapo === false) {
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
-                <input type="text" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required<?php if ($editDiapo === TRUE) {
+                <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required<?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo; ?>" <?php ;
                    } ?> >
-                <textarea name="contingut" class="contingutDiapo" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
+                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
                 <input type="submit" name="anadirEditarDiapositiva" class="boton-crear" <?php if ($editDiapo === TRUE) {
