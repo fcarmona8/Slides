@@ -498,14 +498,25 @@ textarea {
     font-size: 20px;
     align-items: center;
 }
-.containerSeleccionarEstilos select {
+
+
+.containerSeleccionarEstilos input {
     border-radius: 6px;
-    font-size: 18px;
+    font-size: 22px;
     padding: 3px;
+    margin-left: 12%;
+    cursor: pointer;
+}
+
+.containerSeleccionarEstilos label {
+    border-radius: 6px;
+    font-size: 22px;
+    padding: 3px;
+    margin-right: 13%;
 }
 
 .containerSeleccionarEstilos div {
-    margin: 50px;
+    margin: 15px;
 }
 .enviarEstils {
     background-color: #4c86c4;
@@ -709,6 +720,7 @@ a {
     justify-content: space-evenly;
     align-items: center;
 }
+
 .diapo:nth-child(even){
     background-color: #a0a0a0;
 }
@@ -726,8 +738,49 @@ a {
     background-color: #96C5B0;
 }
 
-/* Estilos para el botón de "Crear Presentación" al pasar el cursor */
+.diapositivesExempleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.diapositivaExemple1,
+.diapositivaExemple2 {
+    height: 300px;
+    width: 450px;
+    border-radius: 8px;
+}
+
+.diapositivaExemple1 {
+    background-color: white;
+    margin-right: 10px; 
+}
+
+.diapositivaExemple2 {
+    background-color: rgb(30, 30, 30);
+    margin-left: 10px; 
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.diapositivaExemple2Titol,
+.diapositivaExemple2Contingut {
+    color: white;
+}
+
+.diapositivaExemple2Titol,
+.diapositivaExemple2Contingut,
+.diapositivaExemple1Titol,
+.diapositivaExemple1Contingut {
+    margin-top: 35px;
+}
+
+.diapositivaExemple1Contingut,
+.diapositivaExemple2Contingut {
+    font-size: 16px;
+
+}
 .boton-crear:hover {
     background-color: #0056b3;
     /* Cambia el color de fondo al pasar el cursor */
+
 }
