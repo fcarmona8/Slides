@@ -18,6 +18,11 @@ guardar las presentaciones correctamente y que el diseño nos parezca aceptable 
 Al empezar el sprint 2 actualizamos el trello, hicimos los sketchs de la pagina editar para luego comenzar a hacer el html y crear la opcion de eliminar. Comenzamos con la pagina editar
 y realizamos la opcion de poder cambiar el nombre y la descripción de la presentación, y realizar la funcion de cambiar la posicion del orden(aunque aun esa funcion no se guarda en la bd). +
 
+Semana 2
+Se completo la pantalla editar, cambiamos el diseño del reordenamiento, agregamos la funcion de elimnar y modificar las diapositivas. Empezamos a realizar los mockup de 
+las previsualizaciones, y los archivos php y js para que estos realicen la funcion. Creamos también los estiolos de la previsualización y añadimos la funcion para que esta 
+se guarde en la bd y se muestre cada vez que el usuario le da a previsualizar. +
+También realizamos las 
 
 === Diseño de BD
 Link hacia el digrama relacional de la base de dades:  https://drive.google.com/file/d/1HUVLYU9hPKxmyfT6V3yxM_MYT2UfzMvv/view?usp=sharing
