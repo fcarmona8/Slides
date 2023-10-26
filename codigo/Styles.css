@@ -201,6 +201,11 @@ tr {
     border: 1px solid;
 }
 
+button[name='editarPres']:hover{
+    background-color: inherit;
+    cursor: pointer;
+}
+
 .añadir {
     display: flex;
     justify-content: flex-end;
@@ -393,6 +398,7 @@ tr {
 .buttons-editar button:hover {
     background-color: #78a691;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .buttons-diapositiva {
@@ -411,6 +417,7 @@ tr {
 .buttons-diapositiva button:hover {
     background-color: #78a691;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 textarea {
@@ -460,6 +467,7 @@ textarea {
 /* Estilos para el botón de "Crear Presentación" al pasar el cursor */
 .boton-crear:hover {
     background-color: #0056b3;
+    cursor: pointer;
     /* Cambia el color de fondo al pasar el cursor */
 }
 
@@ -691,6 +699,7 @@ a {
 
 .button-upDown button:hover{
     background-color: #4c86c4;
+    cursor: pointer;
 }
 
 

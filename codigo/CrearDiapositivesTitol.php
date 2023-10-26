@@ -9,6 +9,23 @@ if (isset($_GET["id"])) {
 } else {
     $titol = "Título no disponible";
 }
+$infoDiapo = FALSE;
+$id_diapo = '';
+$titolDiapo = "";
+$contingut = "";
+
+if (isset($_GET["id_diapo"])) {
+    $id_diapo = $_GET["id_diapo"];
+    if ($id_diapo != '') {
+        $titolDiapo = $dao->getTitolDiapoPorID($id_diapo);
+        $contingut = $dao->getContingutPorID($id_diapo);
+
+        $infoDiapo = TRUE;
+    }
+    
+}else{
+    $infoDiapo =FALSE;
+}
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +74,7 @@ if (isset($_GET["id"])) {
                             <form method='post'>
                                 <input type="hidden" name="id" value="<?= $id_presentacio?>">
                                 <input type="hidden" name="id_diapo" value="<?= $row['ID_Diapositiva'];?>">
-                                <button type='submit' name="editar_diapo" class="button-diapo"><?= $row['titol']; ?></button>
+                                <button type='submit' name="getInfoDiapo" class="button-diapo"><?= $row['titol']; ?></button>
                             </form>
                         </div>
                         
@@ -80,12 +97,13 @@ if (isset($_GET["id"])) {
         </div>
         <div class="right">
             <form method="POST" id="formDiapoCont" onsubmit="return validateForm();">
-                <!-- Campo oculto para enviar el ID -->
-                <input type="hidden" name="id_presentacio" value="<?php echo $id_presentacio; ?>">
-                <input type="text" id="titol" name="titol" class="titolDiapo" placeholder="Titulo" maxlength="25" required>
-                <span id="titolError" class="error"></span>
-
-                <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">
+            <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <?php if ($infoDiapo === TRUE) {
+                   ?><p name="titol" class="titolDiapo" id='titol'> <?=$titolDiapo ?></p> <?php ;
+                   }else {
+                    echo '<input type="text" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required/>';
+                   } ?>                
+                   <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">
             </form>
             <div class='buttons-diapositiva'>
                 <!-- Boton previsualizar diapositiva -->
