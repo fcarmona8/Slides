@@ -72,7 +72,12 @@ class DAO{
 
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         $row = $statement->fetch();
-        return $row['orden'];
+        if (is_array($row)) {
+            return $row['orden'];
+        }else {
+            return 'NULL';
+        }
+        
     }
 
     public function getOrdenPorID($id_diapo){
@@ -84,17 +89,7 @@ class DAO{
         $row = $statement->fetch();
         return $row['orden'];
     }
-
-    public function getIDPorOrden($orden){
-        $sql = "SELECT ID_Diapositiva FROM Diapositives WHERE orden = :orden";
-        $statement = $this->pdo->prepare($sql);
-        $statement->execute([':orden' => $orden]);
-
-        $statement->setFetchMode(PDO::FETCH_ASSOC);
-        $row = $statement->fetch();
-        return $row['ID_Diapositiva'];
-    }
-
+    
     public function setPresentacions($titol, $descripcio){
         $sql = "INSERT INTO Presentacions (titol, descripcio) VALUES (:titol, :descripcio)";
         $statement = ($this->pdo)->prepare($sql);
@@ -136,14 +131,37 @@ class DAO{
         $sql = "INSERT INTO Diapositives (titol, contingut, orden, ID_Presentacio) VALUES (:titol, :contingut, :orden, :id_presentacio)";
         $statement = ($this->pdo)->prepare($sql);
 
-        $orden = $this->getLastOrden($id_presentacio)+1;
-        if ($orden<1 || $orden === 'NULL') {
+        $orden = $this->getLastOrden($id_presentacio);
+        if ($orden === 'NULL') {
             $orden = 1;
+        }else {
+            $orden = ($this->getLastOrden($id_presentacio))+1;
         }
         try {
             $statement->execute([
                 ":titol" => $titol,
                 ":contingut" => $contingut,
+                ":orden" => $orden,
+                ':id_presentacio' => $id_presentacio
+            ]);
+            
+        } catch (PDOException $e) {
+            echo "Error al guardar datos: " . $e->getMessage();
+        }
+    }
+    public function setDiapositivesTitol($titol, $id_presentacio){
+        $sql = "INSERT INTO Diapositives (titol, orden, ID_Presentacio) VALUES (:titol, :orden, :id_presentacio)";
+        $statement = ($this->pdo)->prepare($sql);
+
+        $orden = $this->getLastOrden($id_presentacio);
+        if ($orden === 'NULL') {
+            $orden = 1;
+        }else {
+            $orden = ($this->getLastOrden($id_presentacio))+1;
+        }
+        try {
+            $statement->execute([
+                ":titol" => $titol,
                 ":orden" => $orden,
                 ':id_presentacio' => $id_presentacio
             ]);
@@ -161,6 +179,21 @@ class DAO{
             $statement->execute([
                 "titol" => $titol,
                 "contingut" => $contingut,
+                ':id_diapo' => $id_diapositiva
+            ]);
+            
+        } catch (PDOException $e) {
+            echo "Error al guardar datos: " . $e->getMessage();
+        }
+    }
+    
+    public function alterDiapositivesTitol($titol, $id_diapositiva){
+        $sql = "UPDATE  Diapositives SET titol = :titol WHERE ID_Diapositiva = :id_diapo";
+        $statement = ($this->pdo)->prepare($sql);
+
+        try {
+            $statement->execute([
+                "titol" => $titol,
                 ':id_diapo' => $id_diapositiva
             ]);
             
@@ -278,6 +311,7 @@ class DAO{
             return false;
         }
     }
+
     public function editarEstilsPresentacio($id_presentacion, $estils){
         $sql = "UPDATE Presentacions SET estil = :estils WHERE ID_Presentacio = (:id_presentacion)";
         $statement = ($this->pdo)->prepare($sql);
@@ -295,3 +329,27 @@ class DAO{
     
     
 }
+    
+    public function getDiapositivesVista($id_presentacio) {
+        $sql = "SELECT titol, contingut FROM Diapositives WHERE ID_Presentacio = :id_presentacio";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([':id_presentacio' => $id_presentacio]);
+        
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $result;
+    }
+
+    public function obtenerUltimoIDDiapositiva() {
+        $sql = "SELECT MAX(ID_Diapositiva) AS ultimoID FROM Diapositives";
+        $statement = $this->pdo->query($sql);
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($row && isset($row['ultimoID'])) {
+            return $row['ultimoID'];
+        } else {
+            return 0;
+        }
+    }
+}
+
