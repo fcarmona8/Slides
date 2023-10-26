@@ -250,12 +250,10 @@ tr {
     width: 240px;
     border-radius: 5px;
     border: 1px solid black;
-    overflow-y: auto;
 
 }
 
 .diaposInfo {
-    height: 20px;
     height: min-content;
     overflow-wrap: break-word;
     margin: 4px 8px;
@@ -371,7 +369,6 @@ tr {
     font-size: 18px;
     border: 2px solid black;
     padding: 40px;
-    box-sizing: border-box;
 }
 
 .buttons-editar {
@@ -474,6 +471,69 @@ textarea {
     margin: 10px 0;
 }
 
+.button-diapo {
+    background-color: #DDDDDD;
+    height: min-content;
+    overflow-wrap: break-word;
+    margin: 4px 8px;
+    padding: 10px 5px;
+    border-radius: 4px;
+    position: relative; 
+    text-align: center;
+    border: none;
+}
+.button-diapo::after {
+    content: '';
+    position: absolute;
+    left: 50%; 
+    transform: translateX(-50%); 
+    bottom: -15px; 
+    width: 80%; 
+    height: 1px; 
+    background-color: rgb(145, 145, 145); 
+  }
+.button-diapo:hover {
+    background-color: #c8c8c8;
+    cursor: pointer;
+}
+
+.containerSeleccionarEstilos{
+    text-align: center;
+}
+.containerSeleccionarEstilos h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    font-size: 42px;
+}
+
+.containerSeleccionarEstilos form {
+    font-size: 20px;
+    align-items: center;
+}
+.containerSeleccionarEstilos select {
+    border-radius: 6px;
+    font-size: 18px;
+    padding: 3px;
+}
+
+.containerSeleccionarEstilos div {
+    margin: 50px;
+}
+.enviarEstils {
+    background-color: #4c86c4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin: 0 auto;
+}
 .preview {
     display: flex;
     flex-direction: column;

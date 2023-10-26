@@ -60,7 +60,20 @@ if ($editDiapo === false) {
             <div class="presentacion-guardada">
                 <form method='post'>
                     <button class="tituloGuardado" name="editarPres" type='submit' ><?php echo $titol; ?></button>
+                    <div class='buttons-editar'>
+                        <button>
+                            <!-- Boton Previsualizar presentacion -->
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+                        </button>
+
+                        <button class="editarEstils">Editar estils
+                            <!-- Boton editar estilo de la presentacion -->
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M339.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L568.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S517.7-4.4 499.1 9.6L262.4 187.2c-24 18-38.2 46.1-38.4 76.1L339.3 367.1zm-19.6 25.4l-116-104.4C143.9 290.3 96 339.6 96 400c0 3.9 .2 7.8 .6 11.6C98.4 429.1 86.4 448 68.8 448H64c-17.7 0-32 14.3-32 32s14.3 32 32 32H208c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg>
+                    
+                        </button>
+                    </div>
                 </form>
+
                 <div class='buttons-editar'>
                 <form method='post'>
                     <input type="hidden" name="id_presentacion" value="<?= $id_presentacio; ?>">
@@ -73,7 +86,7 @@ if ($editDiapo === false) {
                 </div>
             </div>
         </div>
-    </div>
+            </div>
 
     <div class="down">
         <div class="left">
@@ -156,6 +169,7 @@ if ($editDiapo === false) {
     
     <script>
         const button = document.querySelector('.volver');
+        const buttonEstils = document.querySelector('.editarEstils');
         document.getElementById("tipus").addEventListener("change", function() {
             if (this.value === "titol") {
                 window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
@@ -163,6 +177,12 @@ if ($editDiapo === false) {
         });
         button.addEventListener('click', function (e) {
             window.location.href = "Home.php";
+        });
+        buttonEstils.addEventListener('click', function (e) {
+            e.preventDefault();
+            const url = "seleccionarEstilos.php?id=<?php echo $id_presentacio; ?>";
+            console.log(url);
+            window.location.href = url;
         });
 
         function obtenerValores() {
