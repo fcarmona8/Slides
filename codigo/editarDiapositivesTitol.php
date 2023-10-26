@@ -71,22 +71,36 @@ if (isset($_GET["id_diapo"])) {
             <div class="nuevaDiapositiva">
                 <select name="tipus" id="tipus">
                     <option value="" selected disabled>Nueva Diapositiva</option>
-                    <option value="titol">Titol</option>
-                    <option value="titolContingut">Titol + contingut</option>
+                    <option value="titol">Titulo</option>
+                    <option value="titolContingut">Titulo + contenido</option>
                 </select>
             </div>
             <div class="diapositivas">
                 <?php while ($row = $diapo->fetch()) : ?>
-                    <table class='diapo'>   
-                        <tbody>
-                            <tr>
-                                <form method='post'>
-                                    <input type="hidden" name="id" value="<?= $id_presentacio?>">
-                                    <input type="hidden" name="id_diapo" value="<?= $row['ID_Diapositiva'];?>">
-                                   <button type='submit' name="editar_diapo"><?= $row['titol']; ?></button>
-                                </form>
-                        </tbody>
-                    </table>
+                    <div class='diapo'>   
+                            
+                                <div>
+                                    <form method='post'>
+                                        <input type="hidden" name="id" value="<?= $id_presentacio?>">
+                                        <input type="hidden" name="id_diapo" value="<?= $row['ID_Diapositiva'];?>">
+                                        <button type='submit' name="editar_diapo" class="button-diapo"><?= $row['titol']; ?></button>
+                                    </form>
+                                </div>
+                                
+                                <div class='buttons-orden'>
+                                    <form method="post"  class='button-upDown'>
+                                        <input type="hidden" name="id_diapo" value="<?= $row['ID_Diapositiva'];?>">
+                                            <button type="submit" name="ordenDiapoUp">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M182.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>                    </button>
+                                    </form>
+                                    <form method="post" class='button-upDown'>
+                                        <input type="hidden" name="id_diapo" value="<?= $row['ID_Diapositiva'];?>">
+                                            <button type="submit" name="ordenDiapoDown">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8H288c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128z"/></svg>                    </button>
+                                    </form>
+                                </div>
+                            
+                    </div>
                 <?php endwhile ?>  
             </div>
         </div>
@@ -96,10 +110,15 @@ if (isset($_GET["id_diapo"])) {
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
-                <input type="text" name="titol" id="titol" class="titolDiapo" placeholder="Titol" <?php if ($editDiapo === TRUE) {
+                <input type="text" name="titol" class="titolDiapo" placeholder="Titulo" maxlength="25" required <?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo ?>" <?php ;
                    } ?> >
-                <input type="submit" name="anadirEditarDiapositiva" value="Añadir diapositiva">
+                <input type="submit" name="anadirEditarDiapositiva" class="boton-crear" <?php if ($editDiapo === TRUE) {
+                    echo 'value="Guardar diapositiva"';
+                }else{
+                    echo 'value="Añadir diapositiva"';
+                }
+                ?> >
             </form>
             <div class='buttons-diapositiva'>
                 <form method="post" action="previsualitzarDiapositiva.php"> 
@@ -116,6 +135,7 @@ if (isset($_GET["id_diapo"])) {
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
                     </button>
                 </form>
+                
                 
             </div>
         </div>

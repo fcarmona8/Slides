@@ -229,7 +229,7 @@ tr {
 .nuevaDiapositiva {
     display: flex;
     flex-direction: column;
-    width: 152px;
+    width: 240px;
     margin-left: 40px;
 }
 
@@ -240,14 +240,14 @@ tr {
 
 
 .diapositivas {
-    background-color: #dddd;
+    background-color: #DDDDDD;
     display: flex;
     flex-direction: column;
     height: 100%;
     margin-bottom: 11px;
     overflow-y: auto;
     margin-left: 40px;
-    width: 150px;
+    width: 240px;
     border-radius: 5px;
     border: 1px solid black;
     overflow-y: auto;
@@ -338,7 +338,7 @@ tr {
 
 .tituloGuardado {
     border-radius: 5px;
-    padding: 5px 10px 5px 10px;
+    padding: 5px 50px 5px 50px;
     font-size: 28px;
 }
 
@@ -372,10 +372,6 @@ tr {
     border: 2px solid black;
     padding: 40px;
     box-sizing: border-box;
-}
-
-.tituloGuardado:hover {
-    background-color: #78a691;
 }
 
 .buttons-editar {
@@ -563,4 +559,46 @@ a {
     margin-right: 10px;
     display: flex;
     justify-content: end;
+}
+
+.button-diapo{
+    border: none;
+    background-color: inherit;
+}
+
+.button-diapo:hover{
+    background-color: white;
+}
+
+.buttons-orden{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 18px;
+    width: 10px;
+}
+
+.button-upDown{
+    height: 100%;
+    width: 100%;
+}
+
+.button-upDown button{
+    border: none;
+    background-color: inherit;
+    border-radius: 15%;
+}
+
+.button-upDown button:hover{
+    background-color: #4c86c4;
+}
+
+.diapo{
+    height: 11%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.diapo:nth-child(even){
+    background-color: #a0a0a0;
 }
