@@ -477,8 +477,7 @@ textarea {
 .preview {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    
     height: 100vh;
     margin: 0;
     overflow: hidden;
@@ -491,17 +490,34 @@ textarea {
 }
 
 .diapositiva-preview {
-    text-align: center;
     max-width: 80%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .diapositiva-preview h1 {
-    font-size: 24px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: rgb(210, 206, 206);
+    height: 80px;
+    width: 800px;
+    border: 2px solid black;
 }
 
 .diapositiva-preview p {
     font-size: 18px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(210, 206, 206);
+    width: 800px;
+    height: 350px;
+    border: 2px solid black;
+    
 }
 
 .controles {
@@ -544,6 +560,8 @@ a {
 .aviso {
     font-size: 24px;
     color: red;
+    display: flex;
+    justify-content: center;
 }
 
 .rotate{
@@ -601,4 +619,23 @@ a {
 }
 .diapo:nth-child(even){
     background-color: #a0a0a0;
+}
+
+.boton-salir {
+    margin-top: 10px;
+    /* Color de fondo del botón */
+    /* Color del texto */
+    border: none;
+    
+    /* Tamaño de fuente */
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre el botón */
+    border-radius: 100%;
+    background-color: #96C5B0;
+}
+
+/* Estilos para el botón de "Crear Presentación" al pasar el cursor */
+.boton-crear:hover {
+    background-color: #0056b3;
+    /* Cambia el color de fondo al pasar el cursor */
 }

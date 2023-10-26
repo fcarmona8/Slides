@@ -27,7 +27,6 @@ if (isset($_GET["id"])) {
     <div class="preview">
     <?php if (empty($diapositivas)): ?>
         <div class="aviso">Esta presentación no tiene diapositivas.</div>
-        <a href="<?php echo $from === 'Home' ? 'Home.php' : ($from === 'Editar' ? 'editarDiapositivesTitol.php?id=' . $id_presentacio : 'crearDiapositivesTitol.php?id=' . $id_presentacio); ?>">Cancelar</a>
     <?php else: ?>
     <div class="diapositiva-preview">
         <h1></h1>
@@ -47,17 +46,31 @@ if (isset($_GET["id"])) {
 
         var anteriorButton = document.getElementById("anterior");
         var siguienteButton = document.getElementById("siguiente");
-        
-        function mostrarDiapositiva(slideIndex) {
-                var diapositiva = diapositivas[slideIndex];
-                document.querySelector('.diapositiva-preview h1').textContent = diapositiva.titol;
-                document.querySelector('.diapositiva-preview p').textContent = diapositiva.contingut;
-                currentSlide = slideIndex;
 
-                // Habilitar o deshabilitar botones según la posición de la diapositiva
-                anteriorButton.disabled = currentSlide === 0;
-                siguienteButton.disabled = currentSlide === totalSlides - 1;
+        function mostrarDiapositiva(slideIndex) {
+            var diapositiva = diapositivas[slideIndex];
+            document.querySelector('.diapositiva-preview h1').textContent = diapositiva.titol;
+            document.querySelector('.diapositiva-preview p').textContent = diapositiva.contingut;
+            var tituloElement = document.querySelector('.diapositiva-preview h1');
+            var contenidoElement = document.querySelector('.diapositiva-preview p');
+
+            if (diapositiva.contingut === null) {
+                // Si el contenido es nulo, ocultar el contenido
+                contenidoElement.style.display = 'none';
+            } else {
+                // Si el contenido no es nulo, mostrar tanto el título como el contenido
+                tituloElement.textContent = diapositiva.titol;
+                contenidoElement.textContent = diapositiva.contingut;
+                contenidoElement.style.display = 'flex';
+            }
+
+            currentSlide = slideIndex;
+
+            // Habilitar o deshabilitar botones según la posición de la diapositiva
+            anteriorButton.disabled = currentSlide === 0;
+            siguienteButton.disabled = currentSlide === totalSlides - 1;
         }
+
 
         document.getElementById("anterior").addEventListener("click", function() {
             mostrarDiapositiva(currentSlide - 1);
