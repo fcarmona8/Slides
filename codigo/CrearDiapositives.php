@@ -73,6 +73,11 @@ if (isset($_GET["id"])) {
         
     </div>
     <script>
+        const button = document.querySelector('.volver');
+        button.addEventListener('click', function (e) {
+            window.location.href = "Home.php";
+        });
+        
         document.getElementById("tipus").addEventListener("change", function() {
             if (this.value === "titolContingut") {
                 window.location.href = "CrearDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";

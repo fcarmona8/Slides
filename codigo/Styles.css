@@ -13,8 +13,10 @@ body {
     left: 0;
 }
 
-p{
-    background-color: white;
+.titolHome {
+    margin-left: 100px;
+    margin-top: 45px;
+    font-size: 48px;
 }
 
 .container {
@@ -483,32 +485,6 @@ textarea {
     margin: 10px 0;
 }
 
-.button-diapo {
-    background-color: #DDDDDD;
-    height: min-content;
-    overflow-wrap: break-word;
-    margin: 4px 8px;
-    padding: 10px 5px;
-    border-radius: 4px;
-    position: relative; 
-    text-align: center;
-    border: none;
-}
-.button-diapo::after {
-    content: '';
-    position: absolute;
-    left: 50%; 
-    transform: translateX(-50%); 
-    bottom: -15px; 
-    width: 80%; 
-    height: 1px; 
-    background-color: rgb(145, 145, 145); 
-  }
-.button-diapo:hover {
-    background-color: #c8c8c8;
-    cursor: pointer;
-}
-
 .containerSeleccionarEstilos{
     text-align: center;
 }
@@ -549,8 +525,7 @@ textarea {
 .preview {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    
     height: 100vh;
     margin: 0;
     overflow: hidden;
@@ -563,17 +538,74 @@ textarea {
 }
 
 .diapositiva-preview {
-    text-align: center;
     max-width: 80%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .diapositiva-preview h1 {
-    font-size: 24px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background-color: rgb(210, 206, 206);
+    height: 80px;
+    width: 800px;
+    border: 2px solid black;
 }
 
 .diapositiva-preview p {
     font-size: 18px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: rgb(210, 206, 206);
+    width: 800px;
+    height: 350px;
+    border: 2px solid black;
+}
+
+.diapositiva-preview-fondoBlanco h1 {
+    margin-top: 70px;
+    margin-bottom: 50px;
+    font-size: 38px;
+}
+
+.diapositiva-preview-fondoBlanco p {
+    font-size: 22px;
+}
+
+.diapositiva-preview-fondoBlanco {
+    border-radius: 10px;
+    text-align: center;
+    background-color: white;
+    height: 70%;
+    width: 70%;
+    margin-bottom: 10%;
+}
+
+.diapositiva-preview-fondoNegro h1 {
+    margin-top: 70px;
+    margin-bottom: 50px;
+    font-size: 38px;
+    
+}
+
+.diapositiva-preview-fondoNegro p {
+    font-size: 22px;
+}
+
+.diapositiva-preview-fondoNegro {
+    border-radius: 10px;
+    text-align: center;
+    background-color: rgb(30, 30, 30);
+    color: white;
+    height: 70%;
+    width: 70%;
+    margin-bottom: 10%;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 .controles {
@@ -616,6 +648,8 @@ a {
 .aviso {
     font-size: 24px;
     color: red;
+    display: flex;
+    justify-content: center;
 }
 
 .rotate{
@@ -640,7 +674,7 @@ a {
 
 .button-diapo:hover{
     background-color: white;
-    cursor: pointer;
+    padding: 10px;
 }
 
 .buttons-orden{
@@ -649,6 +683,7 @@ a {
     justify-content: center;
     height: 18px;
     width: 10px;
+    
 }
 
 .button-upDown{
@@ -667,6 +702,7 @@ a {
     cursor: pointer;
 }
 
+
 .diapo{
     height: 11%;
     display: flex;
@@ -675,4 +711,23 @@ a {
 }
 .diapo:nth-child(even){
     background-color: #a0a0a0;
+}
+
+.boton-salir {
+    margin-top: 10px;
+    /* Color de fondo del botón */
+    /* Color del texto */
+    border: none;
+    
+    /* Tamaño de fuente */
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre el botón */
+    border-radius: 100%;
+    background-color: #96C5B0;
+}
+
+/* Estilos para el botón de "Crear Presentación" al pasar el cursor */
+.boton-crear:hover {
+    background-color: #0056b3;
+    /* Cambia el color de fondo al pasar el cursor */
 }
