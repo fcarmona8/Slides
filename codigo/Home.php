@@ -28,7 +28,7 @@ $presen = $dao->getPresentacions();
 </head>
 
 <body>
-    <h1>Slides</h1>
+    <h1 class="titolHome">Slides</h1>
     <hr class="line">
     
     <div class="container">
