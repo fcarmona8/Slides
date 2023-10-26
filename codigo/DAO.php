@@ -311,4 +311,27 @@ class DAO{
             return false;
         }
     }
+    
+    public function getDiapositivesVista($id_presentacio) {
+        $sql = "SELECT titol, contingut FROM Diapositives WHERE ID_Presentacio = :id_presentacio";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([':id_presentacio' => $id_presentacio]);
+        
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+        return $result;
+    }
+
+    public function obtenerUltimoIDDiapositiva() {
+        $sql = "SELECT MAX(ID_Diapositiva) AS ultimoID FROM Diapositives";
+        $statement = $this->pdo->query($sql);
+        $row = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($row && isset($row['ultimoID'])) {
+            return $row['ultimoID'];
+        } else {
+            return 0;
+        }
+    }
 }
+

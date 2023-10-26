@@ -42,7 +42,7 @@ body {
     background-color: #1f66b1;
 }
 
-.presentacionsBD{
+.presentacionsBD {
     margin: 30px;
     height: 50%;
     flex-wrap: wrap;
@@ -51,7 +51,8 @@ body {
     overflow-y: auto;
     justify-content: center;
 }
-.pres{
+
+.pres {
     width: 30%;
     height: fit-content;
     display: flex;
@@ -59,8 +60,8 @@ body {
     justify-content: center;
 }
 
-.bodyTable{
-    border: 1px solid ;
+.bodyTable {
+    border: 1px solid;
     background-color: #DDDDDD;
     border-radius: 15px;
     margin: 10px;
@@ -68,37 +69,38 @@ body {
     overflow-wrap: break-word;
 }
 
-#eliminar{
+#eliminar {
     display: flex;
     flex-direction: row;
 }
 
-.button-row{
+.button-row {
     display: flex;
     flex-direction: row;
 }
 
-.form-inline{
-    display: inline; /* Muestra los elementos del formulario en línea */
+.form-inline {
+    display: inline;
+    /* Muestra los elementos del formulario en línea */
 }
 
-.titolPres{
+.titolPres {
     font-weight: bold;
     font-size: 20px;
 }
 
-.buttons{
+.buttons {
     background-color: #DDDDDD;
     padding: 5px;
     border-radius: 5px;
     border: 0px;
 }
 
-.buttons:hover{
+.buttons:hover {
     background-color: #a0a0a0;
 }
 
-tr{
+tr {
     margin: 10px;
     display: flex;
     justify-content: center;
@@ -146,7 +148,7 @@ tr{
     border-radius: 5px;
 }
 
-.volverButton{
+.volverButton {
     vertical-align: -2px;
 }
 
@@ -174,26 +176,26 @@ tr{
     border: 1.5px solid black;
 }
 
-.presentacion-guardada{
+.presentacion-guardada {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.presentacionV2{
+.presentacionV2 {
     display: flex;
     width: 100%;
     flex-direction: column;
 }
 
-.tituloGuardado{
+.tituloGuardado {
     background-color: #DDDDDD;
     padding: 10px;
     border-radius: 15%;
     border: 1px solid;
 }
 
-.añadir{
+.añadir {
     display: flex;
     justify-content: flex-end;
     align-self: flex-end;
@@ -221,7 +223,7 @@ tr{
     width: min-content;
     margin-top: 30px;
     margin-left: 30px;
-    
+
 }
 
 .nuevaDiapositiva {
@@ -259,19 +261,20 @@ tr{
     margin: 4px 8px;
     padding: 10px 5px;
     border-radius: 4px;
-    position: relative; 
+    position: relative;
     text-align: center;
 }
+
 .diaposInfo::after {
     content: '';
     position: absolute;
-    left: 50%; 
-    transform: translateX(-50%); 
-    bottom: -4px; 
-    width: 80%; 
-    height: 1px; 
-    background-color: rgb(145, 145, 145); 
-  }
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -4px;
+    width: 80%;
+    height: 1px;
+    background-color: rgb(145, 145, 145);
+}
 
 .diaposInfo:hover {
     background-color: #c8c8c8;
@@ -293,7 +296,8 @@ tr{
     flex-direction: column;
     width: 70%;
     height: 100%;
-    align-items: center; /* Centra horizontalmente los elementos del formulario */
+    align-items: center;
+    /* Centra horizontalmente los elementos del formulario */
     align-content: center;
 }
 
@@ -301,10 +305,10 @@ tr{
     display: flex;
     flex-direction: column;
     width: 80%;
-    align-items:center;
+    align-items: center;
 }
 
-.titol{
+.titol {
     box-sizing: border-box;
     width: 100%;
     height: 75%;
@@ -315,7 +319,7 @@ tr{
     border: 2px solid black;
 }
 
-.descripcio{
+.descripcio {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
@@ -332,7 +336,7 @@ tr{
     padding: 2px;
 }
 
-.tituloGuardado{
+.tituloGuardado {
     border-radius: 5px;
     padding: 5px 50px 5px 50px;
     font-size: 28px;
@@ -370,49 +374,46 @@ tr{
     box-sizing: border-box;
 }
 
-button[name="editarPres"]:hover{
-    background-color: #78a691;
-}
-
-.buttons-editar{
+.buttons-editar {
     display: flex;
     flex-direction: column;
     padding: 15px;
 }
 
-.buttons-editar button{
+.buttons-editar button {
     background-color: #96C5B0;
     border: none;
     margin: 5px;
     padding: 5px;
 }
 
-.buttons-editar button:hover{
+.buttons-editar button:hover {
     background-color: #78a691;
     border-radius: 5px;
 }
 
-.buttons-diapositiva{
+.buttons-diapositiva {
     display: flex;
     flex-direction: column;
     padding: 15px;
 }
 
-.buttons-diapositiva button{
+.buttons-diapositiva button {
     background-color: #96C5B0;
     border: none;
     margin: 5px;
     padding: 5px;
 }
 
-.buttons-diapositiva button:hover{
+.buttons-diapositiva button:hover {
     background-color: #78a691;
     border-radius: 5px;
 }
 
 textarea {
     font-family: 'Liberation Sans', sans-serif;
-    width: 100%; /* Asegura que el textarea ocupe el ancho completo */
+    width: 100%;
+    /* Asegura que el textarea ocupe el ancho completo */
 }
 
 
@@ -427,7 +428,7 @@ textarea {
     margin-top: 50px;
 }
 
-.iconoCrear{
+.iconoCrear {
     vertical-align: -3px;
 }
 
@@ -437,28 +438,127 @@ textarea {
 
 .boton-crear {
     margin-top: 10px;
-    background-color: #0074d9; /* Color de fondo del botón */
-    color: #fff; /* Color del texto */
-    border: none; /* Sin borde */
-    padding: 10px 20px; /* Espaciado dentro del botón */
-    font-size: 16px; /* Tamaño de fuente */
-    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-    border-radius: 5px; /* Bordes redondeados */
+    background-color: #0074d9;
+    /* Color de fondo del botón */
+    color: #fff;
+    /* Color del texto */
+    border: none;
+    /* Sin borde */
+    padding: 10px 20px;
+    /* Espaciado dentro del botón */
+    font-size: 16px;
+    /* Tamaño de fuente */
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre el botón */
+    border-radius: 5px;
+    /* Bordes redondeados */
 }
 
 /* Estilos para el botón de "Crear Presentación" al pasar el cursor */
 .boton-crear:hover {
-    background-color: #0056b3; /* Cambia el color de fondo al pasar el cursor */
+    background-color: #0056b3;
+    /* Cambia el color de fondo al pasar el cursor */
 }
 
 .mensaje-exito {
-    background-color: #4CAF50; /* Color de fondo verde */
+    background-color: #4CAF50;
+    /* Color de fondo verde */
     font-weight: bold;
-    color: white; /* Texto en color blanco */
-    padding: 10px; /* Espaciado interno */
-    border-radius: 5px; /* Bordes redondeados */
+    color: white;
+    /* Texto en color blanco */
+    padding: 10px;
+    /* Espaciado interno */
+    border-radius: 5px;
+    /* Bordes redondeados */
     border: 1px solid #000000;
     margin: 10px 0;
+}
+
+.preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    /* Evita barras de desplazamiento */
+}
+
+.diapositiva {
+    width: 90%;
+    height: 90%;
+}
+
+.diapositiva-preview {
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+.diapositiva-preview h1 {
+    font-size: 24px;
+}
+
+.diapositiva-preview p {
+    font-size: 18px;
+}
+
+.controles {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0 20px;
+}
+
+#siguiente, #anterior {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 100%;
+}
+
+#anterior,
+#siguiente {
+    font-size: 16px;
+    margin: 0 10px;
+    padding: 10px 20px;
+}
+
+#anterior:disabled,
+#siguiente:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+a {
+    text-decoration: none;
+    color: #007BFF;
+    font-size: 16px;
+}
+
+.aviso {
+    font-size: 24px;
+    color: red;
+}
+
+.rotate{
+    transform: rotate(180deg);
+}
+
+.vista{
+    overflow: hidden;
+}
+
+.titulo{
+    margin-top: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: end;
 }
 
 .button-diapo{
