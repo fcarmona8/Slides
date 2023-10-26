@@ -13,6 +13,12 @@ body {
     left: 0;
 }
 
+.titolHome {
+    margin-left: 100px;
+    margin-top: 45px;
+    font-size: 48px;
+}
+
 .container {
     text-align: center;
     margin-top: 50px;
@@ -471,32 +477,6 @@ textarea {
     margin: 10px 0;
 }
 
-.button-diapo {
-    background-color: #DDDDDD;
-    height: min-content;
-    overflow-wrap: break-word;
-    margin: 4px 8px;
-    padding: 10px 5px;
-    border-radius: 4px;
-    position: relative; 
-    text-align: center;
-    border: none;
-}
-.button-diapo::after {
-    content: '';
-    position: absolute;
-    left: 50%; 
-    transform: translateX(-50%); 
-    bottom: -15px; 
-    width: 80%; 
-    height: 1px; 
-    background-color: rgb(145, 145, 145); 
-  }
-.button-diapo:hover {
-    background-color: #c8c8c8;
-    cursor: pointer;
-}
-
 .containerSeleccionarEstilos{
     text-align: center;
 }
@@ -550,18 +530,45 @@ textarea {
     height: 90%;
 }
 
-.diapositiva-preview {
+.diapositiva-preview-fondoBlanco h1 {
+    margin-top: 70px;
+    margin-bottom: 50px;
+    font-size: 38px;
+}
+
+.diapositiva-preview-fondoBlanco p {
+    font-size: 22px;
+}
+
+.diapositiva-preview-fondoBlanco {
+    border-radius: 10px;
     text-align: center;
-    max-width: 80%;
-    margin: 0 auto;
+    background-color: white;
+    height: 70%;
+    width: 70%;
+    margin-bottom: 10%;
 }
 
-.diapositiva-preview h1 {
-    font-size: 24px;
+.diapositiva-preview-fondoNegro h1 {
+    margin-top: 70px;
+    margin-bottom: 50px;
+    font-size: 38px;
+    
 }
 
-.diapositiva-preview p {
-    font-size: 18px;
+.diapositiva-preview-fondoNegro p {
+    font-size: 22px;
+}
+
+.diapositiva-preview-fondoNegro {
+    border-radius: 10px;
+    text-align: center;
+    background-color: rgb(30, 30, 30);
+    color: white;
+    height: 70%;
+    width: 70%;
+    margin-bottom: 10%;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 .controles {
@@ -628,6 +635,7 @@ a {
 
 .button-diapo:hover{
     background-color: white;
+    padding: 10px;
 }
 
 .buttons-orden{
@@ -636,6 +644,7 @@ a {
     justify-content: center;
     height: 18px;
     width: 10px;
+    
 }
 
 .button-upDown{
@@ -653,6 +662,7 @@ a {
     background-color: #4c86c4;
 }
 
+
 .diapo{
     height: 11%;
     display: flex;
@@ -660,5 +670,6 @@ a {
     align-items: center;
 }
 .diapo:nth-child(even){
-    background-color: #a0a0a0;
+    background-color: #b7b7b7;
 }
+
