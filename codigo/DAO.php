@@ -311,7 +311,21 @@ class DAO{
             return false;
         }
     }
+
+    public function editarEstilsPresentacio($id_presentacion, $estils){
+        $sql = "UPDATE Presentacions SET estil = :estils WHERE ID_Presentacio = (:id_presentacion)";
+        $statement = ($this->pdo)->prepare($sql);
     
+        try {
+            $statement->execute([
+                "estils" => $estils,
+                "id_presentacion" => $id_presentacion
+            ]);
+        } catch (PDOException $e) {
+            echo "Error al actualizar estilos: " . $e->getMessage();
+        }
+    }
+
     public function getDiapositivesVista($id_presentacio) {
         $sql = "SELECT titol, contingut FROM Diapositives WHERE ID_Presentacio = :id_presentacio";
         $statement = $this->pdo->prepare($sql);
@@ -333,5 +347,18 @@ class DAO{
             return 0;
         }
     }
-}
 
+    public function getEstiloPresentacion($id_presentacio) {
+        if (isset($id_presentacio)) {
+            $sql = "SELECT estil FROM Presentacions WHERE ID_Presentacio = :id_presentacio";
+            $statement = $this->pdo->prepare($sql);
+            $statement->execute([':id_presentacio' => $id_presentacio]);
+            
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+        
+            return $result ? $result['estil'] : null;
+        } else {
+            return null;  
+        }
+    }
+}

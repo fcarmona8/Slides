@@ -13,4 +13,7 @@
 
 [Gitlab](https://git.copernic.cat/cjumelle/slidescarmonagalindojumelle)
 
-
+## IP de la maquina Isard:
+La maquina donde lo realizamos fue en la de Camilo, la IP es la siguiente:  
+  
+192.168.50.158
