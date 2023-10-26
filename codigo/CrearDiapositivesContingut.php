@@ -9,6 +9,25 @@ if (isset($_GET["id"])) {
 } else {
     $titol = "Título no disponible";
 }
+
+$infoDiapo = FALSE;
+$id_diapo = '';
+$titolDiapo = "";
+$contingut = "";
+
+if (isset($_GET["id_diapo"])) {
+    $id_diapo = $_GET["id_diapo"];
+    if ($id_diapo != '') {
+        $titolDiapo = $dao->getTitolDiapoPorID($id_diapo);
+        $contingut = $dao->getContingutPorID($id_diapo);
+
+        $infoDiapo = TRUE;
+    }
+    
+}else{
+    $infoDiapo =FALSE;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +78,7 @@ if (isset($_GET["id"])) {
                             <form method='post'>
                                 <input type="hidden" name="id" value="<?= $id_presentacio?>">
                                 <input type="hidden" name="id_diapo" value="<?= $row['ID_Diapositiva'];?>">
-                                <button type='submit' name="editar_diapo" class="button-diapo"><?= $row['titol']; ?></button>
+                                <button type='submit' name="getInfoDiapo" class="button-diapo"><?= $row['titol']; ?></button>
                             </form>
                         </div>
                         
@@ -82,16 +101,28 @@ if (isset($_GET["id"])) {
         </div>
         <div class="right">
             <form method="POST" id="formDiapoCont">
-                <!-- Campo oculto para enviar el ID -->
-                <input type="hidden" name="id_presentacio" value="<?php echo $id_presentacio; ?>">
-                <input type="text" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25" required>
-                <textarea name="contingut" class="contingutDiapo" placeholder="Contenido" required></textarea>
-                <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">
+                <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <?php if ($infoDiapo === TRUE) {
+                   ?><p name="titol" class="titolContDiapo" id='titol'> <?=$titolDiapo ?></p> <?php ;
+                   }else {
+                    echo '<input type="text" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required/>';
+                   } ?>
+
+                   <?php if ($infoDiapo === TRUE) {
+                        echo '<p name="contingut" class="contingutDiapo" id="contingut"> '. $contingut .'</p>';
+                   }else {
+                    echo '<textarea name="contingut" class="contingutDiapo" placeholder="Contenido" required ></textarea>';
+                   } ?>
+                
+                   <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">
             </form>
             <div class='buttons-diapositiva'>
                 <!-- Boton previsualizar diapositiva -->
                 <form method="post" action="previsualitzarDiapositiva.php">
                     <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                    <input type="hidden" name="id_diapo" value="<?= $id_diapo; ?>">
+                    <input type="hidden" name="titol" class="titolContDiapo" placeholder="Título" value="<?= $titolDiapo; ?>">
+                    <input type="hidden" name="contingut" class="contingutDiapo" placeholder="Contenido" value="<?= $contingut; ?>">
                     <button type='submit' onclick="obtenerValores()" name='previsualizar_diapo'><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg></button>
                 </form>
             </div>
