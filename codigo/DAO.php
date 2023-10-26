@@ -278,4 +278,20 @@ class DAO{
             return false;
         }
     }
+    public function editarEstilsPresentacio($id_presentacion, $estils){
+        $sql = "UPDATE Presentacions SET estil = :estils WHERE ID_Presentacio = (:id_presentacion)";
+        $statement = ($this->pdo)->prepare($sql);
+    
+        try {
+            $statement->execute([
+                "estils" => $estils,
+                "id_presentacion" => $id_presentacion
+            ]);
+        } catch (PDOException $e) {
+            echo "Error al actualizar estilos: " . $e->getMessage();
+        }
+    }
+    
+    
+    
 }
