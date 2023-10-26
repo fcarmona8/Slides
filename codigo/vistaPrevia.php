@@ -29,7 +29,7 @@ if (isset($_GET["id"])) {
         <div class="aviso">Esta presentación no tiene diapositivas.</div>
         <a href="<?php echo $from === 'Home' ? 'Home.php' : ($from === 'Editar' ? 'editarDiapositivesTitol.php?id=' . $id_presentacio : 'crearDiapositivesTitol.php?id=' . $id_presentacio); ?>">Cancelar</a>
     <?php else: ?>
-    <div class="diapositiva-preview">
+    <div class="diapositiva-preview-<?php echo $estiloPresentacion;?>">
         <h1></h1>
         <p></p>
     </div>
@@ -50,8 +50,8 @@ if (isset($_GET["id"])) {
         
         function mostrarDiapositiva(slideIndex) {
                 var diapositiva = diapositivas[slideIndex];
-                document.querySelector('.diapositiva-preview h1').textContent = diapositiva.titol;
-                document.querySelector('.diapositiva-preview p').textContent = diapositiva.contingut;
+                document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
+                document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = diapositiva.contingut;
                 currentSlide = slideIndex;
 
                 // Habilitar o deshabilitar botones según la posición de la diapositiva
