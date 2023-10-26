@@ -1,9 +1,23 @@
 <?php
-$config = require_once 'config.php';
-require_once 'Connection.php';
-require_once 'DAO.php';
+include_once("baseDatos.php");
+include_once("DAO.php");
 
 $dao = new DAO(Connection::getConnection($config['db']));
+
+if (isset($_GET["id"])) {
+    $fondoBlancoChecked = '';
+    $fondoNegroChecked = '';
+
+    if ($estiloPresentacion === 'fondoBlanco') {
+        $fondoBlancoChecked = 'checked';
+    } elseif ($estiloPresentacion === 'fondoNegro') {
+        $fondoNegroChecked = 'checked';
+    }
+} else {
+    $titol = "Error, no se encuentra la presentacion";
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,17 +41,28 @@ $dao = new DAO(Connection::getConnection($config['db']));
     <h1 class="tituloSeleccionarEstilos">Seleccionar Estilos</h1>
 
     <form method="post" action="">
-        <label for="estilos">Estilo:</label>
-        <select name="estilos" id="estilos">
-        <option value="fondoBlanco">Fondo Blanco</option>
-        <option value="fondoNegro">Fondo Negro</option>
-        </select>
+        <input type="radio" id="fondoBlanco" name="estilos" value="fondoBlanco" <?php echo $fondoBlancoChecked; ?>>
+        <label for="fondoBlanco">Estilo 1</label>
+
+        <input type="radio" id="fondoNegro" name="estilos" value="fondoNegro" <?php echo $fondoNegroChecked; ?>>
+        <label for="fondoNegro">Estilo 2</label>
         <input type="hidden" name="id_presentacion" value="' . $id_presentacion . '">
+        <div class="diapositivesExempleContainer">
+        <div class="diapositivaExemple1">
+            <h4 class="diapositivaExemple1Titol">Titol Exemple</h4>
+            <p class="diapositivaExemple1Contingut">Contingut Exemple</p>
+        </div>
+        <div class="diapositivaExemple2">
+            <h4 class="diapositivaExemple2Titol">Titol Exemple</h4>
+            <p class="diapositivaExemple2Contingut">Contingut Exemple</p>
+        </div>
+    </div>
         <div>
             <button class="enviarEstils" type="submit" name="enviarEstilos">Guardar Estilos</button>
         </div>
         
     </form>
+    
 </div>
 
 <?php
