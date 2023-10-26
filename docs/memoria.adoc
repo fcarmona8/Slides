@@ -94,11 +94,10 @@ instalación del servidor: +
 -GIT
 Luego de instalar correctamente los dos podra configurar la ip, el nombre de la bd, el usuario y password en codigo/config.php. +
 Para obtener la última version disponible de Slides abra el CMD o terminal y ubiquese en la carpeta del repositorio GIT 
- slidescarmonagalindojumelle, desde ahí ingrese:
- [source, ssh]
- ----
-git pull 
- ---- 
+ slidescarmonagalindojumelle, desde ahí ingrese: + 
+  +
+$ git pull  +
+  +
 Al darle enter vera como se descarga o actualizan los archivos requeridos para la aplicación. O si tiene ya la última version disponible 
 le saldra un mensaje diciendo 'Already up to date'. +
 
