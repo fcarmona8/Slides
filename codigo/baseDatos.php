@@ -10,9 +10,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirPresentacio"])) 
     // Obtener los datos del formulario
     $titol = $_POST["titol"];
     $descripcio = $_POST["descripcio"];
+    $estilPresentacio = 'fondoBlanco';
     if ($titol != '' && $descripcio != '') {
         // Insertar los datos en la base de datos y obtener el ID generado
-        $dao->setPresentacions($titol, $descripcio);
+        $dao->setPresentacions($titol, $descripcio, $estilPresentacio);
 
         // Obtener el ID generado automáticamente
         $lastInsertId = $dao->getLastInsertId();

@@ -744,7 +744,7 @@ a {
 }
 
 .diapo:nth-child(even){
-    background-color: #a0a0a0;
+    background-color: #c2c2c2;
 }
 
 .boton-salir {
@@ -800,9 +800,18 @@ a {
 .diapositivaExemple1Contingut,
 .diapositivaExemple2Contingut {
     font-size: 16px;
+    text-align: left;
+    margin: 30px;
 
 }
 .boton-crear:hover {
     background-color: #0056b3;
     /* Cambia el color de fondo al pasar el cursor */
 }
+
+.diapositivaExemple1Titol,
+.diapositivaExemple2Titol {
+    text-align: center;
+
+}
+
