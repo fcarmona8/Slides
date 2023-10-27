@@ -101,7 +101,7 @@ if (isset($_GET["id_diapo"])) {
             </div>
         </div>
         <div class="right">
-            <form method="POST" id="formDiapoCont">
+            <form method="POST" id="formDiapo">
                 <!-- Campo oculto para enviar el ID -->
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
@@ -141,11 +141,11 @@ if (isset($_GET["id_diapo"])) {
         const button = document.querySelector('.volver');
         const buttonEstils = document.querySelector('.editarEstils');
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
-            window.location.href = "CrearDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
+            window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
             
         });
         document.querySelector("button[name='tipusContingut']").addEventListener("click", function() {
-            window.location.href = "CrearDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
+            window.location.href = "editarDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
             
         });
         button.addEventListener('click', function (e) {
