@@ -74,6 +74,8 @@ if ($editDiapo === false) {
                     </div>
                 </form>
 
+            <form method='post' class="presentacion-guardada">
+                <button class="tituloGuardado" name="editarPres" type='submit' ><?php echo $titol; ?></button>
                 <div class='buttons-editar'>
                     <form method='post'>
                         <input type="hidden" name="id_presentacion" value="<?= $id_presentacio; ?>">
