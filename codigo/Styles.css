@@ -607,12 +607,14 @@ textarea {
     margin-bottom: 50px;
     font-size: 38px;
     text-align: center;
+    background-color: rgb(30, 30, 30);
     
 }
 
 .diapositiva-preview-fondoNegro p {
     font-size: 22px;
     padding: 40px;
+    background-color: rgb(30, 30, 30);
 }
 
 .diapositiva-preview-fondoNegro {
@@ -770,6 +772,7 @@ a {
 
 .diapositivaExemple2Titol,
 .diapositivaExemple2Contingut {
+    background-color: rgb(30, 30, 30);
     color: white;
 }
 
