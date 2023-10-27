@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirPresentacio"])) 
         $lastInsertId = $dao->getLastInsertId();
 
         // Redirigir a CrearDiapositives.php con el ID de la presentación como parámetro en la URL
-        header("Location: CrearDiapositives.php?id=" . $lastInsertId . "&mensaje=Presentación creada correctamente");
+        header("Location: CrearDiapositivesTitol.php?id=" . $lastInsertId . "&mensaje=Presentación creada correctamente");
         $_POST['titol'] = null;
         $_POST['descripcio'] = null;
         exit();
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
         $dao->setDiapositives($titol, $contingut, $id_presentacio); 
                 
         // Redirigir de nuevo a CrearDiapositives.php
-        header("Location: CrearDiapositivesTitol.php?id=" . $id_presentacio);
+        header("Location: CrearDiapositivesContingut.php?id=" . $id_presentacio);
      }else {
         
         // Obtener los datos del formulario
