@@ -28,7 +28,7 @@ if (isset($_GET["id"])) {
     <?php if (empty($diapositivas)): ?>
         <div class="aviso">Esta presentación no tiene diapositivas.</div>
     <?php else: ?>
-    <div class="diapositiva-preview-<?php echo $estiloPresentacion;?>">
+    <div class="diapositiva-preview">
         <h1></h1>
         <p></p>
     </div>

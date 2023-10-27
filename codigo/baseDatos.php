@@ -195,8 +195,6 @@ if (isset($_POST['editarPres'])) {
     header("Location: editarPresentacio.php?id=".$id_presentacion);
     exit();
 }
-$estiloPresentacion = null;
 if (isset($_GET['id'])) {
     $id_presentacio = $_GET['id'];
-    $estiloPresentacion = $dao->getEstiloPresentacion($id_presentacio);
 }
