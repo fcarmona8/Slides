@@ -36,6 +36,11 @@ if (isset($_GET["id_diapo"])) {
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 </head>
 <body id="crearDiapositivasContingut">
+    <?php
+    if (isset($_GET['mensaje'])) {
+        echo '<div id="mensaje-exito" class="mensaje-exito">' . $_GET['mensaje'] . '</div>';
+    }
+    ?>
     <div class="up">
         <div class="volver">
             <button> 
