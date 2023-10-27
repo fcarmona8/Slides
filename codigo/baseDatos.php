@@ -210,5 +210,6 @@ if (isset($_GET['id'])) {
     $id_presentacio = $_GET['id'];
     $estiloPresentacion = $dao->getEstiloPresentacion($id_presentacio);
     
-    
+
 }
+
