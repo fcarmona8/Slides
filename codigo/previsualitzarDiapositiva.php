@@ -1,6 +1,14 @@
 <?php
+include_once("baseDatos.php");
+include_once("DAO.php");
 // Obtener el valor de $id_presentacio de PHP
 $id_presentacio = isset($_GET["id"]) ? $_GET["id"] : "";
+
+if (isset($_GET["id"])) {
+    $estiloPresentacion = $dao->getEstiloPresentacion($id_presentacio);
+} else {
+    $titol = "Error, no se encuentra la presentacion";
+}
 ?>
 
 <!DOCTYPE html>
@@ -9,17 +17,18 @@ $id_presentacio = isset($_GET["id"]) ? $_GET["id"] : "";
     <title>Previsualización de la Diapositiva</title>
     <link rel="stylesheet" href="Styles.css">
 </head>
-<body class="preview">
+<body class="vista">
     <div class="titulo">
         <button class="boton-salir" id="volverButton"><svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg></button>
     </div>
     <div class="aviso">
         <p id="aviso" style="color: red;"></p>
     </div>
-    <div>
-    <div class="diapositiva-preview">
+    <div class="preview">
+    <div class="diapositiva-preview-<?php echo $estiloPresentacion;?>">
         <h1 id="tituloPrevisualizado"></h1>
         <p id="contenidoPrevisualizado"></p>
+    </div>
     </div>
 
     

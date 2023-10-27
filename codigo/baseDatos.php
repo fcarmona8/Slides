@@ -208,9 +208,14 @@ if (isset($_POST['editarPres'])) {
 if (isset($_GET['id'])) {
     $id_presentacio = $_GET['id'];
     $estiloPresentacion = $dao->getEstiloPresentacion($id_presentacio);
-    
-
 }
 
+if (isset($_POST['previsualizar_diapo'])) {
+    $id_presentacion = $_POST['id_presentacion'];
 
+    $redireccion_url = "previsualitzarDiapositiva.php?id=" . $id_presentacion;
+
+    header("Location: " . $redireccion_url);
+    exit();
+}
 
