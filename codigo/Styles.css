@@ -584,14 +584,13 @@ textarea {
     margin-top: 70px;
     margin-bottom: 50px;
     font-size: 38px;
+    text-align: center;
     
-    padding: 40px;
-
 }
 
 .diapositiva-preview-fondoBlanco p {
     font-size: 22px;
-    text-align: center;
+    padding: 40px;
 }
 
 .diapositiva-preview-fondoBlanco {
