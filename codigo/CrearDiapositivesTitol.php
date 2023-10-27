@@ -99,7 +99,7 @@ if (isset($_GET["id_diapo"])) {
             <form method="POST" id="formDiapoCont" onsubmit="return validateForm();">
             <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                 <?php if ($infoDiapo === TRUE) {
-                   ?><p name="titol" class="titolDiapo" id='titol'> <?=$titolDiapo ?></p> <?php ;
+                   ?><input type="text" name="titol" class="titolDiapo" id='titol' value=' <?=$titolDiapo?>'readOnly > <?php ;
                    }else {
                     echo '<input type="text" name="titol" id="titol" class="titolDiapo" placeholder="Titulo" maxlength="25"required/>';
                    } ?>                

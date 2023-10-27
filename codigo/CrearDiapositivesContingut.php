@@ -103,8 +103,8 @@ if (isset($_GET["id_diapo"])) {
             <form method="POST" id="formDiapoCont">
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                 <?php if ($infoDiapo === TRUE) {
-                   ?><p name="titol" class="titolContDiapo" id='titol'> <?=$titolDiapo ?></p> <?php ;
-                   }else {
+                   ?><input type="text" name="titol" class="titolContDiapo" id='titol' value=' <?=$titolDiapo?> 'readOnly  > <?php ;
+                }else {
                     echo '<input type="text" name="titol" id="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required/>';
                    } ?>
 
@@ -114,6 +114,7 @@ if (isset($_GET["id_diapo"])) {
                     echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" required ></textarea>';
                    } ?>
                 
+                   
                    <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">
             </form>
             <div class='buttons-diapositiva'>
