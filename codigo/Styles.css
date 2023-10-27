@@ -12,7 +12,9 @@ body {
     right: 0;
     left: 0;
 }
-
+p{
+    background-color: white;
+}
 .titolHome {
     margin-left: 100px;
     margin-top: 45px;
@@ -369,6 +371,9 @@ tr {
     border: 2px solid black;
     border-bottom: 1px solid grey;
     margin: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .contingutDiapo {

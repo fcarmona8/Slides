@@ -105,13 +105,13 @@ if (isset($_GET["id_diapo"])) {
                 <?php if ($infoDiapo === TRUE) {
                    ?><p name="titol" class="titolContDiapo" id='titol'> <?=$titolDiapo ?></p> <?php ;
                    }else {
-                    echo '<input type="text" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required/>';
+                    echo '<input type="text" name="titol" id="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required/>';
                    } ?>
 
                    <?php if ($infoDiapo === TRUE) {
                         echo '<p name="contingut" class="contingutDiapo" id="contingut"> '. $contingut .'</p>';
                    }else {
-                    echo '<textarea name="contingut" class="contingutDiapo" placeholder="Contenido" required ></textarea>';
+                    echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" required ></textarea>';
                    } ?>
                 
                    <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">
