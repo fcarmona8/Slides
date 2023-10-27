@@ -101,7 +101,7 @@ if (isset($_GET["id_diapo"])) {
                 <?php if ($infoDiapo === TRUE) {
                    ?><p name="titol" class="titolDiapo" id='titol'> <?=$titolDiapo ?></p> <?php ;
                    }else {
-                    echo '<input type="text" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required/>';
+                    echo '<input type="text" name="titol" class="titolDiapo" placeholder="Titulo" maxlength="25"required/>';
                    } ?>                
                    <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">
             </form>

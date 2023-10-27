@@ -201,11 +201,6 @@ tr {
     border: 1px solid;
 }
 
-button[name='editarPres']:hover{
-    background-color: inherit;
-    cursor: pointer;
-}
-
 .añadir {
     display: flex;
     justify-content: flex-end;
@@ -356,9 +351,12 @@ button[name='editarPres']:hover{
     height: 75%;
     font-size: 42px;
     text-align: center;
+    display: flex;
     margin-top: 40px;
     border: 2px solid black;
     box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
 }
 
 .titolContDiapo {
@@ -370,7 +368,7 @@ button[name='editarPres']:hover{
     text-align: center;
     border: 2px solid black;
     border-bottom: 1px solid grey;
-
+    margin: 0px;
 }
 
 .contingutDiapo {
@@ -380,6 +378,7 @@ button[name='editarPres']:hover{
     font-size: 18px;
     border: 2px solid black;
     padding: 40px;
+    margin: 0px;
 }
 
 .buttons-editar {
@@ -398,7 +397,6 @@ button[name='editarPres']:hover{
 .buttons-editar button:hover {
     background-color: #78a691;
     border-radius: 5px;
-    cursor: pointer;
 }
 
 .buttons-diapositiva {
@@ -417,7 +415,6 @@ button[name='editarPres']:hover{
 .buttons-diapositiva button:hover {
     background-color: #78a691;
     border-radius: 5px;
-    cursor: pointer;
 }
 
 textarea {
@@ -467,7 +464,6 @@ textarea {
 /* Estilos para el botón de "Crear Presentación" al pasar el cursor */
 .boton-crear:hover {
     background-color: #0056b3;
-    cursor: pointer;
     /* Cambia el color de fondo al pasar el cursor */
 }
 
@@ -710,7 +706,6 @@ a {
 
 .button-upDown button:hover{
     background-color: #4c86c4;
-    cursor: pointer;
 }
 
 
@@ -782,5 +777,4 @@ a {
 .boton-crear:hover {
     background-color: #0056b3;
     /* Cambia el color de fondo al pasar el cursor */
-
 }
