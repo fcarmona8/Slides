@@ -68,8 +68,11 @@ if (isset($_GET["id_diapo"])) {
     <div class="down">
         <div class="left">
             <div class="nuevaDiapositiva">
-                <button name="tipusTitol" class="buttonType">Titulo</button>
-                <button name="tipusContingut" class="buttonType">Contenido</button>
+                <select name="tipus" id="tipus">
+                    <option value="" selected disabled>Nueva Diapositiva</option>
+                    <option value="titol">Titulo</option>
+                    <option value="titolContingut">Titulo + contenido</option>
+                </select>
             </div>
             <div class="diapositivas">
                 <?php while ($row = $diapo->fetch()) : ?>
@@ -101,7 +104,7 @@ if (isset($_GET["id_diapo"])) {
             </div>
         </div>
         <div class="right">
-            <form method="POST" id="formDiapo">
+            <form method="POST" id="formDiapoCont">
                 <!-- Campo oculto para enviar el ID -->
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
@@ -140,13 +143,10 @@ if (isset($_GET["id_diapo"])) {
     <script>
         const button = document.querySelector('.volver');
         const buttonEstils = document.querySelector('.editarEstils');
-        document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
-            window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
-            
-        });
-        document.querySelector("button[name='tipusContingut']").addEventListener("click", function() {
-            window.location.href = "editarDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
-            
+        document.getElementById("tipus").addEventListener("change", function() {
+            if (this.value === "titolContingut") {
+                window.location.href = "editarDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
+            }
         });
         button.addEventListener('click', function (e) {
             window.location.href = "Home.php";

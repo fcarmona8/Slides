@@ -101,7 +101,7 @@ if (isset($_GET["id_diapo"])) {
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                 <?php if ($infoDiapo === TRUE) {
                    ?><input type="text" name="titol" class="titolContDiapo" id='titol' value=' <?=$titolDiapo?> 'readOnly  > <?php ;
-                }else {
+                } else {
                     echo '<input type="text" name="titol" id="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required/>';
                    } ?>
 
