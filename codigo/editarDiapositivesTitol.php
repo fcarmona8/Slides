@@ -151,6 +151,7 @@ if (isset($_GET["id_diapo"])) {
         button.addEventListener('click', function (e) {
             window.location.href = "Home.php";
         });
+
         buttonEstils.addEventListener('click', function (e) {
             e.preventDefault();
             const url = "seleccionarEstilos.php?id=<?php echo $id_presentacio; ?>";

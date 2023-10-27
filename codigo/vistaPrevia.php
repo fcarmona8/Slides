@@ -28,7 +28,7 @@ if (isset($_GET["id"])) {
     <?php if (empty($diapositivas)): ?>
         <div class="aviso">Esta presentación no tiene diapositivas.</div>
     <?php else: ?>
-    <div class="diapositiva-preview">
+    <div class="diapositiva-preview-<?php echo $estiloPresentacion;?>">
         <h1></h1>
         <p></p>
     </div>
@@ -49,10 +49,10 @@ if (isset($_GET["id"])) {
 
         function mostrarDiapositiva(slideIndex) {
             var diapositiva = diapositivas[slideIndex];
-            document.querySelector('.diapositiva-preview h1').textContent = diapositiva.titol;
-            document.querySelector('.diapositiva-preview p').textContent = diapositiva.contingut;
-            var tituloElement = document.querySelector('.diapositiva-preview h1');
-            var contenidoElement = document.querySelector('.diapositiva-preview p');
+            document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
+            document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = diapositiva.contingut;
+            var tituloElement = document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1');
+            var contenidoElement = document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p');
 
             if (diapositiva.contingut === null) {
                 // Si el contenido es nulo, ocultar el contenido
