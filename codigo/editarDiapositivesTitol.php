@@ -142,6 +142,7 @@ if (isset($_GET["id_diapo"])) {
 
     <script>
         const button = document.querySelector('.volver');
+        const buttonEstils = document.querySelector('.editarEstils');
         document.getElementById("tipus").addEventListener("change", function() {
             if (this.value === "titolContingut") {
                 window.location.href = "editarDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
@@ -150,8 +151,12 @@ if (isset($_GET["id_diapo"])) {
         button.addEventListener('click', function (e) {
             window.location.href = "Home.php";
         });
-
-
+        buttonEstils.addEventListener('click', function (e) {
+            e.preventDefault();
+            const url = "seleccionarEstilos.php?id=<?php echo $id_presentacio; ?>";
+            console.log(url);
+            window.location.href = url;
+        });
 
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
