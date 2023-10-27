@@ -61,11 +61,8 @@ if (isset($_GET["id_diapo"])) {
     <div class="down">
         <div class="left">
             <div class="nuevaDiapositiva">
-                <select name="tipus" id="tipus">
-                    <option value="" selected disabled>Nueva Diapositiva</option>
-                    <option value="titol">Titulo</option>
-                    <option value="titolContingut">Titulo + contenido</option>
-                </select>
+                <button name="tipusTitol" class="buttonType">Titulo</button>
+                <button name="tipusContingut" class="buttonType">Contenido</button>
             </div>
             <div class="diapositivas">
                 <?php while ($row = $diapo->fetch()) : ?>
@@ -117,10 +114,13 @@ if (isset($_GET["id_diapo"])) {
 
     <script>
         const button = document.querySelector('.volver');
-        document.getElementById("tipus").addEventListener("change", function() {
-            if (this.value === "titolContingut") {
-                window.location.href = "CrearDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
-            }
+        document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
+            window.location.href = "CrearDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
+            
+        });
+        document.querySelector("button[name='tipusContingut']").addEventListener("click", function() {
+            window.location.href = "CrearDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
+            
         });
         button.addEventListener('click', function (e) {
             window.location.href = "Home.php";

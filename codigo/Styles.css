@@ -236,9 +236,14 @@ tr {
 
 .nuevaDiapositiva {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 240px;
     margin-left: 40px;
+    justify-content: space-evenly;
+}
+
+.buttonType{
+    width: 100%;
 }
 
 .nuevaDiapositiva select {
