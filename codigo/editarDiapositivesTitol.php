@@ -87,6 +87,7 @@ if (isset($_GET["id_diapo"])) {
             <div class="nuevaDiapositiva">
                 <button name="tipusTitol" class="buttonType">Titulo</button>
                 <button name="tipusContingut" class="buttonType">Contenido</button>
+                <button name="tipusImatge" class="buttonType">Imagen</button>
             </div>
             <div class="diapositivas">
                 <?php while ($row = $diapo->fetch()) : ?>
@@ -166,6 +167,10 @@ if (isset($_GET["id_diapo"])) {
             window.location.href = "editarDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
             
         });
+        document.querySelector("button[name='tipusImatge']").addEventListener("click", function() {
+            window.location.href = "CrearDiapositivesImatge.php?id=<?php echo $id_presentacio; ?>";
+            
+        });
         button.addEventListener('click', function (e) {
             window.location.href = "index.php";
         });
@@ -183,7 +188,7 @@ if (isset($_GET["id_diapo"])) {
             localStorage.setItem('titolDiapo', titolDiapo);
         }
     </script>
-    <script src="Diapositives.js"></script>
+    <script src="controllers/Diapositives.js"></script>
     
 </body>
 </html>
