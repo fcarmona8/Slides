@@ -216,3 +216,26 @@ if (isset($_POST['previsualizar_diapo'])) {
     exit();
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["publicar_presentacion"])) {
+    $id_presentacion = $_POST['id_presentacion'];
+
+    // Verifica si la presentación está publicada
+    $estaba_publicada = $dao->getPublicacionPresentacion($id_presentacion);
+
+    if ($estaba_publicada) {
+        // Estaba publicada, ahora la despublicamos
+        $result = $dao->despublicarPresentacion($id_presentacion);
+    } else {
+        // No estaba publicada, la publicamos
+        $result = $dao->publicarPresentacion($id_presentacion);
+    }
+
+    if ($result && $estaba_publicada) {
+        echo '<div id="message-container" class="mensaje-exito">Presentación despublicada correctamente.</div>';
+    } elseif ($result && !$estaba_publicada){
+        echo '<div id="message-container" class="mensaje-exito">Presentación publicada correctamente.</div>';
+    } else {
+        echo '<div id="message-container" class="mensaje-error">No se pudo completar la operación.</div>';
+    }
+}
+
