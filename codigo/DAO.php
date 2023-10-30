@@ -90,8 +90,8 @@ class DAO{
         return $row['orden'];
     }
     
-    public function setPresentacions($titol, $descripcio){
-        $sql = "INSERT INTO Presentacions (titol, descripcio) VALUES (:titol, :descripcio)";
+    public function setPresentacions($titol, $descripcio, $estil){
+        $sql = "INSERT INTO Presentacions (titol, descripcio, estil) VALUES (:titol, :descripcio, :estil)";
         $statement = ($this->pdo)->prepare($sql);
 
         // $statement->bindValue(':titol', $titol);
@@ -100,7 +100,8 @@ class DAO{
         try {
             $statement->execute([
                 "titol" => $titol,
-                "descripcio" => $descripcio
+                "descripcio" => $descripcio,
+                "estil" => $estil
             ]);
             
         } catch (PDOException $e) {

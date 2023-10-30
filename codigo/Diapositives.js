@@ -31,34 +31,6 @@ const mostrarDiapositivaColumna = () => {
   }
 };
 
-// Funciones Drag and Drop para reordenar las diapositivas
-function dragStart(e) {
-  e.dataTransfer.setData('text/plain', this.textContent);
-  this.classList.add('dragging');
-}
-
-function dragOver(e) {
-  e.preventDefault();
-  
-}
-
-function drop(e) {
-  e.preventDefault();
-  const draggedElement = document.querySelector('.dragging');
-  const indexFrom = Array.from(visualizarDiapo.children).indexOf(draggedElement);
-  const indexTo = Array.from(visualizarDiapo.children).indexOf(this);
-
-  [diapositives[indexFrom], diapositives[indexTo]] = [diapositives[indexTo], diapositives[indexFrom]];
-
-  if (indexFrom < indexTo) {
-    visualizarDiapo.insertBefore(draggedElement, this.nextSibling);
-  } else {
-    visualizarDiapo.insertBefore(draggedElement, this);
-  }
-
-  draggedElement.classList.remove('dragging');
-}
-
 // Función para mostrar el mensaje durante 3 segundos y luego ocultarlo
 function mostrarMensajeExito() {
     var mensajeExito = document.getElementById("mensaje-exito");

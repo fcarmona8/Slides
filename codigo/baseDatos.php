@@ -10,15 +10,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirPresentacio"])) 
     // Obtener los datos del formulario
     $titol = $_POST["titol"];
     $descripcio = $_POST["descripcio"];
+    $estilPresentacio = 'fondoBlanco';
     if ($titol != '' && $descripcio != '') {
         // Insertar los datos en la base de datos y obtener el ID generado
-        $dao->setPresentacions($titol, $descripcio);
+        $dao->setPresentacions($titol, $descripcio, $estilPresentacio);
 
         // Obtener el ID generado automáticamente
         $lastInsertId = $dao->getLastInsertId();
 
         // Redirigir a CrearDiapositives.php con el ID de la presentación como parámetro en la URL
-        header("Location: CrearDiapositives.php?id=" . $lastInsertId . "&mensaje=Presentación creada correctamente");
+        header("Location: CrearDiapositivesTitol.php?id=" . $lastInsertId . "&mensaje=Presentación creada correctamente");
         $_POST['titol'] = null;
         $_POST['descripcio'] = null;
         exit();
@@ -57,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
         $dao->setDiapositives($titol, $contingut, $id_presentacio); 
                 
         // Redirigir de nuevo a CrearDiapositives.php
-        header("Location: CrearDiapositivesTitol.php?id=" . $id_presentacio);
+        header("Location: CrearDiapositivesContingut.php?id=" . $id_presentacio);
      }else {
         
         // Obtener los datos del formulario
@@ -91,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                 $dao->setDiapositives($titol, $contingut,$id_presentacio); 
                     
                 // Redirigir de nuevo a CrearDiapositives.php
-                header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio);         
+                header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);         
             } 
        }else {
             
@@ -101,11 +102,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
             if (isset($_POST['id_diapo'])) {  
                 $editDiapo = $_POST['id_diapo'];
                 $dao->alterDiapositivesTitol($titol, $id_presentacio);
-                if ($contingut != '') {
-                    header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo);
-                }else {
-                    header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo);
-                }
+                
+                header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo);
+                
             }else {
                     // Insertar los datos en la base de datos
                 $dao->setDiapositivesTitol($titol,$id_presentacio); 
@@ -209,7 +208,14 @@ if (isset($_POST['editarPres'])) {
 if (isset($_GET['id'])) {
     $id_presentacio = $_GET['id'];
     $estiloPresentacion = $dao->getEstiloPresentacion($id_presentacio);
-    
+}
 
+if (isset($_POST['previsualizar_diapo'])) {
+    $id_presentacion = $_POST['id_presentacion'];
+
+    $redireccion_url = "previsualitzarDiapositiva.php?id=" . $id_presentacion;
+
+    header("Location: " . $redireccion_url);
+    exit();
 }
 
