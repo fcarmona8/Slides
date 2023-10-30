@@ -1,6 +1,6 @@
 <?php
-include_once("baseDatos.php");
-include_once("DAO.php");
+include_once("controllers/baseDatos.php");
+include_once("controllers/DAO.php");
 
 if (isset($_GET["id"])) {
     $id_presentacio = $_GET["id"];
@@ -173,7 +173,7 @@ if ($editDiapo === false) {
             
         });
         button.addEventListener('click', function (e) {
-            window.location.href = "Home.php";
+            window.location.href = "index.php";
         });
         buttonEstils.addEventListener('click', function (e) {
             e.preventDefault();

@@ -1,6 +1,6 @@
 <?php
-include_once("baseDatos.php");
-include_once("DAO.php");
+include_once("controllers/baseDatos.php");
+include_once("controllers/DAO.php");
 // Obtener el valor de $id_presentacio de PHP
 $id_presentacio = isset($_GET["id"]) ? $_GET["id"] : "";
 

@@ -1,6 +1,6 @@
 <?php
-include_once("baseDatos.php");
-include_once("DAO.php");
+include_once("controllers/baseDatos.php");
+include_once("controllers/DAO.php");
 
 if (isset($_GET["id"])) {
     $id_presentacio = $_GET["id"];
@@ -144,7 +144,7 @@ if (isset($_GET["id_diapo"])) {
             
         });
         button.addEventListener('click', function (e) {
-            window.location.href = "Home.php";
+            window.location.href = "index.php";
         });
 
         function obtenerValores() {
