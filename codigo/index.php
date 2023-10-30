@@ -1,7 +1,7 @@
 <?php
 //index de prova
-include_once("baseDatos.php");
-require_once 'DAO.php';
+include_once("controllers/baseDatos.php");
+require_once 'controllers/DAO.php';
 
 $presen = $dao->getPresentacions();
 
