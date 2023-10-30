@@ -20,6 +20,7 @@ if (isset($_GET["id_diapo"])) {
     if ($id_diapo != '') {
         $titolDiapo = $dao->getTitolDiapoPorID($id_diapo);
         $contingut = $dao->getContingutPorID($id_diapo);
+        $imatge = $dao->getImatgePorID($id_diapo);
 
         $editDiapo = TRUE;
     }
@@ -130,7 +131,7 @@ if ($editDiapo === false) {
             </div>
         </div>
         <div class="right">
-            <form method="POST" id="formDiapoCont">
+            <form method="POST" id="formDiapoCont" enctype="multipart/form-data">
                 <!-- Campo oculto para enviar el ID -->
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
@@ -141,6 +142,9 @@ if ($editDiapo === false) {
                 <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
+                <input type="file" name="imatge" required value='<?php if($editDiapo === TRUE) {
+                    echo $imatge;
+                } ?>'/>
                 <input type="submit" name="anadirEditarDiapositiva" class="boton-crear" <?php if ($editDiapo === TRUE) {
                         echo 'value="Guardar diapositiva"';
                     }else{
@@ -174,7 +178,7 @@ if ($editDiapo === false) {
             
         });
         document.querySelector("button[name='tipusImatge']").addEventListener("click", function() {
-            window.location.href = "editarDiapositivesImatge.php?id=<?php echo $id_presentacio; ?>";
+            window.location.href = "CrearDiapositivesImatge.php?id=<?php echo $id_presentacio; ?>";
             
         });
         button.addEventListener('click', function (e) {
