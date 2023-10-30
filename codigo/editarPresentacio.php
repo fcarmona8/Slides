@@ -33,7 +33,7 @@ if (isset($_GET["id"])) {
                 <span id="titolError" class="error"></span>
                 <input type="text" name="descripcio" class="descripcio" value="<?php echo $desc; ?>" placeholder="Descripción" required></textarea>
                 <span id="descripcioError" class="error"></span>
-                <input type="submit" name="cambiarPresentacion" value="cambiar">   
+                <input type="submit" name="cambiarPresentacion" class="boton-crear" value="cambiar">   
             </form>
         </div>
     </div>

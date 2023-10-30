@@ -456,6 +456,26 @@ tr {
     background-color: #78a691;
 }
 
+.buttonEditPres{
+    background-color: inherit;
+    border: none;
+    border-radius: 15%;
+}
+
+.buttonEditPres:hover{
+    background-color: #78a691;
+}
+
+.eliminarDiapo{
+    background-color: inherit;
+    border: none;
+    border-radius: 15%;
+}
+
+.eliminarDiapo:hover{
+    background-color: #78a691;
+}
+
 textarea {
     font-family: 'Liberation Sans', sans-serif;
     width: 100%;
@@ -723,6 +743,7 @@ a {
 .button-diapo{
     border: none;
     background-color: inherit;
+    padding: 10px;
 }
 
 .button-diapo:hover{
