@@ -166,10 +166,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["eliminarDiapo"])){
     }
 }
 
-if (isset($_POST['eliminar_presentacion'])) {
+if (isset($_POST['form']) && $_POST['form'] === 'eliminar') {
     $id_presentacion = $_POST['id_presentacion'];
     $result = $dao->eliminarPresentacion($id_presentacion);
-
+    
     if ($result) {
         echo '<div id="message-container" class="mensaje-exito">Presentación eliminada correctamente.</div>';
     } else {
