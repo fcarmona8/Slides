@@ -834,3 +834,45 @@ a {
 
 }
 
+
+.confirm-box {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff; /* Fondo blanco */
+    padding: 20px;
+    border: 2px solid #333; /* Borde negro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto; /* Centrar en la pantalla */
+    text-align: center;
+    z-index: 1000;
+}
+
+.confirm-box p {
+    font-size: 18px; /* Tamaño de fuente para el texto */
+    margin: 0;
+    padding: 10px;
+}
+
+#confirmar-eliminar, #cancelar-eliminar {
+    background-color: #d9534f; /* Fondo rojo para el botón Confirmar */
+    color: #fff; /* Texto blanco para el botón Confirmar */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px; /* Espaciado entre botones */
+}
+
+#cancelar-eliminar {
+    background-color: #5bc0de; /* Fondo azul para el botón Cancelar */
+}
+
+#confirmar-eliminar:hover, #cancelar-eliminar:hover {
+    opacity: 0.8; /* Cambiar la opacidad al pasar el cursor sobre los botones */
+}
+

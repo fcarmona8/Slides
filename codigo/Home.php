@@ -31,6 +31,11 @@ $presen = $dao->getPresentacions();
     <h1 class="titolHome">Slides</h1>
     <hr class="line">
     
+    <div id="confirmacion-eliminar" class="confirm-box">
+        <p>¿Estás seguro de que deseas eliminar esta presentación?</p>
+        <button id="confirmar-eliminar">Confirmar</button>
+        <button id="cancelar-eliminar">Cancelar</button>
+    </div>
     <div class="container">
         <a href="CrearPresentacio.php" class="button"><svg class='iconoCrear' xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>.iconoCrear{fill:#ffffff}</style><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg> Crear una nueva presentación</a>
     </div>
@@ -50,6 +55,7 @@ $presen = $dao->getPresentacions();
                                 </form>
                                 <form method="post" class="form-inline" onsubmit="return confirmarEliminacion(this);">
                                     <input type="hidden" name="id_presentacion" value="<?= $row['ID_Presentacio']; ?>">
+                                    <input type="hidden" name="form" value="eliminar">
                                     <button class='buttons' type="submit" name="eliminar_presentacion"><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></button>
                                 </form>
                                 <button class='buttons'><svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 512 512"><path d="M288 448H64V224h64V160H64c-35.3 0-64 28.7-64 64V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V384H288v64zm-64-96H448c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64H224c-35.3 0-64 28.7-64 64V288c0 35.3 28.7 64 64 64z"/></svg></button>
@@ -67,12 +73,25 @@ $presen = $dao->getPresentacions();
     </div>
     <div>    <p class="description">Este sitio web te permite crear y gestionar presentaciones de diapositivas de forma sencilla y eficiente. ¡Comienza a crear tu presentación ahora!</p>
 </div>
-    <script>
+<script>
     function confirmarEliminacion(form) {
-    var result = confirm("¿Estás seguro de que deseas eliminar esta presentación?");
-    return result;
-}
+        document.getElementById('confirmacion-eliminar').style.display = 'block';
+        
+        // Al hacer clic en "Confirmar", el formulario se enviará
+        document.getElementById('confirmar-eliminar').onclick = function() {
+            form.submit();
+        };
+        
+        // Al hacer clic en "Cancelar", se ocultará la caja de confirmación
+        document.getElementById('cancelar-eliminar').onclick = function() {
+            document.getElementById('confirmacion-eliminar').style.display = 'none';
+        };
+        
+        // Evita que el formulario se envíe directamente en este punto
+        return false;
+    }
 </script>
+
 </body>
 
 
