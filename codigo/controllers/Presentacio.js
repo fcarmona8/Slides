@@ -13,7 +13,7 @@ let descripcionPresentacion = '';
 
 
 button.addEventListener('click', function (e) {
-    document.location.href = 'Home.php';
+    document.location.href = 'index.php';
 });
 
 function validateForm() {

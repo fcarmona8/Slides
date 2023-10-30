@@ -134,7 +134,7 @@ if (isset($_GET["id_diapo"])) {
             
         });
         button.addEventListener('click', function (e) {
-            window.location.href = "Home.php";
+            window.location.href = "index.php";
         });
 
         function validateForm() {
