@@ -98,7 +98,7 @@ p{
 }
 
 .buttons {
-    background-color: #DDDDDD;
+    background-color: inherit;
     padding: 5px;
     border-radius: 5px;
     border: 0px;
@@ -898,5 +898,15 @@ a {
 
 #confirmar-eliminar:hover, #cancelar-eliminar:hover {
     opacity: 0.8; /* Cambiar la opacidad al pasar el cursor sobre los botones */
+}
+
+/* Estilos para presentaciones publicadas */
+.publicada {
+    background-color: #C2FFC2; /* Cambia el fondo a verde para presentaciones publicadas */
+}
+
+/* Estilos para presentaciones no publicadas */
+.no-publicada {
+    background-color: #FFC2C2; /* Cambia el fondo a rojo para presentaciones no publicadas */
 }
 
