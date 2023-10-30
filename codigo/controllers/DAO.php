@@ -7,7 +7,7 @@ class DAO{
     }
     // funcio per mostrar totes les presentacions guardades a la base de dades
     public function getPresentacions(){
-        $sql = "SELECT titol, ID_Presentacio FROM Presentacions";
+        $sql = "SELECT titol, ID_Presentacio, publicada FROM Presentacions";
         $statement = ($this->pdo)->query($sql);
 
         $statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -411,4 +411,54 @@ class DAO{
             return null;  
         }
     }
+
+    public function getPublicacionPresentacion($id_presentacion) {
+        $sql = "SELECT publicada FROM Presentacions WHERE ID_Presentacio = :id_presentacion";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([':id_presentacion' => $id_presentacion]);
+    
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+    
+        if ($result) {
+            return $result['publicada'] == true; // Verifica si está publicada
+        } else {
+            return false; // Si no se encuentra, consideramos que no está publicada
+        }
+    }
+
+    public function generarURLUnica() {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $longitud = 10; // Cambia la longitud de la URL según tus necesidades
+        $url_unica = '';
+        for ($i = 0; $i < $longitud; $i++) {
+            $url_unica .= $caracteres[rand(0, strlen($caracteres) - 1)];
+        }
+        return $url_unica;
+    }
+
+    public function publicarPresentacion($id_presentacion) {
+        $url_unica = $this->generarURLUnica(); // Llama a la función dentro de la clase
+        $sql = "UPDATE Presentacions SET publicada = TRUE, url_unica = :url_unica WHERE ID_Presentacio = :id_presentacion";
+        $statement = $this->pdo->prepare($sql);
+    
+        try {
+            $statement->execute([':url_unica' => $url_unica, ':id_presentacion' => $id_presentacion]);
+            return true; // Devuelve la URL única generada
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    
+    public function despublicarPresentacion($id_presentacion) {
+        $sql = "UPDATE Presentacions SET publicada = FALSE, url_unica = NULL WHERE ID_Presentacio = :id_presentacion";
+        $statement = $this->pdo->prepare($sql);
+        
+        try {
+            $statement->execute([':id_presentacion' => $id_presentacion]);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    
 }
