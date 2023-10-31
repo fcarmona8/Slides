@@ -14,11 +14,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($passwordHash && password_verify($contrasena, $passwordHash)) {
         header("Location: vistaPreviaClient.php?id=$id_presentacio");
-        quit();
+        exit();
     } else {
-        
-    }
 
+    }
 }
 ?>
 
