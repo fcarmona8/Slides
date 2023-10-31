@@ -1,6 +1,6 @@
 <?php
-include_once("baseDatos.php");
-include_once("DAO.php");
+include_once("controllers/baseDatos.php");
+include_once("controllers/DAO.php");
 
 $dao = new DAO(Connection::getConnection($config['db']));
 

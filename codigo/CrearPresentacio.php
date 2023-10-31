@@ -1,5 +1,5 @@
 <?php
-include_once("baseDatos.php");
+include_once("controllers/baseDatos.php");
 ?>
 <!DOCTYPE html>
 <html>

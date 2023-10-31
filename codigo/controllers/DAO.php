@@ -79,6 +79,16 @@ class DAO{
         return $row['contingut'];
     }
 
+    public function getImatgePorID($id_diapositiva){
+        $sql = "SELECT imatge FROM Diapositives WHERE ID_Diapositiva = :id_diapo LIMIT 1";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id_diapo' => $id_diapositiva]);
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch();
+        return $row['imatge'];
+    }
+
     public function getLastOrden($id_presentacio){
         $sql = "SELECT orden FROM Diapositives WHERE ID_Presentacio = :id_presentacio ORDER BY orden DESC LIMIT 1";
         $statement = $this->pdo->prepare($sql);
@@ -141,6 +151,29 @@ class DAO{
             echo "Error al guardar datos: " . $e->getMessage();
         }
     }
+    public function setDiapositivesImatge($titol, $contingut,$imatge, $id_presentacio){
+        $sql = "INSERT INTO Diapositives (titol, contingut,imatge, orden, ID_Presentacio) VALUES (:titol, :contingut,:imatge, :orden, :id_presentacio)";
+        $statement = ($this->pdo)->prepare($sql);
+
+        $orden = $this->getLastOrden($id_presentacio);
+        if ($orden === 'NULL') {
+            $orden = 1;
+        }else {
+            $orden = ($this->getLastOrden($id_presentacio))+1;
+        }
+        try {
+            $statement->execute([
+                ":titol" => $titol,
+                ":contingut" => $contingut,
+                ":imatge" => $imatge,
+                ":orden" => $orden,
+                ':id_presentacio' => $id_presentacio
+            ]);
+            
+        } catch (PDOException $e) {
+            echo "Error al guardar datos: " . $e->getMessage();
+        }
+    }
 
     public function setDiapositives($titol, $contingut, $id_presentacio){
         $sql = "INSERT INTO Diapositives (titol, contingut, orden, ID_Presentacio) VALUES (:titol, :contingut, :orden, :id_presentacio)";
@@ -179,6 +212,22 @@ class DAO{
                 ":titol" => $titol,
                 ":orden" => $orden,
                 ':id_presentacio' => $id_presentacio
+            ]);
+            
+        } catch (PDOException $e) {
+            echo "Error al guardar datos: " . $e->getMessage();
+        }
+    }
+    public function alterDiapositivesImatge($titol, $contingut, $imatge, $id_diapositiva){
+        $sql = "UPDATE  Diapositives SET titol = :titol, contingut = :contingut, imatge = :imatge WHERE ID_Diapositiva = :id_diapo";
+        $statement = ($this->pdo)->prepare($sql);
+
+        try {
+            $statement->execute([
+                "titol" => $titol,
+                "contingut" => $contingut,
+                "imatge" => $imatge,                
+                ':id_diapo' => $id_diapositiva
             ]);
             
         } catch (PDOException $e) {

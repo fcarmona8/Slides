@@ -18,11 +18,11 @@ guardar las presentaciones correctamente y que el diseño nos parezca aceptable 
 Al empezar el sprint 2 actualizamos el trello, hicimos los sketchs de la pagina editar para luego comenzar a hacer el html y crear la opcion de eliminar. Comenzamos con la pagina editar
 y realizamos la opcion de poder cambiar el nombre y la descripción de la presentación, y realizar la funcion de cambiar la posicion del orden(aunque aun esa funcion no se guarda en la bd). +
 
-Semana 2
-Se completo la pantalla editar, cambiamos el diseño del reordenamiento, agregamos la funcion de elimnar y modificar las diapositivas. Empezamos a realizar los mockup de 
+Semana 2 (23-27)
+Se completo la pantalla editar, cambiamos el diseño del reordenamiento, agregamos la funcion de eliminar y modificar las diapositivas. Empezamos a realizar los mockup de 
 las previsualizaciones, y los archivos php y js para que estos realicen la funcion. Creamos también los estiolos de la previsualización y añadimos la funcion para que esta 
 se guarde en la bd y se muestre cada vez que el usuario le da a previsualizar. +
-También realizamos las 
+Comenzamos ha configurar la maquina isard en la maquina de Camilo (aun falta poder entrar correctamente). +
 
 === Diseño de BD
 Link hacia el digrama relacional de la base de dades:  https://drive.google.com/file/d/1HUVLYU9hPKxmyfT6V3yxM_MYT2UfzMvv/view?usp=sharing
@@ -96,7 +96,7 @@ Link del resumen esquemático de la guía de estilos: https://www.figma.com/file
 instalación del servidor: +
 - php
 - mysql 
--GIT
+- GIT
 Luego de instalar correctamente los dos podra configurar la ip, el nombre de la bd, el usuario y password en codigo/config.php. +
 Para obtener la última version disponible de Slides abra el CMD o terminal y ubiquese en la carpeta del repositorio GIT 
  slidescarmonagalindojumelle, desde ahí ingrese: + 
