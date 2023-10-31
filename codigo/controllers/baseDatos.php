@@ -164,8 +164,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["getInfoDiapo"])){
     $id = $_POST['id'];
     $id_diapo = $_POST['id_diapo'];
     $cont = $dao->getContingutPorID($id_diapo);
+    $imatge = $dao->getImatgePorID($id_diapo);
     if($cont != NULL ){
-        header("Location: CrearDiapositivesContingut.php?id=".$id."&id_diapo=".$id_diapo);
+        if ($imatge!= NULL) {
+            header("Location: CrearDiapositivesImatge.php?id=".$id."&id_diapo=".$id_diapo);
+        }else{
+            header("Location: CrearDiapositivesContingut.php?id=".$id."&id_diapo=".$id_diapo);
+        }
     }else {
         header("Location: CrearDiapositivesTitol.php?id=".$id."&id_diapo=".$id_diapo);
     }

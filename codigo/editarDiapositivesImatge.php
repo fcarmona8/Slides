@@ -146,9 +146,12 @@ if ($editDiapo === false) {
                 <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
-                <input type="file" name="imatge" required value='<?php if($editDiapo === TRUE) {
-                    echo $imatge;
-                } ?>'/>
+                <?php if ($editDiapo === TRUE) {
+                        echo '<input type="file" name="imatge" value=" '. $imatge .' ">';
+                        echo '<p> '.$imatge.'</p>';
+                   }else {
+                    echo '<input input type="file" name="imatge" required>';
+                   } ?> 
                 <input type="submit" name="anadirEditarDiapositiva" onsubmit=" " class="boton-crear" <?php if ($editDiapo === TRUE) {
                         echo 'value="Guardar diapositiva"';
                     }else{
