@@ -1,6 +1,6 @@
 <?php
-include_once("baseDatos.php");
-include_once("DAO.php");
+include_once("controllers/baseDatos.php");
+include_once("controllers/DAO.php");
 
 if (isset($_GET["url"])) {
     $url_unica = $_GET["url"];
@@ -93,7 +93,7 @@ if (isset($_GET["id_diapo"])) {
     <script>
         const button = document.querySelector('.volver');
         button.addEventListener('click', function (e) {
-            window.location.href = "Home.php";
+            window.location.href = "index.php";
         });
 
         function obtenerValores() {
