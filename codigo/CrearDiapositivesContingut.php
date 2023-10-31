@@ -117,8 +117,9 @@ if (isset($_GET["id_diapo"])) {
                    } ?>
                 
                    
-                   <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">
-            </form>
+                <?php if($infoDiapo != TRUE){
+                        echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
+                   }?>            </form>
             <div class='buttons-diapositiva'>
                 <!-- Boton previsualizar diapositiva -->
                 <form method="post" action="previsualitzarDiapositiva.php">

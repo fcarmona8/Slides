@@ -14,12 +14,14 @@ $infoDiapo = FALSE;
 $id_diapo = '';
 $titolDiapo = "";
 $contingut = "";
+$imatge = "";
 
 if (isset($_GET["id_diapo"])) {
     $id_diapo = $_GET["id_diapo"];
     if ($id_diapo != '') {
         $titolDiapo = $dao->getTitolDiapoPorID($id_diapo);
         $contingut = $dao->getContingutPorID($id_diapo);
+        $imatge = $dao->getImatgePorID($id_diapo);
 
         $infoDiapo = TRUE;
     }
@@ -119,9 +121,18 @@ if (isset($_GET["id_diapo"])) {
                    }else {
                     echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" required ></textarea>';
                    } ?>
-                   <input type="file" name="imatge" required />                
+                    
+                    <?php if ($infoDiapo === TRUE) {
+                        echo '<img src= " '.$imatge.' "  alt= "Imatge" width=20 heigth=20/>';
+                   }else {
+                    echo '<input input type="file" name="imatge" required>';
+                   } ?>    
                    
-                   <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">
+                   <?php if($infoDiapo != TRUE){
+                        echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
+                   }?>
+                   
+                  
             </form>
             <div class='buttons-diapositiva'>
                 <!-- Boton previsualizar diapositiva -->

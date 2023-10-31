@@ -111,7 +111,9 @@ if (isset($_GET["id_diapo"])) {
                    }else {
                     echo '<input type="text" name="titol" id="titol" class="titolDiapo" placeholder="Titulo" maxlength="25"required/>';
                    } ?>                
-                   <input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">
+                   <?php if($infoDiapo != TRUE){
+                        echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
+                   }?>
             </form>
             <div class='buttons-diapositiva'>
                 <!-- Boton previsualizar diapositiva -->
