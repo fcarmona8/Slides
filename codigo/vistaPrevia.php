@@ -85,6 +85,8 @@ if (isset($_GET["id"])) {
                     tituloElement.textContent = diapositiva.titol;
                     contenidoElement.textContent = diapositiva.contingut;
                     contenidoElement.style.display = 'flex';
+                    contenidoElement.style.width = '500px';
+                    contenidoElement.style.padding = '10px';
                     imatgeElement.src = diapositiva.imatge;
                     imatgeElement.style.display = 'flex';
                 }else{
