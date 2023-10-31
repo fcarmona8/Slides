@@ -6,6 +6,7 @@ if (isset($_GET["id"])) {
     $id_presentacio = $_GET["id"];
     $titol = $dao->getTitolPorID($id_presentacio);
     $diapo = $dao->getDiapositives($id_presentacio);
+    $url_unica = $dao->getURLPorID($id_presentacio);
 } else {
     $titol = "Título no disponible";
 }
@@ -46,6 +47,7 @@ if ($editDiapo === false) {
 <head>
     <title>Pantalla Crear Diapositivas Contingut</title>
     <link rel="stylesheet" href="Styles.css">
+    <div id="message-container" class="mensaje-exito" style="display: none;"></div>
 </head>
 <body id="crearDiapositivasContingut">
     <div class="up">
@@ -83,6 +85,8 @@ if ($editDiapo === false) {
                         <button class='buttons' type="submit" name="publicar_presentacion">
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M352 224H305.5c-45 0-81.5 36.5-81.5 81.5c0 22.3 10.3 34.3 19.2 40.5c6.8 4.7 12.8 12 12.8 20.3c0 9.8-8 17.8-17.8 17.8h-2.5c-2.4 0-4.8-.4-7.1-1.4C210.8 374.8 128 333.4 128 240c0-79.5 64.5-144 144-144h80V34.7C352 15.5 367.5 0 386.7 0c8.6 0 16.8 3.2 23.2 8.9L548.1 133.3c7.6 6.8 11.9 16.5 11.9 26.7s-4.3 19.9-11.9 26.7l-139 125.1c-5.9 5.3-13.5 8.2-21.4 8.2H384c-17.7 0-32-14.3-32-32V224zM80 96c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16H400c8.8 0 16-7.2 16-16V384c0-17.7 14.3-32 32-32s32 14.3 32 32v48c0 44.2-35.8 80-80 80H80c-44.2 0-80-35.8-80-80V112C0 67.8 35.8 32 80 32h48c17.7 0 32 14.3 32 32s-14.3 32-32 32H80z"/></svg></button>
                     </form>
+                    <!-- Boton para copiar url de la presentacion -->
+                    <button class='button-copy' data-url="<?= $url_unica; ?>" onclick="copiarURL(this)"><svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/></svg></button>
                 </div>
                 
                 
@@ -202,6 +206,50 @@ if ($editDiapo === false) {
         localStorage.setItem('titolDiapo', titolDiapo);
         localStorage.setItem('contingut', contingut);
         }
+
+        function copiarURL(buttoncopy) {
+        var url = buttoncopy.getAttribute('data-url');
+
+        // Verifica si el URL es nulo
+        if (url == "") {
+            // Crear un mensaje de error y mostrarlo en el messageContainer
+            var messageContainer = document.getElementById('message-container');
+            messageContainer.textContent = 'No se puede copiar la URL ya que la presentación no esta publicada.';
+            messageContainer.style.display = 'block';
+
+            // Ocultar el mensaje después de 3 segundos (3000 milisegundos)
+            setTimeout(function() {
+                messageContainer.style.display = 'none';
+            }, 5000);
+
+            return; // Salir de la función si el URL es nulo
+        }
+
+        const urlCompleta = `/codigo/vistaPreviaClient.php?url=${url}`;
+
+        const input = document.createElement('input');
+        input.style.position = 'fixed';
+        input.style.opacity = 0;
+
+        input.value = urlCompleta;
+
+        document.body.appendChild(input);
+
+        input.select();
+        document.execCommand('copy');
+
+        document.body.removeChild(input);
+
+        // Crear un mensaje de éxito y mostrarlo en el messageContainer
+        var messageContainer = document.getElementById('message-container');
+        messageContainer.textContent = 'URL copiada correctamente';
+        messageContainer.style.display = 'block';
+
+        // Ocultar el mensaje después de 3 segundos (3000 milisegundos)
+        setTimeout(function() {
+            messageContainer.style.display = 'none';
+        }, 3000);
+    }
     </script>
     <script src="controllers/Diapositives.js"></script>
 </body>
