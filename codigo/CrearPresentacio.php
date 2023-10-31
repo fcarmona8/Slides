@@ -29,6 +29,6 @@ include_once("controllers/baseDatos.php");
             </form>
         </div>
     </div>
-    <script src="Presentacio.js"></script>
+    <script src="controllers/Presentacio.js"></script>
 </body>
 </html>
