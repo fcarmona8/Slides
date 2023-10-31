@@ -55,6 +55,20 @@ class DAO{
         }
     }
 
+    public function getURLPorID($id_presentacio) {
+        $sql = "SELECT url_unica FROM Presentacions WHERE ID_Presentacio = :id_presentacio";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([':id_presentacio' => $id_presentacio]);
+    
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result['url_unica'];
+        } else {
+            return "URL no encontrada";
+        }
+    }
+
     public function getLastInsertId() {
         return $this->pdo->lastInsertId();
     }
