@@ -24,7 +24,7 @@ if (isset($_GET["id"])) {
     <div class="titulo">
     <a href="<?php
     if ($from === 'Home') {
-        echo 'Home.php';
+        echo 'index.php';
     } elseif ($from === 'Editar') {
         echo 'editarDiapositivesTitol.php?id=' . $id_presentacio;
     } elseif ($from === 'Vista') {
