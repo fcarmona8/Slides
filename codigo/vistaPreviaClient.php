@@ -63,8 +63,6 @@ if (isset($_GET["id_diapo"])) {
                     </p>
                 </div>
             </div>
-            
-            
         </div>
     </div>
 
