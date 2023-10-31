@@ -6,6 +6,9 @@ const presentacionGuardada = document.querySelector('.presentacion-guardada');
 const tituloGuardado = document.getElementById('titulo-guardado');
 const añadir = document.querySelector('.añadir');
 const descripcionGuardada = document.getElementById('descripcion-guardada');
+const passwordInput = document.getElementById('password');
+const toggleButton = document.getElementById('togglePassword');
+const toggleButtonOpen = document.getElementById('togglePasswordOpen');
 
 let tituloPresentacion = '';
 let descripcionPresentacion = '';
@@ -35,3 +38,20 @@ function validateForm() {
     
     return isValid;
 }
+
+
+toggleButton.addEventListener('click', function () {
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleButton.style.display = 'none';
+        toggleButtonOpen.style.display = 'block';
+    }
+})
+
+toggleButtonOpen.addEventListener('click', function () {
+    if (passwordInput.type === 'text') {
+        passwordInput.type = 'password';
+        toggleButton.style.display = 'block';
+        toggleButtonOpen.style.display = 'none';
+    }
+})

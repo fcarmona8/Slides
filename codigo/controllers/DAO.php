@@ -114,8 +114,8 @@ class DAO{
         return $row['orden'];
     }
     
-    public function setPresentacions($titol, $descripcio, $estil){
-        $sql = "INSERT INTO Presentacions (titol, descripcio, estil) VALUES (:titol, :descripcio, :estil)";
+    public function setPresentacions($titol, $descripcio, $estil, $pin){
+        $sql = "INSERT INTO Presentacions (titol, descripcio, estil, pin) VALUES (:titol, :descripcio, :estil, :pin)";
         $statement = ($this->pdo)->prepare($sql);
 
         // $statement->bindValue(':titol', $titol);
@@ -125,7 +125,8 @@ class DAO{
             $statement->execute([
                 "titol" => $titol,
                 "descripcio" => $descripcio,
-                "estil" => $estil
+                "estil" => $estil,
+                "pin" => $pin
             ]);
             
         } catch (PDOException $e) {
@@ -473,6 +474,20 @@ class DAO{
         } catch (PDOException $e) {
             return false;
         }
+    }
+
+    public function getHashContraseña($id_presentacio) {
+
+        $sql = "SELECT pin FROM Presentacions WHERE ID_Presentacio = :id_presentacio";
+        $stmt = $this->pdo->prepare($sql);
+
+        try {
+            $stmt->execute([':id_presentacion' => $id_presentacion]);
+        } catch (PDOException $e) {
+            echo "Error al obtener el pin: " . $e->getMessage();
+        }
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $resultado ? $resultado['pin'] : false;
     }
     
 }
