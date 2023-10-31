@@ -941,6 +941,29 @@ a {
     text-align: center;
 }
 
+.passwordFieldContainer {
+    position: relative;
+    display: flex;
+    margin-top: 10px;
+    width: 70%;
+    max-width: 300px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.passwordFieldContainer input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    
+}
+
+
+
 .eye-icon{
     font-size: 1.2em;
     position: absolute;
@@ -962,3 +985,35 @@ a {
     display: none;
     margin-right: -3px;
 }
+
+.verificarPinContainer{
+    background-color: white;
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    padding: 30px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 12px;
+    
+}
+
+.verificarPinContainer h2{
+    text-align: center;
+    font-size: 38px;
+}
+
+.verificarPinForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.bodyVerificarPin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
