@@ -490,16 +490,17 @@ class DAO{
         }
     }
 
-    public function getHashContraseña($id_presentacio) {
-
-        $sql = "SELECT pin FROM Presentacions WHERE ID_Presentacio = :id_presentacio";
+    public function getHashContrasena($id_presentacion) {
+        $sql = "SELECT pin FROM Presentacions WHERE ID_Presentacio = :id_presentacion";
         $stmt = $this->pdo->prepare($sql);
-
+    
         try {
-            $stmt->execute([':id_presentacion' => $id_presentacion]);
+            $stmt->bindParam(':id_presentacion', $id_presentacion, PDO::PARAM_STR);
+            $stmt->execute();
         } catch (PDOException $e) {
-            echo "Error al obtener el pin: " . $e->getMessage();
+            throw new Exception("Error al obtener el pin: " . $e->getMessage());
         }
+    
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
         return $resultado ? $resultado['pin'] : false;
     }

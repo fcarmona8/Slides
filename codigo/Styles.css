@@ -1017,3 +1017,40 @@ a {
     margin: 0;
 }
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+.tooltip .tiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: rgb(40, 40, 40);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    border-radius: 7px;
+    padding: 10px 6px;
+    position: absolute;
+    font-size: 14px;
+    z-index: 1;
+    box-shadow: 5px 5px 10px rgba(0.5, 0.5, 0.5, 0.7);
+}
+.tooltip .tiptext::after {
+    content: "";
+    position: absolute;
+    border-width: 10px;
+    border-style: solid;
+}
+.tooltip:hover .tiptext {
+    visibility: visible;
+}
+.tooltip.bottom .tiptext{
+    margin-left: -60px;
+    top: 150%;
+    left: 30%;
+}
+.tooltip.bottom .tiptext::after{
+    margin-left: -10px;
+    bottom: 100%;
+    left: 50%;
+    border-color: transparent transparent #2E2E2E transparent;
+}

@@ -7,6 +7,11 @@ if (isset($_GET["url"])) {
     $id_presentacio = $dao->getIdPorURL($url_unica);
     $titol = $dao->getTitolPorID($id_presentacio);
     $diapo = $dao->getDiapositives($id_presentacio);
+    $pin_presentacion = $dao->getHashContrasena($id_presentacio);
+    if ($pin_presentacion !== null) {
+        header("Location: validaPassword.php?id=$id_presentacio");
+        exit();
+    }
 } else if(isset($_GET["id"])){
     $id_presentacio = $_GET["id"];
     $titol = $dao->getTitolPorID($id_presentacio);
@@ -102,7 +107,7 @@ if (isset($_GET["id_diapo"])) {
             localStorage.setItem('titolDiapo', titolDiapo);
         }
     </script>
-    <script src="Diapositives.js"></script>
+    <script src="controllers/Diapositives.js"></script>
     
 </body>
 </html>
