@@ -130,6 +130,10 @@ if ($editDiapo === false) {
                 <?php endwhile ?>  
             </div>
         </div>
+        <div id="confirmacion-eliminar" class="confirm-box">
+            <p>Este archivo pesa más que 2MB. Elija otro porfavor.</p>
+            <button id="confirmar-eliminar">Confirmar</button>
+         </div>
         <div class="right">
             <form method="POST" id="formDiapoCont" enctype="multipart/form-data">
                 <!-- Campo oculto para enviar el ID -->
@@ -145,7 +149,7 @@ if ($editDiapo === false) {
                 <input type="file" name="imatge" required value='<?php if($editDiapo === TRUE) {
                     echo $imatge;
                 } ?>'/>
-                <input type="submit" name="anadirEditarDiapositiva" class="boton-crear" <?php if ($editDiapo === TRUE) {
+                <input type="submit" name="anadirEditarDiapositiva" onsubmit=" " class="boton-crear" <?php if ($editDiapo === TRUE) {
                         echo 'value="Guardar diapositiva"';
                     }else{
                         echo 'value="Añadir diapositiva"';
@@ -178,7 +182,7 @@ if ($editDiapo === false) {
             
         });
         document.querySelector("button[name='tipusImatge']").addEventListener("click", function() {
-            window.location.href = "CrearDiapositivesImatge.php?id=<?php echo $id_presentacio; ?>";
+            window.location.href = "editarDiapositivesImatge.php?id=<?php echo $id_presentacio; ?>";
             
         });
         button.addEventListener('click', function (e) {
@@ -198,7 +202,22 @@ if ($editDiapo === false) {
         // Almacena los valores en localStorage para que estén disponibles en la nueva página
         localStorage.setItem('titolDiapo', titolDiapo);
         localStorage.setItem('contingut', contingut);
+    }
+
+    
+    function confirmarEliminacion() {
+        document.getElementById('confirmacion-eliminar').style.display = 'block';
+        
+        document.getElementById('confirmar-eliminar').onclick = function() {
+            document.getElementById('confirmacion-eliminar').style.display= 'none';
+        };
+        
         }
+
+    document.querySelector("input[name='imatge']").addEventListener('change', function(){
+        const size = this.files[0].size /1024 /1024;
+        if(size >= 2){return confirmarEliminacion();};
+    })
     </script>
     <script src="controllers/Diapositives.js"></script>
 </body>
