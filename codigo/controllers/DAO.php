@@ -406,7 +406,7 @@ class DAO{
     }
 
     public function getDiapositivesVista($id_presentacio) {
-        $sql = "SELECT titol, contingut FROM Diapositives WHERE ID_Presentacio = :id_presentacio" ;
+        $sql = "SELECT titol, contingut, imatge FROM Diapositives WHERE ID_Presentacio = :id_presentacio" ;
         $statement = $this->pdo->prepare($sql);
         $statement->execute([':id_presentacio' => $id_presentacio]);
         
