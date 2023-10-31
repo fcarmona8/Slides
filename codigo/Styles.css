@@ -1054,3 +1054,19 @@ a {
     left: 50%;
     border-color: transparent transparent #2E2E2E transparent;
 }
+
+.error-message-password {
+    margin-top: 5px;
+    color: red;
+
+}
+
+.iconoIncorrecte {
+    fill: red;
+    margin-right: 8px;
+    vertical-align: -2px;
+}
+
+.errorPin {
+    border: 2px solid red !important;
+}
