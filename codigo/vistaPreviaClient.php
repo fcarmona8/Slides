@@ -1,12 +1,17 @@
 <?php
-include_once("baseDatos.php");
-include_once("DAO.php");
+include_once("controllers/baseDatos.php");
+include_once("controllers/DAO.php");
 
 if (isset($_GET["url"])) {
     $url_unica = $_GET["url"];
     $id_presentacio = $dao->getIdPorURL($url_unica);
     $titol = $dao->getTitolPorID($id_presentacio);
     $diapo = $dao->getDiapositives($id_presentacio);
+    $pin_presentacion = $dao->getHashContrasena($id_presentacio);
+    if ($pin_presentacion !== null) {
+        header("Location: validaPassword.php?id=$id_presentacio");
+        exit();
+    }
 } else if(isset($_GET["id"])){
     $id_presentacio = $_GET["id"];
     $titol = $dao->getTitolPorID($id_presentacio);
@@ -93,7 +98,7 @@ if (isset($_GET["id_diapo"])) {
     <script>
         const button = document.querySelector('.volver');
         button.addEventListener('click', function (e) {
-            window.location.href = "Home.php";
+            window.location.href = "index.php";
         });
 
         function obtenerValores() {
@@ -102,7 +107,7 @@ if (isset($_GET["id_diapo"])) {
             localStorage.setItem('titolDiapo', titolDiapo);
         }
     </script>
-    <script src="Diapositives.js"></script>
+    <script src="controllers/Diapositives.js"></script>
     
 </body>
 </html>

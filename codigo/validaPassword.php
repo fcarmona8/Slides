@@ -2,13 +2,21 @@
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
+if (isset($_GET["id"])){
+    $id_presentacion = $_GET["id"];
+} else {
+    $titol = "Error, no se encuentra la presentacion";
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $contrasena = $_POST["contrasena"];
-    $passwordHash = $dao->getHashContraseña();
+    $contrasena = $_POST["password"];
+    $passwordHash = $dao->getHashContrasena($id_presentacion);
 
     if ($passwordHash && password_verify($contrasena, $passwordHash)) {
-        var_dump('valida');
+        header("Location: vistaPreviaClient.php?id=$id_presentacio");
+        quit();
     } else {
+        
     }
 
 }
