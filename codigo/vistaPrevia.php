@@ -40,7 +40,10 @@ if (isset($_GET["id"])) {
     <?php else: ?>
     <div class="diapositiva-preview-<?php echo $estiloPresentacion;?>">
         <h1></h1>
-        <p></p>
+        <div class="contenido">
+            <p></p>
+            <img id="imagen" src="" style="width: 250px; height: 250px; margin-rigth: -100px; ">
+        </div>
     </div>
     <div class="controles">
         <button id="anterior"><svg class="rotate" xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></button>
@@ -61,17 +64,37 @@ if (isset($_GET["id"])) {
             var diapositiva = diapositivas[slideIndex];
             document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
             document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = diapositiva.contingut;
+            
+            document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> img').src = diapositiva.imatge;
             var tituloElement = document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1');
             var contenidoElement = document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p');
-
+            var imatgeElement = document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> img');
+            var img = document.getElementById("imagen");
+            const cont = document.querySelector('.contenido');
+            const file = /^file/;
             if (diapositiva.contingut === null) {
                 // Si el contenido es nulo, ocultar el contenido
                 contenidoElement.style.display = 'none';
+                imatgeElement.style.display='none';
             } else {
-                // Si el contenido no es nulo, mostrar tanto el título como el contenido
-                tituloElement.textContent = diapositiva.titol;
-                contenidoElement.textContent = diapositiva.contingut;
-                contenidoElement.style.display = 'flex';
+                console.log(img.src.match(file))
+                if (img.src.match(file)) {
+                    cont.style.display = 'flex';
+                    cont.style.flexDirection= 'row';
+                    cont.style.justifyContent= 'space-around';
+                    tituloElement.textContent = diapositiva.titol;
+                    contenidoElement.textContent = diapositiva.contingut;
+                    contenidoElement.style.display = 'flex';
+                    imatgeElement.src = diapositiva.imatge;
+                    imatgeElement.style.display = 'flex';
+                }else{
+                    imatgeElement.style.display = 'none';
+                    // Si el contenido no es nulo, mostrar tanto el título como el contenido
+                    tituloElement.textContent = diapositiva.titol;
+                    contenidoElement.textContent = diapositiva.contingut;
+                    contenidoElement.style.display = 'flex';
+                }
+                
             }
 
             currentSlide = slideIndex;
