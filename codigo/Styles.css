@@ -531,6 +531,7 @@ textarea {
     /* Cambia el cursor al pasar sobre el botón */
     border-radius: 5px;
     /* Bordes redondeados */
+    margin-top: 40px;
 }
 
 /* Estilos para el botón de "Crear Presentación" al pasar el cursor */
@@ -923,3 +924,41 @@ a {
     background-color: #FFC2C2; /* Cambia el fondo a rojo para presentaciones no publicadas */
 }
 
+.passwordField {
+    position: relative;
+    display: flex;
+    margin-top: 10px;
+    width: 50%;
+    max-width: 300px;
+}
+
+.passwordField input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+.eye-icon{
+    font-size: 1.2em;
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    fill: #737373;
+}
+
+.eye-iconOpen {
+    font-size: 1.2em;
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    fill: #737373;
+    display: none;
+    margin-right: -3px;
+}

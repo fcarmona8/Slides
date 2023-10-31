@@ -11,9 +11,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirPresentacio"])) 
     $titol = $_POST["titol"];
     $descripcio = $_POST["descripcio"];
     $estilPresentacio = 'fondoBlanco';
+    $password = $_POST["password"];
+
+    if ($password === "") {
+        $password = null;
+    } else {
+        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+    }
+
     if ($titol != '' && $descripcio != '') {
         // Insertar los datos en la base de datos y obtener el ID generado
-        $dao->setPresentacions($titol, $descripcio, $estilPresentacio);
+        $dao->setPresentacions($titol, $descripcio, $estilPresentacio, $hashPassword);
 
         // Obtener el ID generado automáticamente
         $lastInsertId = $dao->getLastInsertId();
