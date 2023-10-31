@@ -104,7 +104,20 @@ p{
     border: 0px;
 }
 
+
+
 .buttons:hover {
+    background-color: #a0a0a0;
+}
+
+.button-copy{
+    background-color: inherit;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0px;
+}
+
+.button-copy:hover {
     background-color: #a0a0a0;
 }
 

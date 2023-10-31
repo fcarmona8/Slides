@@ -7,7 +7,7 @@ class DAO{
     }
     // funcio per mostrar totes les presentacions guardades a la base de dades
     public function getPresentacions(){
-        $sql = "SELECT titol, ID_Presentacio, publicada FROM Presentacions";
+        $sql = "SELECT titol, ID_Presentacio, publicada, url_unica FROM Presentacions";
         $statement = ($this->pdo)->query($sql);
 
         $statement->setFetchMode(PDO::FETCH_ASSOC);
@@ -41,6 +41,20 @@ class DAO{
         }
     }
     
+    public function getIdPorURL($url_unica) {
+        $sql = "SELECT ID_Presentacio FROM Presentacions WHERE url_unica = :url_unica";
+        $statement = $this->pdo->prepare($sql);
+        $statement->execute([':url_unica' => $url_unica]);
+    
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            return $result['ID_Presentacio'];
+        } else {
+            return "Id no encontrado ";
+        }
+    }
+
     public function getLastInsertId() {
         return $this->pdo->lastInsertId();
     }

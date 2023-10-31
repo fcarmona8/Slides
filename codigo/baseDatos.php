@@ -136,6 +136,17 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["getInfoDiapo"])){
     }
 }
 
+if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["getInfoDiapoVista"])){
+    $id = $_POST['id'];
+    $id_diapo = $_POST['id_diapo'];
+    $cont = $dao->getContingutPorID($id_diapo);
+    if($cont != NULL ){
+        header("Location: vistaPreviaClientContingut.php?id=".$id."&id_diapo=".$id_diapo);
+    }else {
+        header("Location: vistaPreviaClientTitol.php?id=".$id."&id_diapo=".$id_diapo);
+    }
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["ordenDiapoUp"])) {
      $id_diapo = $_POST['id_diapo'];
      try {
