@@ -168,7 +168,7 @@ if (isset($_GET["id_diapo"])) {
             
         });
         document.querySelector("button[name='tipusImatge']").addEventListener("click", function() {
-            window.location.href = "CrearDiapositivesImatge.php?id=<?php echo $id_presentacio; ?>";
+            window.location.href = "editarDiapositivesImatge.php?id=<?php echo $id_presentacio; ?>";
             
         });
         button.addEventListener('click', function (e) {

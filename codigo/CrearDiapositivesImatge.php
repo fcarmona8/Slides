@@ -101,6 +101,10 @@ if (isset($_GET["id_diapo"])) {
                 <?php endwhile ?>  
             </div>
         </div>
+        <div id="confirmacion-eliminar" class="confirm-box">
+            <p>Este archivo pesa más que 2MB. Elija otro porfavor.</p>
+            <button id="confirmar-eliminar">Confirmar</button>
+         </div>
         <div class="right">
             <form method="POST" enctype="multipart/form-data"id="formDiapoCont" action=" <?= $_SERVER['PHP_SELF'] ?>">
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
@@ -173,6 +177,21 @@ if (isset($_GET["id_diapo"])) {
 
         // Agrega un evento para borrar los valores cuando se cargue la página
         window.addEventListener('load', clearLocalStorage);
+        function confirmarEliminacion(file) {
+        document.getElementById('confirmacion-eliminar').style.display = 'block';
+        
+        document.getElementById('confirmar-eliminar').onclick = function() {
+            document.getElementById('confirmacion-eliminar').style.display= 'none';
+            file.value = ''
+        };
+        
+        }
+        const fileInput = document.querySelector("input[name='imatge']");
+    fileInput.addEventListener('change', function(){
+        const size = this.files[0].size /1024 /1024;
+        if(size >= 2){return confirmarEliminacion(fileInput);};
+    })
+    
     </script>
     <script src="controllers/Diapositives.js"></script>
 </body>
