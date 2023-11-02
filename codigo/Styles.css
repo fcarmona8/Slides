@@ -110,6 +110,32 @@ p{
     background-color: #ffffff;
 }
 
+.buttons-header {
+    background-color: inherit;
+    padding: 5px 7px;
+    border-radius: 5px;
+    border: 0px;
+    width: 155px;
+    display: inline-block;
+    text-align: center;
+}
+
+.buttons-header:hover {
+    background-color: white;
+}
+.buttons-header svg{
+    vertical-align: -2px;
+    margin-right: 5px;
+}
+
+div.vertical-line{
+    width: 1px; /* Line width */
+    background-color: black; /* Line color */
+    height: 100%; /* Override in-line if you want specific height. */
+    display: flex;
+    margin: 0px 3px;
+  }
+
 .button-copy{
     background-color: inherit;
     padding: 5px;
@@ -462,21 +488,21 @@ tr {
 .buttonEstil{
     background-color: inherit;
     border: none;
-    border-radius: 15%;
+    border-radius: 5px;
 }
 
 .buttonEstil:hover{
-    background-color: #78a691;
+    background-color: white;
 }
 
 .buttonEditPres{
     background-color: inherit;
     border: none;
-    border-radius: 15%;
+    border-radius: 5px;
 }
 
 .buttonEditPres:hover{
-    background-color: #78a691;
+    background-color: white;
 }
 
 .eliminarDiapo{
@@ -556,8 +582,11 @@ textarea {
 
 .containerSeleccionarEstilos{
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
-.containerSeleccionarEstilos h1 {
+.TituloSeleccionarEstilos h1 {
     text-align: center;
     margin-bottom: 50px;
     font-size: 42px;
@@ -817,6 +846,10 @@ a {
     background-color: #96C5B0;
 }
 
+.tituloSeleccionarEstilos {
+    text-align: center;
+}
+
 .diapositivesExempleContainer {
     display: flex;
     align-items: center;
@@ -845,13 +878,7 @@ a {
 .diapositivaExemple2Contingut {
     background-color: rgb(30, 30, 30);
     color: white;
-}
-
-.diapositivaExemple2Titol,
-.diapositivaExemple2Contingut,
-.diapositivaExemple1Titol,
-.diapositivaExemple1Contingut {
-    margin-top: 35px;
+    border-radius: 8px;
 }
 
 .diapositivaExemple1Contingut,
@@ -869,6 +896,8 @@ a {
 .diapositivaExemple1Titol,
 .diapositivaExemple2Titol {
     text-align: center;
+    margin-top: 20px;
+    padding-top: 30px;
 
 }
 
@@ -1031,7 +1060,7 @@ a {
     padding: 10px 6px;
     position: absolute;
     font-size: 14px;
-    z-index: 1;
+    z-index: 999;
     box-shadow: 5px 5px 10px rgba(0.5, 0.5, 0.5, 0.7);
 }
 .tooltip .tiptext::after {

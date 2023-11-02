@@ -184,7 +184,7 @@ if ($editDiapo === false) {
     
     <script>
         const button = document.querySelector('.volver');
-        const buttonEstils = document.querySelector('.buttonEstil');
+        const buttonEstils = document.querySelector('.editarEstilsPres');
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
             window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
             
