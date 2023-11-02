@@ -188,6 +188,7 @@ if (isset($_GET["id_diapo"])) {
 
         // Agrega un evento para borrar los valores cuando se cargue la página
         window.addEventListener('load', clearLocalStorage);
+        
         function confirmarEliminacion(file) {
         document.getElementById('confirmacion-eliminar').style.display = 'block';
         
