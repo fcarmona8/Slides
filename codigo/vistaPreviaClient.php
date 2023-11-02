@@ -2,22 +2,30 @@
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
+session_start();
+
 if (isset($_GET["url"])) {
     $url_unica = $_GET["url"];
     $id_presentacio = $dao->getIdPorURL($url_unica);
+
+    if ($id_presentacio === "Id no encontrado ") {
+        header("Location: error404.html");
+        exit();
+    }
+
     $titol = $dao->getTitolPorID($id_presentacio);
     $diapo = $dao->getDiapositives($id_presentacio);
     $pin_presentacion = $dao->getHashContrasena($id_presentacio);
-    if ($pin_presentacion !== null) {
-        header("Location: validaPassword.php?id=$id_presentacio");
+    if (($pin_presentacion !== null) && ($_SESSION['contrasena_valida'][$id_presentacio] !== true)) {
+        header("Location: validaPassword.php?url=$url_unica");
         exit();
+    } else {
+        $titol = $dao->getTitolPorID($id_presentacio);
+        $diapo = $dao->getDiapositives($id_presentacio);
     }
-} else if(isset($_GET["id"])){
-    $id_presentacio = $_GET["id"];
-    $titol = $dao->getTitolPorID($id_presentacio);
-    $diapo = $dao->getDiapositives($id_presentacio);
 } else {
-    $titol = "Título no disponible";
+    header("Location: error404.html");
+    exit();
 }
 
 $infoDiapo = FALSE;

@@ -2,18 +2,27 @@
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
-if (isset($_GET["id"])){
-    $id_presentacion = $_GET["id"];
+session_start();
+
+if (!isset($_SESSION['contrasena_valida'])) {
+    $_SESSION['contrasena_valida'] = array();
+}
+
+if (isset($_GET["url"])){
+    $url_unica = $_GET["url"];
+
 } else {
     $titol = "Error, no se encuentra la presentacion";
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $contrasena = $_POST["password"];
-    $passwordHash = $dao->getHashContrasena($id_presentacion);
+    $id_presentacio = $dao->getIdPorURL($url_unica);
+    $passwordHash = $dao->getHashContrasena($id_presentacio);
 
     if ($passwordHash && password_verify($contrasena, $passwordHash)) {
-        header("Location: vistaPreviaClient.php?id=$id_presentacio");
+        $_SESSION['contrasena_valida'][$id_presentacio] = true;
+        header("Location: vistaPreviaClient.php?url=$url_unica");
         exit();
     } else {
         $error_message = "PIN incorrecte";
@@ -70,21 +79,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         const passwordInput = document.getElementById('password');
         const toggleButton = document.getElementById('togglePassword');
         const toggleButtonOpen = document.getElementById('togglePasswordOpen');
+        const errorMessage = document.querySelector('.error-message-password');
+    
         toggleButton.addEventListener('click', function () {
+
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleButton.style.display = 'none';
                 toggleButtonOpen.style.display = 'block';
             }
+
         })
 
         toggleButtonOpen.addEventListener('click', function () {
+
             if (passwordInput.type === 'text') {
                 passwordInput.type = 'password';
                 toggleButton.style.display = 'block';
                 toggleButtonOpen.style.display = 'none';
             }
+
         })
+        
+        if (errorMessage.innerText !== '') {
+        setTimeout(function () {
+            errorMessage.innerText = '';
+            passwordInput.classList.remove('errorPin');
+        }, 2000);
+    }
 
     </script>
 </body>
