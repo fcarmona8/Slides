@@ -207,18 +207,19 @@ if ($editDiapo === false) {
     }
 
     
-    function confirmarEliminacion() {
+    function confirmarEliminacion(file) {
         document.getElementById('confirmacion-eliminar').style.display = 'block';
         
         document.getElementById('confirmar-eliminar').onclick = function() {
             document.getElementById('confirmacion-eliminar').style.display= 'none';
+            file.value = ''
         };
         
         }
-
-    document.querySelector("input[name='imatge']").addEventListener('change', function(){
+        const fileInput = document.querySelector("input[name='imatge']");
+    fileInput.addEventListener('change', function(){
         const size = this.files[0].size /1024 /1024;
-        if(size >= 2){return confirmarEliminacion();};
+        if(size >= 2){return confirmarEliminacion(fileInput);};
     })
     </script>
     <script src="controllers/Diapositives.js"></script>
