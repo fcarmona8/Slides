@@ -42,7 +42,7 @@ if (isset($_GET["id"])) {
         <h1></h1>
         <div class="contenido">
             <p></p>
-            <img id="imagen" src="" style="width: 250px; height: 250px; margin-rigth: -100px; ">
+            <img id="imagen" src="" style="width: 250px; height: 250px; margin-right: 50px">
         </div>
     </div>
     <div class="controles">
@@ -71,14 +71,11 @@ if (isset($_GET["id"])) {
             var imatgeElement = document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> img');
             var img = document.getElementById("imagen");
             const cont = document.querySelector('.contenido');
-            const file = /^file/;
             if (diapositiva.contingut === null) {
                 // Si el contenido es nulo, ocultar el contenido
                 contenidoElement.style.display = 'none';
                 imatgeElement.style.display='none';
             } else {
-                console.log(img.src.match(file))
-                if (img.src.match(file)) {
                     cont.style.display = 'flex';
                     cont.style.flexDirection= 'row';
                     cont.style.justifyContent= 'space-around';
@@ -89,13 +86,7 @@ if (isset($_GET["id"])) {
                     contenidoElement.style.padding = '10px';
                     imatgeElement.src = diapositiva.imatge;
                     imatgeElement.style.display = 'flex';
-                }else{
-                    imatgeElement.style.display = 'none';
-                    // Si el contenido no es nulo, mostrar tanto el título como el contenido
-                    tituloElement.textContent = diapositiva.titol;
-                    contenidoElement.textContent = diapositiva.contingut;
-                    contenidoElement.style.display = 'flex';
-                }
+                
                 
             }
 

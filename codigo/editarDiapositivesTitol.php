@@ -29,7 +29,7 @@ if (isset($_GET["id_diapo"])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pantalla Crear Diapositivas Contingut</title>
+    <title>Pantalla Editar Diapositivas Contingut</title>
     <link rel="stylesheet" href="Styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
     <div id="message-container" class="mensaje-exito" style="display: none;"></div>

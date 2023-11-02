@@ -45,7 +45,7 @@ if ($editDiapo === false) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pantalla Crear Diapositivas Contingut</title>
+    <title>Pantalla Editar Diapositivas Contingut</title>
     <link rel="stylesheet" href="Styles.css">
     <div id="message-container" class="mensaje-exito" style="display: none;"></div>
 </head>
