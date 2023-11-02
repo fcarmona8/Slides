@@ -45,7 +45,7 @@ if ($editDiapo === false) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pantalla Crear Diapositivas Contingut</title>
+    <title>Pantalla Editar Diapositivas Contingut</title>
     <link rel="stylesheet" href="Styles.css">
 </head>
 <body id="crearDiapositivasContingut">
@@ -147,10 +147,9 @@ if ($editDiapo === false) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {
-                        echo '<input type="file" name="imatge" value=" '. $imatge .' ">';
-                        echo '<p> '.$imatge.'</p>';
+                        echo '<p class="imatge">'.$imatge.'</p>';
                    }else {
-                    echo '<input input type="file" name="imatge" required>';
+                    echo '<input input type="file" name="imatge" id="imatge" required >';
                    } ?> 
                 <input type="submit" name="anadirEditarDiapositiva" onsubmit=" " class="boton-crear" <?php if ($editDiapo === TRUE) {
                         echo 'value="Guardar diapositiva"';
