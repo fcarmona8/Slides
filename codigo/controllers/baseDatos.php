@@ -60,8 +60,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
         // Obtener los datos del formulario
         $titol = $_POST["titol"];
         $contingut = $_POST["contingut"];
-        $imatge = $_FILES['imatge']['tmp_name'];
         $id_presentacio = $_POST["id_presentacio"];
+        if ($_FILES["imatge"]["error"] == UPLOAD_ERR_OK) { 
+            $folderLocation = "uploaded";
+            if (!file_exists($folderLocation)) { 
+                mkdir($folderLocation);
+            }
+            move_uploaded_file($_FILES["imatge"]["tmp_name"], "$folderLocation/" . basename($_FILES["imatge"]["name"])); 
+            
+            $imatge = $folderLocation ."/".basename($_FILES["imatge"]["name"]);
+        }
         // Insertar los datos en la base de datos
         $dao->setDiapositivesImatge($titol, $contingut, $imatge, $id_presentacio); 
                 
@@ -98,8 +106,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                     // Obtener los datos del formulario
                 $titol = $_POST["titol"];
                 $contingut = $_POST["contingut"];
-                $imatge = $_FILES['imatge']['tmp_name'];
                 $id_presentacio = $_POST["id_presentacio"];
+                if ($_FILES["imatge"]["error"] == UPLOAD_ERR_OK) { 
+                    $folderLocation = "uploaded";
+                    if (!file_exists($folderLocation)) { 
+                        mkdir($folderLocation);
+                    }
+                    move_uploaded_file($_FILES["imatge"]["tmp_name"], "$folderLocation/" . basename($_FILES["imatge"]["name"])); 
+                    
+                    $imatge = $folderLocation ."/".basename($_FILES["imatge"]["name"]);
+                }
                 if (isset($_POST['id_diapo'])) {  
                     $editDiapo = $_POST['id_diapo'];
                     $dao->alterDiapositivesImatge($titol, $contingut, $imatge, $editDiapo);

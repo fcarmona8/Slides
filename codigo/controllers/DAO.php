@@ -299,7 +299,7 @@ class DAO{
                     $statement2->execute(['orden1' => $ordenAnterior -1, 'orden2' => $ordenAnterior]);
                     $statement3->execute(['orden2' => $ordenAnterior]);
                 } catch (PDOException $th) {
-                    echo 'error al intercambiar   ' . $ordenNew ;
+                    echo 'error al intercambiar   ' ;
                     echo $ordenAnterior;
                 }        
             }
@@ -331,7 +331,7 @@ class DAO{
                     $statement2->execute(['orden1' => $ordenAnterior +1, 'orden2' => $ordenAnterior]);
                     $statement3->execute(['orden2' => $ordenAnterior]);
                 } catch (PDOException $th) {
-                    echo 'error al intercambiar   ' . $ordenNew ;
+                    echo 'error al intercambiar   ' ;
                     echo $ordenAnterior;
                 }
             }

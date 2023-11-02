@@ -123,10 +123,10 @@ if (isset($_GET["id_diapo"])) {
                    } ?>
                     
                     <?php if ($infoDiapo === TRUE) {
-                        echo '<img src= " '.$imatge.' "  alt= "Imatge" width=20 heigth=20/>';
+                        echo '<p class="imatge"> '.$imatge.'</p>';
                    }else {
-                    echo '<input input type="file" name="imatge" required>';
-                   } ?>    
+                    echo '<input input type="file" name="imatge" id="imatge" required >';
+                   } ?>  
                    
                    <?php if($infoDiapo != TRUE){
                         echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
@@ -202,7 +202,6 @@ if (isset($_GET["id_diapo"])) {
         const size = this.files[0].size /1024 /1024;
         if(size >= 2){return confirmarEliminacion(fileInput);};
     })
-    
     </script>
     <script src="controllers/Diapositives.js"></script>
 </body>
