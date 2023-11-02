@@ -1,7 +1,9 @@
 = Memoria del proyecto
 
 === Introducción
-Los miembros del proyecto somos Carmona Hernandez Ferran, Galindo Palacio Joan y Camilo Jumelle. Este proyecto tratará de realizar una aplicación que permitirá a los usuarios crear presentaciones. Las presentaciones que se podrán crear contaran con diversos tipos de diapositivas, y el usuario al final podra ver su presentación. El target de esta aplicación serán personas que deseen trasmitir sus conocimientos a otro grupo de personas, y evaluar sus conocimientos. 
+Los miembros del proyecto somos Carmona Hernandez Ferran, Galindo Palacio Joan y Camilo Jumelle. Este proyecto tratará de realizar una aplicación que permitirá a los
+ usuarios crear presentaciones. Las presentaciones que se podrán crear contaran con diversos tipos de diapositivas, y el usuario al final podra ver su presentación. 
+ El target de esta aplicación serán personas que deseen trasmitir sus conocimientos a otro grupo de personas, y evaluar sus conocimientos. 
 
 
 
@@ -94,7 +96,7 @@ Link del resumen esquemático de la guía de estilos: https://www.figma.com/file
 
 === Confección del manual de instalación/distribución de la aplicación
 instalación del servidor: +
-- php
+- php (extension pdo_mysql)
 - mysql 
 - GIT
 Luego de instalar correctamente los dos podra configurar la ip, el nombre de la bd, el usuario y password en codigo/config.php. +
