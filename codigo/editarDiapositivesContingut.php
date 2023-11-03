@@ -162,7 +162,7 @@ if ($editDiapo === false) {
                     <div class='buttons-orden'>
                         <form method="post" class='button-upDown'>
                             <input type="hidden" name="id_diapo" value="<?= $row['ID_Diapositiva'];?>">
-                            <button type="submit" class="buttonOrden name=" ordenDiapoUp">
+                            <button type="submit" class="buttonOrden name=" ordenDiapoUp>
                                 <svg xmlns="http://www.w3.org/2000/svg" height="1em"
                                     viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                     <path
@@ -285,7 +285,7 @@ if ($editDiapo === false) {
                 return; // Salir de la función si el URL es nulo
             }
 
-            const urlCompleta = `/codigo/vistaPreviaClient.php?url=${url}`;
+            const urlCompleta = `/vistaPreviaClient.php?url=${url}`;
 
             const input = document.createElement('input');
             input.style.position = 'fixed';
