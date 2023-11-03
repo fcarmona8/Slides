@@ -65,6 +65,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
             $folderLocation = "uploaded";
             if (!file_exists($folderLocation)) { 
                 mkdir($folderLocation);
+                if(!file_exists($folderLocation)){
+                    $command = "sudo mkdir $folderLocation";
+                    exec($command, $output, $returnCode);
+                }
             }
             move_uploaded_file($_FILES["imatge"]["tmp_name"], "$folderLocation/" . basename($_FILES["imatge"]["name"])); 
             
@@ -111,6 +115,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                     $folderLocation = "uploaded";
                     if (!file_exists($folderLocation)) { 
                         mkdir($folderLocation);
+                        if(!file_exists($folderLocation)){
+                            $command = "sudo mkdir $folderLocation";
+                            exec($command, $output, $returnCode);
+                        }
                     }
                     move_uploaded_file($_FILES["imatge"]["tmp_name"], "$folderLocation/" . basename($_FILES["imatge"]["name"])); 
                     
