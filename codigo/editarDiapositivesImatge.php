@@ -185,6 +185,7 @@ if ($editDiapo === false) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {
+                        echo '<input input type="file" name="imatge" id="imatge" required >';
                         echo '<p class="imatge">'.$imatge.'</p>';
                    }else {
                     echo '<input input type="file" name="imatge" id="imatge" required >';
