@@ -1,13 +1,30 @@
 = Memoria del proyecto
 
 === Introducción
-Los miembros del proyecto somos Carmona Hernandez Ferran, Galindo Palacio Joan y Camilo Jumelle. Este proyecto tratará de realizar una aplicación que permitirá a los usuarios crear presentaciones. Las presentaciones que se podrán crear contaran con diversos tipos de diapositivas, y el usuario al final podra ver su presentación. El target de esta aplicación serán personas que deseen trasmitir sus conocimientos a otro grupo de personas, y evaluar sus conocimientos. 
+Los miembros del proyecto somos Carmona Hernandez Ferran, Galindo Palacio Joan y Camilo Jumelle. Este proyecto tratará de realizar una aplicación que permitirá a los
+ usuarios crear presentaciones. Las presentaciones que se podrán crear contaran con diversos tipos de diapositivas, y el usuario al final podra ver su presentación. 
+ El target de esta aplicación serán personas que deseen trasmitir sus conocimientos a otro grupo de personas, y evaluar sus conocimientos. 
 
 
 
 === Seguimiento semanal
 // Actualizar cada viernes con descripción y valoración
+Semana 1 (9, 10, 11 y del 16 al 21): +
+Primeramente hemos definido la guia de estilos de la aplicación, decidimos los colores de la pagina, la tipografia, y hemos elegido varios iconos para la aplicación.
+Seguido de ello decidimos la base de datos, haciendo el diagrama y preparamos el vagrant para la bd, luego de poder conectar la bd con exito, nos pusimos a hacer
+los sketch y Mockups de las pantallas a realizar. Al completar los Mockups empezamos a crear los html y css de la pantalla home y crear presentacion, además del js 
+de crear presentacion. Luego de completar los codigos empezamos a ver como guardar la presentacion al vagrant, mientras lo haciamos descubrimos fallas en el js el cual 
+cambiamos según vimos conveniente, aparte de ver tambien fallas en el html y creamos otras pantallas para poder completar la funcionalidad de la aplicación. Luego de conseguir 
+guardar las presentaciones correctamente y que el diseño nos parezca aceptable terminamos de realizar la pantalla home con visualización de las presentaciones ya creadas. +
 
+Al empezar el sprint 2 actualizamos el trello, hicimos los sketchs de la pagina editar para luego comenzar a hacer el html y crear la opcion de eliminar. Comenzamos con la pagina editar
+y realizamos la opcion de poder cambiar el nombre y la descripción de la presentación, y realizar la funcion de cambiar la posicion del orden(aunque aun esa funcion no se guarda en la bd). +
+
+Semana 2 (23-27)
+Se completo la pantalla editar, cambiamos el diseño del reordenamiento, agregamos la funcion de eliminar y modificar las diapositivas. Empezamos a realizar los mockup de 
+las previsualizaciones, y los archivos php y js para que estos realicen la funcion. Creamos también los estiolos de la previsualización y añadimos la funcion para que esta 
+se guarde en la bd y se muestre cada vez que el usuario le da a previsualizar. +
+Comenzamos ha configurar la maquina isard en la maquina de Camilo (aun falta poder entrar correctamente). +
 
 === Diseño de BD
 Link hacia el digrama relacional de la base de dades:  https://drive.google.com/file/d/1HUVLYU9hPKxmyfT6V3yxM_MYT2UfzMvv/view?usp=sharing
@@ -59,7 +76,7 @@ image::delete.png[width=80]
 
 image::edit.png[width=80]
 
-- https://fontawesome.com/icons/magnifying-glass?f=classic&s=solid[Icono de previsualizar]
+- https://fontawesome.com/icons/eye?f=classic&s=solid[Icono de previsualizar]
 
 image::preview.png[width=80]
 
@@ -67,11 +84,58 @@ image::preview.png[width=80]
 
 image::clonar.png[width=80]
 
+- https://fontawesome.com/icons/palette?f=classic&s=solid[Icono de estilo]
+
+image::estilo.png[width=80]
+
+- https://fontawesome.com/icons/sort-up?f=classic&s=solid[Icono de ordenar arriba]
+
+image::up.png[width=80]
+
+- https://fontawesome.com/icons/sort-down?f=classic&s=solid[Icono de ordenar abajo]
+
+image::down.png[width=80]
+
+- https://fontawesome.com/icons/link?f=classic&s=solid[Icono de copiar URL]
+
+image::link.png[width=80]
+
+- https://fontawesome.com/icons/share-from-square?f=classic&s=solid[Icono de publicar]
+
+image::publicar.png[width=80]
+
+- https://fontawesome.com/icons/house?f=classic&s=solid[Icono Home]
+
+image::home.png[width=80]
+
+- https://fontawesome.com/icons/circle-xmark?f=classic&s=solid[Icono de cerrar]
+
+image::close.png[width=80]
+
+- https://fontawesome.com/icons/circle-arrow-right?f=classic&s=solid[Icono de siguiente]
+
+image::next.png[width=80]
+
+- https://fontawesome.com/icons/circle-arrow-left?f=classic&s=solid[Icono de anterior]
+
+image::before.png[width=80]
+
 Link del resumen esquemático de la guía de estilos: https://www.figma.com/file/NLUpqEUNShhgeqQzZvntOe/Guia-d'estils?type=design&node-id=0%3A1&mode=design&t=Qni8KE80LLjWfZ9U-1[Guía de estilos (figma)]
 
 
 === Confección del manual de instalación/distribución de la aplicación
-
+instalación del servidor: +
+- php (extension pdo_mysql)
+- mysql 
+- GIT
+Luego de instalar correctamente los dos podra configurar la ip, el nombre de la bd, el usuario y password en codigo/config.php. +
+Para obtener la última version disponible de Slides abra el CMD o terminal y ubiquese en la carpeta del repositorio GIT 
+ slidescarmonagalindojumelle, desde ahí ingrese: + 
+  +
+$ git pull  +
+  +
+Al darle enter vera como se descarga o actualizan los archivos requeridos para la aplicación. O si tiene ya la última version disponible 
+le saldra un mensaje diciendo 'Already up to date'. +
 
 === Confección del manual de usuario integrado en la aplicación
 

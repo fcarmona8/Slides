@@ -14,12 +14,14 @@ $infoDiapo = FALSE;
 $id_diapo = '';
 $titolDiapo = "";
 $contingut = "";
+$imatge = "";
 
 if (isset($_GET["id_diapo"])) {
     $id_diapo = $_GET["id_diapo"];
     if ($id_diapo != '') {
         $titolDiapo = $dao->getTitolDiapoPorID($id_diapo);
         $contingut = $dao->getContingutPorID($id_diapo);
+        $imatge = $dao->getImatgePorID($id_diapo);
 
         $infoDiapo = TRUE;
     }
@@ -101,8 +103,12 @@ if (isset($_GET["id_diapo"])) {
                 <?php endwhile ?>  
             </div>
         </div>
+        <div id="confirmacion-eliminar" class="confirm-box">
+            <p>Este archivo pesa más que 2MB. Elija otro porfavor.</p>
+            <button id="confirmar-eliminar">Confirmar</button>
+         </div>
         <div class="right">
-            <form method="POST" id="formDiapoCont">
+            <form method="POST" enctype="multipart/form-data"id="formDiapoCont" action=" <?= $_SERVER['PHP_SELF'] ?>">
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                 <?php if ($infoDiapo === TRUE) {
                    ?><input type="text" name="titol" class="titolContDiapo" id='titol' value=' <?=$titolDiapo?> 'readOnly  > <?php ;
@@ -115,11 +121,19 @@ if (isset($_GET["id_diapo"])) {
                    }else {
                     echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" required ></textarea>';
                    } ?>
-                
+                    
+                    <?php if ($infoDiapo === TRUE) {
+                        echo '<p class="imatge"> '.$imatge.'</p>';
+                   }else {
+                    echo '<input input type="file" name="imatge" id="imatge" required >';
+                   } ?>  
                    
-                <?php if($infoDiapo != TRUE){
+                   <?php if($infoDiapo != TRUE){
                         echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
-                   }?>            </form>
+                   }?>
+                   
+                  
+            </form>
             <div class='buttons-diapositiva'>
                 <!-- Boton previsualizar diapositiva -->
                 <form method="post" action="previsualitzarDiapositiva.php">
@@ -174,6 +188,21 @@ if (isset($_GET["id_diapo"])) {
 
         // Agrega un evento para borrar los valores cuando se cargue la página
         window.addEventListener('load', clearLocalStorage);
+        
+        function confirmarEliminacion(file) {
+        document.getElementById('confirmacion-eliminar').style.display = 'block';
+        
+        document.getElementById('confirmar-eliminar').onclick = function() {
+            document.getElementById('confirmacion-eliminar').style.display= 'none';
+            file.value = ''
+        };
+        
+        }
+        const fileInput = document.querySelector("input[name='imatge']");
+    fileInput.addEventListener('change', function(){
+        const size = this.files[0].size /1024 /1024;
+        if(size >= 2){return confirmarEliminacion(fileInput);};
+    })
     </script>
     <script src="controllers/Diapositives.js"></script>
 </body>
