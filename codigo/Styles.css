@@ -695,6 +695,7 @@ textarea {
 .diapositiva-preview-fondoBlanco p {
     font-size: 22px;
     padding: 70px;
+    overflow: hidden;
 }
 
 .diapositiva-preview-fondoBlanco {
@@ -703,6 +704,7 @@ textarea {
     height: 70%;
     width: 70%;
     margin-bottom: 10%;
+    padding-bottom: 40px;
 }
 
 .diapositiva-preview-fondoNegro h1 {
@@ -728,7 +730,8 @@ textarea {
     height: 70%;
     width: 70%;
     margin-bottom: 10%;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding-bottom: 40px;
 }
 
 .controles {
@@ -1015,6 +1018,7 @@ a {
     transform: translateY(-50%);
     cursor: pointer;
     fill: #737373;
+    z-index: 999;
 }
 
 .eye-iconOpen {
@@ -1026,6 +1030,7 @@ a {
     cursor: pointer;
     fill: #737373;
     display: none;
+    z-index: 999;
     margin-right: -2.85px;
 }
 
@@ -1164,4 +1169,16 @@ body.error-page {
     border-radius: 3px;
   }
 
-  
+.limitInput {
+    background-color: white;
+    height: 20px;
+    width: 35px;
+    font-size: 1.2em;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 800;
+    fill: #737373;
+}

@@ -45,7 +45,7 @@ if (isset($_GET["id"])) {
         <label for="fondoBlanco">Estilo 1</label>
 
         <div class="diapositivaExemple1">
-            <h4 class="diapositivaExemple1Titol">Titol Exemple</h4>
+            <h4 class="diapositivaExemple1Titol">Titulo Ejemplo</h4>
             <p class="diapositivaExemple1Contingut">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quasi debitis atque 
                 est enim animi ut facilis voluptatum, accusamus harum nemo quae nam ab incidunt similique quos aliquid deserunt sit.</p>
         </div>
@@ -60,7 +60,7 @@ if (isset($_GET["id"])) {
         <input type="hidden" name="id_presentacion" value="' . $id_presentacion . '">
         
         <div class="diapositivaExemple2">
-            <h4 class="diapositivaExemple2Titol">Titol Exemple</h4>
+            <h4 class="diapositivaExemple2Titol">Titulo Ejemplo</h4>
             <p class="diapositivaExemple2Contingut">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus nam expedita ducimus 
                 totam ratione incidunt, adipisci animi nulla illo, ex blanditiis iure dolores! Voluptatum, laboriosam ea quaerat quam alias dolor.</p>
         </div>
