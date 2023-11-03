@@ -271,6 +271,19 @@ if (isset($_POST['previsualizar_presentacion'])) {
     exit();
 }
 
+if (isset($_POST['previsualizar_client'])) {
+    $id_presentacion = $_POST['id_presentacion'];
+    $id_diapo = $_POST['id_diapo'];
+    $from = $_POST['from'];
+
+    // Construir la URL de redirección con ambos valores
+    $redireccion_url = "previsualitzarClient.php?id=" . $id_presentacion . "&id_diapo=".$id_diapo . "&from=" . $from;
+
+    // Redirigir a vistaPrevia.php
+    header("Location: " . $redireccion_url);
+    exit();
+}
+
 if (isset($_POST['editarPres'])) {
     $id_presentacion = $_GET['id'];
     
