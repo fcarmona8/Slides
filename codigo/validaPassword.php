@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: vistaPreviaClient.php?url=$url_unica");
         exit();
     } else {
-        $error_message = "PIN incorrecte";
+        $error_message = "PIN incorrecto";
     }
 }
 ?>
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body class="bodyVerificarPin">
     <div class="verificarPinContainer">
-        <h2>Introdueix el PIN</h2>
+        <h2>Introduce el PIN</h2>
         <form method="post" class="verificarPinForm">
                 <div class="passwordFieldContainer">
                     <input type="password" id="password" name="password" class="<?php echo isset($error_message) ? 'errorPin ' : ' '; ?>" placeholder="PIN"
