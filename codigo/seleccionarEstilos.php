@@ -2,8 +2,6 @@
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
-$dao = new DAO(Connection::getConnection($config['db']));
-
 if (isset($_GET["id"])) {
     $fondoBlancoChecked = '';
     $fondoNegroChecked = '';
@@ -37,27 +35,40 @@ if (isset($_GET["id"])) {
         </div>
         
     </div>
+<h1 class="tituloSeleccionarEstilos">Seleccionar Estilos</h1>
 <div class="containerSeleccionarEstilos">
-    <h1 class="tituloSeleccionarEstilos">Seleccionar Estilos</h1>
 
-    <form method="post" action="">
+    <form class="containerSeleccionarEstilos" method="post" action="">
+
+    <div>
         <input type="radio" id="fondoBlanco" name="estilos" value="fondoBlanco" <?php echo $fondoBlancoChecked; ?>>
         <label for="fondoBlanco">Estilo 1</label>
 
-        <input type="radio" id="fondoNegro" name="estilos" value="fondoNegro" <?php echo $fondoNegroChecked; ?>>
-        <label for="fondoNegro">Estilo 2</label>
-        <input type="hidden" name="id_presentacion" value="' . $id_presentacion . '">
-        <div class="diapositivesExempleContainer">
         <div class="diapositivaExemple1">
             <h4 class="diapositivaExemple1Titol">Titol Exemple</h4>
             <p class="diapositivaExemple1Contingut">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quasi debitis atque 
                 est enim animi ut facilis voluptatum, accusamus harum nemo quae nam ab incidunt similique quos aliquid deserunt sit.</p>
         </div>
+
+    </div>
+
+
+    <div>
+
+    <input type="radio" id="fondoNegro" name="estilos" value="fondoNegro" <?php echo $fondoNegroChecked; ?>>
+        <label for="fondoNegro">Estilo 2</label>
+        <input type="hidden" name="id_presentacion" value="' . $id_presentacion . '">
+        
         <div class="diapositivaExemple2">
             <h4 class="diapositivaExemple2Titol">Titol Exemple</h4>
             <p class="diapositivaExemple2Contingut">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus nam expedita ducimus 
                 totam ratione incidunt, adipisci animi nulla illo, ex blanditiis iure dolores! Voluptatum, laboriosam ea quaerat quam alias dolor.</p>
         </div>
+
+    </div>
+        
+
+        
     </div>
         <div>
             <button class="enviarEstils" type="submit" name="enviarEstilos">Guardar Estilos</button>
