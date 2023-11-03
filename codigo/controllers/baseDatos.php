@@ -296,7 +296,7 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['previsualizar_diapo'])) {
-    $id_presentacion = $_POST['id_presentacion'];
+    $id_presentacion = $_POST['id_presentacio'];
 
     $redireccion_url = "previsualitzarDiapositiva.php?id=" . $id_presentacion;
 
