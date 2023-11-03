@@ -2,8 +2,6 @@
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
-$dao = new DAO(Connection::getConnection($config['db']));
-
 if (isset($_GET["id"])) {
     $fondoBlancoChecked = '';
     $fondoNegroChecked = '';
