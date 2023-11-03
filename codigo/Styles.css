@@ -457,6 +457,7 @@ tr {
     border: none;
     margin: 5px;
     padding: 5px;
+    vertical-align: -14px;
 }
 
 .buttons-editar button:hover {
