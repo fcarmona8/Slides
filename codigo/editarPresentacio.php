@@ -34,7 +34,7 @@ if (isset($_GET["id"])) {
                 <input type="text" name="descripcio" class="descripcio" value="<?php echo $desc; ?>" placeholder="Descripción" required></textarea>
                 <span id="descripcioError" class="error"></span>
                 <div >
-                    <a href="editarDiapositivesTitol.php?id=<?= $id_presentacio?>" class="boton-crear">Volver</a>
+                    <a href="editarDiapositivesTitol.php?id=<?= $id_presentacio?>" class="boton-volver">Volver</a>
                     <input type="submit" name="cambiarPresentacion" class="boton-crear" value="Cambiar"> 
                 </div>  
             </form>
