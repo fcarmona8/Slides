@@ -134,7 +134,7 @@ $presen = $dao->getPresentacions();
             return; // Salir de la función si el URL es nulo
         }
 
-        const urlCompleta = `/codigo/vistaPreviaClient.php?url=${url}`;
+        const urlCompleta = `/vistaPreviaClient.php?url=${url}`;
 
         const input = document.createElement('input');
         input.style.position = 'fixed';
