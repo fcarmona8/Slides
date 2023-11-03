@@ -76,16 +76,24 @@ if (isset($_GET["id"])) {
                 contenidoElement.style.display = 'none';
                 imatgeElement.style.display='none';
             } else {
+                if(diapositiva.imatge != null){                    
                     cont.style.display = 'flex';
                     cont.style.flexDirection= 'row';
                     cont.style.justifyContent= 'space-around';
+
+                    
                     tituloElement.textContent = diapositiva.titol;
                     contenidoElement.textContent = diapositiva.contingut;
                     contenidoElement.style.display = 'flex';
                     contenidoElement.style.width = '500px';
-                    contenidoElement.style.padding = '10px';
+                    contenidoElement.style.padding = '10px'
+
                     imatgeElement.src = diapositiva.imatge;
                     imatgeElement.style.display = 'flex';
+                }else{
+                    contenidoElement.style.display = 'flex';
+                    imatgeElement.style.display = 'none';
+                }
                 
                 
             }
