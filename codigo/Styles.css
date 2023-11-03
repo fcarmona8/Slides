@@ -457,6 +457,7 @@ tr {
     border: none;
     margin: 5px;
     padding: 5px;
+    vertical-align: -14px;
 }
 
 .buttons-editar button:hover {
@@ -768,7 +769,6 @@ a {
     text-decoration: none;
     color: #007BFF;
     font-size: 16px;
-    margin-top: 35px;
 }
 
 .aviso {
