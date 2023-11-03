@@ -6,6 +6,7 @@ if (isset($_GET["id"])) {
     $id_presentacio = $_GET["id"];
     $titol = $dao->getTitolPorID($id_presentacio);
     $diapo = $dao->getDiapositives($id_presentacio);
+    $url_unica = $dao->getURLPorID($id_presentacio);
 } else {
     $titol = "Título no disponible";
 }
@@ -260,6 +261,50 @@ if ($editDiapo === false) {
         const size = this.files[0].size /1024 /1024;
         if(size >= 2){return confirmarEliminacion(fileInput);};
     })
+
+    function copiarURL(buttoncopy) {
+        var url = buttoncopy.getAttribute('data-url');
+
+        // Verifica si el URL es nulo
+        if (url == "") {
+            // Crear un mensaje de error y mostrarlo en el messageContainer
+            var messageContainer = document.getElementById('message-container');
+            messageContainer.textContent = 'No se puede copiar la URL ya que la presentación no esta publicada.';
+            messageContainer.style.display = 'block';
+
+            // Ocultar el mensaje después de 3 segundos (3000 milisegundos)
+            setTimeout(function() {
+                messageContainer.style.display = 'none';
+            }, 5000);
+
+            return; // Salir de la función si el URL es nulo
+        }
+
+        const urlCompleta = `/vistaPreviaClient.php?url=${url}`;
+
+        const input = document.createElement('input');
+        input.style.position = 'fixed';
+        input.style.opacity = 0;
+
+        input.value = urlCompleta;
+
+        document.body.appendChild(input);
+
+        input.select();
+        document.execCommand('copy');
+
+        document.body.removeChild(input);
+
+        // Crear un mensaje de éxito y mostrarlo en el messageContainer
+        var messageContainer = document.getElementById('message-container');
+        messageContainer.textContent = 'URL copiada correctamente';
+        messageContainer.style.display = 'block';
+
+        // Ocultar el mensaje después de 3 segundos (3000 milisegundos)
+        setTimeout(function() {
+            messageContainer.style.display = 'none';
+        }, 3000);
+    }
     </script>
     <script src="controllers/Diapositives.js"></script>
 </body>
