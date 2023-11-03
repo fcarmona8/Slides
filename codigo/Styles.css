@@ -452,7 +452,7 @@ tr {
 }
 
 .buttons-editar button:hover {
-    background-color: #78a691;
+    background-color: #ffffff;
     border-radius: 5px;
 }
 
@@ -512,7 +512,7 @@ tr {
 }
 
 .eliminarDiapo:hover{
-    background-color: #78a691;
+    background-color: #fff;
 }
 
 textarea {
@@ -557,6 +557,16 @@ textarea {
     /* Cambia el cursor al pasar sobre el botón */
     border-radius: 5px;
     /* Bordes redondeados */
+    margin-top: 40px;
+}
+.boton-volver{ 
+    background-color: #D04242;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    cursor: pointer;
+    border-radius: 5px;
     margin-top: 40px;
 }
 
@@ -819,7 +829,7 @@ a {
 }
 
 .button-upDown button:hover{
-    background-color: #4c86c4;
+    background-color: #fff;
 }
 
 
