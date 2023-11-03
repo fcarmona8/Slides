@@ -31,7 +31,8 @@ $presen = $dao->getPresentacions();
 <body>
     <h1 class="titolHome">Slides</h1>
     <hr class="line">
-    
+
+    <div class="overlay" id="overlay"></div>
     <div id="confirmacion-eliminar" class="confirm-box">
         <p>¿Estás seguro de que deseas eliminar esta presentación?</p>
         <button id="confirmar-eliminar">Confirmar</button>
@@ -97,6 +98,7 @@ $presen = $dao->getPresentacions();
 </div>
 <script>
     function confirmarEliminacion(form) {
+        document.getElementById('overlay').style.display = 'flex';
         document.getElementById('confirmacion-eliminar').style.display = 'block';
         
         // Al hacer clic en "Confirmar", el formulario se enviará
@@ -107,6 +109,7 @@ $presen = $dao->getPresentacions();
         // Al hacer clic en "Cancelar", se ocultará la caja de confirmación
         document.getElementById('cancelar-eliminar').onclick = function() {
             document.getElementById('confirmacion-eliminar').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
         };
         
         // Evita que el formulario se envíe directamente en este punto
