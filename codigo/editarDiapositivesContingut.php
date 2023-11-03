@@ -216,7 +216,7 @@ if ($editDiapo === false) {
             <div class='buttons-diapositiva'>
                 <!-- Boton previsualizar diapositiva -->
                 <form method="post" action="previsualitzarDiapositiva.php">
-                    <input type="hidden" name="id_presentacion" value="<?= $id_presentacio; ?>">
+                    <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                     <input type="hidden" name="id_diapo" value="<?= $id_diapo; ?>">
                     <input type="hidden" name="titol" class="titolContDiapo" placeholder="Título"
                         value="<?= $titolDiapo; ?>">
