@@ -550,21 +550,18 @@ textarea {
 .boton-crear {
     margin-top: 10px;
     background-color: #0074d9;
-    /* Color de fondo del botón */
     color: #fff;
-    /* Color del texto */
     border: none;
-    /* Sin borde */
     padding: 10px 20px;
-    /* Espaciado dentro del botón */
     font-size: 16px;
-    /* Tamaño de fuente */
     cursor: pointer;
-    /* Cambia el cursor al pasar sobre el botón */
     border-radius: 5px;
-    /* Bordes redondeados */
-    margin-top: 40px;
 }
+
+.enviar-password {
+    margin-top: 35px;
+}
+
 .boton-volver{ 
     background-color: #D04242;
     color: #fff;
