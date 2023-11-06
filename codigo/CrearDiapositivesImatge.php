@@ -117,20 +117,22 @@ if (isset($_GET["id_diapo"])) {
                    } ?>
 
                    <?php if ($infoDiapo === TRUE) {
-                        echo '<p name="contingut" class="contingutDiapo" id="contingut"> '. $contingut .'</p>';
-                   }else {
+                        ?> <input type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> 'readOnly> <?php ;
+                    }else {
                     echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" required ></textarea>';
                    } ?>
                     
-                    <?php if ($infoDiapo === TRUE) {
-                        echo '<p class="imatge"> '.$imatge.'</p>';
-                   }else {
-                    echo '<input input type="file" name="imatge" id="imatge" required >';
-                   } ?>  
-                   
-                   <?php if($infoDiapo != TRUE){
-                        echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
-                   }?>
+                   <div class="imatgeForm">
+                        <?php if ($infoDiapo === TRUE) {
+                            echo '<input type="text" class="imatge" id="rutaImg" name="rutaImg" readonly value="'.$imatge.'">';
+                       }else {
+                        echo '<input input type="file" name="imatge" id="imatge" required >';
+                       } ?>  
+                       
+                       <?php if($infoDiapo != TRUE){
+                            echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
+                       }?>
+                   </div>
                    
                   
             </form>
@@ -170,10 +172,12 @@ if (isset($_GET["id_diapo"])) {
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
             var contingut = document.getElementById('contingut').value;
+            var rutaImg =   document.getElementById('rutaImg').value;
 
             // Almacena los valores en localStorage para que estén disponibles en la nueva página
             localStorage.setItem('titolDiapo', titolDiapo);
             localStorage.setItem('contingut', contingut);
+            localStorage.setItem('rutaImg', rutaImg);
         }
 
         // Obtiene los valores almacenados en localStorage

@@ -22,9 +22,15 @@ y realizamos la opcion de poder cambiar el nombre y la descripción de la presen
 
 Semana 2 (23-27)
 Se completo la pantalla editar, cambiamos el diseño del reordenamiento, agregamos la funcion de eliminar y modificar las diapositivas. Empezamos a realizar los mockup de 
-las previsualizaciones, y los archivos php y js para que estos realicen la funcion. Creamos también los estiolos de la previsualización y añadimos la funcion para que esta 
+las previsualizaciones, y los archivos php y js para que estos realicen la funcion. Creamos también los estilos de la previsualización y añadimos la funcion para que esta 
 se guarde en la bd y se muestre cada vez que el usuario le da a previsualizar. +
 Comenzamos ha configurar la maquina isard en la maquina de Camilo (aun falta poder entrar correctamente). +
+
+Semana 3 (30-3) +
+Terminamos unos toques del sprint anterior y comenzamos el tercero. Realizamos las pantallas para crear y editar diapositivas con imagenes, realizzamos las pantalla
+vsita cliente, y creamos la funcion de pubklicar pudiendo ejecutarla o no y pudiendo copiar las urls de las que si. También junto a eso hicimos que al momento de crear
+la Presentación puedas añadir un pin a está y se le pedira a los clientes en vistacliente para poder acceder a la presentacion. +
+Además terminamos de configurar la maquina isard. +
 
 === Diseño de BD
 Link hacia el digrama relacional de la base de dades:  https://drive.google.com/file/d/1HUVLYU9hPKxmyfT6V3yxM_MYT2UfzMvv/view?usp=sharing
