@@ -188,9 +188,9 @@ if ($editDiapo === false) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {
-                        echo '<div class= "imatgeForm" style = "height: 30.8px;"><input input type="file" name="imatge" id="imatge" > <input type="text" class="imatge" id="rutaImg" name="rutaImg" readonly value="'.$imatge.'"></div>';
+                        echo '<div class= "imatgeForm" style = "height: 30.8px;"><input type="file" accept="image/*" name="imatge" id="imatge" > <input type="text" class="imatge" id="rutaImg" name="rutaImg" readonly value="'.$imatge.'"></div>';
                    }else {
-                    echo '<input input type="file" name="imatge" id="imatge" required >';
+                    echo '<input type="file" accept="image/*" name="imatge" id="imatge" required >';
                    } ?> 
                 <input type="submit" name="anadirEditarDiapositiva" onsubmit=" " class="boton-crear" <?php if ($editDiapo === TRUE) {
                         echo 'value="Guardar diapositiva"';
