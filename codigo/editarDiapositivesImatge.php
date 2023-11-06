@@ -188,7 +188,7 @@ if ($editDiapo === false) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {
-                        echo '<div class= "imatgeForm" style = "height: 30.8px;"><input input type="file" name="imatge" id="imatge" > <p class="imatge">'.$imatge.'</p></div>';
+                        echo '<div class= "imatgeForm" style = "height: 30.8px;"><input input type="file" name="imatge" id="imatge" > <input type="text" class="imatge" id="rutaImg" name="rutaImg" readonly value="'.$imatge.'"></div>';
                    }else {
                     echo '<input input type="file" name="imatge" id="imatge" required >';
                    } ?> 
@@ -241,10 +241,12 @@ if ($editDiapo === false) {
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
             var contingut = document.getElementById('contingut').value;
+            var rutaImg =   document.getElementById('rutaImg').value;
 
-        // Almacena los valores en localStorage para que estén disponibles en la nueva página
-        localStorage.setItem('titolDiapo', titolDiapo);
-        localStorage.setItem('contingut', contingut);
+            // Almacena los valores en localStorage para que estén disponibles en la nueva página
+            localStorage.setItem('titolDiapo', titolDiapo);
+            localStorage.setItem('contingut', contingut);
+            localStorage.setItem('rutaImg', rutaImg);
     }
 
     
