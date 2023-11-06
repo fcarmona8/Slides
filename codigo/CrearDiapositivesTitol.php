@@ -122,7 +122,7 @@ if (isset($_GET["id_diapo"])) {
                         echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
                    }?>
             </form>
-            <div class='buttons-diapositiva'>
+            <div class='buttons-diapositiva' style="display: none;">
                 <!-- Boton previsualizar diapositiva -->
                 <form method="post" action="previsualitzarDiapositiva.php">
                     <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
@@ -135,6 +135,15 @@ if (isset($_GET["id_diapo"])) {
 
     <script>
         const button = document.querySelector('.volver');
+        const titulInput = document.getElementById('titol');
+        const previsualizar = document.querySelector('.buttons-diapositiva');
+        titulInput.addEventListener('keyup', function(){
+            if (titulInput.value == '') {
+                previsualizar.style.display = 'none';
+            }else{
+                previsualizar.style.display = 'flex';
+            }
+        })
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
             window.location.href = "CrearDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
             
