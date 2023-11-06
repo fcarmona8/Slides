@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiva"])) {
         if (isset($_POST['contingut'])) {
-            if (isset($_FILES['imatge'])) {
+            if (isset($_FILES['imatge']) && ($_FILES['imatge']['size']>0)) {
                     // Obtener los datos del formulario
                 $titol = $_POST["titol"];
                 $contingut = $_POST["contingut"];

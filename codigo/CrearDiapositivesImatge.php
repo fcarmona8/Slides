@@ -122,15 +122,17 @@ if (isset($_GET["id_diapo"])) {
                     echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" required ></textarea>';
                    } ?>
                     
-                    <?php if ($infoDiapo === TRUE) {
-                        echo '<p class="imatge"> '.$imatge.'</p>';
-                   }else {
-                    echo '<input input type="file" name="imatge" id="imatge" required >';
-                   } ?>  
-                   
-                   <?php if($infoDiapo != TRUE){
-                        echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
-                   }?>
+                   <div class="imatgeForm">
+                        <?php if ($infoDiapo === TRUE) {
+                            echo '<p class="imatge"> '.$imatge.'</p>';
+                       }else {
+                        echo '<input input type="file" name="imatge" id="imatge" required >';
+                       } ?>  
+                       
+                       <?php if($infoDiapo != TRUE){
+                            echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
+                       }?>
+                   </div>
                    
                   
             </form>

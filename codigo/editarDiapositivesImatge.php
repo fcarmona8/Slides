@@ -184,12 +184,11 @@ if ($editDiapo === false) {
                 <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required<?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo; ?>" <?php ;
                    } ?> >
-                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
+                <textarea id="contingut" name="contingut" class="contingutDiapoImatge" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {
-                        echo '<input input type="file" name="imatge" id="imatge" required >';
-                        echo '<p class="imatge">'.$imatge.'</p>';
+                        echo '<div class= "imatgeForm" style = "height: 30.8px;"><input input type="file" name="imatge" id="imatge" > <p class="imatge">'.$imatge.'</p></div>';
                    }else {
                     echo '<input input type="file" name="imatge" id="imatge" required >';
                    } ?> 
