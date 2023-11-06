@@ -965,12 +965,12 @@ a {
 
 /* Estilos para presentaciones publicadas */
 .publicada {
-    background-color: #C2FFC2; /* Cambia el fondo a verde para presentaciones publicadas */
+    background-color: #9efc9e; /* Cambia el fondo a verde para presentaciones publicadas */
 }
 
 /* Estilos para presentaciones no publicadas */
 .no-publicada {
-    background-color: #FFC2C2; /* Cambia el fondo a rojo para presentaciones no publicadas */
+    background-color: #D9D9D9; /* Cambia el fondo a rojo para presentaciones no publicadas */
 }
 
 .passwordField {
