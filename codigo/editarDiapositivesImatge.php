@@ -184,7 +184,7 @@ if ($editDiapo === false) {
                 <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required<?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo; ?>" <?php ;
                    } ?> >
-                <textarea id="contingut" name="contingut" class="contingutDiapoImatge" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
+                <textarea id="contingut" name="contingut" class="contingutDiapo" style="height: 54.2%;" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {
