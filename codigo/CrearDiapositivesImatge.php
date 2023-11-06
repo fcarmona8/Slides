@@ -124,7 +124,7 @@ if (isset($_GET["id_diapo"])) {
                     
                    <div class="imatgeForm">
                         <?php if ($infoDiapo === TRUE) {
-                            echo '<p class="imatge"> '.$imatge.'</p>';
+                            echo '<input type="text" class="imatge" id="rutaImg" name="rutaImg" readonly value="'.$imatge.'">';
                        }else {
                         echo '<input input type="file" name="imatge" id="imatge" required >';
                        } ?>  
@@ -172,10 +172,12 @@ if (isset($_GET["id_diapo"])) {
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
             var contingut = document.getElementById('contingut').value;
+            var rutaImg =   document.getElementById('rutaImg').value;
 
             // Almacena los valores en localStorage para que estén disponibles en la nueva página
             localStorage.setItem('titolDiapo', titolDiapo);
             localStorage.setItem('contingut', contingut);
+            localStorage.setItem('rutaImg', rutaImg);
         }
 
         // Obtiene los valores almacenados en localStorage
