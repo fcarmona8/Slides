@@ -240,7 +240,7 @@ if ($editDiapo === false) {
 
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
-        var contingut = document.getElementById('contingut').value;
+            var contingut = document.getElementById('contingut').value;
 
         // Almacena los valores en localStorage para que estén disponibles en la nueva página
         localStorage.setItem('titolDiapo', titolDiapo);

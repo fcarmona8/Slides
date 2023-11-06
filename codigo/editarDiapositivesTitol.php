@@ -265,8 +265,8 @@ if (isset($_GET["id_diapo"])) {
             messageContainer.style.display = 'none';
         }, 3000);
     }
+
     </script>
-    <script src="controllers/Diapositives.js"></script>
     
 </body>
 </html>
