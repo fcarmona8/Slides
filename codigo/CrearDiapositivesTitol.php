@@ -38,7 +38,14 @@ if (isset($_GET["id_diapo"])) {
 <body id="crearDiapositivasContingut">
     <?php
     if (isset($_GET['mensaje'])) {
-        echo '<div id="mensaje-exito" class="mensaje-exito">' . $_GET['mensaje'] . '</div>';
+        // Obtiene el mensaje codificado desde la URL
+        $mensajeCodificado = $_GET['mensaje'];
+    
+        // Descifra el mensaje usando la función de decodificación
+        $mensaje = base64_decode($mensajeCodificado);
+    
+        // Muestra el mensaje
+        echo '<div id="mensaje-exito" class="mensaje-exito">' . $mensaje . '</div>';
     }
     ?>
     <div class="up">

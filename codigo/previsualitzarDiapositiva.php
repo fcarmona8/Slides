@@ -6,8 +6,6 @@ $id_presentacio = isset($_GET["id"]) ? $_GET["id"] : "";
 
 if (isset($_GET["id"])) {
     $estiloPresentacion = $dao->getEstiloPresentacion($id_presentacio);
-    $titol = $dao->getTitolDiapoPorID($id_presentacio);
-    $contingut = $dao->getContingutPorID($id_presentacio);
 } else {
     $titol = "Error, no se encuentra la presentacion";
 }

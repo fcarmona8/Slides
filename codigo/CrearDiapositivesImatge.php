@@ -117,8 +117,8 @@ if (isset($_GET["id_diapo"])) {
                    } ?>
 
                    <?php if ($infoDiapo === TRUE) {
-                        echo '<p name="contingut" class="contingutDiapo" id="contingut"> '. $contingut .'</p>';
-                   }else {
+                        ?> <input type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> 'readOnly> <?php ;
+                    }else {
                     echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" required ></textarea>';
                    } ?>
                     

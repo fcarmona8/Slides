@@ -26,8 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirPresentacio"])) 
         // Obtener el ID generado automáticamente
         $lastInsertId = $dao->getLastInsertId();
 
+        // Obtén el mensaje que deseas pasar
+        $mensaje = "Presentación creada correctamente";
+
+        // Codifica el mensaje usando una función de cifrado
+        $mensajeCodificado = base64_encode($mensaje);
+
         // Redirigir a CrearDiapositives.php con el ID de la presentación como parámetro en la URL
-        header("Location: CrearDiapositivesTitol.php?id=" . $lastInsertId . "&mensaje=Presentación creada correctamente");
+        header("Location: CrearDiapositivesTitol.php?id=" . $lastInsertId . "&mensaje=" . $mensajeCodificado);
         $_POST['titol'] = null;
         $_POST['descripcio'] = null;
         exit();
