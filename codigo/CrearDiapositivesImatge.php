@@ -126,7 +126,7 @@ if (isset($_GET["id_diapo"])) {
                         <?php if ($infoDiapo === TRUE) {
                             echo '<input type="text" class="imatge" id="rutaImg" name="rutaImg" readonly value="'.$imatge.'">';
                        }else {
-                        echo '<input input type="file" name="imatge" id="imatge" required >';
+                        echo '<input input type="file" accept="image/*" name="imatge" id="imatge" required >';
                        } ?>  
                        
                        <?php if($infoDiapo != TRUE){

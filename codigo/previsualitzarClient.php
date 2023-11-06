@@ -14,6 +14,8 @@ if (isset($_GET["id"])) {
     $desc = "";
     $diapositivas = array();
 }
+$slideIndex = 0;
+$id_diapo = '';
 if (isset($_GET["id_diapo"])) {
     $id_diapo = $_GET["id_diapo"];
     // Buscar el índice de la diapositiva seleccionada en el array de diapositivas
@@ -24,9 +26,6 @@ if (isset($_GET["id_diapo"])) {
             break;
         }
     }
-} else {
-    $id_diapo = null; // Si no se especifica una diapositiva, se establece como nulo
-    $slideIndex = 0; // Valor predeterminado (primera diapositiva)
 }
 ?>
 <!DOCTYPE html>
@@ -49,7 +48,7 @@ if (isset($_GET["id_diapo"])) {
         <h1></h1>
         <div class="contenido">
             <p></p>
-            <img id="imagen" src="" style="width: 250px; height: 250px; margin-rigth: -100px; ">
+            <img id="imagen" src="" style="width: 250px; height: 250px; margin-right: 50px ">
         </div>
     </div>
     <div class="controles">
@@ -78,14 +77,12 @@ if (isset($_GET["id_diapo"])) {
             var imatgeElement = document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> img');
             var img = document.getElementById("imagen");
             const cont = document.querySelector('.contenido');
-            const file = /^file/;
             if (diapositiva.contingut === null) {
                 // Si el contenido es nulo, ocultar el contenido
                 contenidoElement.style.display = 'none';
                 imatgeElement.style.display='none';
             } else {
-                console.log(img.src.match(file))
-                if (img.src.match(file)) {
+                if (diapositiva.imatge != null) {
                     cont.style.display = 'flex';
                     cont.style.flexDirection= 'row';
                     cont.style.justifyContent= 'space-around';
@@ -123,7 +120,7 @@ if (isset($_GET["id_diapo"])) {
         });
 
         // Mostrar la primera diapositiva al cargar la página
-        mostrarDiapositiva(0);
+        mostrarDiapositiva(<?=$slideIndex?>);
         <?php endif; ?>
     </script>
 </body>
