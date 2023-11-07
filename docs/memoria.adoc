@@ -173,7 +173,8 @@ click en el titulo de está. +
 ==== Más funciones 
 Una vez que a terminado con esta presentacion puede dirigirse a la página principal con el boton de la izquierda superior que dice 'Home'. +
 Acá podrá ver las presentaciones creadas hasta el momento, se verá el titulo de dicha presentación más varios botones. +
-==== Editar presentación
+
+===== Editar presentación
 El primer boton (iniciando por la izquierda) es el botón para editar la presentacion, al precionarlo podrá volver a ver la presentacion como 
 en el momento en el que estaba creandola más unas funciones extras. Arriba debajo del titulo se añadieron 4 botones extras para personalizar 
 aún más su presentacion, comenzando por la izquierda tenemos modificar estilos, en esta pantalla podemos elegir el tema que más nos guste 
@@ -182,18 +183,23 @@ despues tenemos el botón de publicaar presentacion para que otros vean su prese
 presentación) y copiar url, el copiar url solo podrá usarse una vez que la presentacion sea publica. +
 Además de estas 4 funciones también se verán unos botones a la derecha de los botones para reordenar las diapositivas, el cual nos permitirá 
 eliminar las diapositivas. +
-==== Eliminar presentación
+
+===== Eliminar presentación
 Devuelta a la página Home, tenemos después del  botón de editar esta el botón de eliminar por completo la presentación dando click veremos un 
 mensaje para confirmar y aceptando ya no se verá la presentación. +
-==== Clonar presentación (no funcional)
+
+===== Clonar presentación (no funcional)
 El siguiente botón es el de clonar y este por el momento no creara una presentación adicional ni nos llevara a otra página. +
-==== Vizualizar presentación
+
+===== Vizualizar presentación
 Después veremos otra vez el botón del ojo, que al igual que en crear o editar las presentaciones este también nos permite previsualizar la 
 presentación completa con el tema que hayamos elegido en editar presentación. +
-==== Publicar presentación
+
+===== Publicar presentación
 Y por último tenemos los botones que tambien vemos en editar presentación, los cuales nos permitiran publicar o despublicar la presentación 
 (veremos si la presentacion ya esta publicada si su color es verde, si es gris aún no ha sido publicada), y a su lado tenemos el botón para poder 
-copiar la url de la presentación compartida. + +
+copiar la url de la presentación compartida. +
+ +
 Ya con toda esta información usted ya será capaz de crear una increibles presentaciones. 
 
 
