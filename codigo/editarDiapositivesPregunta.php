@@ -21,6 +21,10 @@ if (isset($_GET["id_diapo"])) {
     if ($id_diapo != '') {
         $titolDiapo = $dao->getTitolDiapoPorID($id_diapo);
         $contingut = $dao->getContingutPorID($id_diapo);
+        $pregunta = $dao->getPregunta($id_diapo);
+        $id_pregunta = $pregunta['ID_pregunta'];
+        $respuestas = $dao->getRespuestas($id_pregunta);
+
         $editDiapo = TRUE;
     }
     
@@ -168,15 +172,60 @@ if (isset($_GET["id_diapo"])) {
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
-                <input type="text" id="titol" name="titol" class="titolDiapo" placeholder="Titulo" maxlength="25" required <?php if ($editDiapo === TRUE) {
-                   ?> value="<?= $titolDiapo ?>" <?php ;
-                   } ?> >
-                <input type="submit" name="anadirEditarDiapositiva" class="boton-crear" <?php if ($editDiapo === TRUE) {
+                <div class="preguntaSimple"><?php if ($editDiapo === TRUE) {?>
+                    <input type="text" name="titol" class="titolDiapoPregunta" id='titol' value=' <?=$titolDiapo?>' >
+                        <?php
+                        echo '<input type="textarea" name="pregunta" class="preguntaDiapo" value="' . $pregunta['pregunta'] . '"></input>';
+                        ?>
+                        <div id="respuestas-container">
+                        <?php
+                        foreach ($respuestas as $index => $respuesta) {
+                            echo '<div class="respuesta-container">';
+                            
+                            echo '<input type="radio" name="respuesta_correcta" value="' . $index + 1 . '"';
+                            if ($respuesta['correcta'] == 1) {
+                                echo ' checked';
+                            }
+                            echo '>';
+                            
+                            echo '<input name="opcion[]" class="opcionDiapo" value="' . $respuesta['texto'] . '"></input>';
+                            
+                            echo '</div>';
+                        }
+
+                        echo '</div>';
+                        ?>
+                        <button type="button" class="anadirRespuesta" onclick="agregarRespuesta()">Agregar Respuesta</button>
+                        </div>
+                    <?php
+                    }else {?>
+                        <input type="text" name="titol" id="titol" class="titolDiapoPregunta" placeholder="Titulo diapositiva" maxlength="25" required/>
+                        <textarea name="pregunta" id="pregunta" class="preguntaDiapo" placeholder="Escribe tu pregunta" required></textarea>
+    
+                        <div id="respuestas-container">
+                        <div class="respuesta-container">
+                        <input type="radio" name="respuesta_correcta" value="1" checked>
+                        <input type="text" name="opcion[]" placeholder="Respuesta 1" class="opcionDiapo" required>
+                        </div>
+    
+                        <div class="respuesta-container">
+                        <input type="radio" name="respuesta_correcta" value="2">
+                        <input type="text" name="opcion[]" placeholder="Respuesta 2" class="opcionDiapo" required>
+                        </div>
+                        </div>
+                       
+                        <button type="button" class="anadirRespuesta" onclick="agregarRespuesta()">Agregar Respuesta</button>
+                        </div>
+
+                    <?php
+                    } ?>   
+                <input type="submit" name="anadirEditarDiapositivaPregunta" class="boton-crear" <?php if ($editDiapo === TRUE) {
                     echo 'value="Guardar diapositiva"';
                 }else{
                     echo 'value="Añadir diapositiva"';
                 }
                 ?> >
+                
             </form>
             <div class='buttons-diapositiva'>
                 <form method="post" action="previsualitzarDiapositiva.php"> 
@@ -270,6 +319,48 @@ if (isset($_GET["id_diapo"])) {
         setTimeout(function() {
             messageContainer.style.display = 'none';
         }, 3000);
+    }
+        function agregarRespuesta() {
+        // Contador para dar nombres únicos a los campos
+        if (document.querySelectorAll('input[type="radio"]').length <= 5) {
+            var contador = document.querySelectorAll('input[type="radio"]').length + 1;
+
+            // Crea un nuevo contenedor para la respuesta
+            var respuestaContainer = document.createElement('div');
+            respuestaContainer.classList.add('respuesta-container');
+
+            // Crea un nuevo campo de tipo radio
+            var inputRadio = document.createElement('input');
+            inputRadio.type = 'radio';
+            inputRadio.name = 'respuesta_correcta';
+            inputRadio.value = contador;
+
+            // Crea un nuevo campo de texto para la respuesta
+            var inputTexto = document.createElement('input');
+            inputTexto.type = 'text';
+            inputTexto.name = 'opcion[]';  // Usa un array para almacenar las respuestas
+            inputTexto.placeholder = 'Respuesta ' + contador;
+            inputTexto.setAttribute('required', ''); // Corrección aquí
+
+            // Agrega la clase "opcionDiapo" a ambos campos
+            inputTexto.classList.add('opcionDiapo');
+
+            // Agrega los nuevos campos al contenedor principal
+            respuestaContainer.appendChild(inputRadio);
+            respuestaContainer.appendChild(inputTexto);
+
+            // Agrega el botón de eliminar respuesta
+            var botonEliminar = document.createElement('span');
+            botonEliminar.innerHTML = '<svg class="eliminarRespuesta" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#000000}</style><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>';
+            botonEliminar.onclick = function() {
+                // Elimina el contenedor de respuesta al hacer clic en el botón
+                respuestaContainer.remove();
+            };
+            respuestaContainer.appendChild(botonEliminar);
+
+            // Agrega el contenedor al contenedor principal
+            document.getElementById('respuestas-container').appendChild(respuestaContainer);
+        }
     }
     </script>
     <script src="controllers/Diapositives.js"></script>
