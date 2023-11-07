@@ -30,7 +30,6 @@ class DAO {
             return "Título no encontrado";
         }
     }
-
     // Obtiene la descripción de una presentación por su ID
     public function getDescPorID($id_presentacio) {
         $sql = "SELECT descripcio FROM Presentacions WHERE ID_Presentacio = :id_presentacio";
@@ -73,6 +72,21 @@ class DAO {
             return $result['url_unica'];
         } else {
             return "URL no encontrada";
+        }
+    }
+    public function getEstadoPublicacion($idPresentacion) {
+        $sql = "SELECT publicada FROM Presentacions WHERE ID_Presentacio = :idPresentacion";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':idPresentacion', $idPresentacion, PDO::PARAM_INT);
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        // Verificar si se obtuvo un resultado
+        if ($result) {
+            return $result['publicada'] ? 1 : 0;
+        } else {
+            return 'No existe la presentación con ID ' . $idPresentacion;
         }
     }
 
@@ -380,18 +394,38 @@ class DAO {
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         return $statement;
     }
-    
-    public function eliminarDiapo($id_diapo) {
+    public function getPresentacioPorID($id_diapo){
+        $sql = "SELECT ID_Presentacio FROM Diapositives WHERE ID_Diapositiva = :id_diapo LIMIT 1";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id_diapo' => $id_diapo]);
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch();
+        return $row['ID_Presentacio'];
+    }
+    public function eliminarDiapo($id_diapo){
         try {
             $this->pdo->beginTransaction();
-    
+            $id_presentacio = $this->getPresentacioPorID($id_diapo); 
+            $orden = $this->getOrdenPorID($id_diapo) +1;
+
             // Preparar la consulta SQL para eliminar una diapositiva por su ID
-            $sql = "DELETE FROM Diapositives WHERE ID_Diapositiva = :id_diapo";
+            $sql = "DELETE from Diapositives WHERE ID_Diapositiva = :id_diapo";
+
             $statement = $this->pdo->prepare($sql);
             $statement->bindParam(':id_diapo', $id_diapo);
             $statement->execute(); 
     
             $this->pdo->commit();
+            for ($i=$orden; $i <= $id_presentacio; $i++) { 
+                $sqlOrden = "UPDATE Diapositives SET orden = :ordenNew WHERE orden= :ordenOld AND ID_Presentacio = :id_presentacio ";
+                $stmt = $this->pdo->prepare($sqlOrden);
+                $stmt->execute([
+                    ':ordenNew' => ($i-1),
+                     'ordenOld'=>$i, 
+                     ':id_presentacio' =>$id_presentacio
+                    ]);
+            }
             return true;
         } catch (PDOException $e) {
             $this->pdo->rollback();
@@ -446,20 +480,6 @@ class DAO {
     
         return $result;
     }
-    
-    public function obtenerUltimoIDDiapositiva() {
-        // Obtener el último ID de diapositiva de la tabla
-        $sql = "SELECT MAX(ID_Diapositiva) AS ultimoID FROM Diapositives";
-        $statement = $this->pdo->query($sql);
-        $row = $statement->fetch(PDO::FETCH_ASSOC);
-    
-        if ($row && isset($row['ultimoID'])) {
-            return $row['ultimoID'];
-        } else {
-            return 0;
-        }
-    }
-    
     public function getEstiloPresentacion($id_presentacio) {
         if (isset($id_presentacio)) {
             // Preparar la consulta SQL para obtener el estilo de la presentación
@@ -544,4 +564,104 @@ class DAO {
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
         return $resultado ? $resultado['pin'] : false;
     }
-}    
+
+    public function setPregunta($id_diapo, $pregunta) {
+        $sql = "INSERT INTO pregunta (pregunta, ID_diapositiva) 
+                VALUES (:pregunta, :id_diapo)";
+    
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->bindParam(':id_diapo', $id_diapo, PDO::PARAM_INT);
+            $stmt->bindParam(':pregunta', $pregunta, PDO::PARAM_STR);
+    
+            $stmt->execute();
+    
+            // Después de la ejecución, obtén el ID de la pregunta recién insertada
+            $id_pregunta = $this->pdo->lastInsertId();
+    
+            return $id_pregunta;
+        } catch (PDOException $e) {
+            throw new Exception("Error al insertar pregunta: " . $e->getMessage());
+        }
+    }
+
+    public function getPregunta($id_diapositiva) {
+        $sql = "SELECT ID_pregunta, pregunta FROM pregunta WHERE ID_diapositiva = :id_diapositiva";
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->bindParam(':id_diapositiva', $id_diapositiva, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Error al obtener la pregunta: " . $e->getMessage());
+        }
+    
+        $pregunta = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return $pregunta ? $pregunta : null;
+    }
+    
+    public function setRespuesta($id_pregunta, $texto, $correcta) {
+        $sql = "INSERT INTO respuesta (texto, correcta, ID_pregunta) 
+                VALUES (:texto, :correcta, :id_pregunta)";
+    
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->bindParam(':id_pregunta', $id_pregunta, PDO::PARAM_INT);
+            $stmt->bindParam(':texto', $texto, PDO::PARAM_STR);
+            $stmt->bindParam(':correcta', $correcta, PDO::PARAM_INT);
+    
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Error al insertar respuesta: " . $e->getMessage());
+        }
+    }
+
+    public function getRespuestas($id_pregunta) {
+        $sql = "SELECT * FROM respuesta WHERE ID_pregunta = :id_pregunta";
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->bindParam(':id_pregunta', $id_pregunta, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Error al obtener las respuestas: " . $e->getMessage());
+        }
+    
+        $respuestas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $respuestas ? $respuestas : array();
+    }
+
+    public function updatePregunta($id_pregunta, $nuevoTexto) {
+        $sql = "UPDATE pregunta SET pregunta = :nuevoTexto WHERE ID_pregunta = :id_pregunta";
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->bindParam(':id_pregunta', $id_pregunta, PDO::PARAM_INT);
+            $stmt->bindParam(':nuevoTexto', $nuevoTexto, PDO::PARAM_STR);
+    
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Error al actualizar la pregunta: " . $e->getMessage());
+        }
+    }
+
+    public function updateRespuesta($id_respuesta, $nuevoTexto, $correcta) {
+        $sql = "UPDATE respuesta SET texto = :nuevoTexto, correcta = :correcta WHERE ID_respuesta = :id_respuesta";
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->bindParam(':id_respuesta', $id_respuesta, PDO::PARAM_INT);
+            $stmt->bindParam(':nuevoTexto', $nuevoTexto, PDO::PARAM_STR);
+            $stmt->bindParam(':correcta', $correcta, PDO::PARAM_INT);
+    
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Error al actualizar la respuesta: " . $e->getMessage());
+        }
+    }
+    
+}
+
