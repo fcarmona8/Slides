@@ -14,6 +14,7 @@ class DAO{
         return $statement;
     }
 
+    //Para otener el titulo de la presentacion 
     public function getTitolPorID($id_presentacio) {
         $sql = "SELECT titol FROM Presentacions WHERE ID_Presentacio = :id_presentacio";
         $statement = $this->pdo->prepare($sql);
@@ -27,6 +28,7 @@ class DAO{
             return "Título no encontrado";
         }
     }
+    //Para obtener la descripcion de la presentacion
     public function getDescPorID($id_presentacio) {
         $sql = "SELECT descripcio FROM Presentacions WHERE ID_Presentacio = :id_presentacio";
         $statement = $this->pdo->prepare($sql);
@@ -132,9 +134,6 @@ class DAO{
         $sql = "INSERT INTO Presentacions (titol, descripcio, estil, pin) VALUES (:titol, :descripcio, :estil, :pin)";
         $statement = ($this->pdo)->prepare($sql);
 
-        // $statement->bindValue(':titol', $titol);
-        // $statement->bindValue(':descripcio', $descripcio);
-
         try {
             $statement->execute([
                 "titol" => $titol,
@@ -151,9 +150,6 @@ class DAO{
     public function editarPresentacio($titol, $descripcio, $id){
         $sql = "UPDATE Presentacions SET titol = (:titol), descripcio = (:descripcio) WHERE ID_Presentacio = (:id)";
         $statement = ($this->pdo)->prepare($sql);
-
-        // $statement->bindValue(':titol', $titol);
-        // $statement->bindValue(':descripcio', $descripcio);
 
         try {
             $statement->execute([
@@ -190,6 +186,7 @@ class DAO{
         }
     }
 
+    //diapositivas de tipo contingut
     public function setDiapositives($titol, $contingut, $id_presentacio){
         $sql = "INSERT INTO Diapositives (titol, contingut, orden, ID_Presentacio) VALUES (:titol, :contingut, :orden, :id_presentacio)";
         $statement = ($this->pdo)->prepare($sql);
@@ -250,6 +247,7 @@ class DAO{
         }
     }
 
+    //diapositives de tipo contingut
     public function alterDiapositives($titol, $contingut, $id_diapositiva){
         $sql = "UPDATE  Diapositives SET titol = :titol, contingut = :contingut WHERE ID_Diapositiva = :id_diapo";
         $statement = ($this->pdo)->prepare($sql);
@@ -350,10 +348,20 @@ class DAO{
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         return $statement;
     }
+    public function getPresentacioPorID($id_diapo){
+        $sql = "SELECT ID_Presentacio FROM Diapositives WHERE ID_Diapositiva = :id_diapo LIMIT 1";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id_diapo' => $id_diapo]);
 
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch();
+        return $row['ID_Presentacio'];
+    }
     public function eliminarDiapo($id_diapo){
         try {
             $this->pdo->beginTransaction();
+            $id_presentacio = $this->getPresentacioPorID($id_diapo); 
+            $orden = $this->getOrdenPorID($id_diapo) +1;
 
             $sql = "DELETE from Diapositives WHERE ID_Diapositiva = :id_diapo";
             $statement = $this->pdo->prepare($sql);
@@ -361,6 +369,15 @@ class DAO{
             $statement->execute(); 
 
             $this->pdo->commit();
+            for ($i=$orden; $i <= $id_presentacio; $i++) { 
+                $sqlOrden = "UPDATE Diapositives SET orden = :ordenNew WHERE orden= :ordenOld AND ID_Presentacio = :id_presentacio ";
+                $stmt = $this->pdo->prepare($sqlOrden);
+                $stmt->execute([
+                    ':ordenNew' => ($i-1),
+                     'ordenOld'=>$i, 
+                     ':id_presentacio' =>$id_presentacio
+                    ]);
+            }
             return true;
         } catch (PDOException $e) {
             $this->pdo->rollback();
@@ -413,18 +430,6 @@ class DAO{
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
     
         return $result;
-    }
-
-    public function obtenerUltimoIDDiapositiva() {
-        $sql = "SELECT MAX(ID_Diapositiva) AS ultimoID FROM Diapositives";
-        $statement = $this->pdo->query($sql);
-        $row = $statement->fetch(PDO::FETCH_ASSOC);
-
-        if ($row && isset($row['ultimoID'])) {
-            return $row['ultimoID'];
-        } else {
-            return 0;
-        }
     }
 
     public function getEstiloPresentacion($id_presentacio) {
