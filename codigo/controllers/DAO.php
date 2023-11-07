@@ -30,7 +30,6 @@ class DAO {
             return "Título no encontrado";
         }
     }
-
     // Obtiene la descripción de una presentación por su ID
     public function getDescPorID($id_presentacio) {
         $sql = "SELECT descripcio FROM Presentacions WHERE ID_Presentacio = :id_presentacio";
@@ -395,18 +394,38 @@ class DAO {
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         return $statement;
     }
-    
-    public function eliminarDiapo($id_diapo) {
+    public function getPresentacioPorID($id_diapo){
+        $sql = "SELECT ID_Presentacio FROM Diapositives WHERE ID_Diapositiva = :id_diapo LIMIT 1";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([':id_diapo' => $id_diapo]);
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $row = $stmt->fetch();
+        return $row['ID_Presentacio'];
+    }
+    public function eliminarDiapo($id_diapo){
         try {
             $this->pdo->beginTransaction();
-    
+            $id_presentacio = $this->getPresentacioPorID($id_diapo); 
+            $orden = $this->getOrdenPorID($id_diapo) +1;
+
             // Preparar la consulta SQL para eliminar una diapositiva por su ID
-            $sql = "DELETE FROM Diapositives WHERE ID_Diapositiva = :id_diapo";
+            $sql = "DELETE from Diapositives WHERE ID_Diapositiva = :id_diapo";
+
             $statement = $this->pdo->prepare($sql);
             $statement->bindParam(':id_diapo', $id_diapo);
             $statement->execute(); 
     
             $this->pdo->commit();
+            for ($i=$orden; $i <= $id_presentacio; $i++) { 
+                $sqlOrden = "UPDATE Diapositives SET orden = :ordenNew WHERE orden= :ordenOld AND ID_Presentacio = :id_presentacio ";
+                $stmt = $this->pdo->prepare($sqlOrden);
+                $stmt->execute([
+                    ':ordenNew' => ($i-1),
+                     'ordenOld'=>$i, 
+                     ':id_presentacio' =>$id_presentacio
+                    ]);
+            }
             return true;
         } catch (PDOException $e) {
             $this->pdo->rollback();
@@ -461,20 +480,6 @@ class DAO {
     
         return $result;
     }
-    
-    public function obtenerUltimoIDDiapositiva() {
-        // Obtener el último ID de diapositiva de la tabla
-        $sql = "SELECT MAX(ID_Diapositiva) AS ultimoID FROM Diapositives";
-        $statement = $this->pdo->query($sql);
-        $row = $statement->fetch(PDO::FETCH_ASSOC);
-    
-        if ($row && isset($row['ultimoID'])) {
-            return $row['ultimoID'];
-        } else {
-            return 0;
-        }
-    }
-    
     public function getEstiloPresentacion($id_presentacio) {
         if (isset($id_presentacio)) {
             // Preparar la consulta SQL para obtener el estilo de la presentación
