@@ -75,6 +75,21 @@ class DAO {
             return "URL no encontrada";
         }
     }
+    public function getEstadoPublicacion($idPresentacion) {
+        $sql = "SELECT publicada FROM Presentacions WHERE ID_Presentacio = :idPresentacion";
+        $statement = $this->pdo->prepare($sql);
+        $statement->bindParam(':idPresentacion', $idPresentacion, PDO::PARAM_INT);
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        // Verificar si se obtuvo un resultado
+        if ($result) {
+            return $result['publicada'] ? 1 : 0;
+        } else {
+            return 'No existe la presentación con ID ' . $idPresentacion;
+        }
+    }
 
     // Obtiene el último ID insertado
     public function getLastInsertId() {
@@ -544,4 +559,104 @@ class DAO {
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
         return $resultado ? $resultado['pin'] : false;
     }
-}    
+
+    public function setPregunta($id_diapo, $pregunta) {
+        $sql = "INSERT INTO pregunta (pregunta, ID_diapositiva) 
+                VALUES (:pregunta, :id_diapo)";
+    
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->bindParam(':id_diapo', $id_diapo, PDO::PARAM_INT);
+            $stmt->bindParam(':pregunta', $pregunta, PDO::PARAM_STR);
+    
+            $stmt->execute();
+    
+            // Después de la ejecución, obtén el ID de la pregunta recién insertada
+            $id_pregunta = $this->pdo->lastInsertId();
+    
+            return $id_pregunta;
+        } catch (PDOException $e) {
+            throw new Exception("Error al insertar pregunta: " . $e->getMessage());
+        }
+    }
+
+    public function getPregunta($id_diapositiva) {
+        $sql = "SELECT ID_pregunta, pregunta FROM pregunta WHERE ID_diapositiva = :id_diapositiva";
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->bindParam(':id_diapositiva', $id_diapositiva, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Error al obtener la pregunta: " . $e->getMessage());
+        }
+    
+        $pregunta = $stmt->fetch(PDO::FETCH_ASSOC);
+    
+        return $pregunta ? $pregunta : null;
+    }
+    
+    public function setRespuesta($id_pregunta, $texto, $correcta) {
+        $sql = "INSERT INTO respuesta (texto, correcta, ID_pregunta) 
+                VALUES (:texto, :correcta, :id_pregunta)";
+    
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->bindParam(':id_pregunta', $id_pregunta, PDO::PARAM_INT);
+            $stmt->bindParam(':texto', $texto, PDO::PARAM_STR);
+            $stmt->bindParam(':correcta', $correcta, PDO::PARAM_INT);
+    
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Error al insertar respuesta: " . $e->getMessage());
+        }
+    }
+
+    public function getRespuestas($id_pregunta) {
+        $sql = "SELECT * FROM respuesta WHERE ID_pregunta = :id_pregunta";
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->bindParam(':id_pregunta', $id_pregunta, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Error al obtener las respuestas: " . $e->getMessage());
+        }
+    
+        $respuestas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $respuestas ? $respuestas : array();
+    }
+
+    public function updatePregunta($id_pregunta, $nuevoTexto) {
+        $sql = "UPDATE pregunta SET pregunta = :nuevoTexto WHERE ID_pregunta = :id_pregunta";
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->bindParam(':id_pregunta', $id_pregunta, PDO::PARAM_INT);
+            $stmt->bindParam(':nuevoTexto', $nuevoTexto, PDO::PARAM_STR);
+    
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Error al actualizar la pregunta: " . $e->getMessage());
+        }
+    }
+
+    public function updateRespuesta($id_respuesta, $nuevoTexto, $correcta) {
+        $sql = "UPDATE respuesta SET texto = :nuevoTexto, correcta = :correcta WHERE ID_respuesta = :id_respuesta";
+        $stmt = $this->pdo->prepare($sql);
+    
+        try {
+            $stmt->bindParam(':id_respuesta', $id_respuesta, PDO::PARAM_INT);
+            $stmt->bindParam(':nuevoTexto', $nuevoTexto, PDO::PARAM_STR);
+            $stmt->bindParam(':correcta', $correcta, PDO::PARAM_INT);
+    
+            $stmt->execute();
+        } catch (PDOException $e) {
+            throw new Exception("Error al actualizar la respuesta: " . $e->getMessage());
+        }
+    }
+    
+}
+

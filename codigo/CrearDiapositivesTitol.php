@@ -86,6 +86,7 @@ if (isset($_GET["id_diapo"])) {
                 <button name="tipusTitol" class="buttonType">Titulo</button>
                 <button name="tipusContingut" class="buttonType">Contenido</button>
                 <button name="tipusImatge" class="buttonType">Imagen</button>
+                <button name="tipusSeleccioSimple" class="buttonType">Pregunta</button>
             </div>
             <div class="diapositivas">
                 <?php while ($row = $diapo->fetch()) : ?>
@@ -173,6 +174,9 @@ if (isset($_GET["id_diapo"])) {
         document.querySelector("button[name='tipusImatge']").addEventListener("click", function() {
             window.location.href = "CrearDiapositivesImatge.php?id=<?php echo $id_presentacio; ?>";
             
+        });
+        document.querySelector("button[name='tipusSeleccioSimple']").addEventListener("click", function() {
+            window.location.href = "CrearDiapositivesPregunta.php?id=<?php echo $id_presentacio; ?>";
         });
 
         // Event listener para volver a la página de inicio
