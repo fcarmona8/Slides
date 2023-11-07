@@ -108,18 +108,19 @@ if (isset($_GET["id_diapo"])) {
             <button id="confirmar-eliminar">Confirmar</button>
          </div>
         <div class="right">
-            <form method="POST" enctype="multipart/form-data"id="formDiapoCont" action=" <?= $_SERVER['PHP_SELF'] ?>">
+            <form method="POST" enctype="multipart/form-data"id="formDiapoCont" onsubmit="return validateFormCont();"  action=" <?= $_SERVER['PHP_SELF'] ?>">
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <span id="titolError" class="error"></span>
                 <?php if ($infoDiapo === TRUE) {
                    ?><input type="text" name="titol" class="titolContDiapo" id='titol' value=' <?=$titolDiapo?> 'readOnly  > <?php ;
                 } else {
                     echo '<input type="text" name="titol" id="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required/>';
                    } ?>
-
+                <span id="contError" class="error"></span>
                    <?php if ($infoDiapo === TRUE) {
                         ?><div class="contImatge"> <input type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> 'readOnly> <?php ;
                     }else {
-                    echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" required ></textarea>';
+                    echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" required ></textarea>';
                    } ?>
                     
                     <?php if ($infoDiapo === TRUE) {

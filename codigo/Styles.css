@@ -426,7 +426,6 @@ tr {
     font-size: 32px;
     text-align: center;
     border: 2px solid black;
-    border-bottom: 1px solid grey;
     margin: 0px;
     display: flex;
     justify-content: center;
@@ -1197,4 +1196,13 @@ body.error-page {
     cursor: pointer;
     z-index: 800;
     fill: #737373;
+}
+
+/* Estilos para el mensaje de error */
+.error {
+    color: red;
+    background-color: yellow;
+    font-size: 14px;
+    margin-top: 5px;
+    border-radius: 2%;
 }

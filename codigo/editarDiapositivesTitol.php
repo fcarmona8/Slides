@@ -161,11 +161,12 @@ if (isset($_GET["id_diapo"])) {
             </div>
         </div>
         <div class="right">
-            <form method="POST" id="formDiapo">
+            <form method="POST" id="formDiapo" onsubmit="return validateForm();">
                 <!-- Campo oculto para enviar el ID -->
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <span id="titolError" class="error"></span>
                 <input type="text" id="titol" name="titol" class="titolDiapo" placeholder="Titulo" maxlength="25" required <?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo ?>" <?php ;
                    } ?> >
@@ -279,6 +280,6 @@ if (isset($_GET["id_diapo"])) {
     }
 
     </script>
-    
+    <script src="controllers/Diapositives.js"></script>
 </body>
 </html>

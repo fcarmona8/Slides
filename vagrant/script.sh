@@ -12,8 +12,8 @@
     mysql -u root -p$DBPASS -e "CREATE DATABASE $DBNAME;"
     mysql -u root -p$DBPASS -e "USE $DBNAME; FLUSH PRIVILEGES;"
     
-    mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE Presentacions (ID_Presentacio INT AUTO_INCREMENT PRIMARY KEY, titol VARCHAR(255) NOT NULL, descripcio TEXT, estil VARCHAR(30),pin VARCHAR(255), publicada BOOLEAN DEFAULT FALSE, url_unica VARCHAR(255) DEFAULT NULL);"
-    mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE Diapositives (ID_Diapositiva INT AUTO_INCREMENT PRIMARY KEY, titol VARCHAR(255) NOT NULL, contingut TEXT,imatge TEXT, orden INT NOT NULL, ID_Presentacio INT, FOREIGN KEY (ID_Presentacio) REFERENCES Presentacions(ID_Presentacio));"
+    mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE Presentacions (ID_Presentacio INT AUTO_INCREMENT PRIMARY KEY, titol VARCHAR(30) NOT NULL, descripcio TEXT, estil VARCHAR(255),pin VARCHAR(8), publicada BOOLEAN DEFAULT FALSE, url_unica VARCHAR(255) DEFAULT NULL);"
+    mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE Diapositives (ID_Diapositiva INT AUTO_INCREMENT PRIMARY KEY, titol VARCHAR(25) NOT NULL, contingut TEXT(640),imatge TEXT, orden INT NOT NULL, ID_Presentacio INT, FOREIGN KEY (ID_Presentacio) REFERENCES Presentacions(ID_Presentacio));"
 
     sed -i 's/127.0.0.1/0.0.0.0/g'  /etc/mysql/my.cnf
     service mysql restart
