@@ -120,7 +120,7 @@ if (isset($_GET["id_diapo"])) {
                    <?php if ($infoDiapo === TRUE) {
                         ?><div class="contImatge"> <input type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> 'readOnly> <?php ;
                     }else {
-                    echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" required ></textarea>';
+                    echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" style ="height: 54.2%" required ></textarea>';
                    } ?>
                     
                     <?php if ($infoDiapo === TRUE) {
@@ -135,7 +135,7 @@ if (isset($_GET["id_diapo"])) {
                    
                   
             </form>
-            <div class='buttons-diapositiva' style="display: none;">
+            <div class='buttons-diapositiva'>
                 <!-- Boton previsualizar diapositiva -->
                 <form method="post" action="previsualitzarDiapositiva.php">
                     <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
@@ -154,6 +154,9 @@ if (isset($_GET["id_diapo"])) {
         const button = document.querySelector('.volver');
         const titulInput = document.getElementById('titol');
         const previsualizar = document.querySelector('.buttons-diapositiva');
+        if (titulInput.value =='') {
+            previsualizar.style.display = 'none';
+        }
         titulInput.addEventListener('keyup', function(){
             if (titulInput.value == '') {
                 previsualizar.style.display = 'none';
