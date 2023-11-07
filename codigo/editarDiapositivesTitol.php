@@ -176,7 +176,7 @@ if (isset($_GET["id_diapo"])) {
                 }
                 ?> >
             </form>
-            <div class='buttons-diapositiva' style="display: none;">
+            <div class='buttons-diapositiva'>
                 <form method="post" action="previsualitzarDiapositiva.php"> 
                     <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                     <input type="hidden" name="id_diapo" value="<?= $id_diapo; ?>">
@@ -195,6 +195,9 @@ if (isset($_GET["id_diapo"])) {
         const buttonEstils = document.querySelector('.editarEstilsPres');
         const titulInput = document.getElementById('titol');
         const previsualizar = document.querySelector('.buttons-diapositiva');
+        if (titulInput.value =='') {
+            previsualizar.style.display = 'none';
+        }
         titulInput.addEventListener('keyup', function(){
             if (titulInput.value == '') {
                 previsualizar.style.display = 'none';

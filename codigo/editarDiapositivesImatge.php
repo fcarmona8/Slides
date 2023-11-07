@@ -184,11 +184,14 @@ if ($editDiapo === false) {
                 <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required<?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo; ?>" <?php ;
                    } ?> >
-                <textarea id="contingut" name="contingut" class="contingutDiapo" style="height: 54.2%;" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
+                <?php if ($editDiapo === true) {
+                    echo '<div class="contImatge" style ="height: 54.2%">';
+                }?>
+                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {
-                        echo '<div class= "imatgeForm" style = "height: 30.8px;"><input type="file" accept="image/*" name="imatge" id="imatge" > <input type="text" class="imatge" id="rutaImg" name="rutaImg" readonly value="'.$imatge.'"></div>';
+                        echo '<img src=" '.$imatge.'" class="imatge"><input type="hidden" id="rutaImg" value="'.$imatge.'"></div><input type="file" accept="image/*" name="imatge" id="imatge" >';
                    }else {
                     echo '<input type="file" accept="image/*" name="imatge" id="imatge" required >';
                    } ?> 
@@ -199,7 +202,7 @@ if ($editDiapo === false) {
                     }
                     ?> >            
             </form>
-            <div class='buttons-diapositiva' style="display: none;">
+            <div class='buttons-diapositiva'>
                 <!-- Boton previsualizar diapositiva -->
                 <form method="post" action="previsualitzarDiapositiva.php">
                     <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
@@ -218,6 +221,9 @@ if ($editDiapo === false) {
         const buttonEstils = document.querySelector('.editarEstilsPres');
         const titulInput = document.getElementById('titol');
         const previsualizar = document.querySelector('.buttons-diapositiva');
+        if (titulInput.value =='') {
+            previsualizar.style.display = 'none';
+        }
         titulInput.addEventListener('keyup', function(){
             if (titulInput.value == '') {
                 previsualizar.style.display = 'none';

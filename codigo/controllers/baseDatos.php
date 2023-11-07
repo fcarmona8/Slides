@@ -218,8 +218,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["getInfoDiapoVista"])){
     $id = $_POST['id'];
     $id_diapo = $_POST['id_diapo'];
     $cont = $dao->getContingutPorID($id_diapo);
+    $imatge = $dao->getImatgePorID($id_diapo);
     if($cont != NULL ){
-        header("Location: vistaPreviaClientContingut.php?id=".$id."&id_diapo=".$id_diapo);
+        if ($imatge != NULL) {
+            header("Location: vistaPreviaClientImatge.php?id=".$id."&id_diapo=".$id_diapo);
+        }else{
+            header("Location: vistaPreviaClientContingut.php?id=".$id."&id_diapo=".$id_diapo);
+        }
     }else {
         header("Location: vistaPreviaClientTitol.php?id=".$id."&id_diapo=".$id_diapo);
     }
