@@ -23,10 +23,12 @@ function validateFormCont() {
 
     if (titol.value.length > 25) {
         titleError.textContent = "El título no puede tener más de 25 caracteres";
+        titleError.style.display = 'initial'
         titol.focus();
         isValid = false;
     } else if(contingut.value.length > 640){
         contError.textContent = "Has superado el límite de caracteres";
+        contError.style.display = 'initial'
         contError.focus();
         isValid = false;
     } else {

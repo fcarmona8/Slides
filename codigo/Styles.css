@@ -1205,4 +1205,5 @@ body.error-page {
     font-size: 14px;
     margin-top: 5px;
     border-radius: 2%;
+    display: none;
 }
