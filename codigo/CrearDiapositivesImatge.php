@@ -117,22 +117,20 @@ if (isset($_GET["id_diapo"])) {
                    } ?>
 
                    <?php if ($infoDiapo === TRUE) {
-                        ?> <input type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> 'readOnly> <?php ;
+                        ?><div class="contImatge"> <input type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> 'readOnly> <?php ;
                     }else {
                     echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" required ></textarea>';
                    } ?>
                     
-                   <div class="imatgeForm">
-                        <?php if ($infoDiapo === TRUE) {
-                            echo '<input type="text" class="imatge" id="rutaImg" name="rutaImg" readonly value="'.$imatge.'">';
-                       }else {
+                    <?php if ($infoDiapo === TRUE) {
+                        echo '<img src=" '.$imatge.'" class="imatge"><input type="hidden" class="imatge" id="rutaImg" name="rutaImg" readonly value="'.$imatge.'"></div>';
+                    }else {
                         echo '<input input type="file" accept="image/*" name="imatge" id="imatge" required >';
-                       } ?>  
+                    } ?>  
                        
-                       <?php if($infoDiapo != TRUE){
-                            echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
-                       }?>
-                   </div>
+                    <?php if($infoDiapo != TRUE){
+                        echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
+                    }?>
                    
                   
             </form>
