@@ -199,7 +199,9 @@ if ($editDiapo === false) {
                     echo '<div class="contImatge" style ="height: 54.2%">';
                 }?>
                 <span id="contError" class="error"></span>
-                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" required ><?php if ($editDiapo === TRUE) {
+                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" <?php if ($editDiapo != TRUE) {
+                   echo 'style="height: 54.2%"';
+                   } ?>required ><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {

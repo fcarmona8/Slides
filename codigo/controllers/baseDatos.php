@@ -185,8 +185,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                     $editDiapo = $_POST['id_diapo'];
                     // Realiza una operación de edición en la base de datos para una diapositiva con imagen.
                     $dao->alterDiapositivesImatge($titol, $contingut, $imatge, $editDiapo);
-                    // Redirige al usuario al editor de diapositivas de imagen con el ID de la diapositiva.
-                    header("Location: editarDiapositivesImatge.php?id=" . $id_presentacio . "&id_diapo=".$editDiapo);
+                    header("Location: editarDiapositivesImatge.php?id=" . $id_presentacio);
                     
                 }else {
                         // Insertar los datos en la base de datos
@@ -211,7 +210,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
             if (isset($_POST['id_diapo'])) {  
                 $editDiapo = $_POST['id_diapo'];
                 $dao->alterDiapositives($titol, $contingut, $editDiapo);
-                header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio . "&id_diapo=".$editDiapo);
+                header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);
                 
             }else {
                     // Insertar los datos en la base de datos
@@ -238,7 +237,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                 $editDiapo = $_POST['id_diapo'];
                 $dao->alterDiapositivesTitol($titol, $editDiapo);
                 
-                header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio . "&id_diapo=".$editDiapo);
+                header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio );
                 
             }else {
                     // Insertar los datos en la base de datos

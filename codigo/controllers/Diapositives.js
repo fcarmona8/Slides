@@ -7,6 +7,7 @@ function validateForm() {
     // Verificar si la longitud del título es mayor de 25 caracteres
     if (titol.value.length > 25) {
         titleError.textContent = "El título no puede tener más de 25 caracteres";
+        titleError.style.display = 'initial';
         titol.focus();
         isValid = false;
     } else {
@@ -26,10 +27,12 @@ function validateFormCont() {
     // Verificar si la longitud del título es mayor de 25 caracteres
     if (titol.value.length > 25) {
         titleError.textContent = "El título no puede tener más de 25 caracteres";
+        titleError.style.display = 'initial';
         titol.focus();
         isValid = false;
     } else if (contingut.value.length > 640) { // Si el título es válido, verificar la longitud del contenido
         contError.textContent = "Has superado el límite de caracteres";
+        contError.style.display = 'initial';
         contError.focus();
         isValid = false;
     } else {
