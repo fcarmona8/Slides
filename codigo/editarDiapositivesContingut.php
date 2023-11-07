@@ -215,7 +215,7 @@ if ($editDiapo === false) {
                 <input type="submit" name="anadirEditarDiapositiva" class="boton-crear" <?php if ($editDiapo===TRUE) {
                     echo 'value="Guardar diapositiva"' ; }else{ echo 'value="Añadir diapositiva"' ; } ?> >
             </form>
-            <div class='buttons-diapositiva' style="display: none;">
+            <div class='buttons-diapositiva'>
                 <!-- Boton previsualizar diapositiva -->
                 <form method="post" action="previsualitzarDiapositiva.php">
                     <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
@@ -240,6 +240,9 @@ if ($editDiapo === false) {
         const buttonEstils = document.querySelector('.editarEstilsPres');
         const titulInput = document.getElementById('titol');
         const previsualizar = document.querySelector('.buttons-diapositiva');
+        if (titulInput.value =='') {
+            previsualizar.style.display = 'none';
+        }
         titulInput.addEventListener('keyup', function(){
             if (titulInput.value == '') {
                 previsualizar.style.display = 'none';
