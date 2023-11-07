@@ -112,7 +112,8 @@ if (isset($_GET["id_diapo"])) {
         </div>
         <div class="right">
             <form method="POST" id="formDiapo" onsubmit="return validateForm();">
-            <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <span id="titolError" class="error"></span>
                 <?php if ($infoDiapo === TRUE) {
                    ?><input type="text" name="titol" class="titolDiapo" id='titol' value=' <?=$titolDiapo?>'readOnly > <?php ;
                    }else {
@@ -135,6 +136,18 @@ if (isset($_GET["id_diapo"])) {
 
     <script>
         const button = document.querySelector('.volver');
+        const titulInput = document.getElementById('titol');
+        const previsualizar = document.querySelector('.buttons-diapositiva');
+        if (titulInput.value =='') {
+            previsualizar.style.display = 'none';
+        }
+        titulInput.addEventListener('keyup', function(){
+            if (titulInput.value == '') {
+                previsualizar.style.display = 'none';
+            }else{
+                previsualizar.style.display = 'flex';
+            }
+        })
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
             window.location.href = "CrearDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
             
@@ -151,19 +164,6 @@ if (isset($_GET["id_diapo"])) {
             window.location.href = "index.php";
         });
 
-        function validateForm() {
-            const titol = document.forms["formDiapoCont"]["titol"].value;
-            let isValid = true;
-            
-            if (titol.trim() === "") {
-                isValid = false;
-                document.getElementById("titolError").innerText = "El campo 'Titol' no puede estar vacío";
-            } else {
-                document.getElementById("titolError").innerText = "";
-            }
-            
-            return isValid;
-        }
 
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value.toString();

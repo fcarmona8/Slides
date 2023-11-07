@@ -102,18 +102,19 @@ if (isset($_GET["id_diapo"])) {
             </div>
         </div>
         <div class="right">
-            <form method="POST" id="formDiapoCont">
+            <form method="POST" id="formDiapoCont" onsubmit="return validateFormCont();" >
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <span id="titolError" class="error"></span>
                 <?php if ($infoDiapo === TRUE) {
                    ?><input type="text" name="titol" class="titolContDiapo" id='titol' value=' <?=$titolDiapo?> 'readOnly  > <?php ;
                 } else {
                     echo '<input type="text" name="titol" id="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required/>';
                    } ?>
-
+                <span id="contError" class="error"></span>
                    <?php if ($infoDiapo === TRUE) {
                         ?> <input type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> 'readOnly> <?php ;
                    }else {
-                    echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" required ></textarea>';
+                    echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640"required ></textarea>';
                    } ?>
                 
                    
@@ -137,6 +138,18 @@ if (isset($_GET["id_diapo"])) {
     
     <script>
         const button = document.querySelector('.volver');
+        const titulInput = document.getElementById('titol');
+        const previsualizar = document.querySelector('.buttons-diapositiva');
+        if (titulInput.value =='') {
+            previsualizar.style.display = 'none';
+        }
+        titulInput.addEventListener('keyup', function(){
+            if (titulInput.value == '') {
+                previsualizar.style.display = 'none';
+            }else{
+                previsualizar.style.display = 'flex';
+            }
+        })
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
             window.location.href = "CrearDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
             
@@ -174,6 +187,8 @@ if (isset($_GET["id_diapo"])) {
 
         // Agrega un evento para borrar los valores cuando se cargue la página
         window.addEventListener('load', clearLocalStorage);
+        
+
     </script>
     <script src="controllers/Diapositives.js"></script>
 </body>

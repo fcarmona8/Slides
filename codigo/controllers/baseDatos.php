@@ -67,6 +67,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
         $titol = $_POST["titol"];
         $contingut = $_POST["contingut"];
         $id_presentacio = $_POST["id_presentacio"];
+
+        if(strlen($titol) > 25){
+            // Redirigir de nuevo a CrearDiapositives.php
+            header("Location: CrearDiapositivesContingut.php?id=" . $id_presentacio);
+        } elseif(strlen($contingut) > 640){
+            // Redirigir de nuevo a CrearDiapositives.php
+            header("Location: CrearDiapositivesContingut.php?id=" . $id_presentacio);
+        } else{
         if ($_FILES["imatge"]["error"] == UPLOAD_ERR_OK) { 
             $folderLocation = "uploaded";
             if (!file_exists($folderLocation)) { 
@@ -84,28 +92,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
         $dao->setDiapositivesImatge($titol, $contingut, $imatge, $id_presentacio); 
                 
         // Redirigir de nuevo a CrearDiapositives.php
-        header("Location: CrearDiapositivesImatge.php?id=" . $id_presentacio);    
+        header("Location: CrearDiapositivesImatge.php?id=" . $id_presentacio); 
+        }   
     }else if (isset($_POST['contingut']) && (isset($_FILES['imatge']) == FALSE)) {
 
         // Obtener los datos del formulario
         $titol = $_POST["titol"];
         $contingut = $_POST["contingut"];
         $id_presentacio = $_POST["id_presentacio"];
-        // Insertar los datos en la base de datos
-        $dao->setDiapositives($titol, $contingut, $id_presentacio); 
-                
-        // Redirigir de nuevo a CrearDiapositives.php
-        header("Location: CrearDiapositivesContingut.php?id=" . $id_presentacio);
+
+        if(strlen($titol) > 25){
+            // Redirigir de nuevo a CrearDiapositives.php
+            header("Location: CrearDiapositivesContingut.php?id=" . $id_presentacio);
+        } elseif(strlen($contingut) > 640){
+            // Redirigir de nuevo a CrearDiapositives.php
+            header("Location: CrearDiapositivesContingut.php?id=" . $id_presentacio);
+        } else{
+            // Insertar los datos en la base de datos
+            $dao->setDiapositives($titol, $contingut, $id_presentacio); 
+                    
+            // Redirigir de nuevo a CrearDiapositives.php
+            header("Location: CrearDiapositivesContingut.php?id=" . $id_presentacio);
+        }
      }else {
         
         // Obtener los datos del formulario
         $titol = $_POST["titol"];
         $id_presentacio = $_POST["id_presentacio"];
-        // Insertar los datos en la base de datos
-        $dao->setDiapositivesTitol($titol, $id_presentacio); 
-                
-        // Redirigir de nuevo a CrearDiapositives.php
-        header("Location: CrearDiapositivesTitol.php?id=" . $id_presentacio);
+
+        if(strlen($titol) > 25){
+            // Redirigir de nuevo a CrearDiapositives.php
+            header("Location: CrearDiapositivesTitol.php?id=" . $id_presentacio);
+        }else{
+            // Insertar los datos en la base de datos
+            $dao->setDiapositivesTitol($titol, $id_presentacio); 
+                    
+            // Redirigir de nuevo a CrearDiapositives.php
+            header("Location: CrearDiapositivesTitol.php?id=" . $id_presentacio);
+        }
      }   
     exit();              
 }
@@ -117,6 +141,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                 $titol = $_POST["titol"];
                 $contingut = $_POST["contingut"];
                 $id_presentacio = $_POST["id_presentacio"];
+                if(strlen($titol) > 25){
+                    // Redirigir de nuevo a CrearDiapositives.php
+                    header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);
+                } elseif(strlen($contingut) > 640){
+                    // Redirigir de nuevo a CrearDiapositives.php
+                    header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);
+                } else{
                 if ($_FILES["imatge"]["error"] == UPLOAD_ERR_OK) { 
                     $folderLocation = "uploaded";
                     if (!file_exists($folderLocation)) { 
@@ -133,7 +164,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                 if (isset($_POST['id_diapo'])) {  
                     $editDiapo = $_POST['id_diapo'];
                     $dao->alterDiapositivesImatge($titol, $contingut, $imatge, $editDiapo);
-                    header("Location: editarDiapositivesImatge.php?id=" . $id_presentacio . "&id_diapo=".$editDiapo);
+                    header("Location: editarDiapositivesImatge.php?id=" . $id_presentacio);
                     
                 }else {
                         // Insertar los datos en la base de datos
@@ -142,15 +173,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                     // Redirigir de nuevo a CrearDiapositives.php
                     header("Location: editarDiapositivesImatge.php?id=" . $id_presentacio);
                 }
+            }
             }else{
             // Obtener los datos del formulario
             $titol = $_POST["titol"];
             $contingut = $_POST["contingut"];
             $id_presentacio = $_POST["id_presentacio"];
+            if(strlen($titol) > 25){
+                // Redirigir de nuevo a CrearDiapositives.php
+                header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);
+            } elseif(strlen($contingut) > 640){
+                // Redirigir de nuevo a CrearDiapositives.php
+                header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);
+            } else{
             if (isset($_POST['id_diapo'])) {  
                 $editDiapo = $_POST['id_diapo'];
                 $dao->alterDiapositives($titol, $contingut, $editDiapo);
-                header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio . "&id_diapo=".$editDiapo);
+                header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);
                 
             }else {
                     // Insertar los datos en la base de datos
@@ -158,17 +197,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                     
                 // Redirigir de nuevo a CrearDiapositives.php
                 header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);         
-            } }
+            } 
+            
+        }
+        
+    }
        }else {
             
             // Obtener los datos del formulario
             $titol = $_POST["titol"];
             $id_presentacio = $_POST["id_presentacio"];
+            if(strlen($titol) > 25){
+                // Redirigir de nuevo a CrearDiapositives.php
+                header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio);
+            }else{
+
             if (isset($_POST['id_diapo'])) {  
                 $editDiapo = $_POST['id_diapo'];
                 $dao->alterDiapositivesTitol($titol, $editDiapo);
                 
-                header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio . "&id_diapo=".$editDiapo);
+                header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio );
                 
             }else {
                     // Insertar los datos en la base de datos
@@ -176,10 +224,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                     
                 // Redirigir de nuevo a CrearDiapositives.php
                 header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio);         
-            }         }
+            }
+        }         
+    }
         
 
-        exit();          
+    exit();          
 }
 
 if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["editar_diapo"])){
@@ -218,8 +268,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["getInfoDiapoVista"])){
     $id = $_POST['id'];
     $id_diapo = $_POST['id_diapo'];
     $cont = $dao->getContingutPorID($id_diapo);
+    $imatge = $dao->getImatgePorID($id_diapo);
     if($cont != NULL ){
-        header("Location: vistaPreviaClientContingut.php?id=".$id."&id_diapo=".$id_diapo);
+        if ($imatge != NULL) {
+            header("Location: vistaPreviaClientImatge.php?id=".$id."&id_diapo=".$id_diapo);
+        }else{
+            header("Location: vistaPreviaClientContingut.php?id=".$id."&id_diapo=".$id_diapo);
+        }
     }else {
         header("Location: vistaPreviaClientTitol.php?id=".$id."&id_diapo=".$id_diapo);
     }

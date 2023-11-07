@@ -1,3 +1,4 @@
+
 <?php
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
@@ -199,17 +200,18 @@ if ($editDiapo === false) {
             </div>
         </div>
         <div class="right">
-            <form method="POST" id="formDiapoCont">
+            <form method="POST" id="formDiapoCont" onsubmit="return validateFormCont();">
                 <!-- Campo oculto para enviar el ID -->
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <span id="titolError" class="error"></span>
                 <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"
-                    required<?php if ($editDiapo===TRUE) { ?> value="
-                <?= $titolDiapo; ?>"
+                    required<?php if ($editDiapo===TRUE) { ?> value="<?=$titolDiapo; ?>"
                 <?php ;
                    } ?> >
-                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" required><?php if ($editDiapo === TRUE) {
+                <span id="contError" class="error"></span>
+                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" required><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
                 <input type="submit" name="anadirEditarDiapositiva" class="boton-crear" <?php if ($editDiapo===TRUE) {
@@ -223,7 +225,7 @@ if ($editDiapo === false) {
                     <input type="hidden" name="titol" class="titolContDiapo" placeholder="Título"
                         value="<?= $titolDiapo; ?>">
                     <input type="hidden" name="contingut" class="contingutDiapo" placeholder="Contenido"
-                        value="<?= $contingut; ?>">
+                        value="<?=$contingut; ?>">
                     <button type='submit' onclick="obtenerValores()" name='previsualizar_diapo'>
                         <svg xmlns="http://www.w3.org/2000/svg" height="1.5em"
                             viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -238,6 +240,18 @@ if ($editDiapo === false) {
     <script>
         const button = document.querySelector('.volver');
         const buttonEstils = document.querySelector('.editarEstilsPres');
+        const titulInput = document.getElementById('titol');
+        const previsualizar = document.querySelector('.buttons-diapositiva');
+        if (titulInput.value =='') {
+            previsualizar.style.display = 'none';
+        }
+        titulInput.addEventListener('keyup', function(){
+            if (titulInput.value == '') {
+                previsualizar.style.display = 'none';
+            }else{
+                previsualizar.style.display = 'flex';
+            }
+        })
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function () {
             window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
 

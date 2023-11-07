@@ -176,21 +176,28 @@ if ($editDiapo === false) {
             <button id="confirmar-eliminar">Confirmar</button>
          </div>
         <div class="right">
-            <form method="POST" id="formDiapoCont" enctype="multipart/form-data">
+            <form method="POST" id="formDiapoCont" enctype="multipart/form-data" onsubmit="return validateFormCont();">
                 <!-- Campo oculto para enviar el ID -->
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <span id="titolError" class="error"></span>
                 <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required<?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo; ?>" <?php ;
                    } ?> >
-                <textarea id="contingut" name="contingut" class="contingutDiapo" style="height: 54.2%;" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
+                <?php if ($editDiapo === true) {
+                    echo '<div class="contImatge" style ="height: 54.2%">';
+                }?>
+                <span id="contError" class="error"></span>
+                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" <?php if ($editDiapo != TRUE) {
+                   echo 'style="height: 54.2%"';
+                   } ?>required ><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {
-                        echo '<div class= "imatgeForm" style = "height: 30.8px;"><input input type="file" name="imatge" id="imatge" > <input type="text" class="imatge" id="rutaImg" name="rutaImg" readonly value="'.$imatge.'"></div>';
+                        echo '<img src=" '.$imatge.'" class="imatge"><input type="hidden" id="rutaImg" value="'.$imatge.'"></div><input type="file" accept="image/*" name="imatge" id="imatge" >';
                    }else {
-                    echo '<input input type="file" name="imatge" id="imatge" required >';
+                    echo '<input type="file" accept="image/*" name="imatge" id="imatge" required >';
                    } ?> 
                 <input type="submit" name="anadirEditarDiapositiva" onsubmit=" " class="boton-crear" <?php if ($editDiapo === TRUE) {
                         echo 'value="Guardar diapositiva"';
@@ -216,6 +223,18 @@ if ($editDiapo === false) {
     <script>
         const button = document.querySelector('.volver');
         const buttonEstils = document.querySelector('.editarEstilsPres');
+        const titulInput = document.getElementById('titol');
+        const previsualizar = document.querySelector('.buttons-diapositiva');
+        if (titulInput.value =='') {
+            previsualizar.style.display = 'none';
+        }
+        titulInput.addEventListener('keyup', function(){
+            if (titulInput.value == '') {
+                previsualizar.style.display = 'none';
+            }else{
+                previsualizar.style.display = 'flex';
+            }
+        })
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
             window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
             
