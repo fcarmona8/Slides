@@ -176,15 +176,17 @@ if ($editDiapo === false) {
             <button id="confirmar-eliminar">Confirmar</button>
          </div>
         <div class="right">
-            <form method="POST" id="formDiapoCont" enctype="multipart/form-data">
+            <form method="POST" id="formDiapoCont" enctype="multipart/form-data" onsubmit="return validateFormCont();">
                 <!-- Campo oculto para enviar el ID -->
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <span id="titolError" class="error"></span>
                 <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required<?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo; ?>" <?php ;
                    } ?> >
-                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
+                <span id="contError" class="error"></span>
+                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" required ><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {

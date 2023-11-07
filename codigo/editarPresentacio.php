@@ -27,7 +27,7 @@ if (isset($_GET["id"])) {
             </button>
         </div>
         <div class="presentacion">
-            <form method="POST" id="formPresentacio">
+            <form method="POST" id="formPresentacio" onsubmit="return validateForm();">
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                 <input type="text" name="titol" class="titol" value="<?php echo $titol; ?>" placeholder="Titulo de la presentación" maxlength="30" required>
                 <span id="titolError" class="error"></span>
@@ -40,6 +40,27 @@ if (isset($_GET["id"])) {
             </form>
         </div>
     </div>
-    <script src="Presentacio.js"></script>
+    <script>
+    const button = document.querySelector('.volver');
+    button.addEventListener('click', function (e) {
+        document.location.href = 'index.php';
+    });
+    function validateForm() {
+    const titol = document.forms["formPresentacio"]["titol"].value;
+    let isValid = true;
+    var titleError = document.getElementById("titolError");
+    
+    if (titol === "") {
+        isValid = false;
+    } else if( titol.length > 30){
+        titleError.textContent = "El título no debe tener más de 30 caracteres.";
+        isValid = false;
+    } else {
+        document.getElementById("titolError").innerText = "";
+    }
+    
+    return isValid;
+}
+    </script>
 </body>
 </html>
