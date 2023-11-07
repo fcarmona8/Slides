@@ -146,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                     header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);
                 } elseif(strlen($contingut) > 640){
                     // Redirigir de nuevo a CrearDiapositives.php
-                    header("Location: erearDiapositivesContingut.php?id=" . $id_presentacio);
+                    header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);
                 } else{
                 if ($_FILES["imatge"]["error"] == UPLOAD_ERR_OK) { 
                     $folderLocation = "uploaded";
@@ -184,7 +184,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                 header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);
             } elseif(strlen($contingut) > 640){
                 // Redirigir de nuevo a CrearDiapositives.php
-                header("Location: erearDiapositivesContingut.php?id=" . $id_presentacio);
+                header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);
             } else{
             if (isset($_POST['id_diapo'])) {  
                 $editDiapo = $_POST['id_diapo'];
