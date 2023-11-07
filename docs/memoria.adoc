@@ -6,64 +6,126 @@ Los miembros del proyecto somos Carmona Hernandez Ferran, Galindo Palacio Joan y
  El target de esta aplicación serán personas que deseen trasmitir sus conocimientos a otro grupo de personas, y evaluar sus conocimientos. 
 
 == Requisitos del proyecto
+
 === Sprint 1
-R01: Definir guia de estilos de la aplicación +
-R02: Determinar la base de datos +
-R03: Pantalla Home con un boton para crear una presentacion +
-R04: Pantalla crear presentación. +
-  Permite: +
+
+==== R01: Definir guia de estilos de la aplicación 
+  - Indicar paleta de colores
+  - Tipografia 
+  - Medidas de la fuente
+  - Iconografia 
+  - Botones
+  - Enlaces
+  - Elementos del formilario
+  - Vizaulización de componentes 
+
+==== R02: Determinar la base de datos 
+  - Minimo tablas Presentacions y Diapositives
+  - Realizar un diagrama relacional
+  - Preparar el Vagrant con la BD
+
+==== R03: Pantalla Home 
+  - De momento solo aparecera un boton para crear una presentacion 
+  - Interactuando con él nos llevara a la pantalla CrearPresentacion
+
+==== R04: Pantalla crear presentación
+
     - Poner nombre a la nueva presentacion 
+  
     - Poner descripción a la presentación 
+  
     - Añadir diapositiva tipo titol y/o titol+contenido 
-R05: Guardar la presentación +
-  Poder guardar la presentación desde la pantalla crear presentación guardandose en la BD +
-R06: Pantala Home: +
-  Apareceran todas las presentaciones creadas hasta el momento mas opciones de ir a pantalla edicion, eliminar presentacion, clonarla y previsualizarla +
+
+==== R05: Guardar la presentación 
+  - Poder guardar la presentación desde la pantalla crear presentación guardandose en la BD 
+
+==== R06: Pantala Home: 
+  - Apareceran todas las presentaciones creadas hasta el momento
+  - Ver opciones de ir a pantalla edicion, eliminar presentacion, clonarla y previsualizarla 
+
 === Sprint 2
-R07: Editar presentación +
-  Se puede seleccionar desde home para editar la presentacion y permite: +
+==== R07: Editar presentación 
+    
     - Modificar el nombre de la presentación
+    
     - Modificar la descripción de la presentacion
+    
     - Añadir nuevas diapositivas al final de la presentación
+    
     - Eliminar diapositivas existentes 
+    
     - Reordenar las diapositivas (añadir tambien en crear)
-R08: Eliminar presentacion +
-  Eliminar la presentación con confirmación y feedback si se borra o no +
-R09: Vista previa/estilos +
-  Al crear una presentacion se le asigna un estilo, y se puede cambiar en editar. (Crear min 2 estilos)
-R10: Vista previa Presentación +
-  Acceder desde crear, editar o Home. Se vera con el estilo elegido. Se puede interrumpir la visualización en cualquier momento. +
-R11: Vista previa diapositiva +
-  Acceder desde crear o editar. Solo se ve la diapositiva elegida. Sin diferencia entre visualizar presentación. +
-R12: Desplegamnet de l'aplicació en un servidor +
+
+
+==== R08: Eliminar presentacion 
+  - Eliminar la presentación con confirmación y feedback si se borra o no 
+
+==== R09: Vista previa/estilos 
+  - Al crear una presentacion se le asigna un estilo, y se puede cambiar en editar. (Crear min 2 estilos)
+
+==== R10: Vista previa Presentación 
+  - Acceder desde crear, editar o Home. Se vera con el estilo elegido. Se puede interrumpir la visualización en cualquier momento. 
+
+==== R11: Vista previa diapositiva 
+  - Acceder desde crear o editar. Solo se ve la diapositiva elegida. Sin diferencia entre visualizar presentación. 
+
+==== R12: Desplegamnet de l'aplicació en un servidor 
 
 === Sprint 3 
-R13: Publicación de las presentaciones +
+
+==== R13: Publicación de las presentaciones 
+
   - Atributo si estan publciadas o no
+
   - Inicialmente no están publciadas
+
   - Se puede publicar desde home y editar 
+
   - Al publicarse se genera un url unico
+
   - Las presentaciones tendran vista propietario y cliente (desde la url)
+
   - La vista cliente permte ver las miniaturas de todas las diapositivas
-R14: Pantalla editar presentacion +
+
+
+==== R14: Pantalla editar presentacion 
+
   - Tipo diapositiva nueva titol + contenido + imagen
+
   - La diapositiva con imagen solo permite una por diapositiva
+
   - El diseño de previsualizar
-R15: Atributo PIN en presentaciones +
+
+
+==== R15: Atributo PIN en presentaciones 
+
   - Todas las presentaciones tienen un atributo pin opcional
+
   - Si se indica un PIN cuando se conecta a vista cliente se muetsra introducir un pin en vez de la primera diapositiva
+
   - No aplica en vista propietario
 
 === Sprint 4
-R16: Diapositivas preguntes de seleccion simple
+
+
+==== R16: Diapositivas preguntes de seleccion simple
+
   - Tipo nuevo con una pregunta y varias respuestas
+
   - Debe de haber una respuesta correcta
+
   - OPCIONAL Es posible agregar una imagen en este tipo de diapositiva
+
   - Modificar la previsualizacion de este tipo
+
   - Vista cliente puede responder la pregunta
+
   - Una vez ya respondida no se puede volver a responder hasta que no se cierre el navegador
+
   - Responder una pregunra habilita la visualización de la respuesta
+
   - En las diapositiva tipo respuesta se vera la pregunta, las respuestas y la respuesta correcta amrcada
+
   - En miniaturas solo se verán las diapositivas respuesta si se respondio a la pregunta 
 
 
