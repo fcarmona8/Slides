@@ -134,7 +134,7 @@ instalación del servidor: +
 - php (extension pdo_mysql)
 - mysql 
 - GIT
-Luego de instalar correctamente los dos podra configurar la ip, el nombre de la bd, el usuario y password en codigo/config.php. +
+Luego de instalarlos correctamente podrá configurar la ip, el nombre de la bd, el usuario y password en codigo/controllers/config.php. +
 Para obtener la última version disponible de Slides abra el CMD o terminal y ubiquese en la carpeta del repositorio GIT 
  slidescarmonagalindojumelle, desde ahí ingrese: + 
   +
@@ -144,6 +144,57 @@ Al darle enter vera como se descarga o actualizan los archivos requeridos para l
 le saldra un mensaje diciendo 'Already up to date'. +
 
 === Confección del manual de usuario integrado en la aplicación
+==== Crear Presentación
+Al entrar a la aplicación de slides, si es la primera vez que entra tan solo verá un boton azul el cual dice 'Crear una nueva presentación'
+entre ahi y podrá comenzar a crear presentaciones. +
+Una vez en la pagina de crear presentacion debemos de indicar el nombre y una breve descripción de la presentacion, tenga en cuenta que el 
+límite de el titulo de la presentacion es de 25 cáracteres. También tiene la opción de ponerle un pin a su presentacion este pin se verá solo
+para las personas con las que comparta la presentacion una vez publicada. Si no coloca un pin podrá publicarla sin restrincción de quien entre 
+a su presentación. +
+
+==== Creacion de las Diapositivas
+Al crearla por unos tres segundos se verá un mensaje verde donde nos indicará que la presentacion se ha creado con éxito y ya podemos comenzarar
+a crear las diapositivas de nuestra presentación. Podemos observar en la parte superior un boton para volver a la pantalla inicial, el titulo de 
+nuestra presentación y un boton para previsualizar nuestra presentacion a medida que la creemos. +
+Para crear diapositivas veremos en la parte del centro de nuestra pantalla un cuadro donde podremos escribir el titulo y debajo el botón de 
+añadir diapositiva. Si usted desea crear una diapositiva con titulo y un contenido debajo en la parte de la derecha veras 3 botones, clickando 
+en el segundo cambiará el formato de la diapositiva, si querés solo con titulo presiona 'titulo', si deseas un titulo y un texto presiona 
+'contenido' y si ademas del titulo y texto deseas colocar una imagen presiona 'imagen'. En la version imagen solo podrás añadir una imagen con 
+un limite de 2MB presionando en 'Seleccionar archivo'. +
+
+// Añadir pestaña de preguntas
+
+Si usted ya escribio algo en la diapositiva y quiere saber como se vería en la visualización de la presentación puede ver un boton de un ojo en 
+la derecha donde esta escribiendo la diapositiva, presionelo y se verá con el estilo default (Podrá cambiar el estilo más adelante). +
+Mientras está diseñando la presentacion podra notar que cada diapositiva añadida se ira viendo en la parte izquierda con unos botones a su lado 
+con estos botones podrá ir reordenando la presentación a su gusto. También puede volver a observar (pero no editar) cada diapositiva haciendo 
+click en el titulo de está. +
+
+==== Más funciones 
+Una vez que a terminado con esta presentacion puede dirigirse a la página principal con el boton de la izquierda superior que dice 'Home'. +
+Acá podrá ver las presentaciones creadas hasta el momento, se verá el titulo de dicha presentación más varios botones. +
+==== Editar presentación
+El primer boton (iniciando por la izquierda) es el botón para editar la presentacion, al precionarlo podrá volver a ver la presentacion como 
+en el momento en el que estaba creandola más unas funciones extras. Arriba debajo del titulo se añadieron 4 botones extras para personalizar 
+aún más su presentacion, comenzando por la izquierda tenemos modificar estilos, en esta pantalla podemos elegir el tema que más nos guste 
+para nuestra presentación, a su lado esta el boton para editar la presentacion acá podremos editar el titulo y descripción de la presentacion,
+despues tenemos el botón de publicaar presentacion para que otros vean su presentacion (la persona con la que la comparta no podrá editar su 
+presentación) y copiar url, el copiar url solo podrá usarse una vez que la presentacion sea publica. +
+Además de estas 4 funciones también se verán unos botones a la derecha de los botones para reordenar las diapositivas, el cual nos permitirá 
+eliminar las diapositivas. +
+==== Eliminar presentación
+Devuelta a la página Home, tenemos después del  botón de editar esta el botón de eliminar por completo la presentación dando click veremos un 
+mensaje para confirmar y aceptando ya no se verá la presentación. +
+==== Clonar presentación (no funcional)
+El siguiente botón es el de clonar y este por el momento no creara una presentación adicional ni nos llevara a otra página. +
+==== Vizualizar presentación
+Después veremos otra vez el botón del ojo, que al igual que en crear o editar las presentaciones este también nos permite previsualizar la 
+presentación completa con el tema que hayamos elegido en editar presentación. +
+==== Publicar presentación
+Y por último tenemos los botones que tambien vemos en editar presentación, los cuales nos permitiran publicar o despublicar la presentación 
+(veremos si la presentacion ya esta publicada si su color es verde, si es gris aún no ha sido publicada), y a su lado tenemos el botón para poder 
+copiar la url de la presentación compartida. + +
+Ya con toda esta información usted ya será capaz de crear una increibles presentaciones. 
 
 
 === Linias futuras
