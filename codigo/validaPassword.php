@@ -1,9 +1,13 @@
 <?php
+
+// Incluye archivos de funciones necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
+// Inicia una sesión
 session_start();
 
+// Inicializa una matriz en la sesión para almacenar contraseñas válidas
 if (!isset($_SESSION['contrasena_valida'])) {
     $_SESSION['contrasena_valida'] = array();
 }
@@ -20,8 +24,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id_presentacio = $dao->getIdPorURL($url_unica);
     $passwordHash = $dao->getHashContrasena($id_presentacio);
 
+    // Comprueba si la contraseña ingresada coincide con la contraseña almacenada en la base de datos
     if ($passwordHash && password_verify($contrasena, $passwordHash)) {
         $_SESSION['contrasena_valida'][$id_presentacio] = true;
+        // Redirige a la página de vista previa si la contraseña es correcta
         header("Location: vistaPreviaClient.php?url=$url_unica");
         exit();
     } else {
@@ -46,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form method="post" class="verificarPinForm">
                 <div class="passwordFieldContainer">
                     <input type="password" id="password" name="password" class="<?php echo isset($error_message) ? 'errorPin ' : ' '; ?>" placeholder="PIN"
-                        maxlength="20"></input>
+                        maxlength="8"></input>
                     <div class="limitInput"></div>
                     <svg class="eye-icon" id="togglePassword" xmlns="http://www.w3.org/2000/svg" height="1em"
                         viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -83,7 +89,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         const errorMessage = document.querySelector('.error-message-password');
     
         toggleButton.addEventListener('click', function () {
-
+             // Muestra la contraseña cuando se hace clic en el ícono del ojo
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
                 toggleButton.style.display = 'none';
@@ -93,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         })
 
         toggleButtonOpen.addEventListener('click', function () {
-
+            // Oculta la contraseña cuando se hace clic en el ícono del ojo abierto
             if (passwordInput.type === 'text') {
                 passwordInput.type = 'password';
                 toggleButton.style.display = 'block';
@@ -103,12 +109,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         })
         
         if (errorMessage.innerText !== '') {
-        setTimeout(function () {
-            errorMessage.innerText = '';
-            passwordInput.classList.remove('errorPin');
-        }, 2000);
-    }
-
+            // Borra el mensaje de error después de un tiempo
+            setTimeout(function () {
+                errorMessage.innerText = '';
+                passwordInput.classList.remove('errorPin');
+            }, 2000);
+        }
     </script>
 </body>
 

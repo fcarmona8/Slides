@@ -1,10 +1,15 @@
 <?php
+
+// Incluye archivos de funciones necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
+// Comprueba si se proporciona un parámetro "id" en la URL
 if (isset($_GET["id"])) {
     $id_presentacio = $_GET["id"];
-    $from = isset($_GET["from"]) ? $_GET["from"] : "Página desconocida"; // Obtén el valor de "from"
+    // Obtiene el valor del parámetro "from" en la URL o establece un valor predeterminado
+    $from = isset($_GET["from"]) ? $_GET["from"] : "Página desconocida";
+    // Obtiene el título, descripción y diapositivas de la presentación
     $titol = $dao->getTitolPorID($id_presentacio);
     $desc = $dao->getDescPorID($id_presentacio);
     $diapositivas = $dao->getDiapositivesVista($id_presentacio);
@@ -30,7 +35,7 @@ if (isset($_GET["id"])) {
     } elseif ($from === 'Vista') {
         echo 'vistaPreviaClient.php?id=' . $id_presentacio;
     } else {
-        echo 'crearDiapositivesTitol.php?id=' . $id_presentacio;
+        echo 'CrearDiapositivesTitol.php?id=' . $id_presentacio;
     }
     ?>"><svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg></a>
     </div>
@@ -53,14 +58,16 @@ if (isset($_GET["id"])) {
     <?php endif; ?>
     <script>
         <?php if (!empty($diapositivas)): ?>
+        // Comprueba si hay diapositivas disponibles para mostrar
         var diapositivas = <?php echo json_encode($diapositivas); ?>;
-        var currentSlide = 0;
-        var totalSlides = diapositivas.length;
+        var currentSlide = 0; // Inicializa el índice de la diapositiva actual
+        var totalSlides = diapositivas.length; // Obtiene el número total de diapositivas
 
-        var anteriorButton = document.getElementById("anterior");
-        var siguienteButton = document.getElementById("siguiente");
+        var anteriorButton = document.getElementById("anterior"); // Obtiene el botón de diapositiva anterior
+        var siguienteButton = document.getElementById("siguiente"); // Obtiene el botón de diapositiva siguiente
 
         function mostrarDiapositiva(slideIndex) {
+            // Función para mostrar una diapositiva en función del índice
             var diapositiva = diapositivas[slideIndex];
             document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
             document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = diapositiva.contingut;
@@ -76,7 +83,8 @@ if (isset($_GET["id"])) {
                 contenidoElement.style.display = 'none';
                 imatgeElement.style.display='none';
             } else {
-                if(diapositiva.imatge != null){                    
+                if(diapositiva.imatge != null){       
+                    // Si hay una imagen en la diapositiva, ajusta el diseño             
                     cont.style.display = 'flex';
                     cont.style.flexDirection= 'row';
                     cont.style.justifyContent= 'space-around';
@@ -91,6 +99,7 @@ if (isset($_GET["id"])) {
                     imatgeElement.src = diapositiva.imatge;
                     imatgeElement.style.display = 'flex';
                 }else{
+                    // Si no hay una imagen, muestra solo el contenid
                     contenidoElement.style.display = 'flex';
                     imatgeElement.style.display = 'none';
                 }
@@ -107,11 +116,13 @@ if (isset($_GET["id"])) {
 
 
         document.getElementById("anterior").addEventListener("click", function() {
-            mostrarDiapositiva(currentSlide - 1);
+            // Asocia una función a la acción de hacer clic en el botón anterior
+            mostrarDiapositiva(currentSlide - 1); // Muestra la diapositiva anterior
         });
 
         document.getElementById("siguiente").addEventListener("click", function() {
-            mostrarDiapositiva(currentSlide + 1);
+            // Asocia una función a la acción de hacer clic en el botón siguiente
+            mostrarDiapositiva(currentSlide + 1); // Muestra la diapositiva siguiente
         });
 
         // Mostrar la primera diapositiva al cargar la página

@@ -1,12 +1,17 @@
 <?php
+
+// Incluye archivos de funciones necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
+
 // Obtener el valor de $id_presentacio de PHP
 $id_presentacio = isset($_GET["id"]) ? $_GET["id"] : "";
 
 if (isset($_GET["id"])) {
+    // Si se proporciona un "id" en la URL, obtén el estilo de presentación desde la base de datos
     $estiloPresentacion = $dao->getEstiloPresentacion($id_presentacio);
 } else {
+    // Si no se proporciona "id" en la URL, muestra un mensaje de error
     $titol = "Error, no se encuentra la presentacion";
 }
 ?>
@@ -25,10 +30,14 @@ if (isset($_GET["id"])) {
         <p id="aviso" style="color: red;"></p>
     </div>
     <div class="preview">
-    <div class="diapositiva-preview-<?php echo $estiloPresentacion;?>">
-        <h1 id="tituloPrevisualizado"></h1>
-        <p id="contenidoPrevisualizado"></p>
-    </div>
+        <!-- Muestra la previsualización de la diapositiva con el estilo obtenido -->
+        <div class="diapositiva-preview-<?php echo $estiloPresentacion;?>">
+            <h1 id="tituloPrevisualizado"></h1>
+            <div class="contenido">
+                <p id="contenidoPrevisualizado"></p>
+                <img id="imatgePrevisualizado" src="" style="display: none;width: 250px; height: 250px; margin-right: 50px">
+            </div>
+        </div>
     </div>
 
     
@@ -36,6 +45,12 @@ if (isset($_GET["id"])) {
         // Obtiene los valores almacenados en localStorage
         var titolDiapo = localStorage.getItem('titolDiapo');
         var contingut = localStorage.getItem('contingut');
+        var imatge = localStorage.getItem('rutaImg');
+        
+        let contenidoElement = document.getElementById('contenidoPrevisualizado');
+        let tituloElement= document.getElementById('tituloPrevisualizado');
+        let imatgeElement= document.getElementById('imatgePrevisualizado');
+        let cont = document.querySelector('.contenido');
 
         // Variable para el mensaje de aviso
         var aviso = '';
@@ -43,26 +58,52 @@ if (isset($_GET["id"])) {
         // Comprueba si no hay título
         if (!titolDiapo) {
             // Oculta el contenido
-            document.getElementById('tituloPrevisualizado').style.display='none';
-            document.getElementById('contenidoPrevisualizado').style.display = 'none';
+            tituloElement.style.display='none';
+            cont.style.display = 'none';
             // Actualiza el mensaje de aviso
             aviso = 'La diapositiva no tiene contenido.';
-        }
-        if (!contingut) {
-            document.getElementById('tituloPrevisualizado').style.margin='200px';
-            document.getElementById('contenidoPrevisualizado').style.display='none';
+        }else{
+            if (!contingut) {
+                // Muestra el título si no hay contenido
+                tituloElement.textContent = titolDiapo;
+                tituloElement.style.margin='200px';
+                cont.style.display='none';
+            }else{
+                if(!imatge){
+                // Muestra los valores en la página
+                    tituloElement.textContent = titolDiapo;
+                    contenidoElement.textContent = contingut;
+                    cont.style.display = 'flex';
+                    imatgeElement.style.display = 'none';
+                    document.getElementById('aviso').textContent = aviso;
+                }else{
+                    // Muestra título, contenido e imagen
+                    tituloElement.textContent = titolDiapo;
+                    contenidoElement.textContent = contingut;
+                    imatgeElement.src = imatge;
 
-        }
+                    cont.style.display = 'flex';
+                    cont.style.flexDirection= 'row';
+                    cont.style.justifyContent= 'space-around';
 
-        // Muestra los valores en la página
-        document.getElementById('tituloPrevisualizado').textContent = titolDiapo;
-        document.getElementById('contenidoPrevisualizado').textContent = contingut;
-        document.getElementById('aviso').textContent = aviso;
+                    contenidoElement.style.display = 'flex';
+                    contenidoElement.style.width = '500px';
+                    contenidoElement.style.padding = '10px'
 
+                    imatgeElement.style.display = 'flex';
+
+
+                    document.getElementById('aviso').textContent = aviso;
+                }
+            }
+        }   
+
+        // Elimina los datos almacenados en localStorage
+        localStorage.removeItem('rutaImg');
         localStorage.removeItem('titolDiapo');
         localStorage.removeItem('contingut');
 
-
+        // Agrega un evento de clic al botón de volver para regresar a la página anterior
         document.getElementById("volverButton").addEventListener("click", function() {
         // Redirige a la página anterior
         window.history.back(); // Esto redirige a la página anterior en el historial del navegador
