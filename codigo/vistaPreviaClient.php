@@ -1,22 +1,34 @@
 <?php
+
+// Incluye archivos de funciones necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
+// Inicia la sesión
 session_start();
 
+// Comprueba si se proporciona un parámetro "url" en la URL
 if (isset($_GET["url"])) {
+    // Obtiene la URL única de la presentación
     $url_unica = $_GET["url"];
+    // Obtiene el ID de la presentación correspondiente a la URL única
     $id_presentacio = $dao->getIdPorURL($url_unica);
 
     if ($id_presentacio === "Id no encontrado ") {
+        // Redirige a la página de error 404 si no se encuentra el ID de la presentación
         header("Location: error404.html");
         exit();
     }
 
+    // Obtiene el título de la presentación
     $titol = $dao->getTitolPorID($id_presentacio);
+    // Obtiene las diapositivas de la presentación
     $diapo = $dao->getDiapositives($id_presentacio);
+    // Obtiene el PIN de la presentación
     $pin_presentacion = $dao->getHashContrasena($id_presentacio);
+    
     if (($pin_presentacion !== null) && ($_SESSION['contrasena_valida'][$id_presentacio] !== true)) {
+        // Redirige a la página de validación de contraseña si se requiere contraseña y no se ha validado
         header("Location: validaPassword.php?url=$url_unica");
         exit();
     } else {
@@ -24,6 +36,7 @@ if (isset($_GET["url"])) {
         $diapo = $dao->getDiapositives($id_presentacio);
     }
 } else {
+    // Redirige a la página de error 404 si no se proporciona el parámetro "url"
     header("Location: error404.html");
     exit();
 }
@@ -36,6 +49,7 @@ $contingut = "";
 if (isset($_GET["id_diapo"])) {
     $id_diapo = $_GET["id_diapo"];
     if ($id_diapo != '') {
+        // Obtiene el título y contenido de una diapositiva específica
         $titolDiapo = $dao->getTitolDiapoPorID($id_diapo);
         $contingut = $dao->getContingutPorID($id_diapo);
 
@@ -63,7 +77,6 @@ if (isset($_GET["id_diapo"])) {
         </div>
         <div class="presentacionV2">
             <div class="presentacion-guardada">
-                
                 <div class='buttons-editar'>
                     <p id="titulo-guardado" class="tituloGuardado"><?php echo $titol; ?> 
                     <form method='post'>
@@ -104,11 +117,13 @@ if (isset($_GET["id_diapo"])) {
     </div>
 
     <script>
+        //boton para volver a la pantalla inicial
         const button = document.querySelector('.volver');
         button.addEventListener('click', function (e) {
             window.location.href = "index.php";
         });
 
+        // Esta función se utiliza para obtener y almacenar el título de la diapositiva en el almacenamiento local
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value.toString();
             // Almacena los valores en localStorage para que estén disponibles en la nueva página

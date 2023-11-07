@@ -1,9 +1,14 @@
 <?php
+
+// Incluye archivos de funciones necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
+// Comprueba si se proporciona un parámetro "id" en la URL
 if (isset($_GET["id"])) {
+    // Obtiene el ID de la presentación
     $id_presentacio = $_GET["id"];
+    // Obtiene el título y las diapositivas de la presentación
     $titol = $dao->getTitolPorID($id_presentacio);
     $diapo = $dao->getDiapositives($id_presentacio);
 } else {
@@ -15,9 +20,11 @@ $id_diapo = '';
 $titolDiapo = "";
 $contingut = "";
 
+// Comprueba si se proporciona un parámetro "id_diapo" en la URL
 if (isset($_GET["id_diapo"])) {
     $id_diapo = $_GET["id_diapo"];
     if ($id_diapo != '') {
+        // Obtiene el título, contenido e imagen de una diapositiva específica
         $titolDiapo = $dao->getTitolDiapoPorID($id_diapo);
         $contingut = $dao->getContingutPorID($id_diapo);
         $imatge = $dao->getImatgePorID($id_diapo);
@@ -90,14 +97,14 @@ if (isset($_GET["id_diapo"])) {
                    ?><input type="text" name="titol" class="titolContDiapo" id='titol' value=' <?=$titolDiapo?> 'readOnly  > <?php ;
                 }?>
 
-                   <?php if ($infoDiapo === TRUE) {?>
+                   <?php if ($infoDiapo === TRUE)  // Abre un bloque PHP {?>
                     <div class="contImatge">
                         <input type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> 'readOnly >
                         <img src="<?= $imatge?>" class="imatge" >
                     </div>
                     
                     <?php ;
-                   }?>
+                   // Cierra el bloque PHP?>
             </div>
 
             
@@ -106,11 +113,12 @@ if (isset($_GET["id_diapo"])) {
     
     <script>
         const button = document.querySelector('.volver');
-
+        //boton para volver a la pantalla inicial
         button.addEventListener('click', function (e) {
             window.location.href = "index.php";
         });
 
+        // Esta función se utiliza para obtener y almacenar el título y contenido de la diapositiva en el almacenamiento local
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
             var contingut = document.getElementById('contingut').value;

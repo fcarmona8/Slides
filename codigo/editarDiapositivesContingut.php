@@ -1,8 +1,10 @@
-
 <?php
+
+// Incluye los archivos necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
+// Comprueba si se proporciona un 'id' en la URL
 if (isset($_GET["id"])) {
     $id_presentacio = $_GET["id"];
     $titol = $dao->getTitolPorID($id_presentacio);
@@ -19,6 +21,7 @@ $id_diapo = '';
 $titolDiapo = "";
 $contingut = "";
 
+// Comprueba si se proporciona un 'id_diapo' en la URL
 if (isset($_GET["id_diapo"])) {
     $id_diapo = $_GET["id_diapo"];
     if ($id_diapo != '') {
@@ -58,6 +61,7 @@ if ($editDiapo === false) {
     <div class="up">
         <div class="volver">
             <button>
+                <!-- Botón "Volver" con un icono -->
                 <svg class='volverButton' xmlns="http://www.w3.org/2000/svg" height="1em"
                     viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                     <path
@@ -200,12 +204,17 @@ if ($editDiapo === false) {
             </div>
         </div>
         <div class="right">
+            <!-- Formulario para editar o crear diapositiva -->
             <form method="POST" id="formDiapoCont" onsubmit="return validateFormCont();">
                 <!-- Campo oculto para enviar el ID -->
+                <!-- Comprueba si la diapositiva se está editando o creando -->
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
+                    <!-- Si se está editando, muestra el ID de la diapositiva -->
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <!-- Si se está creando, muestra el nuevo ID de la diapositiva -->
                 <span id="titolError" class="error"></span>
+                <!-- Muestra el título de la diapositiva si se está editando -->
                 <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"
                     required<?php if ($editDiapo===TRUE) { ?> value="<?=$titolDiapo; ?>"
                 <?php ;
@@ -214,6 +223,7 @@ if ($editDiapo === false) {
                 <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" required><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
+                   <!-- Botón para guardar la diapositiva -->
                 <input type="submit" name="anadirEditarDiapositiva" class="boton-crear" <?php if ($editDiapo===TRUE) {
                     echo 'value="Guardar diapositiva"' ; }else{ echo 'value="Añadir diapositiva"' ; } ?> >
             </form>
@@ -238,13 +248,18 @@ if ($editDiapo === false) {
     </div>
 
     <script>
-        const button = document.querySelector('.volver');
-        const buttonEstils = document.querySelector('.editarEstilsPres');
-        const titulInput = document.getElementById('titol');
-        const previsualizar = document.querySelector('.buttons-diapositiva');
+        // Selecciona elementos del DOM por su clase o ID
+        const button = document.querySelector('.volver'); // Botón para volver
+        const buttonEstils = document.querySelector('.editarEstilsPres'); // Botón para editar estilos
+        const titulInput = document.getElementById('titol'); // Campo de entrada de título
+        const previsualizar = document.querySelector('.buttons-diapositiva'); // Botón de previsualización
+        
+        // Oculta el botón de previsualización si el campo de entrada de título está vacío
         if (titulInput.value =='') {
             previsualizar.style.display = 'none';
         }
+
+        // Muestra u oculta el botón de previsualización en función del contenido del campo de entrada del título
         titulInput.addEventListener('keyup', function(){
             if (titulInput.value == '') {
                 previsualizar.style.display = 'none';
@@ -252,6 +267,8 @@ if ($editDiapo === false) {
                 previsualizar.style.display = 'flex';
             }
         })
+
+        // Redirige a diferentes páginas según el botón presionado
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function () {
             window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
 
@@ -264,9 +281,13 @@ if ($editDiapo === false) {
             window.location.href = "editarDiapositivesImatge.php?id=<?php echo $id_presentacio; ?>";
 
         });
+
+        // Redirige a la página principal cuando se hace clic en el botón "Volver"
         button.addEventListener('click', function (e) {
             window.location.href = "index.php";
         });
+
+        // Previene la acción predeterminada y redirige a la página de selección de estilos
         buttonEstils.addEventListener('click', function (e) {
             e.preventDefault();
             const url = "seleccionarEstilos.php?id=<?php echo $id_presentacio; ?>";
@@ -274,6 +295,7 @@ if ($editDiapo === false) {
             window.location.href = url;
         });
 
+        // Almacena valores en el almacenamiento local (localStorage) para que estén disponibles en otra página
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
             var contingut = document.getElementById('contingut').value;
@@ -283,6 +305,7 @@ if ($editDiapo === false) {
             localStorage.setItem('contingut', contingut);
         }
 
+        // Copia una URL al portapapeles y muestra mensajes de éxito o error
         function copiarURL(buttoncopy) {
             var url = buttoncopy.getAttribute('data-url');
 
