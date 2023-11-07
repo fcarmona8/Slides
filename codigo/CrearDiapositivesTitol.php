@@ -123,7 +123,7 @@ if (isset($_GET["id_diapo"])) {
                         echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
                    }?>
             </form>
-            <div class='buttons-diapositiva' style="display: none;">
+            <div class='buttons-diapositiva'>
                 <!-- Boton previsualizar diapositiva -->
                 <form method="post" action="previsualitzarDiapositiva.php">
                     <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
@@ -138,6 +138,9 @@ if (isset($_GET["id_diapo"])) {
         const button = document.querySelector('.volver');
         const titulInput = document.getElementById('titol');
         const previsualizar = document.querySelector('.buttons-diapositiva');
+        if (titulInput.value =='') {
+            previsualizar.style.display = 'none';
+        }
         titulInput.addEventListener('keyup', function(){
             if (titulInput.value == '') {
                 previsualizar.style.display = 'none';
