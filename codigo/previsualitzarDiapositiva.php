@@ -1,12 +1,17 @@
 <?php
+
+// Incluye archivos de funciones necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
+
 // Obtener el valor de $id_presentacio de PHP
 $id_presentacio = isset($_GET["id"]) ? $_GET["id"] : "";
 
 if (isset($_GET["id"])) {
+    // Si se proporciona un "id" en la URL, obtén el estilo de presentación desde la base de datos
     $estiloPresentacion = $dao->getEstiloPresentacion($id_presentacio);
 } else {
+    // Si no se proporciona "id" en la URL, muestra un mensaje de error
     $titol = "Error, no se encuentra la presentacion";
 }
 ?>
@@ -25,6 +30,7 @@ if (isset($_GET["id"])) {
         <p id="aviso" style="color: red;"></p>
     </div>
     <div class="preview">
+        <!-- Muestra la previsualización de la diapositiva con el estilo obtenido -->
         <div class="diapositiva-preview-<?php echo $estiloPresentacion;?>">
             <h1 id="tituloPrevisualizado"></h1>
             <div class="contenido">
@@ -58,6 +64,7 @@ if (isset($_GET["id"])) {
             aviso = 'La diapositiva no tiene contenido.';
         }else{
             if (!contingut) {
+                // Muestra el título si no hay contenido
                 tituloElement.textContent = titolDiapo;
                 tituloElement.style.margin='200px';
                 cont.style.display='none';
@@ -70,6 +77,7 @@ if (isset($_GET["id"])) {
                     imatgeElement.style.display = 'none';
                     document.getElementById('aviso').textContent = aviso;
                 }else{
+                    // Muestra título, contenido e imagen
                     tituloElement.textContent = titolDiapo;
                     contenidoElement.textContent = contingut;
                     imatgeElement.src = imatge;
@@ -90,11 +98,12 @@ if (isset($_GET["id"])) {
             }
         }   
 
+        // Elimina los datos almacenados en localStorage
         localStorage.removeItem('rutaImg');
         localStorage.removeItem('titolDiapo');
         localStorage.removeItem('contingut');
 
-
+        // Agrega un evento de clic al botón de volver para regresar a la página anterior
         document.getElementById("volverButton").addEventListener("click", function() {
         // Redirige a la página anterior
         window.history.back(); // Esto redirige a la página anterior en el historial del navegador

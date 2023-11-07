@@ -1,4 +1,6 @@
 <?php
+
+// Incluye los archivos necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
@@ -9,6 +11,7 @@ if (isset($_GET["id"])) {
     $presen = $dao->getPresentacions();
     $row = $presen->fetch();
     $url_unica = $dao->getURLPorID($id_presentacio);
+    $estado = $dao->getEstadoPublicacion($id_presentacio);
 } else {
     $titol = "Título no disponible";
 }
@@ -48,6 +51,7 @@ if ($editDiapo === false) {
 <body id="crearDiapositivasContingut">
     <div class="up">
         <div class="volver">
+            <!-- Botón de inicio con un ícono de flecha -->
             <button> 
             <svg  class='volverButton' xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></svg>
 
@@ -62,6 +66,7 @@ if ($editDiapo === false) {
                     <form method='post' class="form-inline">
                             <input type="hidden" name="id_presentacion" value="<?= $id_presentacio; ?>">
                             <input type="hidden" name="from" value="Editar">
+                            <!-- Botón de previsualización con un ícono de ojo -->
                             <button class='buttons' type="submit" name="previsualizar_presentacion">
                                 <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>                    
                             </button>
@@ -74,6 +79,7 @@ if ($editDiapo === false) {
                         <!-- Boton editar estilo de la presentacion -->
                         <svg xmlns="http://www.w3.org/2000/svg" height="1em"
                             viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                            <!-- Ícono de editar estilos de presentación -->
                             <path
                                 d="M512 256c0 .9 0 1.8 0 2.7c-.4 36.5-33.6 61.3-70.1 61.3H344c-26.5 0-48 21.5-48 48c0 3.4 .4 6.7 1 9.9c2.1 10.2 6.5 20 10.8 29.9c6.1 13.8 12.1 27.5 12.1 42c0 31.8-21.6 60.7-53.4 62c-3.5 .1-7 .2-10.6 .2C114.6 512 0 397.4 0 256S114.6 0 256 0S512 114.6 512 256zM128 288a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm0-96a32 32 0 1 0 0-64 32 32 0 1 0 0 64zM288 96a32 32 0 1 0 -64 0 32 32 0 1 0 64 0zm96 96a32 32 0 1 0 0-64 32 32 0 1 0 0 64z" />
                         </svg> Modificar estilos
@@ -84,7 +90,8 @@ if ($editDiapo === false) {
                     <form method="post" class="form-inline">
                         <input type="hidden" name="id_presentacion" value="<?= $id_presentacio; ?>">
                         <button class="buttons-header" type="submit" name="editarPres"> 
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em"
+                        <!-- Ícono de editar presentación -->    
+                        <svg xmlns="http://www.w3.org/2000/svg" height="1em"
                                 viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                 <path
                                     d="M471.6 21.7c-21.9-21.9-57.3-21.9-79.2 0L362.3 51.7l97.9 97.9 30.1-30.1c21.9-21.9 21.9-57.3 0-79.2L471.6 21.7zm-299.2 220c-6.1 6.1-10.8 13.6-13.5 21.9l-29.6 88.8c-2.9 8.6-.6 18.1 5.8 24.6s15.9 8.7 24.6 5.8l88.8-29.6c8.2-2.7 15.7-7.4 21.9-13.5L437.7 172.3 339.7 74.3 172.4 241.7zM96 64C43 64 0 107 0 160V416c0 53 43 96 96 96H352c53 0 96-43 96-96V320c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V160c0-17.7 14.3-32 32-32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96z" />
@@ -101,7 +108,7 @@ if ($editDiapo === false) {
                                 viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                 <path
                                     d="M352 224H305.5c-45 0-81.5 36.5-81.5 81.5c0 22.3 10.3 34.3 19.2 40.5c6.8 4.7 12.8 12 12.8 20.3c0 9.8-8 17.8-17.8 17.8h-2.5c-2.4 0-4.8-.4-7.1-1.4C210.8 374.8 128 333.4 128 240c0-79.5 64.5-144 144-144h80V34.7C352 15.5 367.5 0 386.7 0c8.6 0 16.8 3.2 23.2 8.9L548.1 133.3c7.6 6.8 11.9 16.5 11.9 26.7s-4.3 19.9-11.9 26.7l-139 125.1c-5.9 5.3-13.5 8.2-21.4 8.2H384c-17.7 0-32-14.3-32-32V224zM80 96c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16H400c8.8 0 16-7.2 16-16V384c0-17.7 14.3-32 32-32s32 14.3 32 32v48c0 44.2-35.8 80-80 80H80c-44.2 0-80-35.8-80-80V112C0 67.8 35.8 32 80 32h48c17.7 0 32 14.3 32 32s-14.3 32-32 32H80z" />
-                            </svg><?php echo $row['publicada'] ? 'Despublicar' : 'Publicar'; ?> presentación
+                            </svg><?php echo $estado == 1 ? 'Despublicar' : 'Publicar'; ?> presentación
                         </button>
                         
                     </form><div class="vertical-line"></div>
@@ -121,12 +128,17 @@ if ($editDiapo === false) {
 
     </div>
 
+    <!-- Sección de edición de diapositivas -->
     <div class="down">
         <div class="left">
             <div class="nuevaDiapositiva">
+                <!-- Botón de agregar título con un ícono de texto -->
                 <button name="tipusTitol" class="buttonType">Titulo</button>
+                <!-- Botón de agregar contenido con un ícono de contenido -->
                 <button name="tipusContingut" class="buttonType">Contenido</button>
+                <!-- Botón de agregar imagen con un ícono de imagen -->
                 <button name="tipusImatge" class="buttonType">Imagen</button>
+                <button name="tipusSeleccioSimple" class="buttonType">Pregunta</button>
             </div>
             <div class="diapositivas">
                 <?php while ($row = $diapo->fetch()) : ?>
@@ -143,7 +155,7 @@ if ($editDiapo === false) {
                         <div class='buttons-orden'>
                             <form method="post"  class='button-upDown'>
                                 <input type="hidden" name="id_diapo" value="<?= $row['ID_Diapositiva'];?>">
-                                    <button type="submit" class="buttonOrden name="ordenDiapoUp">
+                                    <button type="submit" class="buttonOrden" name="ordenDiapoUp">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 320 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M182.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"/></svg>                    </button>
                             </form>
                             <form method="post" class='button-upDown'>
@@ -201,7 +213,7 @@ if ($editDiapo === false) {
                     ?> >            
             </form>
             <div class='buttons-diapositiva'>
-                <!-- Boton previsualizar diapositiva -->
+                <!-- Formulario para previsualizar la diapositiva actual -->
                 <form method="post" action="previsualitzarDiapositiva.php">
                     <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                     <input type="hidden" name="id_diapo" value="<?= $id_diapo; ?>">
@@ -215,13 +227,21 @@ if ($editDiapo === false) {
     </div>
     
     <script>
+        // Selecciona el botón con la clase 'volver'
         const button = document.querySelector('.volver');
+        // Selecciona el botón con la clase 'editarEstilsPres'
         const buttonEstils = document.querySelector('.editarEstilsPres');
+        // Obtiene el elemento de entrada con el ID 'titol'
         const titulInput = document.getElementById('titol');
+        // Selecciona el elemento con la clase 'buttons-diapositiva'
         const previsualizar = document.querySelector('.buttons-diapositiva');
+
+        // Si el valor del elemento de entrada 'titolInput' está vacío, oculta el elemento 'previsualizar'
         if (titulInput.value =='') {
             previsualizar.style.display = 'none';
         }
+
+        // Agrega un evento de escucha cuando se suelta una tecla en 'titulInput'
         titulInput.addEventListener('keyup', function(){
             if (titulInput.value == '') {
                 previsualizar.style.display = 'none';
@@ -229,28 +249,47 @@ if ($editDiapo === false) {
                 previsualizar.style.display = 'flex';
             }
         })
+
+        // Agrega un evento de clic al botón con el nombre 'tipusTitol'
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
+            // Redirige a "editarDiapositivesTitol.php" con el ID de presentación
             window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
-            
         });
+
+        // Agrega un evento de clic al botón con el nombre 'tipusContingut'
         document.querySelector("button[name='tipusContingut']").addEventListener("click", function() {
+            // Redirige a "editarDiapositivesContingut.php" con el ID de presentación
             window.location.href = "editarDiapositivesContingut.php?id=<?php echo $id_presentacio; ?>";
             
         });
+
+        // Agrega un evento de clic al botón con el nombre 'tipusImatge'
         document.querySelector("button[name='tipusImatge']").addEventListener("click", function() {
+            // Redirige a "editarDiapositivesImatge.php" con el ID de presentación
             window.location.href = "editarDiapositivesImatge.php?id=<?php echo $id_presentacio; ?>";
-            
         });
+        document.querySelector("button[name='tipusSeleccioSimple']").addEventListener("click", function () {
+            window.location.href = "editarDiapositivesPregunta.php?id=<?php echo $id_presentacio; ?>";
+
+        });
+
+        // Agrega un evento de clic al botón 'button' con la clase 'volver'
         button.addEventListener('click', function (e) {
+            // Redirige a la página de inicio "index.php"
             window.location.href = "index.php";
         });
+
+        // Agrega un evento de clic al botón 'buttonEstils' con la clase 'editarEstilsPres'
         buttonEstils.addEventListener('click', function (e) {
             e.preventDefault();
+            // Crea la URL para redirigir a "seleccionarEstilos.php" con el ID de presentación
             const url = "seleccionarEstilos.php?id=<?php echo $id_presentacio; ?>";
             console.log(url);
+            // Redirige a la URL creada
             window.location.href = url;
         });
 
+        // Función para obtener los valores de título, contenido y ruta de la imagen y almacenarlos en el almacenamiento local
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
             var contingut = document.getElementById('contingut').value;
@@ -262,22 +301,29 @@ if ($editDiapo === false) {
             localStorage.setItem('rutaImg', rutaImg);
     }
 
-    
+    // Función para confirmar la eliminación de un archivo
     function confirmarEliminacion(file) {
+        // Muestra el elemento con ID 'confirmacion-eliminar'
         document.getElementById('confirmacion-eliminar').style.display = 'block';
         
+        // Agrega un evento de clic al botón 'confirmar-eliminar' para ocultar el mensaje y borrar el valor del archivo
         document.getElementById('confirmar-eliminar').onclick = function() {
             document.getElementById('confirmacion-eliminar').style.display= 'none';
             file.value = ''
         };
         
         }
+        // Selecciona el elemento de entrada de tipo archivo con el nombre 'imatge'
         const fileInput = document.querySelector("input[name='imatge']");
     fileInput.addEventListener('change', function(){
+        // Obtiene el tamaño del archivo seleccionado en MB
         const size = this.files[0].size /1024 /1024;
+
+        // Si el tamaño es mayor o igual a 2 MB, muestra el mensaje de confirmación
         if(size >= 2){return confirmarEliminacion(fileInput);};
     })
 
+    // Función para copiar una URL al portapapeles
     function copiarURL(buttoncopy) {
         var url = buttoncopy.getAttribute('data-url');
 
@@ -296,19 +342,25 @@ if ($editDiapo === false) {
             return; // Salir de la función si el URL es nulo
         }
 
+        // Crea una URL completa
         const urlCompleta = `/vistaPreviaClient.php?url=${url}`;
 
+        // Crea un elemento de entrada oculto
         const input = document.createElement('input');
         input.style.position = 'fixed';
         input.style.opacity = 0;
 
+        // Establece el valor del elemento de entrada oculto como la URL completa
         input.value = urlCompleta;
 
+        // Agrega el elemento de entrada al cuerpo del documento
         document.body.appendChild(input);
 
+        // Selecciona el contenido del elemento de entrada
         input.select();
         document.execCommand('copy');
 
+        // Elimina el elemento de entrada del cuerpo del documento
         document.body.removeChild(input);
 
         // Crear un mensaje de éxito y mostrarlo en el messageContainer

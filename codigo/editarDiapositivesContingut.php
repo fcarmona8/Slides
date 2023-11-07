@@ -1,8 +1,10 @@
-
 <?php
+
+// Incluye los archivos necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
+// Comprueba si se proporciona un 'id' en la URL
 if (isset($_GET["id"])) {
     $id_presentacio = $_GET["id"];
     $titol = $dao->getTitolPorID($id_presentacio);
@@ -10,6 +12,7 @@ if (isset($_GET["id"])) {
     $url_unica = $dao->getURLPorID($id_presentacio);
     $presen = $dao->getPresentacions();
     $row = $presen->fetch();
+    $estado = $dao->getEstadoPublicacion($id_presentacio);
 } else {
     $titol = "Título no disponible";
 }
@@ -19,6 +22,7 @@ $id_diapo = '';
 $titolDiapo = "";
 $contingut = "";
 
+// Comprueba si se proporciona un 'id_diapo' en la URL
 if (isset($_GET["id_diapo"])) {
     $id_diapo = $_GET["id_diapo"];
     if ($id_diapo != '') {
@@ -52,6 +56,7 @@ if ($editDiapo === false) {
     <div class="up">
         <div class="volver">
             <button>
+                <!-- Botón "Volver" con un icono -->
                 <svg class='volverButton' xmlns="http://www.w3.org/2000/svg" height="1em"
                     viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                     <path
@@ -113,7 +118,7 @@ if ($editDiapo === false) {
                                 viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                                 <path
                                     d="M352 224H305.5c-45 0-81.5 36.5-81.5 81.5c0 22.3 10.3 34.3 19.2 40.5c6.8 4.7 12.8 12 12.8 20.3c0 9.8-8 17.8-17.8 17.8h-2.5c-2.4 0-4.8-.4-7.1-1.4C210.8 374.8 128 333.4 128 240c0-79.5 64.5-144 144-144h80V34.7C352 15.5 367.5 0 386.7 0c8.6 0 16.8 3.2 23.2 8.9L548.1 133.3c7.6 6.8 11.9 16.5 11.9 26.7s-4.3 19.9-11.9 26.7l-139 125.1c-5.9 5.3-13.5 8.2-21.4 8.2H384c-17.7 0-32-14.3-32-32V224zM80 96c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16H400c8.8 0 16-7.2 16-16V384c0-17.7 14.3-32 32-32s32 14.3 32 32v48c0 44.2-35.8 80-80 80H80c-44.2 0-80-35.8-80-80V112C0 67.8 35.8 32 80 32h48c17.7 0 32 14.3 32 32s-14.3 32-32 32H80z" />
-                            </svg><?php echo $row['publicada'] ? 'Despublicar' : 'Publicar'; ?> presentación
+                            </svg><?php echo $estado == 1 ? 'Despublicar' : 'Publicar'; ?> presentación
                         </button>
                         
                     </form><div class="vertical-line"></div>
@@ -141,6 +146,7 @@ if ($editDiapo === false) {
                 <button name="tipusTitol" class="buttonType">Titulo</button>
                 <button name="tipusContingut" class="buttonType">Contenido</button>
                 <button name="tipusImatge" class="buttonType">Imagen</button>
+                <button name="tipusSeleccioSimple" class="buttonType">Pregunta</button>
             </div>
             <div class="diapositivas">
                 <?php while ($row = $diapo->fetch()) : ?>
@@ -194,12 +200,17 @@ if ($editDiapo === false) {
             </div>
         </div>
         <div class="right">
+            <!-- Formulario para editar o crear diapositiva -->
             <form method="POST" id="formDiapoCont" onsubmit="return validateFormCont();">
                 <!-- Campo oculto para enviar el ID -->
+                <!-- Comprueba si la diapositiva se está editando o creando -->
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
+                    <!-- Si se está editando, muestra el ID de la diapositiva -->
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
+                <!-- Si se está creando, muestra el nuevo ID de la diapositiva -->
                 <span id="titolError" class="error"></span>
+                <!-- Muestra el título de la diapositiva si se está editando -->
                 <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"
                     required<?php if ($editDiapo===TRUE) { ?> value="<?=$titolDiapo; ?>"
                 <?php ;
@@ -208,6 +219,7 @@ if ($editDiapo === false) {
                 <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" required><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
+                   <!-- Botón para guardar la diapositiva -->
                 <input type="submit" name="anadirEditarDiapositiva" class="boton-crear" <?php if ($editDiapo===TRUE) {
                     echo 'value="Guardar diapositiva"' ; }else{ echo 'value="Añadir diapositiva"' ; } ?> >
             </form>
@@ -232,13 +244,18 @@ if ($editDiapo === false) {
     </div>
 
     <script>
-        const button = document.querySelector('.volver');
-        const buttonEstils = document.querySelector('.editarEstilsPres');
-        const titulInput = document.getElementById('titol');
-        const previsualizar = document.querySelector('.buttons-diapositiva');
+        // Selecciona elementos del DOM por su clase o ID
+        const button = document.querySelector('.volver'); // Botón para volver
+        const buttonEstils = document.querySelector('.editarEstilsPres'); // Botón para editar estilos
+        const titulInput = document.getElementById('titol'); // Campo de entrada de título
+        const previsualizar = document.querySelector('.buttons-diapositiva'); // Botón de previsualización
+        
+        // Oculta el botón de previsualización si el campo de entrada de título está vacío
         if (titulInput.value =='') {
             previsualizar.style.display = 'none';
         }
+
+        // Muestra u oculta el botón de previsualización en función del contenido del campo de entrada del título
         titulInput.addEventListener('keyup', function(){
             if (titulInput.value == '') {
                 previsualizar.style.display = 'none';
@@ -246,6 +263,8 @@ if ($editDiapo === false) {
                 previsualizar.style.display = 'flex';
             }
         })
+
+        // Redirige a diferentes páginas según el botón presionado
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function () {
             window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
 
@@ -258,9 +277,21 @@ if ($editDiapo === false) {
             window.location.href = "editarDiapositivesImatge.php?id=<?php echo $id_presentacio; ?>";
 
         });
+        document.querySelector("button[name='tipusSeleccioSimple']").addEventListener("click", function () {
+            window.location.href = "editarDiapositivesPregunta.php?id=<?php echo $id_presentacio; ?>";
+
+        });
+        document.querySelector("button[name='tipusSeleccioSimple']").addEventListener("click", function () {
+            window.location.href = "editarDiapositivesPregunta.php?id=<?php echo $id_presentacio; ?>";
+
+        });
+
+        // Redirige a la página principal cuando se hace clic en el botón "Volver"
         button.addEventListener('click', function (e) {
             window.location.href = "index.php";
         });
+
+        // Previene la acción predeterminada y redirige a la página de selección de estilos
         buttonEstils.addEventListener('click', function (e) {
             e.preventDefault();
             const url = "seleccionarEstilos.php?id=<?php echo $id_presentacio; ?>";
@@ -268,6 +299,7 @@ if ($editDiapo === false) {
             window.location.href = url;
         });
 
+        // Almacena valores en el almacenamiento local (localStorage) para que estén disponibles en otra página
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
             var contingut = document.getElementById('contingut').value;
@@ -277,6 +309,7 @@ if ($editDiapo === false) {
             localStorage.setItem('contingut', contingut);
         }
 
+        // Copia una URL al portapapeles y muestra mensajes de éxito o error
         function copiarURL(buttoncopy) {
             var url = buttoncopy.getAttribute('data-url');
 

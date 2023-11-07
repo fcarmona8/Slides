@@ -1,10 +1,7 @@
 <?php
-
-// Incluir los archivos necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
-// Verificar si se proporciona el parámetro "id" en la URL
 if (isset($_GET["id"])) {
     $id_presentacio = intval($_GET["id"]);
     $titol = $dao->getTitolPorID($id_presentacio);
@@ -24,6 +21,10 @@ if (isset($_GET["id_diapo"])) {
     if ($id_diapo != '') {
         $titolDiapo = $dao->getTitolDiapoPorID($id_diapo);
         $contingut = $dao->getContingutPorID($id_diapo);
+        $pregunta = $dao->getPregunta($id_diapo);
+        $id_pregunta = $pregunta['ID_pregunta'];
+        $respuestas = $dao->getRespuestas($id_pregunta);
+
         $editDiapo = TRUE;
     }
     
@@ -55,21 +56,19 @@ if (isset($_GET["id_diapo"])) {
         </div>
         <div class="presentacionV2">
             <div class="presentacion-guardada">
-                <!-- Contenido de la presentación y botones -->
+                
                 <div class='buttons-editar'>
                     <p id="titulo-guardado" class="tituloGuardado"><?php echo $titol; ?> 
                     <form method='post'>
                             <input type="hidden" name="id_presentacion" value="<?= $id_presentacio; ?>">
                             <input type="hidden" name="from" value="Editar">
                             <button class='buttons' type="submit" name="previsualizar_presentacion">
-                            <!-- Boton editar estilo de la presentacion -->    
-                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>                    
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>                    
                             </button>
                         </form>
                     </p>
                 </div>
                 <div class="editarEstils">
-                    <!-- Formulario para editar estilos de la presentación -->
                     <form method="post">
                         <button class="buttons-header editarEstilsPres" name="editarEstilsPres"> 
                         <!-- Boton editar estilo de la presentacion -->
@@ -94,7 +93,7 @@ if (isset($_GET["id_diapo"])) {
                     </button>
                     
                     </form><div class="vertical-line"></div>
-                    <!-- Boton publicar la presentación -->
+                    <!-- Boton publicar -->
                     <form method="post" class="form-inline">
                         <input type="hidden" name="id_presentacion" value="<?= $id_presentacio; ?>">
                         <button class='buttons-header' type="submit" name="publicar_presentacion"> 
@@ -125,7 +124,6 @@ if (isset($_GET["id_diapo"])) {
     <div class="down">
         <div class="left">
             <div class="nuevaDiapositiva">
-                <!-- Botones para agregar diferentes tipos de diapositivas -->
                 <button name="tipusTitol" class="buttonType">Titulo</button>
                 <button name="tipusContingut" class="buttonType">Contenido</button>
                 <button name="tipusImatge" class="buttonType">Imagen</button>
@@ -169,23 +167,65 @@ if (isset($_GET["id_diapo"])) {
             </div>
         </div>
         <div class="right">
-            <form method="POST" id="formDiapo" onsubmit="return validateForm();">
+            <form method="POST" id="formDiapo">
                 <!-- Campo oculto para enviar el ID -->
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
-                <span id="titolError" class="error"></span>
-                <!-- Campo de entrada de título de diapositiva -->
-                <input type="text" id="titol" name="titol" class="titolDiapo" placeholder="Titulo" maxlength="25" required <?php if ($editDiapo === TRUE) {
-                   ?> value="<?= $titolDiapo ?>" <?php ;
-                   } ?> >
-                <!-- Botón para guardar la diapositiva -->
-                <input type="submit" name="anadirEditarDiapositiva" class="boton-crear" <?php if ($editDiapo === TRUE) {
+                <div class="preguntaSimple"><?php if ($editDiapo === TRUE) {?>
+                    <input type="text" name="titol" class="titolDiapoPregunta" id='titol' value=' <?=$titolDiapo?>' >
+                        <?php
+                        echo '<input type="textarea" name="pregunta" class="preguntaDiapo" value="' . $pregunta['pregunta'] . '"></input>';
+                        ?>
+                        <div id="respuestas-container">
+                        <?php
+                        foreach ($respuestas as $index => $respuesta) {
+                            echo '<div class="respuesta-container">';
+                            
+                            echo '<input type="radio" name="respuesta_correcta" value="' . $index + 1 . '"';
+                            if ($respuesta['correcta'] == 1) {
+                                echo ' checked';
+                            }
+                            echo '>';
+                            
+                            echo '<input name="opcion[]" class="opcionDiapo" value="' . $respuesta['texto'] . '"></input>';
+                            
+                            echo '</div>';
+                        }
+
+                        echo '</div>';
+                        ?>
+                        <button type="button" class="anadirRespuesta" onclick="agregarRespuesta()">Agregar Respuesta</button>
+                        </div>
+                    <?php
+                    }else {?>
+                        <input type="text" name="titol" id="titol" class="titolDiapoPregunta" placeholder="Titulo diapositiva" maxlength="25" required/>
+                        <textarea name="pregunta" id="pregunta" class="preguntaDiapo" placeholder="Escribe tu pregunta" required></textarea>
+    
+                        <div id="respuestas-container">
+                        <div class="respuesta-container">
+                        <input type="radio" name="respuesta_correcta" value="1" checked>
+                        <input type="text" name="opcion[]" placeholder="Respuesta 1" class="opcionDiapo" required>
+                        </div>
+    
+                        <div class="respuesta-container">
+                        <input type="radio" name="respuesta_correcta" value="2">
+                        <input type="text" name="opcion[]" placeholder="Respuesta 2" class="opcionDiapo" required>
+                        </div>
+                        </div>
+                       
+                        <button type="button" class="anadirRespuesta" onclick="agregarRespuesta()">Agregar Respuesta</button>
+                        </div>
+
+                    <?php
+                    } ?>   
+                <input type="submit" name="anadirEditarDiapositivaPregunta" class="boton-crear" <?php if ($editDiapo === TRUE) {
                     echo 'value="Guardar diapositiva"';
                 }else{
                     echo 'value="Añadir diapositiva"';
                 }
                 ?> >
+                
             </form>
             <div class='buttons-diapositiva'>
                 <form method="post" action="previsualitzarDiapositiva.php"> 
@@ -202,27 +242,8 @@ if (isset($_GET["id_diapo"])) {
     </div>
 
     <script>
-        // Selección de elementos del DOM
         const button = document.querySelector('.volver');
         const buttonEstils = document.querySelector('.editarEstilsPres');
-        const titulInput = document.getElementById('titol');
-        const previsualizar = document.querySelector('.buttons-diapositiva');
-
-        // Si el campo de título está vacío, oculta el elemento "previsualizar"
-        if (titulInput.value =='') {
-            previsualizar.style.display = 'none';
-        }
-
-        // Agrega un evento para detectar pulsaciones de teclas en el campo de título
-        titulInput.addEventListener('keyup', function(){
-            if (titulInput.value == '') {
-                previsualizar.style.display = 'none';
-            }else{
-                previsualizar.style.display = 'flex';
-            }
-        })
-
-        // Event listeners para botones
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
             window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
             
@@ -250,14 +271,12 @@ if (isset($_GET["id_diapo"])) {
             window.location.href = url;
         });
 
-        // Función para obtener valores del campo de título y almacenarlos en el almacenamiento local
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
             // Almacena los valores en localStorage para que estén disponibles en la nueva página
             localStorage.setItem('titolDiapo', titolDiapo);
         }
 
-        // Función para copiar una URL al portapapeles
         function copiarURL(buttoncopy) {
         var url = buttoncopy.getAttribute('data-url');
 
@@ -276,10 +295,8 @@ if (isset($_GET["id_diapo"])) {
             return; // Salir de la función si el URL es nulo
         }
 
-        // Construye una URL completa
         const urlCompleta = `/vistaPreviaClient.php?url=${url}`;
 
-        // Crea un elemento de entrada oculto y copia la URL en él
         const input = document.createElement('input');
         input.style.position = 'fixed';
         input.style.opacity = 0;
@@ -288,11 +305,9 @@ if (isset($_GET["id_diapo"])) {
 
         document.body.appendChild(input);
 
-        // Selecciona y copia el contenido del campo de entrada
         input.select();
         document.execCommand('copy');
 
-        // Elimina el campo de entrada
         document.body.removeChild(input);
 
         // Crear un mensaje de éxito y mostrarlo en el messageContainer
@@ -305,8 +320,50 @@ if (isset($_GET["id_diapo"])) {
             messageContainer.style.display = 'none';
         }, 3000);
     }
+        function agregarRespuesta() {
+        // Contador para dar nombres únicos a los campos
+        if (document.querySelectorAll('input[type="radio"]').length <= 5) {
+            var contador = document.querySelectorAll('input[type="radio"]').length + 1;
 
+            // Crea un nuevo contenedor para la respuesta
+            var respuestaContainer = document.createElement('div');
+            respuestaContainer.classList.add('respuesta-container');
+
+            // Crea un nuevo campo de tipo radio
+            var inputRadio = document.createElement('input');
+            inputRadio.type = 'radio';
+            inputRadio.name = 'respuesta_correcta';
+            inputRadio.value = contador;
+
+            // Crea un nuevo campo de texto para la respuesta
+            var inputTexto = document.createElement('input');
+            inputTexto.type = 'text';
+            inputTexto.name = 'opcion[]';  // Usa un array para almacenar las respuestas
+            inputTexto.placeholder = 'Respuesta ' + contador;
+            inputTexto.setAttribute('required', ''); // Corrección aquí
+
+            // Agrega la clase "opcionDiapo" a ambos campos
+            inputTexto.classList.add('opcionDiapo');
+
+            // Agrega los nuevos campos al contenedor principal
+            respuestaContainer.appendChild(inputRadio);
+            respuestaContainer.appendChild(inputTexto);
+
+            // Agrega el botón de eliminar respuesta
+            var botonEliminar = document.createElement('span');
+            botonEliminar.innerHTML = '<svg class="eliminarRespuesta" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#000000}</style><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>';
+            botonEliminar.onclick = function() {
+                // Elimina el contenedor de respuesta al hacer clic en el botón
+                respuestaContainer.remove();
+            };
+            respuestaContainer.appendChild(botonEliminar);
+
+            // Agrega el contenedor al contenedor principal
+            document.getElementById('respuestas-container').appendChild(respuestaContainer);
+        }
+    }
     </script>
     <script src="controllers/Diapositives.js"></script>
+    
 </body>
 </html>
