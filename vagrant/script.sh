@@ -14,6 +14,8 @@
     
     mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE Presentacions (ID_Presentacio INT AUTO_INCREMENT PRIMARY KEY, titol VARCHAR(30) NOT NULL, descripcio TEXT, estil VARCHAR(255),pin VARCHAR(8), publicada BOOLEAN DEFAULT FALSE, url_unica VARCHAR(255) DEFAULT NULL);"
     mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE Diapositives (ID_Diapositiva INT AUTO_INCREMENT PRIMARY KEY, titol VARCHAR(25) NOT NULL, contingut TEXT(640),imatge TEXT, orden INT NOT NULL, ID_Presentacio INT, FOREIGN KEY (ID_Presentacio) REFERENCES Presentacions(ID_Presentacio));"
+    mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE pregunta(ID_pregunta INT (11) AUTO_INCREMENT PRIMARY KEY, PREGUNTA TEXT, ID_Diapositiva INT (11), FOREIGN KEY (ID_Diapositiva) REFERENCES Diapositives(ID_Diapositiva)); "
+    mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE respuesta (ID_respuesta INT (11) AUTO_INCREMENT PRIMARY KEY, texto TEXT, correcta INT (11), ID_pregunta INT (11),  FOREIGN KEY (ID_pregunta) REFERENCES pregunta(ID_pregunta)); "
 
     sed -i 's/127.0.0.1/0.0.0.0/g'  /etc/mysql/my.cnf
     service mysql restart
