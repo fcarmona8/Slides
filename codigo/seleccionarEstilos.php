@@ -1,4 +1,6 @@
 <?php
+
+// Incluye archivos de funciones necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
 
@@ -6,6 +8,7 @@ if (isset($_GET["id"])) {
     $fondoBlancoChecked = '';
     $fondoNegroChecked = '';
 
+    // Comprueba si el estilo de presentación es "fondoBlanco" o "fondoNegro" y marca el radio button correspondiente
     if ($estiloPresentacion === 'fondoBlanco') {
         $fondoBlancoChecked = 'checked';
     } elseif ($estiloPresentacion === 'fondoNegro') {
@@ -28,7 +31,9 @@ if (isset($_GET["id"])) {
 <body>  
     <div class="up">
         <div class="volver">
+            <!-- Botón "Volver" con un icono -->
             <button> 
+                <!-- Icono SVG para "Volver" -->
             <svg class="volverButton" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#000000}</style><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>
                 Volver
             </button>
@@ -44,6 +49,7 @@ if (isset($_GET["id"])) {
         <input type="radio" id="fondoBlanco" name="estilos" value="fondoBlanco" <?php echo $fondoBlancoChecked; ?>>
         <label for="fondoBlanco">Estilo 1</label>
 
+        <!-- Ejemplo de diapositiva para el "Estilo 1" -->
         <div class="diapositivaExemple1">
             <h4 class="diapositivaExemple1Titol">Titulo Ejemplo</h4>
             <p class="diapositivaExemple1Contingut">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate quasi debitis atque 
@@ -59,6 +65,7 @@ if (isset($_GET["id"])) {
         <label for="fondoNegro">Estilo 2</label>
         <input type="hidden" name="id_presentacion" value="' . $id_presentacion . '">
         
+        <!-- Ejemplo de diapositiva para el "Estilo 2" -->
         <div class="diapositivaExemple2">
             <h4 class="diapositivaExemple2Titol">Titulo Ejemplo</h4>
             <p class="diapositivaExemple2Contingut">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus nam expedita ducimus 
@@ -71,6 +78,7 @@ if (isset($_GET["id"])) {
         
     </div>
         <div>
+            <!-- Botón para enviar la selección de estilos -->
             <button class="enviarEstils" type="submit" name="enviarEstilos">Guardar Estilos</button>
         </div>
         
@@ -79,15 +87,18 @@ if (isset($_GET["id"])) {
 </div>
 
 <?php
-// Verificar si s'ha rebut el id
+// Verificar si se ha recibido el ID de la presentación
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id_presentacion = $_GET['id'];
 
+    // Procesar el formulario cuando se envía
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["enviarEstilos"])) {
         $estilos = $_POST["estilos"];
 
+        // Editar los estilos de la presentación en la base de datos
         $dao->editarEstilsPresentacio($id_presentacion, $estilos);
 
+        // Redirigir a la página adecuada según el contenido
         if ($contingut != '') {
             header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo);
         }else {
@@ -102,6 +113,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 </body>
 <script>
+    // Agrega un evento de clic al botón "Volver" para regresar a la página anterior
     const btn = document.querySelector('.volver');
     btn.addEventListener('click', function (e) {
         window.history.back();
