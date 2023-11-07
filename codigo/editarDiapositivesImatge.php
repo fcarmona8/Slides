@@ -185,15 +185,16 @@ if ($editDiapo === false) {
                 <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required<?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo; ?>" <?php ;
                    } ?> >
-                <span id="contError" class="error"></span>
-                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" required ><?php if ($editDiapo === TRUE) {
+                <?php if ($editDiapo === true) {
+                    echo '<div class="contImatge" style ="height: 54.2%">';
+                }?>
+                <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" required ><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {
-                        echo '<input input type="file" name="imatge" id="imatge" required >';
-                        echo '<p class="imatge">'.$imatge.'</p>';
+                        echo '<img src=" '.$imatge.'" class="imatge"><input type="hidden" id="rutaImg" value="'.$imatge.'"></div><input type="file" accept="image/*" name="imatge" id="imatge" >';
                    }else {
-                    echo '<input input type="file" name="imatge" id="imatge" required >';
+                    echo '<input type="file" accept="image/*" name="imatge" id="imatge" required >';
                    } ?> 
                 <input type="submit" name="anadirEditarDiapositiva" onsubmit=" " class="boton-crear" <?php if ($editDiapo === TRUE) {
                         echo 'value="Guardar diapositiva"';
@@ -219,6 +220,18 @@ if ($editDiapo === false) {
     <script>
         const button = document.querySelector('.volver');
         const buttonEstils = document.querySelector('.editarEstilsPres');
+        const titulInput = document.getElementById('titol');
+        const previsualizar = document.querySelector('.buttons-diapositiva');
+        if (titulInput.value =='') {
+            previsualizar.style.display = 'none';
+        }
+        titulInput.addEventListener('keyup', function(){
+            if (titulInput.value == '') {
+                previsualizar.style.display = 'none';
+            }else{
+                previsualizar.style.display = 'flex';
+            }
+        })
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
             window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
             
@@ -244,10 +257,12 @@ if ($editDiapo === false) {
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
             var contingut = document.getElementById('contingut').value;
+            var rutaImg =   document.getElementById('rutaImg').value;
 
-        // Almacena los valores en localStorage para que estén disponibles en la nueva página
-        localStorage.setItem('titolDiapo', titolDiapo);
-        localStorage.setItem('contingut', contingut);
+            // Almacena los valores en localStorage para que estén disponibles en la nueva página
+            localStorage.setItem('titolDiapo', titolDiapo);
+            localStorage.setItem('contingut', contingut);
+            localStorage.setItem('rutaImg', rutaImg);
     }
 
     

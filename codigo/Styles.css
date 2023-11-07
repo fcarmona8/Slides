@@ -441,7 +441,23 @@ tr {
     padding: 40px;
     margin: 0px;
 }
-
+.contImatge{
+    display: flex;
+    width: 100%;
+    height: 59.2%;
+}
+.contImatge > .contingutDiapo{
+    width: 50%;
+    height: 100%;
+    overflow: auto;
+}
+.contImatge > .imatge{
+    width: 50%;
+}
+.imatgeForm{
+    display: flex;
+    align-items: center;
+}
 .buttons-editar {
     display: flex;
     flex-direction: row;

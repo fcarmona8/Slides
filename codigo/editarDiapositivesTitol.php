@@ -194,6 +194,18 @@ if (isset($_GET["id_diapo"])) {
     <script>
         const button = document.querySelector('.volver');
         const buttonEstils = document.querySelector('.editarEstilsPres');
+        const titulInput = document.getElementById('titol');
+        const previsualizar = document.querySelector('.buttons-diapositiva');
+        if (titulInput.value =='') {
+            previsualizar.style.display = 'none';
+        }
+        titulInput.addEventListener('keyup', function(){
+            if (titulInput.value == '') {
+                previsualizar.style.display = 'none';
+            }else{
+                previsualizar.style.display = 'flex';
+            }
+        })
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
             window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
             

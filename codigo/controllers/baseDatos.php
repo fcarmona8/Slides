@@ -136,7 +136,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiva"])) {
         if (isset($_POST['contingut'])) {
-            if (isset($_FILES['imatge'])) {
+            if (isset($_FILES['imatge']) && ($_FILES['imatge']['size']>0)) {
                     // Obtener los datos del formulario
                 $titol = $_POST["titol"];
                 $contingut = $_POST["contingut"];
@@ -268,8 +268,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["getInfoDiapoVista"])){
     $id = $_POST['id'];
     $id_diapo = $_POST['id_diapo'];
     $cont = $dao->getContingutPorID($id_diapo);
+    $imatge = $dao->getImatgePorID($id_diapo);
     if($cont != NULL ){
-        header("Location: vistaPreviaClientContingut.php?id=".$id."&id_diapo=".$id_diapo);
+        if ($imatge != NULL) {
+            header("Location: vistaPreviaClientImatge.php?id=".$id."&id_diapo=".$id_diapo);
+        }else{
+            header("Location: vistaPreviaClientContingut.php?id=".$id."&id_diapo=".$id_diapo);
+        }
     }else {
         header("Location: vistaPreviaClientTitol.php?id=".$id."&id_diapo=".$id_diapo);
     }

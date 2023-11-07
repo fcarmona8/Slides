@@ -118,24 +118,24 @@ if (isset($_GET["id_diapo"])) {
                    } ?>
                 <span id="contError" class="error"></span>
                    <?php if ($infoDiapo === TRUE) {
-                        ?> <input type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> 'readOnly> <?php ;
+                        ?><div class="contImatge"> <input type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> 'readOnly> <?php ;
                     }else {
                     echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" required ></textarea>';
                    } ?>
                     
                     <?php if ($infoDiapo === TRUE) {
-                        echo '<p class="imatge"> '.$imatge.'</p>';
-                   }else {
-                    echo '<input input type="file" name="imatge" id="imatge" required >';
-                   } ?>  
-                   
-                   <?php if($infoDiapo != TRUE){
+                        echo '<img src=" '.$imatge.'" class="imatge"><input type="hidden" class="imatge" id="rutaImg" name="rutaImg" readonly value="'.$imatge.'"></div>';
+                    }else {
+                        echo '<input input type="file" accept="image/*" name="imatge" id="imatge" required >';
+                    } ?>  
+                       
+                    <?php if($infoDiapo != TRUE){
                         echo '<input type="submit" name="anadirDiapositiva" class="boton-crear" value="Añadir diapositiva">';
-                   }?>
+                    }?>
                    
                   
             </form>
-            <div class='buttons-diapositiva'>
+            <div class='buttons-diapositiva' style="display: none;">
                 <!-- Boton previsualizar diapositiva -->
                 <form method="post" action="previsualitzarDiapositiva.php">
                     <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
@@ -152,6 +152,15 @@ if (isset($_GET["id_diapo"])) {
     
     <script>
         const button = document.querySelector('.volver');
+        const titulInput = document.getElementById('titol');
+        const previsualizar = document.querySelector('.buttons-diapositiva');
+        titulInput.addEventListener('keyup', function(){
+            if (titulInput.value == '') {
+                previsualizar.style.display = 'none';
+            }else{
+                previsualizar.style.display = 'flex';
+            }
+        })
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
             window.location.href = "CrearDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
             
@@ -171,10 +180,12 @@ if (isset($_GET["id_diapo"])) {
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
             var contingut = document.getElementById('contingut').value;
+            var rutaImg =   document.getElementById('rutaImg').value;
 
             // Almacena los valores en localStorage para que estén disponibles en la nueva página
             localStorage.setItem('titolDiapo', titolDiapo);
             localStorage.setItem('contingut', contingut);
+            localStorage.setItem('rutaImg', rutaImg);
         }
 
         // Obtiene los valores almacenados en localStorage
