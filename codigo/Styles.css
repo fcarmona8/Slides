@@ -215,6 +215,7 @@ tr {
 #titulo {
     width: 90%;
     text-align: center;
+    margin-left: auto;
     height: 30%;
     margin-bottom: 5px;
     border-radius: 4px;

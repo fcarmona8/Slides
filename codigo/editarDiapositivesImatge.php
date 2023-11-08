@@ -36,12 +36,6 @@ if (isset($_GET["id_diapo"])) {
 }
 
 if ($editDiapo === false) {
-    // Obtiene el último ID de diapositiva de la base de datos
-    $ultimoIDDiapo = $dao->obtenerUltimoIDDiapositiva();
-
-    // Incrementa el ID para asignar el nuevo ID
-    $nuevoIDDiapo = $ultimoIDDiapo + 1;
-
     // Establece los valores de título y contenido desde el formulario si no existe la diapositiva
     $titolDiapo = $_POST["titol"] ?? "";
     $contingut = $_POST["contingut"] ?? "";
