@@ -437,6 +437,7 @@ tr {
     height: 59.2%;
     font-size: 18px;
     border: 2px solid black;
+    border-top: none;
     padding: 40px;
     margin: 0px;
 }
@@ -1247,7 +1248,7 @@ body.error-page {
 
 .titolDiapoPregunta {
     width: 80%;
-    margin: 30px 0px;
+    margin: 60px 0px 20px 0px;
     padding: 10px;
     font-size: 26px;
     text-align: center;
