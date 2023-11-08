@@ -90,8 +90,13 @@ if (isset($_GET["id_diapo"])) {
                 // Si el contenido es nulo, ocultar el contenido
                 contenidoElement.style.display = 'none';
                 imatgeElement.style.display='none';
+
+                tituloElement.style.fontSize = "6rem";
+                tituloElement.style.marginTop = "200px";
             } else {
                 if (diapositiva.imatge != null) {
+                    tituloElement.style.fontSize = "40px";
+                    tituloElement.style.marginTop = "65px";
                     cont.style.display = 'flex';
                     cont.style.flexDirection= 'row';
                     cont.style.justifyContent= 'space-around';
@@ -108,6 +113,8 @@ if (isset($_GET["id_diapo"])) {
                     tituloElement.textContent = diapositiva.titol;
                     contenidoElement.textContent = diapositiva.contingut;
                     contenidoElement.style.display = 'flex';
+                    tituloElement.style.fontSize = "40px";
+                    tituloElement.style.marginTop = "65px";
                 }
                 
             }
