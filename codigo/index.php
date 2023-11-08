@@ -8,8 +8,7 @@ require_once 'controllers/DAO.php';
 $presen = $dao->getPresentacions();
 ?>
 <!DOCTYPE html>
-<html>
-
+<html lang="es">
 <head>
     <title>Pantalla Home</title>
     <link rel="stylesheet" href="Styles.css">
@@ -28,7 +27,6 @@ $presen = $dao->getPresentacions();
 </script>
 <div id="message-container" class="mensaje-exito" style="display: none;"></div>
 </head>
-
 <body>
     <h1 class="titolHome">Slides</h1>
     <hr class="line">
