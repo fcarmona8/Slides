@@ -137,7 +137,8 @@ El target de esta aplicación serán personas que deseen trasmitir sus conocimie
 
 == Seguimiento semanal
 // Actualizar cada viernes con descripción y valoración
-Semana 1 (9, 10, 11 y del 16 al 21): +
+
+=== Semana 1 (9, 10, 11 y del 16 al 21): 
 Primeramente hemos definido la guia de estilos de la aplicación, decidimos los colores de la pagina, la tipografia, y hemos elegido varios iconos para la aplicación.
 Seguido de ello decidimos la base de datos, haciendo el diagrama y preparamos el vagrant para la bd, luego de poder conectar la bd con exito, nos pusimos a hacer
 los sketch y Mockups de las pantallas a realizar. Al completar los Mockups empezamos a crear los html y css de la pantalla home y crear presentacion, además del js 
@@ -148,13 +149,13 @@ guardar las presentaciones correctamente y que el diseño nos parezca aceptable 
 Al empezar el sprint 2 actualizamos el trello, hicimos los sketchs de la pagina editar para luego comenzar a hacer el html y crear la opcion de eliminar. Comenzamos con la pagina editar
 y realizamos la opcion de poder cambiar el nombre y la descripción de la presentación, y realizar la funcion de cambiar la posicion del orden(aunque aun esa funcion no se guarda en la bd). +
 
-Semana 2 (23-27) +
+=== Semana 2 (23-27) 
 Se completo la pantalla editar, cambiamos el diseño del reordenamiento, agregamos la funcion de eliminar y modificar las diapositivas. Empezamos a realizar los mockup de 
 las previsualizaciones, y los archivos php y js para que estos realicen la funcion. Creamos también los estilos de la previsualización y añadimos la funcion para que esta 
 se guarde en la bd y se muestre cada vez que el usuario le da a previsualizar. +
 Comenzamos ha configurar la maquina isard en la maquina de Camilo (aun falta poder entrar correctamente). +
 
-Semana 3 (30-3) +
+=== Semana 3 (30-3) 
 Terminamos unos toques del sprint anterior y comenzamos el tercero. Realizamos las pantallas para crear y editar diapositivas con imagenes, realizzamos las pantalla
 vsita cliente, y creamos la funcion de pubklicar pudiendo ejecutarla o no y pudiendo copiar las urls de las que si. También junto a eso hicimos que al momento de crear
 la Presentación puedas añadir un pin a está y se le pedira a los clientes en vistacliente para poder acceder a la presentacion. +
@@ -192,7 +193,7 @@ image::Pregunta.jpg[Sketch de crear diapositiva tipo pregunta, width=40%]
 
 image::PrevisualizarTitulo.jpg[Sketch de previsualizacion solo titulo, width=40%]
 
-image::PrevisualizarCotenido.jpg[Sketch de previsualizacion tipo contenido, width=40%]
+image::PrevisualizarContenido.jpg[Sketch de previsualizacion tipo contenido, width=40%]
 
 image::PrevisualizarImagen.jpg[Sketch de previsualizacion tipo imagen, width=40%]
 
