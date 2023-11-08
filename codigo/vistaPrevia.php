@@ -82,9 +82,15 @@ if (isset($_GET["id"])) {
                 // Si el contenido es nulo, ocultar el contenido
                 contenidoElement.style.display = 'none';
                 imatgeElement.style.display='none';
+
+                tituloElement.style.fontSize = "6rem";
+                tituloElement.style.marginTop = "200px";
             } else {
                 if(diapositiva.imatge != null){       
-                    // Si hay una imagen en la diapositiva, ajusta el diseño             
+                    // Si hay una imagen en la diapositiva, ajusta el diseño   
+                    tituloElement.style.fontSize = "40px";
+                    tituloElement.style.marginTop = "65px";
+
                     cont.style.display = 'flex';
                     cont.style.flexDirection= 'row';
                     cont.style.justifyContent= 'space-around';
@@ -102,6 +108,9 @@ if (isset($_GET["id"])) {
                     // Si no hay una imagen, muestra solo el contenid
                     contenidoElement.style.display = 'flex';
                     imatgeElement.style.display = 'none';
+
+                    tituloElement.style.fontSize = "40px";
+                    tituloElement.style.marginTop = "65px";
                 }
                 
                 
