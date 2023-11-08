@@ -17,7 +17,7 @@ if (isset($_GET["id"])) {
 ?>
 
 <!DOCTYPE html>
-<html class="preview">
+<html lang="es" class="preview">
 <head>
     <title>Previsualización de la Diapositiva</title>
     <link rel="stylesheet" href="Styles.css">
@@ -35,7 +35,7 @@ if (isset($_GET["id"])) {
             <h1 id="tituloPrevisualizado"></h1>
             <div class="contenido">
                 <p id="contenidoPrevisualizado"></p>
-                <img id="imatgePrevisualizado" src="" style="display: none;width: 250px; height: 250px; margin-right: 50px">
+                <img id="imatgePrevisualizado" src="" alt="imagen" style="display: none;width: 250px; height: 250px; margin-right: 50px">
             </div>
         </div>
     </div>

@@ -20,7 +20,7 @@ if (isset($_GET["id"])) {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <title>Vista Previa de Presentación</title>
     <link rel="stylesheet" href="Styles.css">
@@ -47,7 +47,7 @@ if (isset($_GET["id"])) {
         <h1></h1>
         <div class="contenido">
             <p></p>
-            <img id="imagen" src="" style="width: 250px; height: 250px; margin-right: 50px">
+            <img id="imagen" src="" alt="imagen" style="width: 250px; height: 250px; margin-right: 50px">
         </div>
     </div>
     <div class="controles">
