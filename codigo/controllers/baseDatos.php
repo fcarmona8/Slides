@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
         $dao->setDiapositivesTitol($titol, $id_presentacio); 
         $id_diapo = $dao->getLastInsertId();
         $dao->setPregunta($id_diapo, $pregunta);
-        
+
         $id_pregunta = $dao->getLastInsertId();
         $respuestas = $_POST['opcion'];
         $respuesta_correcta_index = $_POST['respuesta_correcta'] - 1;
@@ -146,6 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
             $dao->setRespuesta($id_pregunta, $respuestaTexto, $correcta);
             
         }
+        
         header("Location: CrearDiapositivesPregunta.php?id=$id_presentacio&mensaje=Diapositiva creada con éxito");
 
         
@@ -542,7 +543,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                 $dao->setRespuesta($id_pregunta, $respuestaTexto, $correcta);
             }
             header("Location: editarDiapositivesPregunta.php?id=$id_presentacio");
-        }        
+        }
         exit(); 
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();

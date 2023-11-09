@@ -654,7 +654,7 @@ class DAO {
     }
 
     public function getDiapositivesVista($id_presentacio) {
-    $sql = "SELECT d.titol, d.contingut, d.imatge, d.orden, p.pregunta, p.ID_pregunta, r.texto AS opcion_respuesta
+    $sql = "SELECT d.titol, d.contingut, d.imatge, d.orden, p.pregunta, p.ID_pregunta, d.ID_diapositiva, r.texto AS opcion_respuesta
             FROM Diapositives d
             LEFT JOIN pregunta p ON d.ID_Diapositiva = p.ID_Diapositiva
             LEFT JOIN respuesta r ON p.ID_pregunta = r.ID_pregunta
@@ -681,6 +681,7 @@ class DAO {
                 'contingut' => $row['contingut'],
                 'imatge' => $row['imatge'],
                 'orden' => $row['orden'],
+                'ID_Diapositiva' => $row['ID_pregunta'],
                 'pregunta' => $row['pregunta'],
                 'es_pregunta' => !empty($row['pregunta']), // Indicador de si es una pregunta o no
                 'pregunta_id' => $row['ID_pregunta'],

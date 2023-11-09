@@ -65,7 +65,6 @@ if (isset($_GET["id"])) {
         var diapositivas = <?php echo json_encode($diapositivas); ?>;
         var currentSlide = 0; // Inicializa el índice de la diapositiva actual
         var totalSlides = diapositivas.length; // Obtiene el número total de diapositivas
-        console.log(diapositivas);
 
         var anteriorButton = document.getElementById("anterior"); // Obtiene el botón de diapositiva anterior
         var siguienteButton = document.getElementById("siguiente"); // Obtiene el botón de diapositiva siguiente
