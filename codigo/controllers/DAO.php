@@ -470,16 +470,6 @@ class DAO {
         }
     }
     
-    public function getDiapositivesVista($id_presentacio) {
-        // Preparar la consulta SQL para obtener las diapositivas de una presentación
-        $sql = "SELECT ID_Diapositiva, titol, contingut, imatge FROM Diapositives WHERE ID_Presentacio = :id_presentacio ORDER BY orden";
-        $statement = $this->pdo->prepare($sql);
-        $statement->execute([':id_presentacio' => $id_presentacio]);
-        
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-    
-        return $result;
-    }
     public function getEstiloPresentacion($id_presentacio) {
         if (isset($id_presentacio)) {
             // Preparar la consulta SQL para obtener el estilo de la presentación
@@ -662,6 +652,60 @@ class DAO {
             throw new Exception("Error al actualizar la respuesta: " . $e->getMessage());
         }
     }
+
+    public function getDiapositivesVista($id_presentacio) {
+    $sql = "SELECT d.titol, d.contingut, d.imatge, d.orden, p.pregunta, p.ID_pregunta, r.texto AS opcion_respuesta
+            FROM Diapositives d
+            LEFT JOIN pregunta p ON d.ID_Diapositiva = p.ID_Diapositiva
+            LEFT JOIN respuesta r ON p.ID_pregunta = r.ID_pregunta
+            WHERE d.ID_Presentacio = :id_presentacio
+            ORDER BY d.orden, p.ID_pregunta, r.ID_respuesta;";
+    $stmt = $this->pdo->prepare($sql);
+    $stmt->bindParam(':id_presentacio', $id_presentacio, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $result = array();
+    $currentPreguntaID = null;
+    $diapositiva = null;
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        if ($currentPreguntaID === null || $currentPreguntaID !== $row['ID_pregunta']) {
+            // Nueva pregunta, crear una nueva entrada en $result
+            if ($diapositiva !== null) {
+                $result[] = $diapositiva;
+            }
+
+            $currentPreguntaID = $row['ID_pregunta'];
+            $diapositiva = array(
+                'titol' => $row['titol'],
+                'contingut' => $row['contingut'],
+                'imatge' => $row['imatge'],
+                'orden' => $row['orden'],
+                'pregunta' => $row['pregunta'],
+                'es_pregunta' => !empty($row['pregunta']), // Indicador de si es una pregunta o no
+                'pregunta_id' => $row['ID_pregunta'],
+                'respuestas' => array(), // Inicializar el array de respuestas
+            );
+        }
+
+        if (!empty($row['opcion_respuesta'])) {
+            // Agregar respuesta a la pregunta actual
+            $diapositiva['respuestas'][] = $row['opcion_respuesta'];
+        }
+    }
+
+    // Agregar la última diapositiva al resultado
+    if ($diapositiva !== null) {
+        $result[] = $diapositiva;
+    }
+
+    return $result;
+}
+
+    
     
 }
+    
+    
+
 

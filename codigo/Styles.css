@@ -1293,3 +1293,19 @@ body.error-page {
     border-radius: 2%;
     display: none;
 }
+
+.contenido h2 {
+    margin-left: 90px;
+    margin-bottom: 50px;
+    font-size: 28px;
+}
+
+.respuestas {
+    margin-left: 120px;
+
+}
+
+.respuestas input{
+    margin: 20px 0px;
+
+}
