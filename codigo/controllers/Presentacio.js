@@ -34,6 +34,7 @@ function validateForm() {
         isValid = false;
     } else if (titol.length > 30) {
         titleError.textContent = "El título no debe tener más de 30 caracteres.";
+        titleError.style.display = 'initial';
         isValid = false;
     } else {
         document.getElementById("titolError").innerText = "";
@@ -42,6 +43,7 @@ function validateForm() {
     // Validar la contraseña (PIN)
     if (password.length > 8) {
         passwordError.textContent = "El PIN no debe tener más de 8 caracteres."
+        passwordError.style.display = 'initial';
         isValid = false;
     } else {
         document.getElementById("passwordError").innerText = "";

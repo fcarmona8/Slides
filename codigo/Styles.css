@@ -438,6 +438,7 @@ tr {
     height: 59.2%;
     font-size: 18px;
     border: 2px solid black;
+    border-top: none;
     padding: 40px;
     margin: 0px;
 }
@@ -555,7 +556,7 @@ textarea {
 }
 
 .iconoCrear {
-    vertical-align: -3px;
+    vertical-align: -7px;
 }
 
 .line {
@@ -1248,7 +1249,7 @@ body.error-page {
 
 .titolDiapoPregunta {
     width: 80%;
-    margin: 30px 0px;
+    margin: 60px 0px 20px 0px;
     padding: 10px;
     font-size: 26px;
     text-align: center;
@@ -1291,4 +1292,20 @@ body.error-page {
     margin-top: 5px;
     border-radius: 2%;
     display: none;
+}
+
+.contenido h2 {
+    margin-left: 90px;
+    margin-bottom: 50px;
+    font-size: 28px;
+}
+
+.respuestas {
+    margin-left: 120px;
+
+}
+
+.respuestas input{
+    margin: 20px 0px;
+
 }

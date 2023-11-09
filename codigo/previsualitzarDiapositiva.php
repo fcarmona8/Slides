@@ -17,7 +17,7 @@ if (isset($_GET["id"])) {
 ?>
 
 <!DOCTYPE html>
-<html class="preview">
+<html lang="es" class="preview">
 <head>
     <title>Previsualización de la Diapositiva</title>
     <link rel="stylesheet" href="Styles.css">
@@ -34,9 +34,12 @@ if (isset($_GET["id"])) {
         <div class="diapositiva-preview-<?php echo $estiloPresentacion;?>">
             <h1 id="tituloPrevisualizado"></h1>
             <div class="contenido">
+                <h2 id="titulPregunta"></h2>
+                <form class="respuestas" id="respuestas"></form>
                 <p id="contenidoPrevisualizado"></p>
-                <img id="imatgePrevisualizado" src="" style="display: none;width: 250px; height: 250px; margin-right: 50px">
+                <img id="imatgePrevisualizado" src="" alt="imagen" style="display: none;width: 250px; height: 250px; margin-right: 50px">
             </div>
+            
         </div>
     </div>
 
@@ -46,7 +49,12 @@ if (isset($_GET["id"])) {
         var titolDiapo = localStorage.getItem('titolDiapo');
         var contingut = localStorage.getItem('contingut');
         var imatge = localStorage.getItem('rutaImg');
+        var pregunta = localStorage.getItem('pregunta');
+        var respuesta = localStorage.getItem('limitR');
         
+        
+        let preguntaElement = document.getElementById('titulPregunta');
+        let respostaElement = document.getElementById('respuestas');
         let contenidoElement = document.getElementById('contenidoPrevisualizado');
         let tituloElement= document.getElementById('tituloPrevisualizado');
         let imatgeElement= document.getElementById('imatgePrevisualizado');
@@ -64,10 +72,35 @@ if (isset($_GET["id"])) {
             aviso = 'La diapositiva no tiene contenido.';
         }else{
             if (!contingut) {
-                // Muestra el título si no hay contenido
-                tituloElement.textContent = titolDiapo;
-                tituloElement.style.margin='200px';
-                cont.style.display='none';
+                if(!pregunta){
+                    cont.style.display = 'flex';
+                    contenidoElement.style.display =  'none';
+                    // Muestra el título si no hay contenido
+                    tituloElement.textContent = titolDiapo;
+                    tituloElement.style.margin='200px';
+                    cont.style.display='none';
+                }else{
+                    contenidoElement.style.display = 'none';
+                    tituloElement.textContent = titolDiapo;
+
+                    tituloElement.style.fontSize = "40px";
+                    tituloElement.style.marginTop = "65px";
+                    tituloElement.style.marginBottom = "50px";
+
+                    
+                    preguntaElement.textContent = pregunta;
+                    if (respuesta != '') {
+                        for (let i = 0; i < respuesta ; i++) {
+                            let elemR =  localStorage.getItem('respuesta'+i);
+                            
+                            var respuestaContainer = document.createElement('div');
+                            respuestaContainer.classList.add('.respuesta-container-preview');
+                            respuestaContainer.innerHTML += '<label><input type="radio" name="respuesta" value="' + i + '"> ' + elemR + '</label><br>';
+                            respostaElement.appendChild(respuestaContainer);
+                        }
+                    }
+                }
+                
             }else{
                 if(!imatge){
                 // Muestra los valores en la página
@@ -102,6 +135,9 @@ if (isset($_GET["id"])) {
         localStorage.removeItem('rutaImg');
         localStorage.removeItem('titolDiapo');
         localStorage.removeItem('contingut');
+        localStorage.removeItem('pregunta');
+        localStorage.removeItem('respuesta');
+        localStorage.removeItem('limitR');
 
         // Agrega un evento de clic al botón de volver para regresar a la página anterior
         document.getElementById("volverButton").addEventListener("click", function() {

@@ -43,9 +43,9 @@ if ($editDiapo === false) {
 ?>
   
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Pantalla Editar Diapositivas Contingut</title>
+    <title>Pantalla Editar Diapositivas Imatge</title>
     <link rel="stylesheet" href="Styles.css">
 </head>
 <body id="crearDiapositivasContingut">
@@ -60,18 +60,16 @@ if ($editDiapo === false) {
         </div>
         <div class="presentacionV2">
         <div class="presentacion-guardada">
-                
                 <div class='buttons-editar'>
                     <p id="titulo-guardado" class="tituloGuardado"><?php echo $titol; ?> 
                     <form method='post' class="form-inline">
-                            <input type="hidden" name="id_presentacion" value="<?= $id_presentacio; ?>">
-                            <input type="hidden" name="from" value="Editar">
-                            <!-- Botón de previsualización con un ícono de ojo -->
-                            <button class='buttons' type="submit" name="previsualizar_presentacion">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>                    
-                            </button>
-                        </form>
-                    </p>
+                        <input type="hidden" name="id_presentacion" value="<?= $id_presentacio; ?>">
+                        <input type="hidden" name="from" value="Editar">
+                        <!-- Botón de previsualización con un ícono de ojo -->
+                        <button class='buttons' type="submit" name="previsualizar_presentacion">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>                    
+                        </button>
+                    </form>
                 </div>
                 <div class="editarEstils">
                     <form method="post">
@@ -188,27 +186,27 @@ if ($editDiapo === false) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                 <span id="titolError" class="error"></span>
-                <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25"required<?php if ($editDiapo === TRUE) {
+                <input type="text" id="titol" name="titol" class="titolContDiapo" placeholder="Titulo" maxlength="25" required<?php if ($editDiapo === TRUE) {
                    ?> value="<?= $titolDiapo; ?>" <?php ;
                    } ?> >
                 <?php if ($editDiapo === true) {
-                    echo '<div class="contImatge" style ="height: 54.2%">';
+                    echo '<div class="contImatge" style ="height: 54.2% " > ';
                 }?>
                 <span id="contError" class="error"></span>
                 <textarea id="contingut" name="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" <?php if ($editDiapo != TRUE) {
-                   echo 'style="height: 54.2%"';
+                   echo 'style="height: 54.2% " ';
                    } ?>required ><?php if ($editDiapo === TRUE) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {
-                        echo '<img src=" '.$imatge.'" class="imatge"><input type="hidden" id="rutaImg" value="'.$imatge.'"></div><input type="file" accept="image/*" name="imatge" id="imatge" >';
+                        echo '<img src=" '.$imatge.'" class="imatge"><input type="hidden" name="rutaImg" id="rutaImg" value="'.$imatge.'"></div><input type="file" accept="image/*" name="imatge" id="imatge" >';
                    }else {
                     echo '<input type="file" accept="image/*" name="imatge" id="imatge" required >';
                    } ?> 
                 <input type="submit" name="anadirEditarDiapositiva" onsubmit=" " class="boton-crear" <?php if ($editDiapo === TRUE) {
-                        echo 'value="Guardar diapositiva"';
+                        echo 'value="Guardar diapositiva" ';
                     }else{
-                        echo 'value="Añadir diapositiva"';
+                        echo 'value="Añadir diapositiva" ';
                     }
                     ?> >            
             </form>
@@ -217,8 +215,8 @@ if ($editDiapo === false) {
                 <form method="post" action="previsualitzarDiapositiva.php">
                     <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                     <input type="hidden" name="id_diapo" value="<?= $id_diapo; ?>">
-                    <input type="hidden" name="titol" class="titolContDiapo" placeholder="Título" value="<?= $titolDiapo; ?>">
-                    <input type="hidden" name="contingut" class="contingutDiapo" placeholder="Contenido" value="<?= $contingut; ?>">
+                    <input type="hidden" name="titol" class="titolContDiapo" value="<?= $titolDiapo; ?>">
+                    <input type="hidden" name="contingut" class="contingutDiapo" value="<?= $contingut; ?>">
                     <button type='submit' onclick="obtenerValores()" name='previsualizar_diapo'>
                         <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM144 256a144 144 0 1 1 288 0 144 144 0 1 1 -288 0zm144-64c0 35.3-28.7 64-64 64c-7.1 0-13.9-1.2-20.3-3.3c-5.5-1.8-11.9 1.6-11.7 7.4c.3 6.9 1.3 13.8 3.2 20.7c13.7 51.2 66.4 81.6 117.6 67.9s81.6-66.4 67.9-117.6c-11.1-41.5-47.8-69.4-88.6-71.1c-5.8-.2-9.2 6.1-7.4 11.7c2.1 6.4 3.3 13.2 3.3 20.3z"/></svg>                </button>
                 </form>

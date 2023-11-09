@@ -15,9 +15,9 @@ if (isset($_GET["id"])) {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Pantalla Crear Presentació</title>
+    <title>Pantalla Editar Presentació</title>
     <link rel="stylesheet" href="Styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 </head>
