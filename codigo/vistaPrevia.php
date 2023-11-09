@@ -94,24 +94,28 @@ if (isset($_GET["id"])) {
                 cont.style.display = 'block';
                 respuestasForm.innerHTML = '';
                 if (diapositiva.es_pregunta === true) {
-                // Si es una pregunta, muestra el título de la pregunta y las respuestas
-                document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
+                    tituloElement.style.fontSize = "40px";
+                    tituloElement.style.marginTop = "65px";
+                    tituloElement.style.marginBottom = "50px";
+                    // Si es una pregunta, muestra el título de la pregunta y las respuestas
+                    document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
 
-                    if (diapositiva.respuestas && diapositiva.respuestas.length > 0) {
-                        var respuestaContainer = document.createElement('div');
-                        respuestaContainer.classList.add('.respuesta-container-preview')
-                        diapositiva.respuestas.forEach(function(respuesta, index) {
+                        if (diapositiva.respuestas && diapositiva.respuestas.length > 0) {
+                            var respuestaContainer = document.createElement('div');
+                            respuestaContainer.classList.add('.respuesta-container-preview')
+                            diapositiva.respuestas.forEach(function(respuesta, index) {
 
-                            respuestaContainer.innerHTML += '<label><input type="radio" name="respuesta" value="' + index + '"> ' + respuesta + '</label><br>';
-                            respuestasForm.appendChild(respuestaContainer);
-                        });
-                    } else {
-                        document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = 'No hay respuestas disponibles';
-                    }
+                                respuestaContainer.innerHTML += '<label><input type="radio" name="respuesta" value="' + index + '"> ' + respuesta + '</label><br>';
+                                respuestasForm.appendChild(respuestaContainer);
+                            });
+                        } else {
+                            document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = 'No hay respuestas disponibles';
+                        }
+                } else {
+                    tituloElement.style.fontSize = "6rem";
+                    tituloElement.style.marginTop = "200px";
                 }
 
-                tituloElement.style.fontSize = "6rem";
-                tituloElement.style.marginTop = "200px";
             } else {
                 if(diapositiva.imatge != null){       
                     // Si hay una imagen en la diapositiva, ajusta el diseño   
