@@ -32,7 +32,6 @@ include_once("controllers/baseDatos.php");
 
                 <input type="text" name="titol" class="titol" placeholder="Titulo de la presentación" maxlength="30" required>
                 <!-- Campo de entrada de texto para el título de la presentación. Se requiere y tiene un límite de caracteres. -->
-
                 <span id="titolError" class="error"></span>
                 <!-- Aquí se mostrará un mensaje de error relacionado con el título. -->
 
