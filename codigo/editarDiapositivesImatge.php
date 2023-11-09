@@ -199,7 +199,7 @@ if ($editDiapo === false) {
                    echo $contingut;
                    } ?></textarea>
                 <?php if ($editDiapo === TRUE) {
-                        echo '<img src=" '.$imatge.'" class="imatge"><input type="hidden" id="rutaImg" value="'.$imatge.'"></div><input type="file" accept="image/*" name="imatge" id="imatge" >';
+                        echo '<img src=" '.$imatge.'" class="imatge"><input type="hidden" name="rutaImg" id="rutaImg" value="'.$imatge.'"></div><input type="file" accept="image/*" name="imatge" id="imatge" >';
                    }else {
                     echo '<input type="file" accept="image/*" name="imatge" id="imatge" required >';
                    } ?> 
