@@ -44,14 +44,12 @@ if ($editDiapo === false) {
 ?>
 
 <!DOCTYPE html>
-<html>
-
+<html lang="es">
 <head>
     <title>Pantalla Editar Diapositivas Contingut</title>
     <link rel="stylesheet" href="Styles.css">
     <div id="message-container" class="mensaje-exito" style="display: none;"></div>
 </head>
-
 <body id="crearDiapositivasContingut">
     <div class="up">
         <div class="volver">
@@ -228,9 +226,9 @@ if ($editDiapo === false) {
                 <form method="post" action="previsualitzarDiapositiva.php">
                     <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                     <input type="hidden" name="id_diapo" value="<?= $id_diapo; ?>">
-                    <input type="hidden" name="titol" class="titolContDiapo" placeholder="Título"
+                    <input type="hidden" name="titol" class="titolContDiapo"
                         value="<?= $titolDiapo; ?>">
-                    <input type="hidden" name="contingut" class="contingutDiapo" placeholder="Contenido"
+                    <input type="hidden" name="contingut" class="contingutDiapo"
                         value="<?=$contingut; ?>">
                     <button type='submit' onclick="obtenerValores()" name='previsualizar_diapo'>
                         <svg xmlns="http://www.w3.org/2000/svg" height="1.5em"

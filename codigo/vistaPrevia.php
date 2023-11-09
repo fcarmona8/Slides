@@ -20,7 +20,7 @@ if (isset($_GET["id"])) {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <title>Vista Previa de Presentación</title>
     <link rel="stylesheet" href="Styles.css">
@@ -48,9 +48,9 @@ if (isset($_GET["id"])) {
         <div class="contenido">
             <p></p>
             <h2></h2>
-            <img id="imagen" src="" style="width: 250px; height: 250px; margin-right: 50px">
             <div class="opciones-respuesta" style="display: none;"></div>
             <form class="respuestas"></form>
+            <img id="imagen" src="" alt="imagen" style="width: 250px; height: 250px; margin-right: 50px">
         </div>
     </div>
     <div class="controles">
@@ -109,9 +109,15 @@ if (isset($_GET["id"])) {
                         document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = 'No hay respuestas disponibles';
                     }
                 }
+
+                tituloElement.style.fontSize = "6rem";
+                tituloElement.style.marginTop = "200px";
             } else {
                 if(diapositiva.imatge != null){       
-                    // Si hay una imagen en la diapositiva, ajusta el diseño             
+                    // Si hay una imagen en la diapositiva, ajusta el diseño   
+                    tituloElement.style.fontSize = "40px";
+                    tituloElement.style.marginTop = "65px";
+
                     cont.style.display = 'flex';
                     cont.style.flexDirection= 'row';
                     cont.style.justifyContent= 'space-around';
@@ -132,6 +138,9 @@ if (isset($_GET["id"])) {
                     contenidoElement.style.display = 'flex';
                     imatgeElement.style.display = 'none';
                     respuestasForm.innerHTML = '';
+
+                    tituloElement.style.fontSize = "40px";
+                    tituloElement.style.marginTop = "65px";
                 }
             }
 

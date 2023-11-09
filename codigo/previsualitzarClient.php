@@ -33,9 +33,9 @@ if (isset($_GET["id_diapo"])) {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Vista Previa de Presentación</title>
+    <title>Vista Previa de Diapositiva Cliente</title>
     <link rel="stylesheet" href="Styles.css">
 </head>
 <body class="vista">
@@ -55,7 +55,7 @@ if (isset($_GET["id_diapo"])) {
         <h1></h1>
         <div class="contenido">
             <p></p>
-            <img id="imagen" src="" style="width: 250px; height: 250px; margin-right: 50px ">
+            <img id="imagen" src="" alt="imagen" style="width: 250px; height: 250px; margin-right: 50px ">
         </div>
     </div>
     <div class="controles">
@@ -90,8 +90,13 @@ if (isset($_GET["id_diapo"])) {
                 // Si el contenido es nulo, ocultar el contenido
                 contenidoElement.style.display = 'none';
                 imatgeElement.style.display='none';
+
+                tituloElement.style.fontSize = "6rem";
+                tituloElement.style.marginTop = "200px";
             } else {
                 if (diapositiva.imatge != null) {
+                    tituloElement.style.fontSize = "40px";
+                    tituloElement.style.marginTop = "65px";
                     cont.style.display = 'flex';
                     cont.style.flexDirection= 'row';
                     cont.style.justifyContent= 'space-around';
@@ -108,6 +113,8 @@ if (isset($_GET["id_diapo"])) {
                     tituloElement.textContent = diapositiva.titol;
                     contenidoElement.textContent = diapositiva.contingut;
                     contenidoElement.style.display = 'flex';
+                    tituloElement.style.fontSize = "40px";
+                    tituloElement.style.marginTop = "65px";
                 }
                 
             }

@@ -556,7 +556,7 @@ textarea {
 }
 
 .iconoCrear {
-    vertical-align: -3px;
+    vertical-align: -7px;
 }
 
 .line {
@@ -768,7 +768,7 @@ textarea {
     cursor: pointer;
     border-radius: 100%;
     font-size: 16px;
-    margin: 0 10px;
+    margin: -10px 10px;
     padding: 18px 20px;
 }
 
