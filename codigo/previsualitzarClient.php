@@ -3,7 +3,7 @@
 // Incluye archivos de funciones necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
-
+session_start();
 // Verifica si se ha proporcionado un parámetro "id" en la URL
 if (isset($_GET["id"])) {
     $id_presentacio = $_GET["id"];
@@ -12,6 +12,7 @@ if (isset($_GET["id"])) {
     $desc = $dao->getDescPorID($id_presentacio);
     $diapositivas = $dao->getDiapositivesVista($id_presentacio);
     $url_unica = $dao->getURLPorID($id_presentacio);
+
 } else {
     // Si no se proporciona "id" en la URL, muestra un mensaje de error
     $titol = "Error, no se encuentra la presentacion";
@@ -101,7 +102,9 @@ if (isset($_GET["id_diapo"])) {
                 contenidoElement.style.width = null;
                 cont.style.display = 'block';
                 respuestasForm.innerHTML = '';
+
                 if (diapositiva.es_pregunta === true) {
+                    
                     tituloElement.style.fontSize = "40px";
                     tituloElement.style.marginTop = "65px";
                     tituloElement.style.marginBottom = "50px";
@@ -159,7 +162,7 @@ if (isset($_GET["id_diapo"])) {
             currentSlide = slideIndex;
 
             // Habilitar o deshabilitar botones según la posición de la diapositiva
-            anteriorButton.disabled = currentSlide === 0;
+            anteriorButton.disabled = currentSlide === 1;
             siguienteButton.disabled = currentSlide === totalSlides - 1;
         }
 
@@ -174,7 +177,7 @@ if (isset($_GET["id_diapo"])) {
         });
 
         // Mostrar la primera diapositiva al cargar la página
-        mostrarDiapositiva(0);
+        mostrarDiapositiva(1);
         <?php endif; ?>
     </script>
 </body>

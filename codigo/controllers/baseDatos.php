@@ -131,11 +131,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
         $titol = $_POST["titol"];
         $pregunta = $_POST["pregunta"];
 
-        $dao->setDiapositivesTitol($titol, $id_presentacio); 
-        $id_diapo = $dao->getLastInsertId();
-        $dao->setPregunta($id_diapo, $pregunta);
-
+        $dao->setPregunta($pregunta);
         $id_pregunta = $dao->getLastInsertId();
+        $dao->setDiapositivesTitol($titol, $id_presentacio, $id_pregunta);
+        $dao->setDiapositivesTitol('Respuesta: ' . $titol, $id_presentacio, $id_pregunta);
+        $id_diapo = $dao->getLastInsertId();
+        
         $respuestas = $_POST['opcion'];
         $respuesta_correcta_index = $_POST['respuesta_correcta'] - 1;
 
@@ -146,7 +147,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
             $dao->setRespuesta($id_pregunta, $respuestaTexto, $correcta);
             
         }
-        
+
         header("Location: CrearDiapositivesPregunta.php?id=$id_presentacio&mensaje=Diapositiva creada con éxito");
 
         
@@ -203,15 +204,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                     
                     $imatge = $folderLocation ."/".basename($_FILES["imatge"]["name"]);
                 }
-                if (isset($_POST['id_diapo']) && isset($_POST['rutaImg'])) {  
-                    if ($imatge === null) {
-                        $imatge = $_POST['rutaImg'];
-                    }
+                if (isset($_POST['id_diapo'])) {  
                     // Comprueba si se proporciona un ID de diapositiva existente:
                     $editDiapo = $_POST['id_diapo'];
                     // Realiza una operación de edición en la base de datos para una diapositiva con imagen.
                     $dao->alterDiapositivesImatge($titol, $contingut, $imatge, $editDiapo);
-                    $imatge = '';
                     header("Location: editarDiapositivesImatge.php?id=" . $id_presentacio);
                     
                 }else {
@@ -237,11 +234,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
             if (isset($_POST['id_diapo'])) {  
                 $editDiapo = $_POST['id_diapo'];
                 $dao->alterDiapositives($titol, $contingut, $editDiapo);
-                if ($_POST['rutaImg'] != '') {
-                    header("Location: editarDiapositivesImatge.php?id=". $id_presentacio);
-                }else{
-                    header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);
-                }
+                header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio);
                 
             }else {
                     // Insertar los datos en la base de datos
@@ -535,22 +528,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                     $dao->setRespuesta($pregunta['ID_pregunta'], $nuevaRespuestaTexto, $correcta);
                 }
             }
+
             header("Location: editarDiapositivesPregunta.php?id=" . $id_presentacio . "&id_diapo=".$editDiapo);
+            
         } else {
             // Agregar nueva diapositiva con pregunta y respuestas
-            $dao->setDiapositivesTitol($titol, $id_presentacio); 
-            $id_diapo = $dao->getLastInsertId();
-            $dao->setPregunta($id_diapo, $preguntaTexto);
-        
+            $id_presentacio = $_POST["id_presentacio"];
+            $titol = $_POST["titol"];
+            $pregunta = $_POST["pregunta"];
+
+            $dao->setPregunta($pregunta);
             $id_pregunta = $dao->getLastInsertId();
+            $dao->setDiapositivesTitol($titol, $id_presentacio, $id_pregunta);
+            $dao->setDiapositivesTitol('Respuesta: ' . $titol, $id_presentacio, $id_pregunta);
+            $id_diapo = $dao->getLastInsertId();
+            
             $respuestas = $_POST['opcion'];
             $respuesta_correcta_index = $_POST['respuesta_correcta'] - 1;
 
+
             foreach ($respuestas as $numeroRespuesta => $respuestaTexto) {
                 $correcta = ($numeroRespuesta == $respuesta_correcta_index) ? 1 : 0;
+
                 $dao->setRespuesta($id_pregunta, $respuestaTexto, $correcta);
+                
             }
-            header("Location: editarDiapositivesPregunta.php?id=$id_presentacio");
         }
         exit(); 
     } catch (Exception $e) {

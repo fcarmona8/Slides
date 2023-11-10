@@ -235,8 +235,8 @@ class DAO {
     }
 
     // Inserta una nueva diapositiva sin imagen y sin contenido en la base de datos
-    public function setDiapositivesTitol($titol, $id_presentacio) {
-        $sql = "INSERT INTO Diapositives (titol, orden, ID_Presentacio) VALUES (:titol, :orden, :id_presentacio)";
+    public function setDiapositivesTitol($titol, $id_presentacio, $id_pregunta = null) {
+        $sql = "INSERT INTO Diapositives (titol, orden, ID_Presentacio, ID_pregunta) VALUES (:titol, :orden, :id_presentacio, :id_pregunta)";
         $statement = ($this->pdo)->prepare($sql);
 
         $orden = $this->getLastOrden($id_presentacio);
@@ -249,7 +249,8 @@ class DAO {
             $statement->execute([
                 ":titol" => $titol,
                 ":orden" => $orden,
-                ':id_presentacio' => $id_presentacio
+                ':id_presentacio' => $id_presentacio,
+                ":id_pregunta" => $id_pregunta
             ]);
         } catch (PDOException $e) {
             echo "Error al guardar datos: " . $e->getMessage();
@@ -303,7 +304,7 @@ class DAO {
             echo "Error al guardar datos: " . $e->getMessage();
         }
     }
-    //Pone el orden de la diapositiva dada por la diapositiva de arriba(un número menor)
+
     public function changeOrdenUp($id_diapo) {
         try {
             // Obtener el orden anterior de la diapositiva
@@ -341,7 +342,7 @@ class DAO {
             echo 'Error al intercambiar el orden';
         }
     }
-    //Cambia el orden de la diapositiva dada por la que tenga abajo
+    
     public function changeOrdenDown($id_diapo) {
         try {            
             // Obtener el orden anterior de la diapositiva
@@ -384,7 +385,7 @@ class DAO {
             echo 'Error al intercambiar el orden';
         }
     }
-    //obtiene el titulo y id de las diapositivas de una presentacion
+    
     public function getDiapositives($id_presentacio) {
         // Preparar la consulta SQL para obtener las diapositivas ordenadas por orden ASC
         $sql = "SELECT titol, ID_Diapositiva FROM Diapositives WHERE ID_Presentacio = :id_presentacio ORDER BY orden ASC";
@@ -394,7 +395,6 @@ class DAO {
         $statement->setFetchMode(PDO::FETCH_ASSOC);
         return $statement;
     }
-    //Obtiene la id_presentacio de una diapositiva
     public function getPresentacioPorID($id_diapo){
         $sql = "SELECT ID_Presentacio FROM Diapositives WHERE ID_Diapositiva = :id_diapo LIMIT 1";
         $stmt = $this->pdo->prepare($sql);
@@ -404,7 +404,6 @@ class DAO {
         $row = $stmt->fetch();
         return $row['ID_Presentacio'];
     }
-    //Elimina una diapositiva y coloca bien el orden de las diapositivas de abajo
     public function eliminarDiapo($id_diapo){
         try {
             $this->pdo->beginTransaction();
@@ -434,7 +433,7 @@ class DAO {
             return false;
         }
     }
-    //Elimina una presentacion (solo si se confirma)
+    
     public function eliminarPresentacion($id_presentacion) {
         try {
             $this->pdo->beginTransaction();
@@ -456,7 +455,7 @@ class DAO {
             return false;
         }
     }
-    //Cambia el estilo de una presentacion
+    
     public function editarEstilsPresentacio($id_presentacion, $estils) {
         // Preparar la consulta SQL para actualizar los estilos de la presentación
         $sql = "UPDATE Presentacions SET estil = :estils WHERE ID_Presentacio = (:id_presentacion)";
@@ -486,7 +485,7 @@ class DAO {
             return null;  
         }
     }
-    //Obtiene si la presentacion dada esta publicada o no
+    
     public function getPublicacionPresentacion($id_presentacion) {
         // Preparar la consulta SQL para obtener el estado de publicación de la presentación
         $sql = "SELECT publicada FROM Presentacions WHERE ID_Presentacio = :id_presentacion";
@@ -501,7 +500,7 @@ class DAO {
             return false; // Si no se encuentra, consideramos que no está publicada
         }
     }
-    //Genera de manera aleatoria una url para una presentacion
+    
     public function generarURLUnica() {
         $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $longitud = 10; // Cambia la longitud de la URL según tus necesidades
@@ -511,7 +510,7 @@ class DAO {
         }
         return $url_unica;
     }
-    //Publica una presentacion y le coloca una url aleatoria
+    
     public function publicarPresentacion($id_presentacion) {
         // Generar una URL única para la presentación
         $url_unica = $this->generarURLUnica();
@@ -527,7 +526,7 @@ class DAO {
             return false;
         }
     }
-    //Despublica una presentacion
+    
     public function despublicarPresentacion($id_presentacion) {
         // Preparar la consulta SQL para marcar la presentación como no publicada y eliminar la URL única
         $sql = "UPDATE Presentacions SET publicada = FALSE, url_unica = NULL WHERE ID_Presentacio = :id_presentacion";
@@ -540,7 +539,7 @@ class DAO {
             return false;
         }
     }
-    //Obtiene el hash del pin de una presentacion
+    
     public function getHashContrasena($id_presentacion) {
         // Preparar la consulta SQL para obtener el pin (contraseña) de la presentación
         $sql = "SELECT pin FROM Presentacions WHERE ID_Presentacio = :id_presentacion";
@@ -556,15 +555,14 @@ class DAO {
         $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
         return $resultado ? $resultado['pin'] : false;
     }
-    //Agrega a la tabla pregunta una diapositiva de tal tipo
-    public function setPregunta($id_diapo, $pregunta) {
-        $sql = "INSERT INTO pregunta (pregunta, ID_diapositiva) 
-                VALUES (:pregunta, :id_diapo)";
+
+    public function setPregunta($pregunta) {
+        $sql = "INSERT INTO pregunta (pregunta) 
+                VALUES (:pregunta)";
     
         $stmt = $this->pdo->prepare($sql);
     
         try {
-            $stmt->bindParam(':id_diapo', $id_diapo, PDO::PARAM_INT);
             $stmt->bindParam(':pregunta', $pregunta, PDO::PARAM_STR);
     
             $stmt->execute();
@@ -577,9 +575,13 @@ class DAO {
             throw new Exception("Error al insertar pregunta: " . $e->getMessage());
         }
     }
-    //Obtiene la pregunta de una diapositiva
+
     public function getPregunta($id_diapositiva) {
-        $sql = "SELECT ID_pregunta, pregunta FROM pregunta WHERE ID_diapositiva = :id_diapositiva";
+        $sql = "SELECT d.ID_pregunta, p.pregunta 
+                FROM Diapositives d
+                JOIN pregunta p ON d.ID_pregunta = p.ID_pregunta
+                WHERE d.ID_diapositiva = :id_diapositiva";
+    
         $stmt = $this->pdo->prepare($sql);
     
         try {
@@ -593,7 +595,7 @@ class DAO {
     
         return $pregunta ? $pregunta : null;
     }
-    //Coloca una respuesta a una pregunta 
+    
     public function setRespuesta($id_pregunta, $texto, $correcta) {
         $sql = "INSERT INTO respuesta (texto, correcta, ID_pregunta) 
                 VALUES (:texto, :correcta, :id_pregunta)";
@@ -610,7 +612,7 @@ class DAO {
             throw new Exception("Error al insertar respuesta: " . $e->getMessage());
         }
     }
-    //Obtiene las respuestas de una pregunta
+
     public function getRespuestas($id_pregunta) {
         $sql = "SELECT * FROM respuesta WHERE ID_pregunta = :id_pregunta";
         $stmt = $this->pdo->prepare($sql);
@@ -625,7 +627,7 @@ class DAO {
         $respuestas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $respuestas ? $respuestas : array();
     }
-    //Actualiza una pregunta
+
     public function updatePregunta($id_pregunta, $nuevoTexto) {
         $sql = "UPDATE pregunta SET pregunta = :nuevoTexto WHERE ID_pregunta = :id_pregunta";
         $stmt = $this->pdo->prepare($sql);
@@ -639,7 +641,7 @@ class DAO {
             throw new Exception("Error al actualizar la pregunta: " . $e->getMessage());
         }
     }
-    //Actualiza una respuesta 
+
     public function updateRespuesta($id_respuesta, $nuevoTexto, $correcta) {
         $sql = "UPDATE respuesta SET texto = :nuevoTexto, correcta = :correcta WHERE ID_respuesta = :id_respuesta";
         $stmt = $this->pdo->prepare($sql);
@@ -656,56 +658,126 @@ class DAO {
     }
 
     public function getDiapositivesVista($id_presentacio) {
-    $sql = "SELECT d.titol, d.contingut, d.imatge, d.orden, p.pregunta, p.ID_pregunta, d.ID_diapositiva, r.texto AS opcion_respuesta
-            FROM Diapositives d
-            LEFT JOIN pregunta p ON d.ID_Diapositiva = p.ID_Diapositiva
-            LEFT JOIN respuesta r ON p.ID_pregunta = r.ID_pregunta
-            WHERE d.ID_Presentacio = :id_presentacio
-            ORDER BY d.orden, p.ID_pregunta, r.ID_respuesta;";
-    $stmt = $this->pdo->prepare($sql);
-    $stmt->bindParam(':id_presentacio', $id_presentacio, PDO::PARAM_INT);
-    $stmt->execute();
-
-    $result = array();
-    $currentPreguntaID = null;
-    $diapositiva = null;
-
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        if ($currentPreguntaID === null || $currentPreguntaID !== $row['ID_pregunta']) {
-            // Nueva pregunta, crear una nueva entrada en $result
-            if ($diapositiva !== null) {
-                $result[] = $diapositiva;
-            }
-
-            $currentPreguntaID = $row['ID_pregunta'];
-            $diapositiva = array(
-                'titol' => $row['titol'],
-                'contingut' => $row['contingut'],
-                'imatge' => $row['imatge'],
-                'orden' => $row['orden'],
-                'ID_Diapositiva' => $row['ID_pregunta'],
-                'pregunta' => $row['pregunta'],
-                'es_pregunta' => !empty($row['pregunta']), // Indicador de si es una pregunta o no
-                'pregunta_id' => $row['ID_pregunta'],
-                'respuestas' => array(), // Inicializar el array de respuestas
-            );
-        }
-
-        if (!empty($row['opcion_respuesta'])) {
-            // Agregar respuesta a la pregunta actual
-            $diapositiva['respuestas'][] = $row['opcion_respuesta'];
-        }
-    }
-
-    // Agregar la última diapositiva al resultado
-    if ($diapositiva !== null) {
-        $result[] = $diapositiva;
-    }
-
-    return $result;
-}
-
+        $sql = "SELECT
+            d.titol,
+            d.contingut,
+            d.imatge,
+            d.orden,
+            p.pregunta,
+            d.ID_pregunta,
+            d.ID_diapositiva AS pregunta_diapo_id,
+            NULL AS respuesta_diapo_id,
+            NULL AS opcion_respuesta,
+            NULL AS correcta_respuesta
+        FROM Diapositives d
+        LEFT JOIN pregunta p ON d.ID_pregunta = p.ID_pregunta
+        WHERE d.ID_Presentacio = :id_presentacio
     
+        UNION
+    
+        SELECT
+            d.titol,
+            d.contingut,
+            d.imatge,
+            d.orden,
+            NULL AS pregunta,
+            NULL AS pregunta_diapo_id,
+            NULL AS pregunta_diapo_id,
+            d.ID_diapositiva AS respuesta_diapo_id,
+            r.texto AS opcion_respuesta,
+            r.correcta
+        FROM Diapositives d
+        LEFT JOIN pregunta p ON d.ID_pregunta = p.ID_pregunta
+        LEFT JOIN respuesta r ON p.ID_pregunta = r.ID_pregunta
+        WHERE d.ID_Presentacio = :id_presentacio
+        ORDER BY orden;";
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(':id_presentacio', $id_presentacio, PDO::PARAM_INT);
+        $stmt->execute();
+    
+        $result = array();
+        $currentPreguntaID = null;
+        $diapositiva['ID_Diapositiva'] = null;
+    
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $currentDiapoID = $row['pregunta_diapo_id'] ?? $row['respuesta_diapo_id'];
+    
+            // Verifica si la diapositiva actual es diferente de la anterior
+            if ($currentDiapoID != $diapositiva['ID_Diapositiva']) {
+                // Si es diferente, guarda la diapositiva actual y comienza una nueva
+                if ($diapositiva !== null) {
+                    $result[] = $diapositiva;
+                }
+    
+                $diapositiva = array(
+                    'titol' => $row['titol'],
+                    'contingut' => $row['contingut'],
+                    'imatge' => $row['imatge'],
+                    'orden' => $row['orden'],
+                    'ID_Diapositiva' => $currentDiapoID,
+                    'pregunta' => $row['pregunta'],
+                    'es_pregunta' => !empty($row['pregunta']), // Indicador de si es una pregunta o no
+                    'pregunta_id' => $row['ID_pregunta'],
+                    'respuestas' => array(),
+                );
+            }
+    
+            if (!empty($row['opcion_respuesta'])) {
+                // Agregar respuesta a la pregunta actual
+                $diapositiva['respuestas'][] = array(
+                    'respuesta_texto' => $row['opcion_respuesta'],
+                    'correcta' => $row['correcta_respuesta']
+                );
+            }
+        }
+
+
+        // Agregar la última diapositiva al resultado
+        if ($diapositiva !== null) {
+            $result[] = $diapositiva;
+        }
+
+        return $result;
+    }
+    
+        public function esDiapositivaDePregunta($id_diapositiva) {
+            // Obtener el ID de pregunta asociado a la diapositiva
+            $id_pregunta = $this->getIdPreguntaPorDiapositiva($id_diapositiva);
+    
+            if ($id_pregunta !== null) {
+                // Comprobar si hay una diapositiva de respuesta con el ID siguiente
+                $id_respuesta = $id_diapositiva + 1;
+                $esRespuesta = $this->existeDiapositiva($id_respuesta, $id_pregunta);
+    
+                return !$esRespuesta;
+            }
+    
+            return false;
+        }
+    
+        private function getIdPreguntaPorDiapositiva($id_diapositiva) {
+            $sql = "SELECT ID_pregunta FROM Diapositives WHERE ID_diapositiva = :id_diapositiva";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':id_diapositiva', $id_diapositiva, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            $id_pregunta = $stmt->fetchColumn();
+    
+            return $id_pregunta !== false ? $id_pregunta : null;
+        }
+    
+        private function existeDiapositiva($id_diapositiva, $id_pregunta) {
+            $sql = "SELECT COUNT(*) FROM Diapositives WHERE ID_diapositiva = :id_diapositiva AND ID_pregunta = :id_pregunta";
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':id_diapositiva', $id_diapositiva, PDO::PARAM_INT);
+            $stmt->bindParam(':id_pregunta', $id_pregunta, PDO::PARAM_INT);
+            $stmt->execute();
+    
+            $cantidad = $stmt->fetchColumn();
+    
+            return $cantidad > 0;
+        }
     
 }
     

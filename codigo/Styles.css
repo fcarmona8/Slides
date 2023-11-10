@@ -556,7 +556,7 @@ textarea {
 }
 
 .iconoCrear {
-    vertical-align: -7px;
+    vertical-align: -3px;
 }
 
 .line {
@@ -768,7 +768,7 @@ textarea {
     cursor: pointer;
     border-radius: 100%;
     font-size: 16px;
-    margin: -10px 10px;
+    margin: 0 10px;
     padding: 18px 20px;
 }
 
@@ -1308,4 +1308,41 @@ body.error-page {
 .respuestas input{
     margin: 20px 0px;
 
+}
+
+.respuesta-correcta {
+    color: rgb(0, 223, 0);
+    border: 2px solid rgb(0, 223, 0);
+    border-radius: 10px;
+}
+
+.respuesta-preview {
+    padding: 10px 15px;
+    width: 82%;
+    margin-right: 100px;
+}
+
+.respuesta-preview input {
+    margin-right: 10px;
+    vertical-align: -2px;
+}
+
+.respuestaVacia-preview {
+    padding: 10px 15px;
+    width: 80%;
+    margin-right: 100px;
+    border-radius: 10px;
+}
+
+.respuestaVacia-preview:hover {
+    padding: 10px 15px;
+    width: 82%;
+    margin-right: 100px;
+    background-color: rgb(224, 224, 224);
+    cursor: pointer;
+}
+
+.respuestaVacia-preview input {
+    margin-right: 10px;
+    vertical-align: -2px;
 }
