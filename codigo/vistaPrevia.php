@@ -49,7 +49,7 @@ if (isset($_GET["id"])) {
             <p></p>
             <h2></h2>
             <div class="opciones-respuesta" style="display: none;"></div>
-            <form class="respuestas"></form>
+            <div class="respuestas"></div>
             <img id="imagen" src="" alt="imagen" style="width: 250px; height: 250px; margin-right: 50px">
         </div>
     </div>
@@ -65,11 +65,14 @@ if (isset($_GET["id"])) {
         var diapositivas = <?php echo json_encode($diapositivas); ?>;
         var currentSlide = 0; // Inicializa el índice de la diapositiva actual
         var totalSlides = diapositivas.length; // Obtiene el número total de diapositivas
+        var preguntasRespondidas = [];
+        var valorRespuestas = [];
 
         var anteriorButton = document.getElementById("anterior"); // Obtiene el botón de diapositiva anterior
         var siguienteButton = document.getElementById("siguiente"); // Obtiene el botón de diapositiva siguiente
 
         function mostrarDiapositiva(slideIndex) {
+
             // Función para mostrar una diapositiva en función del índice
             var diapositiva = diapositivas[slideIndex];
             document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
@@ -82,7 +85,27 @@ if (isset($_GET["id"])) {
             var img = document.getElementById("imagen");
             const cont = document.querySelector('.contenido');
             const respuestasForm = document.querySelector('.respuestas');
+            var radioButtons = document.querySelectorAll('.respuestas');
 
+            console.log(diapositiva);
+            console.log(diapositiva.respuestas);
+            console.log(preguntasRespondidas);
+
+            radioButtons.forEach(function(radioButton) {
+                radioButton.addEventListener('change', function() {
+                    var pregunta_id = diapositiva.pregunta_id;
+                    var respuesta_value = document.querySelector('input[name="respuesta"]:checked').value;
+                    var preguntaYaRespondida = preguntasRespondidas.find(item => item.pregunta_id === pregunta_id);
+
+                    if (!preguntaYaRespondida) {
+                        // Imprime el array en la consola para verificar
+                    } else {
+                        preguntaYaRespondida.respuesta = respuesta_value;
+                        preguntaYaRespondida.respondida = true;
+                        
+                    }
+                });
+            });
             
             if (diapositiva.contingut === null) {
                 // Si el contenido es nulo, ocultar el contenido
@@ -92,24 +115,58 @@ if (isset($_GET["id"])) {
                 contenidoElement.style.width = null;
                 cont.style.display = 'block';
                 respuestasForm.innerHTML = '';
+
                 if (diapositiva.es_pregunta === true) {
                     tituloElement.style.fontSize = "40px";
                     tituloElement.style.marginTop = "65px";
                     tituloElement.style.marginBottom = "50px";
-                    // Si es una pregunta, muestra el título de la pregunta y las respuestas
-                    document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
 
-                        if (diapositiva.respuestas && diapositiva.respuestas.length > 0) {
-                            var respuestaContainer = document.createElement('div');
-                            respuestaContainer.classList.add('.respuesta-container-preview')
-                            diapositiva.respuestas.forEach(function(respuesta, index) {
+                    preguntaRespuesta = preguntasRespondidas.find(item => item.pregunta_id === diapositiva.pregunta_id)
 
-                                respuestaContainer.innerHTML += '<label><input type="radio" name="respuesta" value="' + index + '"> ' + respuesta + '</label><br>';
-                                respuestasForm.appendChild(respuestaContainer);
-                            });
-                        } else {
-                            document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = 'No hay respuestas disponibles';
+                    if ((!preguntaRespuesta ) || (preguntaRespuesta.id_diapositiva === diapositiva.ID_Diapositiva)) {
+                        
+                        if (!preguntaRespuesta) {
+                            preguntasRespondidas.push({ pregunta_id: diapositiva.pregunta_id, id_diapositiva: diapositiva.ID_Diapositiva, respondida: false, respuesta: -1 });
                         }
+                        
+                        // Si es una pregunta, muestra el título de la pregunta y las respuestas
+                        document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
+
+                            if (diapositiva.respuestas && diapositiva.respuestas.length > 0) {
+                                var respuestaContainer = document.createElement('div');
+                                respuestaContainer.classList.add('.respuesta-container-preview')
+                                diapositiva.respuestas.forEach(function(respuesta, index) {
+
+                                    respuestaContainer.innerHTML += '<label class="respuestaVacia-preview"><input type="radio" name="respuesta" value="' + index + '"> ' + respuesta.respuesta_texto + '</label><br>';
+                                    respuestasForm.appendChild(respuestaContainer);
+                                });
+                            } else {
+                                document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = 'No hay respuestas disponibles';
+                            } 
+
+                    } else if ((preguntaRespuesta.respondida === false) && (preguntaRespuesta.id_diapositiva !== diapositiva.ID_Diapositiva)) {
+                      
+                    } else if ((preguntaRespuesta.respondida === true) && (preguntaRespuesta.id_diapositiva !== diapositiva.ID_Diapositiva)) {
+                        // Si es una pregunta, muestra el título de la pregunta y las respuestas
+                        document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
+
+                            if (diapositiva.respuestas && diapositiva.respuestas.length > 0) {
+                                var respuestaContainer = document.createElement('div');
+                                respuestaContainer.classList.add('.respuesta-container-preview')
+                                diapositiva.respuestas.forEach(function(respuesta, index) {
+
+                                    respuestaContainer.innerHTML += '<label class="respuesta-preview ' + (respuesta.correcta === 1 ? 'respuesta-correcta' : '') + '"><input type="radio" name="respuesta" value="' + index + '" ' + ((index == preguntaRespuesta.respuesta) ? 'checked' : '') + ' disabled> ' + respuesta.respuesta_texto + '</label><br>';
+                                    respuestasForm.appendChild(respuestaContainer);
+                                    console.log(respuesta.correcta);
+                                });
+                            } else {
+                                document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = 'No hay respuestas disponibles';
+                            }
+
+                            
+                    }
+                    
+                    
                 } else {
                     tituloElement.style.fontSize = "6rem";
                     tituloElement.style.marginTop = "200px";
@@ -150,7 +207,7 @@ if (isset($_GET["id"])) {
             currentSlide = slideIndex;
 
             // Habilitar o deshabilitar botones según la posición de la diapositiva
-            anteriorButton.disabled = currentSlide === 0;
+            anteriorButton.disabled = currentSlide === 1;
             siguienteButton.disabled = currentSlide === totalSlides - 1;
 
 
@@ -168,7 +225,7 @@ if (isset($_GET["id"])) {
         });
 
         // Mostrar la primera diapositiva al cargar la página
-        mostrarDiapositiva(0);
+        mostrarDiapositiva(1);
         <?php endif; ?>
     </script>
 </body>
