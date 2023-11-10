@@ -172,9 +172,9 @@ if (isset($_GET["id_diapo"])) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                 <div class="preguntaSimple"><?php if ($editDiapo === TRUE) {?>
-                    <input type="text" name="titol" class="titolDiapoPregunta" id='titol' value=' <?=$titolDiapo?>' >
+                    <input type="text" name="titol" class="titolDiapoPregunta" id="titol" value=' <?=$titolDiapo?>' >
                         <?php
-                        echo '<input type="textarea" name="pregunta" class="preguntaDiapo" value="' . $pregunta['pregunta'] . '">';
+                        echo '<input type="textarea" name="pregunta" id="pregunta" class="preguntaDiapo" value="' . $pregunta['pregunta'] . '">';
                         ?>
                         <div id="respuestas-container">
                         <?php
@@ -187,7 +187,7 @@ if (isset($_GET["id_diapo"])) {
                             }
                             echo '>';
                             
-                            echo '<input name="opcion[]" class="opcionDiapo" value="' . $respuesta['texto'] . '">';
+                            echo '<input name="opcion[]" class="opcionDiapo" id="opcionDiapo" value="' . $respuesta['texto'] . '">';
                             
                             echo '</div>';
                         }
@@ -202,18 +202,18 @@ if (isset($_GET["id_diapo"])) {
                         <textarea name="pregunta" id="pregunta" class="preguntaDiapo" placeholder="Escribe tu pregunta" required></textarea>
     
                         <div id="respuestas-container">
-                        <div class="respuesta-container">
-                        <input type="radio" name="respuesta_correcta" value="1" checked>
-                        <input type="text" name="opcion[]" placeholder="Respuesta 1" class="opcionDiapo" required>
-                        </div>
-    
-                        <div class="respuesta-container">
-                        <input type="radio" name="respuesta_correcta" value="2">
-                        <input type="text" name="opcion[]" placeholder="Respuesta 2" class="opcionDiapo" required>
-                        </div>
-                        </div>
-                       
-                        <button type="button" class="anadirRespuesta" onclick="agregarRespuesta()">Agregar Respuesta</button>
+                            <div class="respuesta-container">
+                            <input type="radio" name="respuesta_correcta" value="1" checked>
+                            <input type="text" name="opcion[]" placeholder="Respuesta 1" class="opcionDiapo" id="opcionDiapo" required>
+                            </div>
+        
+                            <div class="respuesta-container">
+                            <input type="radio" name="respuesta_correcta" value="2">
+                            <input type="text" name="opcion[]" placeholder="Respuesta 2" class="opcionDiapo" id="opcionDiapo" required>
+                            </div>
+                            </div>
+                        
+                            <button type="button" class="anadirRespuesta" onclick="agregarRespuesta()">Agregar Respuesta</button>
                         </div>
 
                     <?php
@@ -269,11 +269,20 @@ if (isset($_GET["id_diapo"])) {
             console.log(url);
             window.location.href = url;
         });
-
+        
         function obtenerValores() {
             var titolDiapo = document.getElementById('titol').value;
+            var pregunta = document.getElementById('pregunta').value;
+            var resposta = document.querySelectorAll('#opcionDiapo');
+            let limitR = resposta.length;
+            
+            for (let i = 0; i < limitR ; i++) {
+                localStorage.setItem(('respuesta'+i) , resposta[i].value);
+            };
             // Almacena los valores en localStorage para que estén disponibles en la nueva página
             localStorage.setItem('titolDiapo', titolDiapo);
+            localStorage.setItem('pregunta', pregunta);
+            localStorage.setItem('limitR', limitR);
         }
 
         function copiarURL(buttoncopy) {
@@ -337,6 +346,7 @@ if (isset($_GET["id_diapo"])) {
             // Crea un nuevo campo de texto para la respuesta
             var inputTexto = document.createElement('input');
             inputTexto.type = 'text';
+            inputTexto.id = 'opcionDiapo';
             inputTexto.name = 'opcion[]';  // Usa un array para almacenar las respuestas
             inputTexto.placeholder = 'Respuesta ' + contador;
             inputTexto.setAttribute('required', ''); // Corrección aquí
