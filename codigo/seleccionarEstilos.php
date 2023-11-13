@@ -27,6 +27,7 @@ if (isset($_GET["id"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seleccionar Estilos</title>
     <link rel="stylesheet" href="Styles.css">
+    <link rel="icon" href="logoSlides.ico" type="image/x-icon">
 </head>
 <body>  
     <div class="up">
