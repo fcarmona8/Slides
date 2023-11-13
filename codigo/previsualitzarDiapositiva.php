@@ -78,7 +78,10 @@ if (isset($_GET["id"])) {
                     // Muestra el título si no hay contenido
                     tituloElement.textContent = titolDiapo;
                     tituloElement.style.margin='200px';
+                    tituloElement.style.fontSize = "6rem";
                     cont.style.display='none';
+                    preguntaElement.style.display = 'none';
+                    respostaElement.style.display = 'none';
                 }else{
                     contenidoElement.style.display = 'none';
                     tituloElement.textContent = titolDiapo;
@@ -109,6 +112,9 @@ if (isset($_GET["id"])) {
                     cont.style.display = 'flex';
                     imatgeElement.style.display = 'none';
                     document.getElementById('aviso').textContent = aviso;
+                    
+                    preguntaElement.style.display = 'none';
+                    respostaElement.style.display = 'none';
                 }else{
                     // Muestra título, contenido e imagen
                     tituloElement.textContent = titolDiapo;
@@ -125,6 +131,9 @@ if (isset($_GET["id"])) {
 
                     imatgeElement.style.display = 'flex';
 
+                    
+                    preguntaElement.style.display = 'none';
+                    respostaElement.style.display = 'none';
 
                     document.getElementById('aviso').textContent = aviso;
                 }
