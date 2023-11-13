@@ -26,6 +26,9 @@ if (isset($_GET["id_diapo"])) {
         // Obtiene el título y el contenido de una diapositiva específica
         $titolDiapo = $dao->getTitolDiapoPorID($id_diapo);
         $contingut = $dao->getContingutPorID($id_diapo);
+        $pregunta = $dao->getPregunta($id_diapo);
+        $id_pregunta = $pregunta['ID_pregunta'];
+        $respuestas = $dao->getRespuestas($id_pregunta);
 
         $infoDiapo = TRUE;
     }
@@ -86,9 +89,18 @@ if (isset($_GET["id_diapo"])) {
         </div>
         <div class="right">
             <div id="formDiapo">
-                <?php if ($infoDiapo === TRUE) {
-                   ?><input type="text" name="titol" class="titolDiapo" id='titol' value=' <?=$titolDiapo?>' readOnly > <?php ;
-                   }?>
+            <div class="preguntaSimple"><?php if ($infoDiapo === TRUE): ?>
+                <input type="text" name="titol" id="titol" class="titolDiapoPregunta" value='<?= $titolDiapo ?>' readonly>
+                <textarea class="preguntaDiapo" name="pregunta" id="pregunta" readonly><?= htmlspecialchars($pregunta['pregunta']) ?></textarea>
+                <div id="respuestas-container">
+                    <?php foreach ($respuestas as $respuesta): ?>
+                        <div class="respuesta-container">
+                            <input type="radio" name="respuesta_correcta" value="<?= $respuesta['ID_respuesta'] ?>" disabled<?= $respuesta['correcta'] == 1 ? ' checked' : '' ?>>
+                            <input type="text" name="opcion[]" class="opcionDiapo" id="opcionDiapo" readonly value="<?= htmlspecialchars($respuesta['texto']) ?>">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
             </div>
         </div>
     </div>

@@ -3,7 +3,6 @@
 // Incluye archivos de funciones necesarios
 include_once("controllers/baseDatos.php");
 include_once("controllers/DAO.php");
-session_start();
 // Verifica si se ha proporcionado un parámetro "id" en la URL
 if (isset($_GET["id"])) {
     $id_presentacio = $_GET["id"];
@@ -51,19 +50,16 @@ if (isset($_GET["id_diapo"])) {
         <!-- Si no hay diapositivas en la presentación, muestra un mensaje de aviso -->
         <div class="aviso">Esta presentación no tiene diapositivas.</div>
     <?php else: ?>
-    <!-- Si hay diapositivas, muestra la vista previa de la presentación -->
     <div class="diapositiva-preview-<?php echo $estiloPresentacion;?>">
         <h1></h1>
         <div class="contenido">
             <p></p>
             <h2></h2>
-            <div class="opciones-respuesta" style="display: none;"></div>
-            <form class="respuestas"></form>
+            <div class="respuestas"></div>
             <img id="imagen" src="" alt="imagen" style="width: 250px; height: 250px; margin-right: 50px">
         </div>
     </div>
     <div class="controles">
-        <!-- Botones para navegar entre las diapositivas -->
         <button id="anterior"><svg class="rotate" xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#ffffff}</style><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></button>
         <button id="siguiente"><svg xmlns="http://www.w3.org/2000/svg" height="2em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></button>
     </div>
@@ -75,13 +71,18 @@ if (isset($_GET["id_diapo"])) {
         var diapositivas = <?php echo json_encode($diapositivas); ?>;
         var currentSlide = 0; // Inicializa el índice de la diapositiva actual
         var totalSlides = diapositivas.length; // Obtiene el número total de diapositivas
+        var preguntasRespondidas = [];
+        var valorRespuestas = [];
 
         var anteriorButton = document.getElementById("anterior"); // Obtiene el botón de diapositiva anterior
         var siguienteButton = document.getElementById("siguiente"); // Obtiene el botón de diapositiva siguiente
 
-        function mostrarDiapositiva(slideIndex) {
+        function mostrarDiapositiva(slideIndex, direccion) {
+
             // Función para mostrar una diapositiva en función del índice
             var diapositiva = diapositivas[slideIndex];
+            var direccionDiapositiva = direccion;
+            var preguntaNoRespondida = false;
             document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
             document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = diapositiva.contingut;
             document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h2').textContent = diapositiva.pregunta;
@@ -92,8 +93,32 @@ if (isset($_GET["id_diapo"])) {
             var img = document.getElementById("imagen");
             const cont = document.querySelector('.contenido');
             const respuestasForm = document.querySelector('.respuestas');
+            var radioButtons = document.querySelectorAll('.respuestas');
+            var numeroDiapositiva = 1;
 
-            
+
+            respuestasForm.addEventListener('change', function(event) {
+                var pregunta_id = diapositiva.pregunta_id;
+                var respuesta_value = event.target.value;
+
+                var preguntaYaRespondida = preguntasRespondidas.find(item => item.pregunta_id === pregunta_id);
+
+                if (respuesta_value !== undefined) {
+                    // Si la pregunta ha sido respondida, actualiza la propiedad respondida a true
+                    if (preguntaYaRespondida) {
+                        if (numeroDiapositiva == currentSlide) {
+                            if (preguntaYaRespondida.respondida !== undefined) {
+                                preguntaYaRespondida.respuesta = respuesta_value;
+                                preguntaYaRespondida.respondida = true;
+                            }
+                        }
+                        
+                    } 
+                }
+
+                siguienteButton.disabled =  totalSlides === -1;
+            });
+
             if (diapositiva.contingut === null) {
                 // Si el contenido es nulo, ocultar el contenido
                 contenidoElement.style.display = 'none';
@@ -103,25 +128,73 @@ if (isset($_GET["id_diapo"])) {
                 cont.style.display = 'block';
                 respuestasForm.innerHTML = '';
 
+
                 if (diapositiva.es_pregunta === true) {
-                    
                     tituloElement.style.fontSize = "40px";
                     tituloElement.style.marginTop = "65px";
                     tituloElement.style.marginBottom = "50px";
-                    // Si es una pregunta, muestra el título de la pregunta y las respuestas
-                    document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
 
-                        if (diapositiva.respuestas && diapositiva.respuestas.length > 0) {
-                            var respuestaContainer = document.createElement('div');
-                            respuestaContainer.classList.add('.respuesta-container-preview')
-                            diapositiva.respuestas.forEach(function(respuesta, index) {
+                    preguntaRespuesta = preguntasRespondidas.find(item => item.pregunta_id === diapositiva.pregunta_id);
+                    numeroDiapositiva = currentSlide + 1;
 
-                                respuestaContainer.innerHTML += '<label><input type="radio" name="respuesta" value="' + index + '"> ' + respuesta + '</label><br>';
-                                respuestasForm.appendChild(respuestaContainer);
-                            });
-                        } else {
-                            document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = 'No hay respuestas disponibles';
+                    if ((!preguntaRespuesta ) || (preguntaRespuesta.id_diapositiva === diapositiva.ID_Diapositiva)) {
+                        
+                        if (!preguntaRespuesta) {
+                            preguntasRespondidas.push({ pregunta_id: diapositiva.pregunta_id, id_diapositiva: diapositiva.ID_Diapositiva, respondida: false, respuesta: -1 });
                         }
+                        
+                        // Si es una pregunta, muestra el título de la pregunta y las respuestas
+                        document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
+
+                            if (diapositiva.respuestas && diapositiva.respuestas.length > 0) {
+                                var respuestaContainer = document.createElement('div');
+                                respuestaContainer.classList.add('.respuesta-container-preview')
+                                diapositiva.respuestas.forEach(function(respuesta, index) {
+
+                                    respuestaContainer.innerHTML += '<label class="respuestaVacia-preview"><input type="radio" name="respuesta" value="' + index + '"> ' + respuesta.respuesta_texto + '</label><br>';
+                                    respuestasForm.appendChild(respuestaContainer);
+                                });
+                            } else {
+                                document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = 'No hay respuestas disponibles';
+                            } 
+
+                    } else if ((preguntaRespuesta.respondida === false) && (preguntaRespuesta.id_diapositiva !== diapositiva.ID_Diapositiva)) {
+
+                        preguntaNoRespondida = true;
+                        currentSlide = slideIndex;
+
+                        if (direccionDiapositiva === 'front') {
+                            mostrarDiapositiva(currentSlide + 1, 'front')
+                        } else {
+                            mostrarDiapositiva(currentSlide - 1, 'back')
+                        }
+
+                        anteriorButton.disabled = currentSlide === 1;
+                        siguienteButton.disabled = currentSlide === totalSlides - 2;
+
+                        return;
+
+                        
+                    
+                    } else if ((preguntaRespuesta.respondida === true) && (preguntaRespuesta.id_diapositiva !== diapositiva.ID_Diapositiva) && (diapositiva.pregunta_id === preguntaRespuesta.pregunta_id)) {
+                        // Si es una pregunta, muestra el título de la pregunta y las respuestas
+
+                        document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
+
+                            if (diapositiva.respuestas && diapositiva.respuestas.length > 0) {
+                                var respuestaContainer = document.createElement('div');
+                                respuestaContainer.classList.add('.respuesta-container-preview')
+                                diapositiva.respuestas.forEach(function(respuesta, index) {
+
+                                    respuestaContainer.innerHTML += '<label class="respuesta-preview ' + (respuesta.correcta === 1 ? 'respuesta-correcta' : '') + '"><input type="radio" name="respuesta" value="' + index + '" ' + ((index == preguntaRespuesta.respuesta) ? 'checked' : '') + ' disabled> ' + respuesta.respuesta_texto + '</label><br>';
+                                    respuestasForm.appendChild(respuestaContainer);
+                                });
+                            } else {
+                                document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = 'No hay respuestas disponibles';
+                            }  
+
+                            
+                    }
                 } else {
                     tituloElement.style.fontSize = "6rem";
                     tituloElement.style.marginTop = "200px";
@@ -164,20 +237,22 @@ if (isset($_GET["id_diapo"])) {
             // Habilitar o deshabilitar botones según la posición de la diapositiva
             anteriorButton.disabled = currentSlide === 1;
             siguienteButton.disabled = currentSlide === totalSlides - 1;
-        }
 
-        document.getElementById("anterior").addEventListener("click", function() {
+            }
+
+
+            document.getElementById("anterior").addEventListener("click", function() {
             // Asocia una función a la acción de hacer clic en el botón anterior
-            mostrarDiapositiva(currentSlide - 1); // Muestra la diapositiva anterior
-        });
+            mostrarDiapositiva(currentSlide - 1, 'back'); // Muestra la diapositiva anterior
+            });
 
-        document.getElementById("siguiente").addEventListener("click", function() {
+            document.getElementById("siguiente").addEventListener("click", function() {
             // Asocia una función a la acción de hacer clic en el botón siguiente
-            mostrarDiapositiva(currentSlide + 1); // Muestra la diapositiva siguiente
-        });
+            mostrarDiapositiva(currentSlide + 1, 'front'); // Muestra la diapositiva siguiente
+            });
 
-        // Mostrar la primera diapositiva al cargar la página
-        mostrarDiapositiva(1);
+            // Mostrar la primera diapositiva al cargar la página
+            mostrarDiapositiva(1);
         <?php endif; ?>
     </script>
 </body>

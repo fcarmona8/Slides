@@ -134,6 +134,5 @@ if (isset($_GET["id_diapo"])) {
         // Agrega un evento para borrar los valores cuando se cargue la página
         window.addEventListener('load', clearLocalStorage);
     </script>
-    <script src="Diapositives.js"></script>
 </body>
 </html>

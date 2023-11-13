@@ -556,7 +556,8 @@ textarea {
 }
 
 .iconoCrear {
-    vertical-align: -3px;
+    vertical-align: -7px;
+    margin-right: 4px;
 }
 
 .line {
@@ -1327,18 +1328,30 @@ body.error-page {
     vertical-align: -2px;
 }
 
-.respuestaVacia-preview {
+.respuestaVacia-previewfondoNegro {
     padding: 10px 15px;
-    width: 80%;
     margin-right: 100px;
     border-radius: 10px;
 }
 
-.respuestaVacia-preview:hover {
+.respuestaVacia-previewfondoBlanco {
+    padding: 10px 15px;
+    margin-right: 100px;
+    border-radius: 10px;
+}
+
+.respuestaVacia-previewfondoBlanco:hover {
+    padding: 10px 15px;
+    margin-right: 100px;
+    background-color: rgb(224, 224, 224);
+    cursor: pointer;
+}
+
+.respuestaVacia-previewfondoNegro:hover {
     padding: 10px 15px;
     width: 82%;
     margin-right: 100px;
-    background-color: rgb(224, 224, 224);
+    border: 2px solid white;
     cursor: pointer;
 }
 
