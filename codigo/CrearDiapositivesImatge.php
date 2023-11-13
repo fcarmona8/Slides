@@ -128,7 +128,7 @@ if (isset($_GET["id_diapo"])) {
                    } ?>
                 <span id="contError" class="error"></span>
                    <?php if ($infoDiapo === TRUE) {
-                        ?><div class="contImatge"> <input type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> ' readOnly> <?php ;
+                        ?><div class="contImatge"> <textarea name="contArea" id="contArea" class="contingutDiapo" placeholder="Contenido" maxlength="640"><?=$contingut?></textarea> <input type="hidden" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> ' readOnly> <?php ;
                     }else {
                     echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" style ="height: 54.2%" required ></textarea>';
                    } ?>
