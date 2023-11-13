@@ -12,6 +12,7 @@ $presen = $dao->getPresentacions();
 <head>
     <title>Pantalla Home</title>
     <link rel="stylesheet" href="Styles.css">
+    <link rel="icon" href="logoSlides.ico" type="image/x-icon">
     <script>
     // Evento que se ejecuta cuando el contenido HTML está completamente cargado
     document.addEventListener("DOMContentLoaded", function() {

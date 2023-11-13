@@ -47,6 +47,7 @@ if ($editDiapo === false) {
 <html lang="es">
 <head>
     <title>Pantalla Editar Diapositivas Contingut</title>
+    <link rel="icon" href="logoSlides.ico" type="image/x-icon">
     <link rel="stylesheet" href="Styles.css">
     <div id="message-container" class="mensaje-exito" style="display: none;"></div>
 </head>
