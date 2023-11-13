@@ -108,7 +108,5 @@ if (isset($_GET["id_diapo"])) {
             localStorage.setItem('titolDiapo', titolDiapo);
         }
     </script>
-    <script src="Diapositives.js"></script>
-    
 </body>
 </html>
