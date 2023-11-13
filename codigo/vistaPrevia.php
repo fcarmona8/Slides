@@ -23,6 +23,7 @@ if (isset($_GET["id"])) {
 <html lang="es">
 <head>
     <title>Vista Previa de Presentación</title>
+    <link rel="icon" href="logoSlides.ico" type="image/x-icon">
     <link rel="stylesheet" href="Styles.css">
 </head>
 <body class="vista">
