@@ -266,6 +266,7 @@ if (isset($_GET["id_diapo"])) {
             // Crear un mensaje de error y mostrarlo en el messageContainer
             var messageContainer = document.getElementById('message-container');
             messageContainer.textContent = 'No se puede copiar la URL ya que la presentación no esta publicada.';
+            messageContainer.style.backgroundColor = 'red';
             messageContainer.style.display = 'block';
 
             // Ocultar el mensaje después de 3 segundos (3000 milisegundos)
