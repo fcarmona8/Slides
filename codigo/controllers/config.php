@@ -3,8 +3,8 @@
 $config = [
     'db' => [
         // Define la información de conexión a la base de datos. Puede haber una conexión alternativa comentada.
-        //'connection' => 'mysql:host=192.168.1.12',
-        'connection' => 'mysql:host=localhost:3306',
+        'connection' => 'mysql:host=192.168.1.12',
+        //'connection' => 'mysql:host=localhost:3306',
 
         // Nombre de la base de datos a la que se conectará.
         'dbname' => 'slides',
