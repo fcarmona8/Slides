@@ -76,7 +76,6 @@ if (isset($_GET["id"])) {
             // Función para mostrar una diapositiva en función del índice
             var diapositiva = diapositivas[slideIndex];
             var direccionDiapositiva = direccion;
-            var preguntaNoRespondida = false;
             document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h1').textContent = diapositiva.titol;
             document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> p').textContent = diapositiva.contingut;
             document.querySelector('.diapositiva-preview-<?php echo $estiloPresentacion;?> h2').textContent = diapositiva.pregunta;
@@ -154,21 +153,17 @@ if (isset($_GET["id"])) {
 
                     } else if ((preguntaRespuesta.respondida === false) && (preguntaRespuesta.id_diapositiva !== diapositiva.ID_Diapositiva)) {
 
-                        preguntaNoRespondida = true;
                         currentSlide = slideIndex;
-
+                        
                         if (direccionDiapositiva === 'front') {
-                            mostrarDiapositiva(currentSlide + 1, 'front')
+
+                                mostrarDiapositiva(currentSlide + 1, 'front')
+                             
                         } else {
                             mostrarDiapositiva(currentSlide - 1, 'back')
                         }
 
-                        anteriorButton.disabled = currentSlide === 1;
-                        siguienteButton.disabled = currentSlide === totalSlides - 2;
-
                         return;
-
-                        
                       
                     } else if ((preguntaRespuesta.respondida === true) && (preguntaRespuesta.id_diapositiva !== diapositiva.ID_Diapositiva) && (diapositiva.pregunta_id === preguntaRespuesta.pregunta_id)) {
                         // Si es una pregunta, muestra el título de la pregunta y las respuestas
@@ -226,12 +221,29 @@ if (isset($_GET["id"])) {
                     tituloElement.style.marginTop = "65px";
                 }
             }
-
             currentSlide = slideIndex;
 
+            if (currentSlide < totalSlides - 1) {
+                var siguienteDiapositiva = preguntasRespondidas.find(item => item.pregunta_id === diapositivas[currentSlide + 1].pregunta_id);
+            }
+
             // Habilitar o deshabilitar botones según la posición de la diapositiva
+            if (
+                currentSlide === totalSlides - 2 && // La diapositiva actual es la penúltima
+                diapositivas[currentSlide + 1].es_pregunta === true &&
+                siguienteDiapositiva.respondida === false
+            ) {
+                siguienteButton.disabled = true;
+                
+            } else if (currentSlide === totalSlides - 1) {
+                
+                siguienteButton.disabled = true;
+            } else {
+                siguienteButton.disabled = false;
+            }
+
             anteriorButton.disabled = currentSlide === 1;
-            siguienteButton.disabled = currentSlide === totalSlides - 1;
+            
         }
 
 
