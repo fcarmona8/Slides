@@ -755,7 +755,7 @@ textarea {
 
 .controles {
     position: absolute;
-    bottom: 20px;
+    bottom: 0px;
     display: flex;
     justify-content: space-around;
     width: 100%;
