@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirDiapositiva"])) 
         $dao->setPregunta($pregunta);
         $id_pregunta = $dao->getLastInsertId();
         $dao->setDiapositivesTitol($titol, $id_presentacio, $id_pregunta);
-        $dao->setDiapositivesTitol('Respuesta: ' . $titol, $id_presentacio, $id_pregunta);
+        $dao->setDiapositivesTitol($titol, $id_presentacio, $id_pregunta);
         $id_diapo = $dao->getLastInsertId();
         
         $respuestas = $_POST['opcion'];
