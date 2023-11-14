@@ -192,7 +192,7 @@ if (isset($_GET["id_diapo"])) {
                             
                     }
                 } else {
-                    tituloElement.style.fontSize = "6rem";
+                    tituloElement.style.fontSize = "4rem";
                     tituloElement.style.marginTop = "200px";
                 }
 
