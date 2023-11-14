@@ -43,6 +43,7 @@ if (isset($_GET["id_diapo"])) {
 <head>
     <title>Pantalla Vista Previa Titol Client</title>
     <link rel="stylesheet" href="Styles.css">
+    <link rel="icon" href="logoSlides.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
 </head>
 <body id="crearDiapositivasContingut">
