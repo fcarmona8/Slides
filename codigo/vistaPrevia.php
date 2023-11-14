@@ -158,7 +158,12 @@ if (isset($_GET["id"])) {
                         currentSlide = slideIndex;
 
                         if (direccionDiapositiva === 'front') {
-                            mostrarDiapositiva(currentSlide + 1, 'front')
+                            if (currentSlide === totalSlides - 1) {
+                                mostrarDiapositiva(currentSlide - 1, 'front')
+                            } else {
+                                mostrarDiapositiva(currentSlide + 1, 'front')
+                            }
+                            
                         } else {
                             mostrarDiapositiva(currentSlide - 1, 'back')
                         }
