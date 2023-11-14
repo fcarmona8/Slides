@@ -12,7 +12,7 @@
     mysql -u root -p$DBPASS -e "CREATE DATABASE $DBNAME;"
     mysql -u root -p$DBPASS -e "USE $DBNAME; FLUSH PRIVILEGES;"
     
-    mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE Presentacions (ID_Presentacio INT AUTO_INCREMENT PRIMARY KEY, titol VARCHAR(30) NOT NULL, descripcio TEXT, estil VARCHAR(255),pin VARCHAR(8), publicada BOOLEAN DEFAULT FALSE, url_unica VARCHAR(255) DEFAULT NULL);"
+    mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE Presentacions (ID_Presentacio INT AUTO_INCREMENT PRIMARY KEY, titol VARCHAR(30) NOT NULL, descripcio TEXT, estil VARCHAR(255),pin VARCHAR(255), publicada BOOLEAN DEFAULT FALSE, url_unica VARCHAR(255) DEFAULT NULL);"
     mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE pregunta(ID_pregunta INT (11) AUTO_INCREMENT PRIMARY KEY, pregunta TEXT); "
     mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE Diapositives (ID_Diapositiva INT AUTO_INCREMENT PRIMARY KEY, titol VARCHAR(25) NOT NULL, contingut TEXT(640),imatge TEXT, orden INT NOT NULL, ID_pregunta INT (11), ID_Presentacio INT, FOREIGN KEY (ID_Presentacio) REFERENCES Presentacions(ID_Presentacio), FOREIGN KEY(ID_pregunta) REFERENCES pregunta (ID_pregunta));"
     mysql -u root -p$DBPASS -e "USE $DBNAME; CREATE TABLE respuesta (ID_respuesta INT (11) AUTO_INCREMENT PRIMARY KEY, texto TEXT, correcta INT (11), ID_pregunta INT (11),  FOREIGN KEY (ID_pregunta) REFERENCES pregunta(ID_pregunta)); "
