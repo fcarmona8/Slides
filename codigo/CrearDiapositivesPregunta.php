@@ -105,25 +105,25 @@ if (isset($_GET["id_diapo"])) {
             </div>
         </div>
         <div class="right">
-            <form method="POST" id="formDiapo" onsubmit="return validateForm();">
+            <form method="POST" id="formDiapo"  onsubmit="return validatePregunta();">
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
                 <div class="preguntaSimple"><?php if ($infoDiapo === TRUE) {?>
-                        <input type="text" name="titol" id="titol"  class="titolDiapoPregunta" value=' <?=$titolDiapo?>' readOnly >
+                        <input type="text" name="titol" id="titol"  class="titolDiapoPregunta" maxlength ="25" value=' <?=$titolDiapo?>' readOnly >
                         <?php
-                        echo '<textarea class="preguntaDiapo" name="pregunta" id="pregunta" readonly>' . htmlspecialchars($pregunta['pregunta']) . '</textarea>';
+                        echo '<textarea class="preguntaDiapo" name="pregunta" id="pregunta" maxlength ="65" readonly>' . htmlspecialchars($pregunta['pregunta']) . '</textarea>';
                         ?>
                         <div id="respuestas-container">
                         <?php
                         foreach ($respuestas as $respuesta) {
                             echo '<div class="respuesta-container">';
                             
-                            echo '<input type="radio" name="respuesta_correcta" value="' . $respuesta['ID_respuesta'] . '" disabled';
+                            echo '<input type="radio" name="respuesta_correcta" maxlength ="110" value="' . $respuesta['ID_respuesta'] . '" disabled';
                             if ($respuesta['correcta'] == 1) {
                                 echo ' checked';
                             }
                             echo '>';
                             
-                            echo '<input type="text" name="opcion[]" class="opcionDiapo" id="opcionDiapo" readonly value="' . htmlspecialchars($respuesta['texto']) . '">';
+                            echo '<input type="text" name="opcion[]" class="opcionDiapo" id="opcionDiapo" maxlength ="110" readonly value="' . htmlspecialchars($respuesta['texto']) . '">';
                             
                             echo '</div>';
                         }
@@ -135,17 +135,17 @@ if (isset($_GET["id_diapo"])) {
                     <?php
                     }else {?>
                         <input type="text" name="titol" id="titol" class="titolDiapoPregunta" placeholder="Titulo diapositiva" maxlength="25" required/>
-                        <textarea name="pregunta" id="pregunta" class="preguntaDiapo" placeholder="Escribe tu pregunta" required></textarea>
+                        <textarea name="pregunta" id="pregunta" class="preguntaDiapo" maxlength ="65" placeholder="Escribe tu pregunta" required></textarea>
     
                         <div id="respuestas-container">
                         <div class="respuesta-container">
                         <input type="radio" name="respuesta_correcta" value="1" checked>
-                        <input type="text" name="opcion[]" placeholder="Respuesta 1" class="opcionDiapo" id="opcionDiapo"  required>
+                        <input type="text" name="opcion[]" placeholder="Respuesta 1" class="opcionDiapo" id="opcionDiapo" maxlength ="110"  required>
                         </div>
     
                         <div class="respuesta-container">
                         <input type="radio" name="respuesta_correcta" value="2">
-                        <input type="text" name="opcion[]" placeholder="Respuesta 2" class="opcionDiapo" id="opcionDiapo"  required>
+                        <input type="text" name="opcion[]" placeholder="Respuesta 2" class="opcionDiapo" id="opcionDiapo" maxlength ="110" required>
                         </div>
                         </div>
                        
@@ -246,6 +246,7 @@ if (isset($_GET["id_diapo"])) {
         inputTexto.name = 'opcion[]';  // Usa un array para almacenar las respuestas
         inputTexto.placeholder = 'Respuesta ' + contador;
         inputTexto.setAttribute('required', ''); // Corrección aquí
+        inputTexto.setAttribute('maxlength','110');
 
         // Agrega la clase "opcionDiapo" a ambos campos
         inputTexto.classList.add('opcionDiapo');

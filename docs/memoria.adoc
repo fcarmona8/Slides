@@ -182,6 +182,8 @@ todas las partes del código para poder comentarlas y ayudar a su entendimiento.
 El sprint 4 se comenzo haciendo las pantallas editar y crear de tipo pregunta, para luego añadirlo a las pantallas vista previa y visualizar diapositiva. Y por último hacer que esta 
 al entrar desde cliente se pueda responder la pregunta. 
 
+=== Semana 5 (13-15)
+Terminamos de hacer el sprint 4, toques finales de la memoria y realizamos el video de presentación. 
 
 == Diseño
 
