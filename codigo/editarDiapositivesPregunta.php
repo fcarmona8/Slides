@@ -175,7 +175,7 @@ if (isset($_GET["id_diapo"])) {
                 <div class="preguntaSimple">
                     <?php if ($editDiapo === TRUE) {?>
                     <span id="titolError" class="error"></span>
-                    <input type="text" name="titol" class="titolDiapoPregunta" id="titol"  maxlength ="25" value=' <?=$titolDiapo?>' >
+                    <input type="text" name="titol" class="titolDiapoPregunta" id="titol"  maxlength ="25" value='<?=$titolDiapo?>' >
                         <?php
                         echo '<input type="textarea" name="pregunta" id="pregunta" class="preguntaDiapo" maxlength ="65" value="' . $pregunta['pregunta'] . '">';
                         ?>

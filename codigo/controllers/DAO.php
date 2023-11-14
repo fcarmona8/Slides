@@ -741,44 +741,6 @@ class DAO {
         return $result;
     }
     
-        public function esDiapositivaDePregunta($id_diapositiva) {
-            // Obtener el ID de pregunta asociado a la diapositiva
-            $id_pregunta = $this->getIdPreguntaPorDiapositiva($id_diapositiva);
-    
-            if ($id_pregunta !== null) {
-                // Comprobar si hay una diapositiva de respuesta con el ID siguiente
-                $id_respuesta = $id_diapositiva + 1;
-                $esRespuesta = $this->existeDiapositiva($id_respuesta, $id_pregunta);
-    
-                return !$esRespuesta;
-            }
-    
-            return false;
-        }
-    
-        private function getIdPreguntaPorDiapositiva($id_diapositiva) {
-            $sql = "SELECT ID_pregunta FROM Diapositives WHERE ID_diapositiva = :id_diapositiva";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->bindParam(':id_diapositiva', $id_diapositiva, PDO::PARAM_INT);
-            $stmt->execute();
-    
-            $id_pregunta = $stmt->fetchColumn();
-    
-            return $id_pregunta !== false ? $id_pregunta : null;
-        }
-    
-        private function existeDiapositiva($id_diapositiva, $id_pregunta) {
-            $sql = "SELECT COUNT(*) FROM Diapositives WHERE ID_diapositiva = :id_diapositiva AND ID_pregunta = :id_pregunta";
-            $stmt = $this->pdo->prepare($sql);
-            $stmt->bindParam(':id_diapositiva', $id_diapositiva, PDO::PARAM_INT);
-            $stmt->bindParam(':id_pregunta', $id_pregunta, PDO::PARAM_INT);
-            $stmt->execute();
-    
-            $cantidad = $stmt->fetchColumn();
-    
-            return $cantidad > 0;
-        }
-    
 }
     
     

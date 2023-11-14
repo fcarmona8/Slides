@@ -517,6 +517,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
             $nuevasRespuestas = $_POST['opcion'];
             $respuesta_correcta_index = $_POST['respuesta_correcta'] - 1;
 
+            $dao->alterDiapositivesTitol($titol, $editDiapo);
             $pregunta = $dao->getPregunta($editDiapo);
             $dao->updatePregunta($pregunta['ID_pregunta'], $preguntaTexto);
 
@@ -556,6 +557,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["anadirEditarDiapositiv
                 $dao->setRespuesta($id_pregunta, $respuestaTexto, $correcta);
                 
             }
+
+            header("Location: editarDiapositivesPregunta.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo);
         }
         exit(); 
     } catch (Exception $e) {
