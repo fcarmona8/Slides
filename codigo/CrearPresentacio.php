@@ -7,6 +7,7 @@ include_once("controllers/baseDatos.php");
 <html lang="es">
 <head>
     <title>Pantalla Crear Presentació</title>
+    <link rel="icon" href="logoSlides.ico" type="image/x-icon">
     <!-- Enlaces a hojas de estilo CSS para el diseño de la página. -->
     <link rel="stylesheet" href="Styles.css">
     <!-- Enlace a una fuente de iconos desde Font Awesome. -->

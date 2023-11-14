@@ -337,6 +337,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["getInfoDiapo"])) {
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["getInfoDiapoVista"])) {
     $id = $_POST['id'];
     $id_diapo = $_POST['id_diapo'];
+    $pregunta = $dao->getPregunta($id_diapo);
     $cont = $dao->getContingutPorID($id_diapo);
     $imatge = $dao->getImatgePorID($id_diapo);
 
@@ -350,7 +351,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["getInfoDiapoVista"])) 
             // Si no contiene imagen, redirige a la vista previa de contenido de texto.
             header("Location: vistaPreviaClientContingut.php?id=" . $id . "&id_diapo=" . $id_diapo);
         }
-    } else {
+    }else if ($pregunta !== NULL) {
+        header("Location: vistaPreviaClientPregunta.php?id=" . $id . "&id_diapo=" . $id_diapo);
+    }else {
         // Si no contiene contenido, redirige a la vista previa de título.
         header("Location: vistaPreviaClientTitol.php?id=" . $id . "&id_diapo=" . $id_diapo);
     }

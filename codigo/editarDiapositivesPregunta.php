@@ -37,6 +37,7 @@ if (isset($_GET["id_diapo"])) {
 <html lang="es">
 <head>
     <title>Pantalla Editar Diapositivas Pregunta</title>
+    <link rel="icon" href="logoSlides.ico" type="image/x-icon">
     <link rel="stylesheet" href="Styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
     <div id="message-container" class="mensaje-exito" style="display: none;"></div>
