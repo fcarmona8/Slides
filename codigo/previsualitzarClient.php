@@ -161,17 +161,15 @@ if (isset($_GET["id_diapo"])) {
 
                     } else if ((preguntaRespuesta.respondida === false) && (preguntaRespuesta.id_diapositiva !== diapositiva.ID_Diapositiva)) {
 
-                        preguntaNoRespondida = true;
                         currentSlide = slideIndex;
-
+                        
                         if (direccionDiapositiva === 'front') {
-                            mostrarDiapositiva(currentSlide + 1, 'front')
+
+                                mostrarDiapositiva(currentSlide + 1, 'front')
+                             
                         } else {
                             mostrarDiapositiva(currentSlide - 1, 'back')
                         }
-
-                        anteriorButton.disabled = currentSlide === 1;
-                        siguienteButton.disabled = currentSlide === totalSlides - 2;
 
                         return;
 
@@ -235,11 +233,26 @@ if (isset($_GET["id_diapo"])) {
 
             currentSlide = slideIndex;
 
-            // Habilitar o deshabilitar botones según la posición de la diapositiva
-            anteriorButton.disabled = currentSlide === 1;
-            siguienteButton.disabled = currentSlide === totalSlides - 1;
-
+            if (currentSlide < totalSlides - 1) {
+                var siguienteDiapositiva = preguntasRespondidas.find(item => item.pregunta_id === diapositivas[currentSlide + 1].pregunta_id);
             }
+
+            // Habilitar o deshabilitar botones según la posición de la diapositiva
+            if (
+                currentSlide === totalSlides - 2 && // La diapositiva actual es la penúltima
+                diapositivas[currentSlide + 1].es_pregunta === true &&
+                siguienteDiapositiva.respondida === false
+            ) {
+                siguienteButton.disabled = true;
+                
+            } else if (currentSlide === totalSlides - 1) {
+                
+                siguienteButton.disabled = true;
+            } else {
+                siguienteButton.disabled = false;
+            }
+
+            anteriorButton.disabled = currentSlide === 1;
 
 
             document.getElementById("anterior").addEventListener("click", function() {

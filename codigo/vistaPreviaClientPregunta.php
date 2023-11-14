@@ -95,7 +95,7 @@ if (isset($_GET["id_diapo"])) {
                 <div id="respuestas-container">
                     <?php foreach ($respuestas as $respuesta): ?>
                         <div class="respuesta-container">
-                            <input type="radio" name="respuesta_correcta" value="<?= $respuesta['ID_respuesta'] ?>" disabled<?= $respuesta['correcta'] == 1 ? ' checked' : '' ?>>
+                            <input type="radio" name="respuesta_correcta" value="<?= $respuesta['ID_respuesta'] ?>" disabled>
                             <input type="text" name="opcion[]" class="opcionDiapo" id="opcionDiapo" readonly value="<?= htmlspecialchars($respuesta['texto']) ?>">
                         </div>
                     <?php endforeach; ?>
