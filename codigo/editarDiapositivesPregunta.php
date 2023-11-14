@@ -167,28 +167,30 @@ if (isset($_GET["id_diapo"])) {
             </div>
         </div>
         <div class="right">
-            <form method="POST" id="formDiapo">
+            <form method="POST" id="formDiapo" onsubmit="return validatePregunta();">
                 <!-- Campo oculto para enviar el ID -->
                 <?php if ($editDiapo) {
                     echo "<input type='hidden' name='id_diapo' value='$id_diapo'>";}?>
                 <input type="hidden" name="id_presentacio" value="<?= $id_presentacio; ?>">
-                <div class="preguntaSimple"><?php if ($editDiapo === TRUE) {?>
-                    <input type="text" name="titol" class="titolDiapoPregunta" id="titol" value=' <?=$titolDiapo?>' >
+                <div class="preguntaSimple">
+                    <?php if ($editDiapo === TRUE) {?>
+                    <span id="titolError" class="error"></span>
+                    <input type="text" name="titol" class="titolDiapoPregunta" id="titol"  maxlength ="25" value=' <?=$titolDiapo?>' >
                         <?php
-                        echo '<input type="textarea" name="pregunta" id="pregunta" class="preguntaDiapo" value="' . $pregunta['pregunta'] . '">';
+                        echo '<input type="textarea" name="pregunta" id="pregunta" class="preguntaDiapo" maxlength ="65" value="' . $pregunta['pregunta'] . '">';
                         ?>
                         <div id="respuestas-container">
                         <?php
                         foreach ($respuestas as $index => $respuesta) {
                             echo '<div class="respuesta-container">';
                             
-                            echo '<input type="radio" name="respuesta_correcta" value="' . $index + 1 . '" ';
+                            echo '<input type="radio" name="respuesta_correcta"  maxlength ="110" value="' . $index + 1 . '" ';
                             if ($respuesta['correcta'] == 1) {
                                 echo ' checked';
                             }
                             echo '>';
                             
-                            echo '<input name="opcion[]" class="opcionDiapo" id="opcionDiapo" value="' . $respuesta['texto'] . '">';
+                            echo '<input name="opcion[]" class="opcionDiapo" id="opcionDiapo" maxlength ="110"  value="' . $respuesta['texto'] . '">';
                             
                             echo '</div>';
                         }
@@ -199,18 +201,19 @@ if (isset($_GET["id_diapo"])) {
                         </div>
                     <?php
                     }else {?>
+                        <span id="titolError" class="error"></span>
                         <input type="text" name="titol" id="titol" class="titolDiapoPregunta" placeholder="Titulo diapositiva" maxlength="25" required>
-                        <textarea name="pregunta" id="pregunta" class="preguntaDiapo" placeholder="Escribe tu pregunta" required></textarea>
+                        <textarea name="pregunta" id="pregunta" class="preguntaDiapo" placeholder="Escribe tu pregunta"  maxlength ="65" required></textarea>
     
                         <div id="respuestas-container">
                             <div class="respuesta-container">
                             <input type="radio" name="respuesta_correcta" value="1" checked>
-                            <input type="text" name="opcion[]" placeholder="Respuesta 1" class="opcionDiapo" id="opcionDiapo" required>
+                            <input type="text" name="opcion[]" placeholder="Respuesta 1" class="opcionDiapo" id="opcionDiapo"  maxlength ="110" required>
                             </div>
         
                             <div class="respuesta-container">
                             <input type="radio" name="respuesta_correcta" value="2">
-                            <input type="text" name="opcion[]" placeholder="Respuesta 2" class="opcionDiapo" id="opcionDiapo" required>
+                            <input type="text" name="opcion[]" placeholder="Respuesta 2" class="opcionDiapo" id="opcionDiapo" maxlength ="110"  required>
                             </div>
                             </div>
                         
@@ -244,6 +247,23 @@ if (isset($_GET["id_diapo"])) {
     <script>
         const button = document.querySelector('.volver');
         const buttonEstils = document.querySelector('.editarEstilsPres');
+        const titulInput = document.getElementById('titol'); // Campo de entrada de título
+        const previsualizar = document.querySelector('.buttons-diapositiva'); // Botón de previsualización
+        
+        // Oculta el botón de previsualización si el campo de entrada de título está vacío
+        if (titulInput.value =='') {
+            previsualizar.style.display = 'none';
+        }
+
+        // Muestra u oculta el botón de previsualización en función del contenido del campo de entrada del título
+        titulInput.addEventListener('keyup', function(){
+            if (titulInput.value == '') {
+                previsualizar.style.display = 'none';
+            }else{
+                previsualizar.style.display = 'flex';
+            }
+        })
+
         document.querySelector("button[name='tipusTitol']").addEventListener("click", function() {            
             window.location.href = "editarDiapositivesTitol.php?id=<?php echo $id_presentacio; ?>";
             
@@ -351,6 +371,7 @@ if (isset($_GET["id_diapo"])) {
             inputTexto.name = 'opcion[]';  // Usa un array para almacenar las respuestas
             inputTexto.placeholder = 'Respuesta ' + contador;
             inputTexto.setAttribute('required', ''); // Corrección aquí
+            inputTexto.setAttribute('maxlength','110');
 
             // Agrega la clase "opcionDiapo" a ambos campos
             inputTexto.classList.add('opcionDiapo');

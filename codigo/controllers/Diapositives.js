@@ -41,3 +41,33 @@ function validateFormCont() {
     }
     return isValid;
 }
+
+function validatePregunta(){
+    const titol = document.getElementById("titol");
+    const pregunta = document.getElementById('pregunta');
+    const respuesta = document.querySelectorAll('#opcionDiapo');
+    var titleError = document.getElementById("titolError");
+    let isValid = true;
+
+    if (titol.value.length > 25) {
+        titleError.textContent = "El título no puede tener más de 25 caracteres";
+        titleError.style.display = 'initial';
+        titol.focus();
+        isValid = false;
+    }else if(pregunta.value.length > 65){
+        titleError.textContent = "La pregunta no puede tener más de 65 caracteres";
+        titleError.style.display = 'initial';
+        titol.focus();
+        isValid = false;
+    }
+    respuesta.forEach(ele => {
+       if (ele.value.length > 25) {
+        titleError.textContent = "Las respuestas no puede tener más de 110 caracteres";
+        titleError.style.display = 'initial';
+        titol.focus();
+        isValid = false;
+       } 
+    });
+
+    return isValid;
+}
