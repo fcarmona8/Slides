@@ -79,7 +79,7 @@ if (isset($_GET["id"])) {
                     // Muestra el título si no hay contenido
                     tituloElement.textContent = titolDiapo;
                     tituloElement.style.margin='200px';
-                    tituloElement.style.fontSize = "6rem";
+                    tituloElement.style.fontSize = "4rem";
                     cont.style.display='none';
                     preguntaElement.style.display = 'none';
                     respostaElement.style.display = 'none';
