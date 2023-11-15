@@ -392,10 +392,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["eliminarDiapo"])) {
 
     // Elimina la diapositiva con el ID especificado.
     $dao->eliminarDiapo($id_diapo);
+    $mensaje = 'Diapositiva eliminada correctamente';
+    $mensajeCodificado = base64_encode($mensaje);
 
     if ($dao == TRUE) {
         // Si la eliminación tuvo éxito, muestra un mensaje de éxito.
-        header("Location: editarDiapositivesTitol.php?id=" . $id . "&feedEliminado=Diapositiva eliminada correctamente.");
+        header("Location: editarDiapositivesTitol.php?id=" . $id . "&feedEliminado=".$mensajeCodificado);
     } else {
         // Si la eliminación falla, muestra un mensaje de error.
         echo 'No se pudo eliminar la diapositiva';
@@ -495,13 +497,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["publicar_presentacion"
 
     if ($result && $estaba_publicada) {
         // Muestra un mensaje de éxito si la presentación se despublica correctamente.
-        echo '<div id="message-container" class="mensaje-exito">Presentación despublicada correctamente.</div>';
+        echo '<div id="message-container" class="mensaje-exito" style="position: fixed;">Presentación despublicada correctamente.</div>';
     } elseif ($result && !$estaba_publicada) {
         // Muestra un mensaje de éxito si la presentación se publica correctamente.
-        echo '<div id="message-container" class="mensaje-exito">Presentación publicada correctamente.</div>';
+        echo '<div id="message-container" class="mensaje-exito" style="position: fixed;">Presentación publicada correctamente.</div>';
     } else {
         // Muestra un mensaje de error si no se pudo completar la operación.
-        echo '<div id="message-container" class="mensaje-error">No se pudo completar la operación.</div>';
+        echo '<div id="message-container" class="mensaje-error" style="position: fixed;">No se pudo completar la operación.</div>';
     }
 }
 
