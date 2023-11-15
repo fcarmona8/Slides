@@ -411,6 +411,7 @@ if (isset($_GET["id_diapo"])) {
     function mostrarMensajeExitoEliminado() {
             var mensajeExito = document.getElementById("eliminadaDiapo");
             mensajeExito.style.display = "block";
+            mensajeExito.style.position = 'fixed';
             
             setTimeout(function() {
                 mensajeExito.style.display = "none";
