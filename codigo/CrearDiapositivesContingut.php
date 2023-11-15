@@ -122,7 +122,7 @@ if (isset($_GET["id_diapo"])) {
                    } ?>
                 <span id="contError" class="error"></span>
                    <?php if ($infoDiapo === TRUE) {
-                        ?> <input type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> ' readOnly> <?php ;
+                        ?> <textarea type="text" name="contingut" class="contingutDiapo" id="contingut" value=' <?=$contingut?> ' readOnly><?=$contingut?></textarea> <?php ;
                    }else {
                     // Campo de entrada de contenido para diapositiva nueva
                     echo '<textarea name="contingut" id="contingut" class="contingutDiapo" placeholder="Contenido" maxlength="640" required ></textarea>';
