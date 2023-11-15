@@ -17,3 +17,11 @@
 La maquina donde lo realizamos fue en la de Camilo, la IP es la siguiente:  
   
 192.168.50.158
+
+## Portfolios:
+
+- [Carmona Hernandez Ferran]()
+
+- [Galindo Palacio Joan](https://github.com/galindojoan)
+
+- [Jumelle Camilo](https://github.com/jumelleCL)
