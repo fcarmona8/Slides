@@ -379,7 +379,8 @@ Ya con toda esta información usted ya será capaz de crear unas increibles pres
 
 
 == Linias futuras
-
+Nos hubiese interesado implementar la función de clonar en la aplicación, creación de usuarios y sesiones cada uno con sus presentaciones, añadir 
+más estilos para las presentaciones y una función para exportar tu presentación a un archivo powerpoint.
 
 == Concluciones 
 
@@ -408,3 +409,7 @@ Si se realiza satisfactioriamente este proyecto el alumno contará con conocimie
 - https://fontawesome.com[Font Awesome (iconos)]
 
 == Presentación del proyecto
+
+Para ver el video del proyecto puedes verlo en la carpeta de docs bajo el nombre de "Video_Slides.mp4" o verlo en el siguiente link: 
+
+- https://drive.google.com/file/d/1abNxpRdn7qZqEen5P3g8qNYnLT3J3nvf/view?usp=sharing[Link al video]
