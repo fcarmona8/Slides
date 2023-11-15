@@ -374,7 +374,7 @@ if ($editDiapo === false) {
             setTimeout(function() {
                 mensajeExito.style.display = "none";
                 window.location.href = "editarDiapositivesContingut.php?id=<?=$id_presentacio?>&id_diapo=<?=$id_diapo?>"
-            }, 3000); // 3000 milisegundos = 3 segundos
+            }, 1000); // 3000 milisegundos = 3 segundos
         }
         <?php if (isset($_GET['feedEliminado'])) {
             ?> mostrarMensajeExitoEliminado(); <?php
@@ -387,7 +387,7 @@ if ($editDiapo === false) {
             setTimeout(function() {
                 mensajeExito.style.display = "none";
                 window.location.href = "editarDiapositivesContingut.php?id=<?=$id_presentacio?>&id_diapo=<?=$id_diapo?>"
-            }, 3000); // 3000 milisegundos = 3 segundos
+            }, 1000); // 3000 milisegundos = 3 segundos
         }
         <?php if (isset($_GET['mensaje'])) {
             ?> mostrarMensajeExito(); <?php
