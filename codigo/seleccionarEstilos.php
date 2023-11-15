@@ -18,7 +18,12 @@ if (isset($_GET["id"])) {
     $titol = "Error, no se encuentra la presentacion";
 
 }
-
+if (isset($_GET['type'])) {
+    $type = $_GET['type'];
+}
+if (isset($_GET['id_diapo'])) {
+    $id_diapo = $_GET['id_diapo'];
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -45,7 +50,7 @@ if (isset($_GET["id"])) {
 <div class="containerSeleccionarEstilos">
 
     <form class="containerSeleccionarEstilos" method="post" action="">
-
+    <input type="hidden" id="type" name="type" value="<?=$type?>">
     <div>
         <input type="radio" id="fondoBlanco" name="estilos" value="fondoBlanco" <?php echo $fondoBlancoChecked; ?>>
         <label for="fondoBlanco">Estilo 1</label>
@@ -95,16 +100,36 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     // Procesar el formulario cuando se envía
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["enviarEstilos"])) {
         $estilos = $_POST["estilos"];
+        $type = $_POST['type'];
 
         // Editar los estilos de la presentación en la base de datos
         $dao->editarEstilsPresentacio($id_presentacion, $estilos);
 
-        // Redirigir a la página adecuada según el contenido
-        if ($contingut != '') {
-            header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo);
-        }else {
-            header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo);
+        $mensaje = 'Estilo cambiado exitosamente.';
+        
+        $mensajeCodificado = base64_encode($mensaje);
+
+        
+       // Redirigir a la página adecuada según el contenido
+        switch ($type) {
+            case 'Titol':
+                header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo . "&mensaje=" . $mensajeCodificado);
+                break;
+            case 'Contingut':
+                header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo . "&mensaje=" . $mensajeCodificado);
+                break;
+
+            case 'Imatge':
+                header("Location: editarDiapositivesImatge.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo . "&mensaje=" . $mensajeCodificado);
+                break;
+            case 'Pregunta':
+                header("Location: editarDiapositivesPregunta.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo . "&mensaje=" . $mensajeCodificado);
+                break;
+            default:
+                header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo . "&mensaje=" . $mensajeCodificado);
+                break;
         }
+        
     }
 } else {
     echo 'Error: No se proporcionó un ID de presentación válido.';
