@@ -137,6 +137,7 @@ $presen = $dao->getPresentacions();
             var messageContainer = document.getElementById('message-container');
             messageContainer.textContent = 'No se puede copiar la URL ya que la presentación no esta publicada.';
             messageContainer.style.backgroundColor = 'red';
+            messageContainer.style.position = 'fixed';
             messageContainer.style.display = 'block';
 
             // Ocultar el mensaje después de 3 segundos (3000 milisegundos)
@@ -165,6 +166,7 @@ $presen = $dao->getPresentacions();
         // Crear un mensaje de éxito y mostrarlo en el messageContainer
         var messageContainer = document.getElementById('message-container');
         messageContainer.textContent = 'URL copiada correctamente';
+        messageContainer.style.position = 'fixed';
         messageContainer.style.display = 'block';
 
         // Ocultar el mensaje después de 3 segundos (3000 milisegundos)

@@ -56,7 +56,9 @@ if (isset($_GET["id_diapo"])) {
     ?>
     <?php
     if (isset($_GET['feedEliminado'])) {
-        echo '<div class="mensaje-exito">' . $_GET['feedEliminado'] . '</div>';
+        $msjCod = $_GET['feedEliminado'];
+        $msj = base64_decode($msjCod);
+        echo '<div id="eliminadaDiapo" class="mensaje-exito" style="display: none;">' . $msj . '</div>';
     }
     ?>
     <div class="up">
@@ -318,6 +320,7 @@ if (isset($_GET["id_diapo"])) {
             messageContainer.style.display = 'none';
         }, 3000);
     }
+
     function mostrarMensajeExito() {
             var mensajeExito = document.getElementById("mensaje-exito");
             mensajeExito.style.display = "block";
@@ -329,6 +332,18 @@ if (isset($_GET["id_diapo"])) {
         }
         <?php if (isset($_GET['mensaje'])) {
             ?> mostrarMensajeExito(); <?php
+        } ?>
+
+        function mostrarMensajeExitoEliminado() {
+            var mensajeExito = document.getElementById("eliminadaDiapo");
+            mensajeExito.style.display = "block";
+            
+            setTimeout(function() {
+                mensajeExito.style.display = "none";
+            }, 3000); // 3000 milisegundos = 3 segundos
+        }
+        <?php if (isset($_GET['feedEliminado'])) {
+            ?> mostrarMensajeExitoEliminado(); <?php
         } ?>
     </script>
     <script src="controllers/Diapositives.js"></script>
