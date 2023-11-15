@@ -64,13 +64,7 @@ if ($editDiapo === false) {
         echo '<div id="mensaje-exito" class="mensaje-exito" style="display: none;">' . $mensaje . '</div>';
     }
     ?>
-    <?php
-    if (isset($_GET['feedEliminado'])) {
-        $msjCod = $_GET['feedEliminado'];
-        $msj = base64_decode($msjCod);
-        echo '<div id="eliminadaDiapo" class="mensaje-exito" style="display: none;">' . $msj . '</div>';
-    }
-    ?>
+    
     <div class="up">
         <div class="volver">
             <button>
@@ -375,6 +369,7 @@ if ($editDiapo === false) {
         function mostrarMensajeExitoEliminado() {
             var mensajeExito = document.getElementById("eliminadaDiapo");
             mensajeExito.style.display = "block";
+            mensajeExito.style.position = 'fixed';
             
             setTimeout(function() {
                 mensajeExito.style.display = "none";
