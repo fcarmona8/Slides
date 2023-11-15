@@ -99,12 +99,12 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         // Editar los estilos de la presentación en la base de datos
         $dao->editarEstilsPresentacio($id_presentacion, $estilos);
 
+        $mensaje = 'Estilo cambiado exitosamente.';
+        
+        $mensajeCodificado = base64_encode($mensaje);
         // Redirigir a la página adecuada según el contenido
-        if ($contingut != '') {
-            header("Location: editarDiapositivesContingut.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo);
-        }else {
-            header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo);
-        }
+        header("Location: editarDiapositivesTitol.php?id=" . $id_presentacio . "&id_diapo=".$id_diapo . "&mensaje=" . $mensajeCodificado);
+        
     }
 } else {
     echo 'Error: No se proporcionó un ID de presentación válido.';

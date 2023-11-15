@@ -43,6 +43,18 @@ if (isset($_GET["id_diapo"])) {
 </head>
 <body id="crearDiapositivasContingut">
     <?php
+    if (isset($_GET['mensaje'])) {
+        // Obtiene el mensaje codificado desde la URL
+        $mensajeCodificado = $_GET['mensaje'];
+    
+        // Descifra el mensaje usando la función de decodificación
+        $mensaje = base64_decode($mensajeCodificado);
+    
+        // Muestra el mensaje
+        echo '<div id="mensaje-exito" class="mensaje-exito" style="display: none;">' . $mensaje . '</div>';
+    }
+    ?>
+    <?php
     if (isset($_GET['feedEliminado'])) {
         echo '<div class="mensaje-exito">' . $_GET['feedEliminado'] . '</div>';
     }
@@ -306,7 +318,18 @@ if (isset($_GET["id_diapo"])) {
             messageContainer.style.display = 'none';
         }, 3000);
     }
-
+    function mostrarMensajeExito() {
+            var mensajeExito = document.getElementById("mensaje-exito");
+            mensajeExito.style.display = "block";
+            mensajeExito.innerText = "Estilo cambiado exitosamente.";
+            
+            setTimeout(function() {
+                mensajeExito.style.display = "none";
+            }, 3000); // 3000 milisegundos = 3 segundos
+        }
+        <?php if (isset($_GET['mensaje'])) {
+            ?> mostrarMensajeExito(); <?php
+        } ?>
     </script>
     <script src="controllers/Diapositives.js"></script>
 </body>
